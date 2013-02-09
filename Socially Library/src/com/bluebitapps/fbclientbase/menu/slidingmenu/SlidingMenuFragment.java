@@ -218,7 +218,7 @@ public class SlidingMenuFragment extends ListFragment {
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_SUBSCRIPTIONS, R.drawable.sliding_menu_icon_subscriptions, MenuItemAdapter.TYPE_MAIN));
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_FRIEND_REQUESTS, R.drawable.sliding_menu_icon_friend_requests, MenuItemAdapter.TYPE_MAIN));
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_SETTINGS, R.drawable.sliding_menu_icon_settings, MenuItemAdapter.TYPE_MAIN));
-		mAdapter.add(new MenuItem(Constants.MENU_ITEM_RATE, R.drawable.sliding_menu_icon_rate, MenuItemAdapter.TYPE_MAIN));
+		//mAdapter.add(new MenuItem(Constants.MENU_ITEM_RATE, R.drawable.sliding_menu_icon_rate, MenuItemAdapter.TYPE_MAIN));
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_ABOUT, R.drawable.sliding_menu_icon_about, MenuItemAdapter.TYPE_MAIN));
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_LOGOUT, R.drawable.sliding_menu_icon_logout, MenuItemAdapter.TYPE_MAIN));
 
