@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+    android:id="@+id/root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical" >
+
+    <com.bluebitapps.utils.ClearableEditText
+        android:id="@+id/edit_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="#333333"
+        android:hint="@string/type_friends_name"
+        android:minHeight="50dip"
+        android:padding="10dip" />
+
+    <ListView
+        android:id="@+id/image_list_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/adView"
+        android:layout_below="@id/edit_text"
+        android:cacheColorHint="#00000000"
+        android:clipToPadding="false"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="@dimen/divider_height"
+        android:fastScrollEnabled="false"
+        android:paddingBottom="@dimen/list_padding_bottom"
+        android:paddingLeft="@dimen/list_padding_left"
+        android:paddingRight="@dimen/list_padding_right"
+        android:paddingTop="@dimen/list_padding_top"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbarThumbVertical="@drawable/scrollbar_vertical_thumb" />
+
+    <com.google.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="a150ab340c1545c"
+        ads:loadAdOnCreate="true" />
+
+    <com.bluebitapps.fbclientbase.layout.LoadingView
+        android:id="@+id/loadingView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="horizontal" />
+
+</RelativeLayout>

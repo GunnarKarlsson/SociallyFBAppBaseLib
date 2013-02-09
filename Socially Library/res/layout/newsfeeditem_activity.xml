@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/commentFooter"
+        android:layout_alignParentTop="true"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="-1sp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp" />
+
+    <com.bluebitapps.utils.WrappingSlidingDrawer
+        android:id="@+id/slidingDrawer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/commentFooter"
+        android:content="@+id/content"
+        android:handle="@+id/handle" >
+
+        <LinearLayout
+            android:id="@+id/handle"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#00000000" />
+
+        <RelativeLayout
+            android:id="@+id/content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <View
+                android:id="@+id/dropShadow"
+                android:layout_width="fill_parent"
+                android:layout_height="10dip"
+                android:background="@drawable/drop_shadow_top" />
+
+            <RelativeLayout
+                android:id="@+id/gridViewContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/dropShadow"
+                android:padding="10dip" >
+
+                <GridView
+                    android:id="@+id/gridView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    
+                    android:background="@drawable/square_white"
+                    android:columnWidth="40dp"
+                    android:gravity="center"
+                    android:horizontalSpacing="6dp"
+                    android:numColumns="auto_fit"
+                    android:padding="10dip"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="6dp" 
+                    android:layout_centerInParent="true">
+                </GridView>
+            </RelativeLayout>
+        </RelativeLayout>
+    </com.bluebitapps.utils.WrappingSlidingDrawer>
+
+    <include
+        android:id="@+id/commentFooter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        layout="@layout/post_message_with_emoticons" />
+
+</RelativeLayout>

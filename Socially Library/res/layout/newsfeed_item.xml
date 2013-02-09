@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/square_white_four_borders" >
+
+    <include
+        android:id="@+id/fromHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        layout="@layout/from_header" 
+        android:layout_marginBottom="10dip"/>
+
+    <TextView
+        android:id="@+id/newsFeedItemMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fromHeader"
+        android:singleLine="false"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingBottom="10dip"
+        />
+
+    <LinearLayout
+        android:id="@+id/newsFeedItemPictureAndName"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/newsFeedItemMessage"
+        android:background="@drawable/square_shape_grey_border"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip" 
+        android:paddingBottom="10dip">
+
+        <com.bluebitapps.utils.AspectRatioImageView
+            android:id="@+id/newsFeedItemPicture"
+            android:layout_width="80dip"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true" />
+
+        <TextView
+            android:id="@+id/newsFeedItemName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="false"
+            android:paddingLeft="5dip"
+            android:paddingTop="0dip"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/newsFeedItemDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/newsFeedItemPictureAndName"
+        android:paddingBottom="0dip"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="5dip"
+        android:singleLine="false"
+        android:textAppearance="@style/bodyTextStyle" />
+
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@id/newsFeedItemPictureAndName"
+        android:layout_below="@id/newsFeedItemDescription"
+        layout="@layout/action_footer_like_and_comment" />
+
+</RelativeLayout>

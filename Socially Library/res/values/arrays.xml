@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="main_menu_items">
+        <item>SlidingMenuTest</item>
+        <item>Newsfeed</item>
+        <item>Theme test</item>
+        <item>Notifications</item>
+        <item>Messages</item>
+        <item>Photos</item>
+        <item>Events</item>
+        <item>Checkins</item>
+        <item>Friends</item>
+        <item>Groups</item>
+        <item>Settings</item>
+    </string-array>
+    <string-array name="pref_notification_delivery_entries">
+        <item>Statusbar message (default)</item>
+        <item>Themed pop-up</item>
+    </string-array>
+    <string-array name="pref_notification_delivery_values">
+        <item>statusbar</item>
+        <item>popup</item>
+    </string-array>
+    <string-array name="pref_font_size_entries">
+        <item>Smallest (10 dip)</item>
+        <item>Smaller (12 dip)</item>
+        <item>Small (Default) (15 dip)</item>
+        <item>Medium (18 dip)</item>
+        <item>Large (22 dip)</item>
+        <item>Larger (26 dip)</item>
+        <item>Largest (30 dip)</item>
+    </string-array>
+    <string-array name="pref_font_size_values">
+        <item>10</item>
+        <item>12</item>
+        <item>15</item>
+        <item>18</item>
+        <item>22</item>
+        <item>26</item>
+        <item>30</item>
+    </string-array>
+    <string-array name="pref_font_color_entries">
+        <item>Black</item>
+        <item>Grey</item>
+        <item>Purple</item>
+        <item>Blue (dark)</item>
+        <item>Blue (bright)</item>
+        <item>Blue (light)</item>
+        <item>Green (dark)</item>
+        <item>Green (light)</item>
+        <item>Orange (dark)</item>
+        <item>Orange (light)</item>
+        <item>Red(dark)</item>
+        <item>Red (light)</item>
+    </string-array>
+    <string-array name="pref_font_color_values">
+        <item>Black</item>
+        <item>Grey</item>
+        <item>Purple</item>
+        <item>BlueDark</item>
+        <item>BlueBright</item>
+        <item>BlueLight</item>
+        <item>GreenDark</item>
+        <item>GreenLight</item>
+        <item>OrangeDark</item>
+        <item>OrangeLight</item>
+        <item>RedDark</item>
+        <item>RedLight</item>
+    </string-array>
+    <string-array name="pref_font_type_entries">
+        <item>Cute</item>
+        <item>Droid (default)</item>
+        <item>Future</item>
+        <item>Garamond</item>
+        <item>Gill</item>
+        <item>Roboto </item>
+        <item>Verdana</item>
+    </string-array>
+    <string-array name="pref_font_type_values">
+        <item>cute</item>
+        <item>droid</item>
+        <item>bmsolid</item>
+        <item>garamond</item>
+        <item>gill</item>
+        <item>roboto</item>
+        <item>verdana</item>
+    </string-array>
+    <string-array name="pref_notifications_request_frequency_entries">
+        <item>Every 12 hours</item>
+        <item>Every 10 hours</item>
+        <item>Every 8 hours</item>
+        <item>Every 6 hours</item>
+        <item>Every 4 hours</item>
+        <item>Every 2 hours</item>
+        <item>Every 1 hour</item>
+        <item>Every 30 minutes</item>
+        <item>Every 15 minutes</item>
+        <item>Every 5 minutes</item>
+        <item>Every minute</item>
+        <item>Don\'t fetch notifications</item>
+    </string-array>
+    <string-array name="pref_notifications_request_frequency_values">
+        <item>720</item>
+        <item>600</item>
+        <item>480</item>
+        <item>360</item>
+        <item>240</item>
+        <item>120</item>
+        <item>60</item>
+        <item>30</item>
+        <item>15</item>
+        <item>5</item>
+        <item>1</item>
+        <item>-1</item>
+    </string-array>
+    <string-array name="pref_notifications_type_entries">
+        <item>Status updates</item>
+        <item>Photo</item>
+        <item>Event</item>
+        <item>Group</item>
+        <item>Birthday</item>
+    </string-array>
+    <string-array name="pref_notifications_type_values">
+        <item>stream</item>
+        <item>photo</item>
+        <item>event</item>
+        <item>group</item>
+        <item>birthday</item>
+    </string-array>
+    <string-array name="pref_themes_entries">
+        <item>White</item>
+        <item>Blue</item>
+        <item>Pink</item>
+        <item>Green</item>
+        <item>Sepia</item>
+    </string-array>
+    <string-array name="pref_themes_values">
+        <item>white</item>
+        <item>blue</item>
+        <item>pink</item>
+        <item>green</item>
+        <item>sepia</item>
+    </string-array>
+    <string-array name="pref_newsfeed_refresh_entries">
+        <item>Yes, automatically</item>
+        <item>No, not until I press refresh myself</item>
+    </string-array>
+    <string-array name="pref_newsfeed_refresh_values">
+        <item>true</item>
+        <item>false</item>
+    </string-array>
+
+</resources>

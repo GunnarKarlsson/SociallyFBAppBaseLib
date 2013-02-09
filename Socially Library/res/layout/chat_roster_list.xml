@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/chatConnectionStatus"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+    <ListView
+        android:id="@+id/chatRosterListView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="#00000000"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10.0sp" 
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"/>
+
+</RelativeLayout>

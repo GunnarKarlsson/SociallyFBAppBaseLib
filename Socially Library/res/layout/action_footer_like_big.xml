@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="10dip" >
+
+    <RelativeLayout
+        android:id="@+id/actionsFooter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#eeeeee"
+        android:orientation="horizontal"
+        android:padding="3dip" >
+
+        <ImageView
+            android:id="@+id/likeIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="2dip"
+            android:contentDescription="@null"
+            android:src="@drawable/like_big_icon" />
+
+        <TextView
+            android:id="@+id/likeCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dip"
+            android:layout_toRightOf="@id/likeIcon"
+            android:paddingTop="7dip" />
+
+        <Button
+            android:id="@+id/likeButton"
+            android:layout_width="80dip"
+            android:layout_height="36dip"
+            android:layout_toRightOf="@id/likeCount"
+            android:background="@drawable/custom_button"
+            android:text="@string/like"
+            android:textColor="#222222"
+            android:textSize="16dp" />
+    </RelativeLayout>
+
+</RelativeLayout>

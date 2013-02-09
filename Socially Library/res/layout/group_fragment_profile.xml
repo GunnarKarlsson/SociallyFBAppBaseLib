@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <RelativeLayout
+            android:id="@+id/contentRoot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dip"
+            android:padding="10dip"
+            android:background="@drawable/square_white_four_borders" >
+
+            <RelativeLayout
+                android:id="@+id/profilePhotoFrame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/square_white"
+                android:padding="10dip" >
+
+                <com.bluebitapps.utils.AspectRatioImageView
+                    android:id="@+id/profilePhoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+
+            <TableLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/profilePhotoFrame"
+                android:layout_marginTop="10dip"
+                android:orientation="vertical"
+                android:padding="20dip" >
+
+                <TableRow
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/nameLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dip"
+                        android:singleLine="false"
+                        android:text="@string/profile_name" />
+
+                    <TextView
+                        android:id="@+id/nameValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="false" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/descriptionLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dip"
+                        android:singleLine="false"
+                        android:text="@string/profile_first_name" />
+
+                    <TextView
+                        android:id="@+id/descriptionValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="false" />
+                </TableRow>
+
+
+            </TableLayout>
+        </RelativeLayout>
+
+      <com.bluebitapps.fbclientbase.layout.LoadingView
+            android:id="@+id/loadingView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+</ScrollView>

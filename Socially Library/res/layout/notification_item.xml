@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/square_white_four_borders" >
+
+    <include
+        android:id="@+id/fromHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        layout="@layout/from_header" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fromHeader"
+        android:paddingBottom="5dip"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="5dip" />
+
+    <TextView
+        android:id="@+id/body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:paddingBottom="10dip"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="5dip" />
+
+        <TextView
+        android:id="@+id/longClickLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/long_click_to_mark_as_read"
+        android:layout_below="@id/body"
+        android:paddingBottom="10dip"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="5dip" />
+    
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/body"
+        android:checked="false"
+        android:padding="10dip"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/checkBoxLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mark as read" 
+        android:layout_below="@id/body"
+        android:layout_toRightOf="@id/checkBox"
+        android:visibility="gone"/>
+
+</RelativeLayout>

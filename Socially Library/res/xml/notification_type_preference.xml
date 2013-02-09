@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="Notification Type" 
+        android:summary="Which type of notification to receive:">
+        <CheckBoxPreference
+            android:key="stream"
+            android:title="Stream" 
+            android:defaultValue="true"
+            android:summary="Close friends' status updates to newsfeed and wall"/>
+        <CheckBoxPreference
+            android:key="photo"
+            android:title="Photo" 
+            android:defaultValue="true"
+            android:summary="Close friends' photo uploads"/>
+        <CheckBoxPreference
+            android:key="page"
+            android:title="Page" 
+            android:defaultValue="true"
+            android:summary="Invitations from friends to like pages"/>
+        <CheckBoxPreference
+            android:key="event"
+            android:title="Event" 
+            android:defaultValue="true"
+            android:summary="Invitations to events"/>
+        <CheckBoxPreference
+            android:key="group"
+            android:title="Group" 
+            android:defaultValue="true"
+            android:summary="Invitations to groups"/>
+        <CheckBoxPreference
+            android:key="friendrequest"
+            android:title="Friend request" 
+            android:defaultValue="true"
+            android:summary="Requests to approve/decline friend requests"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

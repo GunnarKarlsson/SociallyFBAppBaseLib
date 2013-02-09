@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This is the background for the newsfeed story box. To enable shape padding, a hack with a shape in a shape is applied. -->
+<layer-list
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:left="20px"
+        android:right="20px"
+        android:drawable="@drawable/roundcorner_shape_with_border_inner" />
+
+</layer-list>

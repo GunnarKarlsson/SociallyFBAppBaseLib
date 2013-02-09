@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <string-array name="theme_names">
+        <item>Blue</item>
+        <item>Green</item>
+        <item>Leopard</item>
+        <item>Pink</item>
+        <item>Sepia</item>
+    </string-array>
+</resources>

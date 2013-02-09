@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appthemes>
+
+    <!--
+    Example theme xml:
+    
+    <apptheme
+        name="theme_blue" is used to save retrieve and theme from SharedPreferences.
+        actionbarcolor="someActionBarBackgroundColor" references R.color.someActionBarBackgroundColor
+        background="someColor" references R.color.someColor OR R.drawable.someColor
+        icon="theme_something_image" references R.drawable.theme_something_image
+        menucolor="someMenuColor" references R.color.someMenuColor
+    </apptheme>
+    -->
+    <apptheme
+        name="theme_purple_rain"
+        actionbarcolor="leopardActionBarColor"
+        background="theme_purple_rain_background"
+        displayname="Purple Rain"
+        icon="theme_purple_rain_image"
+        menucolor="leopardMenuColor" >
+    </apptheme>
+    <apptheme
+        name="theme_color_wave"
+        actionbarcolor="blackActionBarColor"
+        background="theme_color_wave_background"
+        displayname="Color Wave"
+        icon="theme_color_wave_image"
+        menucolor="blackMenuColor" >
+    </apptheme>
+    <apptheme
+        name="theme_raindrops_grey"
+        actionbarcolor="greyActionBarColor"
+        background="theme_raindrops_grey_background"
+        displayname="Raindrops"
+        icon="theme_raindrops_grey_image"
+        menucolor="greyMenuColor" >
+    </apptheme>
+    <apptheme
+        name="theme_blue"
+        actionbarcolor="blueActionBarColor"
+        background="theme_blue_background"
+        displayname="Blue"
+        icon="theme_blue_background"
+        icondisplaytype="Theme.ICON_DISPLAY_TYPE."
+        menucolor="blueMenuColor" >
+    </apptheme>
+    <apptheme
+        name="theme_pink"
+        actionbarcolor="pinkActionBarColor"
+        background="theme_pink_background"
+        displayname="Pink"
+        icon="theme_pink_background"
+        menucolor="pinkMenuColor" />
+    <apptheme
+        name="theme_green"
+        actionbarcolor="greenActionBarColor"
+        background="theme_green_background"
+        displayname="Green"
+        icon="theme_green_background"
+        menucolor="greenMenuColor" />
+    <apptheme
+        name="theme_sepia"
+        actionbarcolor="sepiaActionBarColor"
+        background="theme_sepia_background"
+        displayname="Sepia"
+        icon="theme_sepia_background"
+        menucolor="sepiaMenuColor" />
+    <apptheme
+        name="theme_black"
+        actionbarcolor="blackActionBarColor"
+        background="theme_black_background"
+        displayname="Sleek Black"
+        icon="theme_black_background"
+        menucolor="blackMenuColor" />
+    <apptheme
+        name="theme_leopard"
+        actionbarcolor="leopardActionBarColor"
+        background="theme_leopard_background"
+        displayname="leopard"
+        icon="theme_leopard_background"
+        menucolor="leopardMenuColor" />
+    <apptheme
+        name="theme_tartan_black_pink_blue"
+        actionbarcolor="tartanBlackPinkBlueActionBarColor"
+        background="theme_tartan_black_pink_blue_background"
+        displayname="Emo Tartan"
+        icon="theme_tartan_black_pink_blue_background"
+        menucolor="tartanBlackPinkBlueMenuColor" />
+    <apptheme
+        name="theme_grey_stripes"
+        actionbarcolor="greyActionBarColor"
+        background="theme_grey_stripes_background"
+        displayname="Grey Stripes"
+        icon="theme_grey_stripes_background"
+        menucolor="greyMenuColor" />
+    <apptheme
+        name="theme_jeans"
+        actionbarcolor="jeansActionBarColor"
+        background="theme_bluejeans_background"
+        displayname="Jeans"
+        icon="theme_bluejeans_background"
+        menucolor="jeansMenuColor" />
+    <apptheme
+        name="theme_pink_fur"
+        actionbarcolor="pinkFurAbColor"
+        background="theme_pink_fur_background"
+        displayname="Pink Fur"
+        icon="theme_pink_fur_image"
+        menucolor="pinkFurMenuColor" />
+    <apptheme
+        name="theme_hearts"
+        actionbarcolor="heartsActionBarColor"
+        background="theme_hearts_background"
+        displayname="Hearts"
+        icon="theme_hearts_background"
+        menucolor="heartsMenuColor" />
+    <apptheme
+        name="theme_tablecloth"
+        actionbarcolor="tableclothAbColor"
+        background="theme_tablecloth_background"
+        displayname="Tablecloth"
+        icon="theme_tablecloth_background"
+        menucolor="tableclothMenuColor" />
+    <apptheme
+        name="theme_stripes_white_pink_black"
+        actionbarcolor="pinkBlackStripesAbColor"
+        background="theme_stripes_white_pink_black_background"
+        displayname="PinknBlack stripes"
+        icon="theme_stripes_white_pink_black_background"
+        menucolor="stripesWhitePinkBlackMenuColor" />
+    <apptheme
+        name="theme_kimono"
+        actionbarcolor="kimonoActionBarColor"
+        background="theme_kimono_background"
+        displayname="Kimono"
+        icon="theme_kimono_background"
+        menucolor="kimonoMenuColor" />
+    <apptheme
+        name="theme_zebra"
+        actionbarcolor="zebraActionBarColor"
+        background="theme_zebra_background"
+        displayname="Zebra"
+        icon="theme_zebra_background"
+        menucolor="zebraMenuColor" />
+    <apptheme
+        name="theme_stripes_brown_blue"
+        actionbarcolor="stripesBrownBlueActionBarColor"
+        background="theme_stripes_brown_blue_background"
+        displayname="Brown Blue stripes"
+        icon="theme_stripes_brown_blue_background"
+        menucolor="stripesBrownBlueMenuColor" />
+    <apptheme
+        name="theme_pink_skull"
+        actionbarcolor="pinkSkullAbColor"
+        background="theme_pink_skull_background"
+        displayname="Pink Skull"
+        icon="theme_pink_skull_background"
+        menucolor="pinkSkullMenuColor" />
+    <apptheme
+        name="theme_girly_skull"
+        actionbarcolor="girlySkullActionBarColor"
+        background="theme_girly_skull_background"
+        displayname="Girly Skull"
+        icon="theme_girly_skull_background"
+        menucolor="girlySkullMenuColor" />
+    <apptheme
+        name="theme_metal_holes"
+        actionbarcolor="metalHolesActionBarColor"
+        background="theme_metal_holes_background"
+        displayname="Metal"
+        icon="theme_metal_holes_background"
+        menucolor="metalHolesMenuColor" />
+    <apptheme
+        name="theme_electric"
+        actionbarcolor="electricActionBarColor"
+        background="theme_electric_background"
+        displayname="Electric"
+        icon="theme_electric_background"
+        menucolor="electricMenuColor" />
+    <apptheme
+        name="theme_black_white_circles"
+        actionbarcolor="blackAbColor"
+        background="theme_black_white_circles_background"
+        displayname="Black White Circles"
+        icon="theme_black_white_circles_background"
+        menucolor="blackColor" />
+    <apptheme
+        name="theme_black_white_curls"
+        actionbarcolor="blackAbColor"
+        background="theme_black_white_curls_background"
+        displayname="Black White Curls"
+        icon="theme_black_white_curls_background"
+        menucolor="blackColor" />
+    <apptheme
+        name="theme_black_white_leaves"
+        actionbarcolor="blackAbColor"
+        background="theme_black_white_leaves_background"
+        displayname="Black White Leaves"
+        icon="theme_black_white_leaves_background"
+        menucolor="blackColor" />
+    <apptheme
+        name="theme_faded_stripes"
+        actionbarcolor="blackAbColor"
+        background="theme_faded_stripes_background"
+        displayname="Grungle stripes"
+        icon="theme_faded_stripes_background"
+        menucolor="blackColor" />
+    <apptheme
+        name="theme_grey_curls"
+        actionbarcolor="blackAbColor"
+        background="theme_grey_curls_background"
+        displayname="Grey curls"
+        icon="theme_grey_curls_background"
+        menucolor="blackColor" />
+    <apptheme
+        name="theme_fleurdelys"
+        actionbarcolor="blackAbColor"
+        background="theme_fleurdelys_background"
+        displayname="Fleur-de-lys"
+        icon="theme_fleurdelys_background"
+        menucolor="blackColor" />
+    <apptheme
+        name="theme_white_skull"
+        actionbarcolor="blackAbColor"
+        background="theme_white_skull_background"
+        displayname="White skull"
+        icon="theme_white_skull_background"
+        menucolor="blackColor" />
+    <apptheme
+        name="theme_triangles_black_white"
+        actionbarcolor="blackAbColor"
+        background="theme_triangles_black_white_background"
+        displayname="White skull"
+        icon="theme_triangles_black_white_background"
+        menucolor="blackColor" />
+    <apptheme
+        name="theme_squiggles"
+        actionbarcolor="blackAbColor"
+        background="theme_squiggles_background"
+        displayname="Squiggles"
+        icon="theme_squiggles_background"
+        menucolor="blackColor" />
+    <apptheme
+        name="theme_grey_black_curl"
+        actionbarcolor="blackAbColor"
+        background="theme_grey_black_curl_background"
+        displayname="Grey Curlycurl"
+        icon="theme_grey_black_curl_background"
+        menucolor="blackColor" />
+    <apptheme
+        name="theme_diamond"
+        actionbarcolor="blackAbColor"
+        background="theme_diamond_background"
+        displayname="Diamonds"
+        icon="theme_diamond_background"
+        menucolor="blackColor" />
+    <apptheme
+        name="theme_dot_blue"
+        actionbarcolor="softBlueAbColor"
+        background="theme_dot_blue_background"
+        displayname="Dots Blue"
+        icon="theme_dot_blue_background"
+        menucolor="softBlueColor" />
+    <apptheme
+        name="theme_fractal"
+        actionbarcolor="blackAbColor"
+        background="theme_black_white_fractal_background"
+        displayname="Black White Fractal"
+        icon="theme_black_white_fractal_background"
+        menucolor="blackColor" />
+    <apptheme
+        name="theme_blue_white_bubbles"
+        actionbarcolor="blueWhiteBubblesAbColor"
+        background="theme_blue_white_bubbles_background"
+        displayname="Blue White Bubbles"
+        icon="theme_blue_white_bubbles_background"
+        menucolor="blueWhiteBubblesMenuColor" />
+    <apptheme
+        name="theme_pop_blue"
+        actionbarcolor="softBlueAbColor"
+        background="theme_pop_blue_background"
+        displayname="Blue White Flowers"
+        icon="theme_pop_blue_background"
+        menucolor="softBlueColor" />
+    <apptheme
+        name="theme_cloud_sea"
+        actionbarcolor="softBlueAbColor"
+        background="theme_cloud_sea_background"
+        displayname="Cloud Sea"
+        icon="theme_cloud_sea_background"
+        menucolor="softBlueColor" />
+    <apptheme
+        name="theme_waves"
+        actionbarcolor="waveAbColor"
+        background="theme_waves_background"
+        displayname="Waves"
+        icon="theme_waves_background"
+        menucolor="waveMenuColor" />
+    <apptheme
+        name="theme_clouds"
+        actionbarcolor="cloudsAbColor"
+        background="theme_clouds_background"
+        displayname="Clouds"
+        icon="theme_clouds_background"
+        menucolor="cloudsMenuColor" />
+    <apptheme
+        name="theme_dots_white_blue"
+        actionbarcolor="blueDotsAbColor"
+        background="theme_dots_white_blue_background"
+        displayname="Blue dots"
+        icon="theme_dots_white_blue_background"
+        menucolor="blueDotsMenuColor" />
+    <apptheme
+        name="theme_girls_with_balloons"
+        actionbarcolor="balloonAbColor"
+        background="theme_girl_with_balloon_background"
+        displayname="Balloon girl"
+        icon="theme_girl_with_balloon_background"
+        menucolor="balloonMenuColor" />
+    <apptheme
+        name="theme_stripes_pink_purple"
+        actionbarcolor="pinkGreyAbColor"
+        background="theme_stripes_pink_purple_background"
+        displayname="Air Mail"
+        icon="theme_stripes_pink_purple_background"
+        menucolor="pinkGreyMenuColor" />
+    <apptheme
+        name="theme_pink_circles"
+        actionbarcolor="pinkCirclesAbColor"
+        background="theme_pink_circles_background"
+        displayname="Pink Circles"
+        icon="theme_pink_circles_background"
+        menucolor="pinkCirclesMenuColor" />
+    <apptheme
+        name="theme_pink_dots"
+        actionbarcolor="dotsPinkAbColor"
+        background="theme_dots_pink_background"
+        displayname="Dots Pink"
+        icon="theme_dots_pink_background"
+        menucolor="dotsPinkMenuColor" />
+    <apptheme
+        name="theme_pink_white_stripes"
+        actionbarcolor="pinkWhiteStripesAbColor"
+        background="theme_pink_white_stripes_background"
+        displayname="Pink White Stripes"
+        icon="theme_pink_white_stripes_background"
+        menucolor="pinkWhiteStripesMenuColor" />
+    <apptheme
+        name="theme_pink_black_stripes"
+        actionbarcolor="pinkBlackStripesAbColor"
+        background="theme_pink_black_stripes_background"
+        displayname="Pink Black Stripes"
+        icon="theme_pink_black_stripes_background"
+        menucolor="blackMenuColor" />
+    <apptheme
+        name="theme_strawberry"
+        actionbarcolor="strawberryAbColor"
+        background="theme_berry_background"
+        displayname="Strawberry"
+        icon="theme_berry_background"
+        menucolor="strawberryMenuColor" />
+    <apptheme
+        name="theme_cherry"
+        actionbarcolor="cherryAbColor"
+        background="theme_cherry_background"
+        displayname="Cherry"
+        icon="theme_cherry_background"
+        menucolor="cherryMenuColor" />
+    <apptheme
+        name="theme_pop_pink"
+        actionbarcolor="pinkFlowersAbColor"
+        background="theme_pop_pink_background"
+        displayname="Pink flowers"
+        icon="theme_pop_pink_background"
+        menucolor="pinkFlowersMenuColor" />
+    <apptheme
+        name="theme_shopping"
+        actionbarcolor="shoppingAbColor"
+        background="theme_shopping_background"
+        displayname="Accessorize"
+        icon="theme_shopping_background"
+        menucolor="shoppingMenuColor" />
+    <apptheme
+        name="theme_thunder"
+        actionbarcolor="thunderAbColor"
+        background="theme_thunder_background"
+        displayname="Thunder"
+        icon="theme_thunder_background"
+        menucolor="thunderMenuColor" />
+    <apptheme
+        name="theme_tartan_cyan"
+        actionbarcolor="tartanCyanAbColor"
+        background="theme_tartan_cyan_purple_pink_background"
+        displayname="Cyan Tartan"
+        icon="theme_tartan_cyan_purple_pink_background"
+        menucolor="tartanCyanMenuColor" />
+    <apptheme
+        name="theme_girly_skull_fur"
+        actionbarcolor="pinkFurAbColor"
+        background="theme_girly_skull_fur_background"
+        displayname="Girly Skull Fur"
+        icon="theme_girly_skull_fur_background"
+        menucolor="pinkFurMenuColor" />
+    <apptheme
+        name="theme_dot_green"
+        actionbarcolor="greenAbColor"
+        background="theme_dot_green_background"
+        displayname="Green Dots"
+        icon="theme_dot_green_background"
+        menucolor="greenMenuColor" />
+    <apptheme
+        name="theme_dot_white_green"
+        actionbarcolor="greenAbColor"
+        background="theme_dot_white_green_background"
+        displayname="Green Lime Dots"
+        icon="theme_dot_white_green_background"
+        menucolor="greenMenuColor" />
+    <apptheme
+        name="theme_green_curls"
+        actionbarcolor="greenCurlsAbColor"
+        background="theme_green_curls_background"
+        displayname="Green Curls"
+        icon="theme_green_curls_background"
+        menucolor="greenCurlsMenuColor" />
+    <apptheme
+        name="theme_orange_curls"
+        actionbarcolor="orangeAbColor"
+        background="theme_orange_curls_background"
+        displayname="Orange Curls"
+        icon="theme_orange_curls_background"
+        menucolor="orangeMenuColor" />
+    <apptheme
+        name="theme_cny"
+        actionbarcolor="cnyAbColor"
+        background="theme_chinese_flowers_background"
+        displayname="Chinese Flowers"
+        icon="theme_chinese_flowers_background"
+        menucolor="cnyMenuColor" />
+    <apptheme
+        name="theme_eggs"
+        actionbarcolor="orangeAbColor"
+        background="theme_eggs_background"
+        displayname="Eggs"
+        icon="theme_eggs_background"
+        menucolor="orangeMenuColor" />
+    <apptheme
+        name="theme_lemon"
+        actionbarcolor="yellowAbColor"
+        background="theme_lemon_background"
+        displayname="Lemon"
+        icon="theme_lemon_background"
+        menucolor="greenMenuColor" />
+    <apptheme
+        name="theme_capsule"
+        actionbarcolor="capsuleAbColor"
+        background="theme_capsule_background"
+        displayname="Capsule"
+        icon="theme_capsule_background"
+        menucolor="capsuleMenuColor" />
+    <apptheme
+        name="theme_brown_Stripes"
+        actionbarcolor="brownStripesAbColor"
+        background="theme_brown_stripes_background"
+        displayname="Brown Stripes"
+        icon="theme_brown_stripes_background"
+        menucolor="brownStripesMenuColor" />
+    <apptheme
+        name="theme_grey_blue_curls"
+        actionbarcolor="greyBlueCurlsAbColor"
+        background="theme_grey_blue_curls_background"
+        displayname="Grey Blue Curls"
+        icon="theme_grey_blue_curls_background"
+        menucolor="greyBlueCurlsMenuColor" />
+    <apptheme
+        name="theme_square_retro"
+        actionbarcolor="squareRetroAbColor"
+        background="theme_square_retro_background"
+        displayname="Retro Squares"
+        icon="theme_square_retro_background"
+        menucolor="squareRetroMenuColor" />
+    <apptheme
+        name="theme_japanese_circle"
+        actionbarcolor="japaneseCirclesAbColor"
+        background="theme_japanese_circle_background"
+        displayname="Japanese circles"
+        icon="theme_japanese_circle_background"
+        menucolor="japaneseCirclesMenuColor" />
+    <apptheme
+        name="theme_purty_wood_circle"
+        actionbarcolor="purtyWoodAbColor"
+        background="theme_purty_wood_background"
+        displayname="Purty Wood"
+        icon="theme_purty_wood_background"
+        menucolor="purtyWoodMenuColor" />
+    <apptheme
+        name="theme_seventies"
+        actionbarcolor="seventiesAbColor"
+        background="theme_seventies_background"
+        displayname="70s"
+        icon="theme_seventies_background"
+        menucolor="seventiesMenuColor" />
+    <apptheme
+        name="theme_pommegranate"
+        actionbarcolor="pommeAbColor"
+        background="theme_pomme_background"
+        displayname="Pommegranate"
+        icon="theme_pomme_background"
+        menucolor="pommeMenuColor" />
+    <apptheme
+        name="theme_stars"
+        actionbarcolor="starsAbColor"
+        background="theme_stars_background"
+        displayname="Stars"
+        icon="theme_stars_background"
+        menucolor="starsMenuColor" />
+    <apptheme
+        name="theme_graph"
+        actionbarcolor="graphAbColor"
+        background="theme_graph_background"
+        displayname="Graph"
+        icon="theme_graph_background"
+        menucolor="graphMenuColor" />
+    <apptheme
+        name="theme_paven"
+        actionbarcolor="graphAbColor"
+        background="theme_paven_background"
+        displayname="Paven"
+        icon="theme_paven_background"
+        menucolor="graphMenuColor" />
+
+</appthemes>

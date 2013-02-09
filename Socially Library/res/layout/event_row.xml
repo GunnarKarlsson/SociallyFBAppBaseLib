@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/square_white_four_borders"
+    android:padding="10dip" >
+
+    <ImageView
+        android:id="@+id/eventPicture"
+        android:layout_width="100dip"
+        android:layout_height="100dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@null"/>
+
+    <TextView
+        android:id="@+id/eventName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/eventPicture"
+        android:paddingLeft="8dip"
+        android:singleLine="false" />
+
+    <View
+        android:id="@+id/startLine"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_below="@id/eventPicture"
+        android:background="#eeeeee" />
+
+    <TextView
+        android:id="@+id/startLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/startLine"
+        android:text="@string/start" />
+
+    <TextView
+        android:id="@+id/eventStartTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/startLabel"
+        android:singleLine="false"
+        android:textAppearance="@style/bodyTextStyle" />
+
+    <View
+        android:id="@+id/endLine"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_below="@id/eventStartTime"
+        android:background="#eeeeee" />
+
+    <TextView
+        android:id="@+id/endLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/endLine"
+        android:text="@string/end" />
+
+    <TextView
+        android:id="@+id/eventEndTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/endLabel"
+        android:singleLine="false" />
+
+    <View
+        android:id="@+id/attendingLine"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_below="@id/eventEndTime"
+        android:background="#eeeeee" />
+
+    <TextView
+        android:id="@+id/rsvpLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/attendingLine"
+        android:text="@string/rsvp_status" />
+
+    <TextView
+        android:id="@+id/eventRsvpStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rsvpLabel"
+        
+        />
+
+</RelativeLayout>

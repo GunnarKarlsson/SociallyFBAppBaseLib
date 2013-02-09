@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    
+    <!-- "@android:style/Theme.Holo.Light" -->
+<!-- 
+    <style name="pink" parent="@android:style/Theme.Holo.Light">
+        <item name="android:background">@color/pinkFragmentBackgroundColor</item>
+    </style>
+
+    <style name="blue" parent="@android:style/Theme.Holo.Light">
+        <item name="android:background">@color/blueFragmentBackgroundColor</item>
+    </style>
+
+    <style name="green" parent="@android:style/Theme.Holo.Light">
+        <item name="android:background">@color/greenFragmentBackgroundColor</item>
+    </style>
+
+    <style name="sepia" parent="@android:style/Theme.Holo.Light">
+        <item name="android:background">@color/sepiaFragmentBackgroundColor</item>
+    </style>
+
+    <style name="leopard" parent="@android:style/Theme.Holo.Light">
+        <item name="android:background">@drawable/leopard_background</item>
+    </style>
+
+    <style name="tartan_black_pink_blue" parent="@android:style/Theme.Holo.Light">
+        <item name="android:background">@drawable/theme_tartan_black_pink_blue_background</item>
+    </style>
+ -->
+
+    <style name="holoLightDialog" parent="@android:style/Theme.Holo.Light.Dialog" />
+
+</resources>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        android:contentDescription="@null" />
+
+     <com.bluebitapps.fbclientbase.layout.LoadingView
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+    
+    <SlidingDrawer
+        android:id="@+id/slidingDrawer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dip"
+        android:layout_marginRight="16dip"
+        android:content="@+id/contentLayout"
+        android:handle="@+id/handleLayout"
+        android:orientation="vertical" 
+        android:topOffset="8dip">
+
+        <LinearLayout
+            android:id="@+id/handleLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/square_top_corners_rounded"
+            android:gravity="right"
+            android:orientation="vertical" >
+
+            <include
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/action_footer_show_like_and_comment_read_only" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/contentLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:background="@drawable/square_top_corners_rounded"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/likeButton"
+                android:layout_width="80dip"
+                android:layout_height="36dip"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/custom_button"
+                android:text="@string/like"
+                android:textColor="#222222"
+                android:textSize="16dp" 
+                android:layout_margin="16dip"/>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_below="@id/likeButton"
+                android:orientation="vertical" >
+
+                <ListView
+                    android:id="@+id/list"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:divider="@android:color/transparent"
+                    android:dividerHeight="-1sp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp" />
+
+                <include
+                    android:id="@+id/commentFooter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    layout="@layout/post_message"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp" />
+            </LinearLayout>
+        </RelativeLayout>
+    </SlidingDrawer>
+
+</FrameLayout>

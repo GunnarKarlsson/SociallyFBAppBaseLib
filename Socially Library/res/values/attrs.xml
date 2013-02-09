@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <attr name="smallText" format="reference" />
+    <attr name="mediumText" format="reference" />
+    <attr name="largeText" format="reference" />
+
+    <!-- ptr -->
+
+    <declare-styleable name="PullToRefresh">
+        <attr name="ptrAdapterViewBackground" format="reference|color" />
+        <attr name="ptrHeaderBackground" format="reference|color" />
+        <attr name="ptrHeaderTextColor" format="reference|color" />
+        <attr name="ptrHeaderSubTextColor" format="reference|color" />
+        <attr name="ptrMode">
+            <flag name="disabled" value="0x0" />
+            <flag name="pullDownFromTop" value="0x1" />
+            <flag name="pullUpFromBottom" value="0x2" />
+            <flag name="both" value="0x3" />
+        </attr>
+        <attr name="ptrShowIndicator" format="reference|boolean" />
+        <attr name="ptrDrawable" format="reference" />
+    </declare-styleable>
+
+    <!-- color picker -->
+
+    <declare-styleable name="ColorPicker">
+        <attr name="color_wheel_radius" format="dimension" />
+        <attr name="color_wheel_thickness" format="dimension" />
+        <attr name="color_center_radius" format="dimension" />
+        <attr name="color_center_halo_radius" format="dimension" />
+        <attr name="color_pointer_radius" format="dimension" />
+        <attr name="color_pointer_halo_radius" format="dimension" />
+    </declare-styleable>
+    <declare-styleable name="ColorBars">
+        <attr name="bar_thickness" format="dimension" />
+        <attr name="bar_length" format="dimension" />
+        <attr name="bar_pointer_radius" format="dimension" />
+        <attr name="bar_pointer_halo_radius" format="dimension" />
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="licenseText"><![CDATA[<p>Copyright (C) 2012 Gunnar Karlsson.</p>
+
+<p>
+All rights reserved. This software is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either 
+
+express or implied. The copyright holder will not be liable for any damages or injury caused by, including but not limited to, 
+
+any failure of performance, error, omission, interruption, defect, delay in operation of transmission, computer virus, or line 
+
+failure. The copyright holder will not be liable for any damages or injury, including but not limited to, special or 
+
+consequential damages that result from the use of, or the inability to use, the materials in this app or an app or site which is 
+
+linked to this app, even if there is negligence on the part of the copyright holder and the copyright holder has been advised of the 
+
+possibility of such damages. If any part of these Terms and Conditions is unlawful, void, or unenforceable, that part will be 
+
+deemed severable and will not affect the validity and enforceability of any remaining provisions. These Terms and Conditions 
+
+will be governed and be interpreted pursuant to the laws of Hong Kong SAR, China.
+</p>
+
+<p>
+This app uses the following 3rd party libraries:
+<p/>
+
+<p>
+Android Platform.<br/>
+Copyright (C) 2010 The Android Open Source Project.<br/>
+Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache License, Version 2.0 ()</a><br/>
+<p/>
+
+<p>
+Facebook Android SDK.<br/>
+Copyright (C) 2012 Facebook Inc.<br/>
+Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache License, Version 2.0 ()</a><br/>
+<p/>
+
+<p>
+
+SlidingMenu.<br/>
+Copyright (C) 2012 Jeremy Feinstein.<br/>
+Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache License, Version 2.0 ()</a><br/>
+<p/>
+
+<p>
+Pull To Refresh Views for Android.<br/>
+Copyright (C) Chris Banes.<br/>
+Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache License, Version 2.0 ()</a><br/>
+<p/>
+
+<p>
+Crouton.<br/>
+Copyright (C) 2012 Benjamin Weiss.<br/>
+Copyright (C) 2012 Neofonie Mobile GmbH.<br/>
+Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache License, Version 2.0 ()</a></br>
+<p/>
+
+<p>
+Universal Image Loader for Android.<br/>
+Copyright (c) 2011-2012, Sergey Tarasevich.<br/>
+Licensed under the <a href="http://opensource.org/licenses/BSD-3-Clause">BSD 3-clause</a></br>
+<p/>
+
+<p>
+Android ViewBadger.<br/>
+Copyright (c) 2011 readyState Software Ltd.<br/>
+Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache License, Version 2.0 ()</a></br>
+<p/>
+
+<p>
+asmack.<br/>
+Copyright 2003-2005 Jive Software.<br/>
+Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache License, Version 2.0 ()</a></br>
+<p/>]]></string>
+
+</resources>

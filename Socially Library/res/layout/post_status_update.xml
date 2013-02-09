@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    style="@android:style/Theme.Holo.Light"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:padding="10dip" 
+    android:clipToPadding="false">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/square_white_four_borders"
+            android:orientation="vertical"
+            android:padding="10dip" 
+            android:clipToPadding="false"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Message"
+                android:textColor="#000000"
+                android:textSize="20dip" />
+
+            <EditText
+                android:id="@+id/message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_holo_light"
+                android:cursorVisible="true"
+                android:gravity="top"
+               
+                android:textColorHint="#999999"
+                android:minHeight="100dip"
+                android:textColor="#000000"
+                android:textSize="16dip" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dip"
+                android:text="Link"
+                android:textColor="#000000"
+                android:textSize="20dip" />
+
+            <EditText
+                android:id="@+id/link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_holo_light"
+                android:hint="URL"
+                android:textColor="#000000"
+                android:textSize="16dip" />
+
+            <EditText
+                android:id="@+id/linkName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_holo_light"
+                android:hint="Name "
+                android:textColor="#000000"
+                android:textSize="16dip" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dip"
+                android:text="Privacy"
+                android:textColor="#000000"
+                android:textSize="20dip" />
+
+            <Spinner
+                android:id="@+id/privacySpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/privacy_for_post_array"
+                android:prompt="@string/privacy_spinner_prompt" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

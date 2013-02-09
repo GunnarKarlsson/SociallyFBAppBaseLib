@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootView"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/square_white_four_borders"
+    android:padding="10dip">
+
+    <ImageView
+        android:id="@+id/userPicture"
+        android:layout_width="64dip"
+        android:layout_height="64dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@null"/>
+
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/userPicture"
+        android:paddingLeft="5dip"
+        android:paddingRight="10dip"
+        android:paddingTop="12dip"
+        android:textAppearance="@style/bodyTextStyle" />
+
+    <TextView
+        android:id="@+id/birthdayDate"
+        android:drawableLeft="@drawable/birthday_icon"
+        android:drawablePadding="4dip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/userName"
+        android:layout_toRightOf="@id/userPicture"
+        android:paddingBottom="0dp"
+        android:paddingLeft="2dip"
+        android:paddingRight="10dip"
+        android:paddingTop="2dp"
+        android:textAppearance="@style/smallGreyTextStyle" />
+
+</RelativeLayout>

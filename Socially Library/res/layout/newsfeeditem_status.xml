@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/square_white_four_borders">
+
+     <include
+        android:id="@+id/fromHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        layout="@layout/from_header" />
+
+    <TextView
+        android:id="@+id/newsFeedItemMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fromHeader"
+        android:singleLine="false"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:textAppearance="@style/smallHeadLineTextStyle" />
+
+
+      <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@id/newsFeedItemMessage"
+        android:layout_below="@id/newsFeedItemMessage"
+        android:layout_marginRight="10dip"
+        layout="@layout/action_footer_like_and_comment" />
+
+</RelativeLayout>

@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <RelativeLayout
+            android:id="@+id/contentRoot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dip"
+            android:padding="10dip"
+            android:background="@drawable/square_white_four_borders" >
+
+            <RelativeLayout
+                android:id="@+id/profilePhotoFrame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/square_white"
+                android:padding="10dip" >
+
+                <com.bluebitapps.utils.AspectRatioImageView
+                    android:id="@+id/profilePhoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+
+            <TableLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/profilePhotoFrame"
+                android:layout_marginTop="10dip"
+                android:orientation="vertical"
+                android:padding="20dip" >
+
+                <TableRow
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/nameLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dip"
+                        android:singleLine="false"
+                        android:text="@string/profile_name" />
+
+                    <TextView
+                        android:id="@+id/nameValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="false" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/firstName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/firstNameLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dip"
+                        android:singleLine="false"
+                        android:text="@string/profile_first_name" />
+
+                    <TextView
+                        android:id="@+id/firstNameValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="false" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/lastName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/lastNameLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dip"
+                        android:singleLine="false"
+                        android:text="@string/profile_last_name" />
+
+                    <TextView
+                        android:id="@+id/lastNameValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="false" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/userName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/userNameLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dip"
+                        android:singleLine="false"
+                        android:text="@string/profile_user_name" />
+
+                    <TextView
+                        android:id="@+id/userNameValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="false" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/birthday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/birthdayLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dip"
+                        android:singleLine="false"
+                        android:text="@string/profile_birthday" />
+
+                    <TextView
+                        android:id="@+id/birthdayValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="false" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/homeTownName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/homeTownNameLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dip"
+                        android:singleLine="false"
+                        android:text="@string/profile_home_town" />
+
+                    <TextView
+                        android:id="@+id/homeTownNameValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="false" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/relationshipStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/relationshipStatusLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dip"
+                        android:singleLine="false"
+                        android:text="@string/profile_relationship_status" />
+
+                    <TextView
+                        android:id="@+id/relationshipstatusValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="false" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/ownerName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/ownerNameLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dip"
+                        android:singleLine="false"
+                        android:text="@string/profile_owner_name" />
+
+                    <TextView
+                        android:id="@+id/ownerNameValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="false" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/ownerCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/ownerCategoryLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dip"
+                        android:singleLine="false"
+                        android:text="@string/profile_owner_category" />
+
+                    <TextView
+                        android:id="@+id/ownerCategoryValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="false" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/descriptionLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dip"
+                        android:singleLine="false"
+                        android:text="@string/profile_description" />
+
+                    <TextView
+                        android:id="@+id/descriptionValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="false" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/startTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/startTimeLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dip"
+                        android:singleLine="false"
+                        android:text="@string/profile_start_time" />
+
+                    <TextView
+                        android:id="@+id/startTimeValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="false" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/endTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/endTimeLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dip"
+                        android:singleLine="false"
+                        android:text="@string/profile_end_time" />
+
+                    <TextView
+                        android:id="@+id/endTimeValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="false" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/locationLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dip"
+                        android:singleLine="false"
+                        android:text="@string/profile_location" />
+
+                    <TextView
+                        android:id="@+id/locationValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="false" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/venueName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/venueNameLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dip"
+                        android:singleLine="false"
+                        android:text="@string/profile_venue_name" />
+
+                    <TextView
+                        android:id="@+id/venueNameValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="false" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/privacy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/privacyLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dip"
+                        android:singleLine="false"
+                        android:text="@string/profile_privacy" />
+
+                    <TextView
+                        android:id="@+id/privacyValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="false" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/updatedTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/updatedTimeLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dip"
+                        android:singleLine="false"
+                        android:text="@string/profile_updated_time" />
+
+                    <TextView
+                        android:id="@+id/updatedTimeValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="false" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/icon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/iconLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dip"
+                        android:singleLine="false"
+                        android:text="@string/profile_icon" />
+
+                    <TextView
+                        android:id="@+id/iconValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="false" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/emailLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dip"
+                        android:singleLine="false"
+                        android:text="@string/profile_email" />
+
+                    <TextView
+                        android:id="@+id/emailValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="false" />
+                </TableRow>
+            </TableLayout>
+        </RelativeLayout>
+
+      <com.bluebitapps.fbclientbase.layout.LoadingView
+            android:id="@+id/loadingView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+</ScrollView>

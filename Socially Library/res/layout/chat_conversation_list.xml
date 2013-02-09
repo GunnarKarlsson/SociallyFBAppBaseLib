@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+      <ListView
+        android:id="@+id/chatConversationListview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="#00000000"
+        android:dividerHeight="10.0sp"
+        android:fastScrollEnabled="true"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" 
+        android:layout_alignParentTop="true"/>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/roundcorner_shape"
+        android:orientation="horizontal" 
+        android:layout_alignParentBottom="true">
+
+        <EditText
+            android:id="@+id/chatConversationMessageText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/type_your_message" 
+            android:layout_weight="3"/>
+        
+            <Button
+            android:id="@+id/chatConversationSendBtn"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/send" />
+            
+    </LinearLayout>
+
+</RelativeLayout>

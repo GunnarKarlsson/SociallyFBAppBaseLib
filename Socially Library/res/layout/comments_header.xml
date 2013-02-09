@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/roundcorner_shape" >
+
+    <ImageView
+        android:id="@+id/newsFeedItemFromPicture"
+        android:layout_width="64dip"
+        android:layout_height="64dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="10dip"
+        android:paddingTop="10dip" 
+        android:contentDescription="@null"/>
+
+    <TextView
+        android:id="@+id/newsFeedItemFromName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/newsFeedItemFromPicture"
+        android:paddingLeft="5dip"
+        android:paddingRight="5dip"
+        android:paddingTop="12dip" />
+
+    <ImageView
+        android:id="@+id/newsFeedItemCreatedTimeImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/newsFeedItemFromName"
+        android:layout_toRightOf="@id/newsFeedItemFromPicture"
+        android:paddingBottom="5dip"
+        android:paddingLeft="5dip"
+        android:paddingRight="2dip"
+        android:paddingTop="3dip"
+        android:src="@drawable/clock" 
+        android:contentDescription="@null"/>
+
+    <TextView
+        android:id="@+id/newsFeedItemCreatedTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/newsFeedItemFromName"
+        android:layout_toRightOf="@id/newsFeedItemCreatedTimeImage"
+        android:paddingBottom="5dp"
+        android:paddingTop="3dp"
+        android:textAppearance="@style/smallGreyTextStyle" />
+
+    <TextView
+        android:id="@+id/newsFeedItemMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/newsFeedItemCreatedTime"
+        android:paddingLeft="20dip"
+        android:paddingRight="20dip"
+        android:paddingTop="20dip" />
+<!-- 
+    <View
+        android:id="@+id/newsFeedItemDividerFirst"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/newsFeedItemMessage"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="#eeeeee" />
+ -->
+
+    <LinearLayout
+        android:id="@+id/newsFeedItemPictureAndName"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/newsFeedItemMessage"
+        android:background="@drawable/roundcorner_shape_with_border_outer"
+        android:orientation="horizontal"
+        android:paddingLeft="20dip"
+        android:paddingRight="20dip" 
+        android:paddingTop="20dip">
+
+        <ImageView
+            android:id="@+id/newsFeedItemPicture"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="fitCenter" 
+            android:contentDescription="@null"/>
+
+        <TextView
+            android:id="@+id/newsFeedItemName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dip"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/newsFeedItemDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/newsFeedItemPictureAndName"
+        android:paddingBottom="5dip"
+        android:paddingLeft="20dip"
+        android:paddingRight="20dip"
+        android:paddingTop="5dip" />
+
+    <LinearLayout
+        android:id="@+id/newsFeedItemActions"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/newsFeedItemDescription"
+        android:orientation="horizontal" 
+        android:padding="20dip">
+
+          <Button
+            android:id="@+id/newsFeedItemLikeButton"
+            android:background="@drawable/custom_button"
+            android:layout_width="wrap_content"
+            android:layout_height="30dip"
+            android:text="@string/like"
+            android:textSize="10dp" 
+            android:layout_marginRight="20dip"/>
+
+        <Button
+            android:id="@+id/newsFeedItemCommentButton"
+            android:background="@drawable/custom_button"
+            android:layout_width="wrap_content"
+            android:layout_height="30dip"       
+            android:text="@string/comment"
+            android:textSize="10dp" />
+
+        <ImageView
+            android:id="@+id/newsFeedItemLikeIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/like" 
+            android:contentDescription="@null"/>
+
+        <TextView
+            android:id="@+id/newsFeedItemLikeCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2345" 
+            style="@style/smallGreyTextStyle"/>
+
+        <ImageView
+            android:id="@+id/newsFeedItemCommentIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/comment" 
+            android:contentDescription="@null"/>
+
+        <TextView
+            android:id="@+id/newsFeedItemCommentCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="6789" 
+            style="@style/smallGreyTextStyle"/>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ViewSwitcher xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/viewSwitcher"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/square_white"
+        android:padding="10dip">
+
+         <ProgressBar
+            android:id="@+id/progressWheel"
+            android:layout_centerVertical="true"
+            android:layout_width="20dip"
+            android:layout_height="20dip"/>
+        
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/loading_comments"
+            android:layout_toRightOf="@id/progressWheel"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dip"
+        android:background="@drawable/square_white">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/progressWheel"
+            android:text="@string/earlier_comments" 
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+</ViewSwitcher>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/postMessage"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    android:background="#000000"
+    android:padding="4dip">
+
+    <Button
+        android:id="@+id/postButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/custom_button"
+        android:text="@string/post"
+        android:textColor="#222222"/>
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/postButton"
+        android:hint="@string/write_your_message"
+        android:inputType="text|textMultiLine"/>
+
+</RelativeLayout>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true" >
+
+    <RelativeLayout
+        android:id="@+id/rootView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dip" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/square_white_four_borders"
+            android:padding="10dip" >
+
+            <ImageView
+                android:id="@+id/eventPicture"
+                android:layout_width="100dip"
+                android:layout_height="100dip"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:contentDescription="@null" />
+
+            <TextView
+                android:id="@+id/eventName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/eventPicture"
+                android:paddingLeft="8dip"
+                android:singleLine="false" />
+
+            <View
+                android:id="@+id/startLine"
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_below="@id/eventPicture"
+                android:background="#eeeeee" />
+
+            <TextView
+                android:id="@+id/startLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/startLine"
+                android:text="@string/start" />
+
+            <TextView
+                android:id="@+id/eventStartTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/startLabel"
+                android:singleLine="false" />
+
+            <View
+                android:id="@+id/endLine"
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_below="@id/eventStartTime"
+                android:background="#eeeeee"
+                android:paddingTop="6dip"
+                android:paddingBottom="6dip"/>
+
+            <TextView
+                android:id="@+id/endLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/endLine"
+                android:text="@string/end" />
+
+            <TextView
+                android:id="@+id/eventEndTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/endLabel"
+                android:singleLine="false" />
+
+            <View
+                android:id="@+id/attendingLine"
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_below="@id/eventEndTime"
+                android:background="#eeeeee" 
+                android:paddingTop="6dip"
+                android:paddingBottom="6dip"/>
+
+            <LinearLayout
+                android:id="@+id/buttons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/attendingLine"
+                android:orientation="horizontal"
+                android:paddingTop="10dip" >
+
+                <Button
+                    android:id="@+id/joinBtn"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_marginRight="5dip"
+                    android:background="@drawable/custom_button"
+                    android:text="Join"
+                    android:textColor="#222222"
+                    android:textSize="14sp" />
+
+                <Button
+                    android:id="@+id/maybeBtn"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_marginRight="5dip"
+                    android:background="@drawable/custom_button"
+                    android:textColor="#222222"
+                    android:text="Maybe"
+                    android:textSize="14sp" />
+
+                <Button
+                    android:id="@+id/declineBtn"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textSize="14sp"
+                    android:background="@drawable/custom_button"
+                    android:textColor="#222222"
+                    android:text="Decline"/>
+            </LinearLayout>
+              <TextView
+                  
+                android:id="@+id/status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="6dip"
+                android:layout_below="@id/attendingLine"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</ScrollView>

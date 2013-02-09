@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/square_white" >
+
+    <include
+        android:id="@+id/fromHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        layout="@layout/from_header" />
+
+    <TextView
+        android:id="@+id/newsFeedItemMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fromHeader"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:singleLine="false"
+        android:textAppearance="@style/smallHeadLineTextStyle" />
+
+    <TextView
+        android:id="@+id/newsFeedItemName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/newsFeedItemMessage"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:singleLine="false"
+        android:textAppearance="@style/bodyTextStyle" />
+
+    <TextView
+        android:id="@+id/newsFeedItemDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/newsFeedItemName"
+        android:paddingBottom="0dip"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="5dip"
+        android:singleLine="false"
+        android:textAppearance="@style/bodyTextStyle" />
+
+    <include
+        android:id="@+id/likeSection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/newsFeedItemDescription"
+        layout="@layout/action_footer_like_big"
+        android:padding="10dip" />
+
+</RelativeLayout>

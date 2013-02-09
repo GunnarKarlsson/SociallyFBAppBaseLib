@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="Notifications" >
+        <ListPreference
+            android:defaultValue="@string/PREFS_NOTIFICATION_DELIVERY_DEFAULT_VALUE"
+            android:entries="@array/pref_notification_delivery_entries"
+            android:entryValues="@array/pref_notification_delivery_values"
+            android:key="@string/PREFS_NOTIFICATION_DELIVERY_KEY"
+            android:summary="Statusbar or themed pop-up"
+            android:title="Notification Delivery" />
+        <ListPreference
+            android:defaultValue="@string/PREFS_NOTIFICATION_FREQUENCY_DEFAULT_VALUE"
+            android:entries="@array/pref_notifications_request_frequency_entries"
+            android:entryValues="@array/pref_notifications_request_frequency_values"
+            android:key="@string/PREFS_NOTIFICATION_FREQUENCY_KEY"
+            android:summary="Choose how often to check for new notifications"
+            android:title="Notifications Poll Frequency" />
+
+        <Preference
+            android:key="notiftype"
+            android:summary="Choose what type of notification to receive"
+            android:title="Notification Type" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="NewsFeed" >
+        <ListPreference
+            android:defaultValue="@string/PREFS_NEWSFEED_REFRESH_DEFAULT_VALUE"
+            android:entries="@array/pref_newsfeed_refresh_entries"
+            android:entryValues="@array/pref_newsfeed_refresh_values"
+            android:key="@string/PREFS_NEWSFEED_REFRESH_KEY"
+            android:summary="When opening Newsfeed, fetch latest posts automatically"
+            android:title="Refresh Newsfeed Automatically" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Text Appearance" >
+        <ListPreference
+            android:defaultValue="@string/PREFS_FONT_SIZE_DEFAULT_VALUE"
+            android:entries="@array/pref_font_size_entries"
+            android:entryValues="@array/pref_font_size_values"
+            android:key="@string/PREFS_FONT_SIZE_KEY"
+            android:summary="Choose font size"
+            android:title="Text Size" />
+        <ListPreference
+            android:defaultValue="@string/PREFS_FONT_COLOR_DEFAULT_VALUE"
+            android:entries="@array/pref_font_color_entries"
+            android:entryValues="@array/pref_font_color_values"
+            android:key="@string/PREFS_FONT_COLOR_KEY"
+            android:summary="Choose font color"
+            android:title="Text Color" />
+        <ListPreference
+            android:defaultValue="@string/PREFS_FONT_TYPE_DEFAULT_VALUE"
+            android:entries="@array/pref_font_type_entries"
+            android:entryValues="@array/pref_font_type_values"
+            android:key="@string/PREFS_FONT_TYPE_KEY"
+            android:summary="Choose font"
+            android:title="Text Typeface" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

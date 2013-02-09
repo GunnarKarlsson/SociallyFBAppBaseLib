@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/markAsRead"
+        android:icon="@drawable/actionbar_mark_as_read"
+        android:showAsAction="always"
+        android:title="Mark as read"/>
+
+</menu>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+    android:id="@+id/container"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        xmlns:ptr="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/pull_refresh_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10.0sp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:layout_above="@+id/adView"
+        android:layout_alignParentTop="true"
+        ptr:ptrMode="both"
+        ptr:ptrHeaderTextColor="#777777"
+        ptr:ptrShowIndicator="false"
+		android:clipToPadding="false"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbarThumbVertical="@drawable/scrollbar_vertical_thumb"
+        />
+    
+    <com.google.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        ads:adUnitId="a150ab340c1545c"
+        ads:adSize="SMART_BANNER"
+        ads:loadAdOnCreate="true"
+        />
+
+    <com.bluebitapps.fbclientbase.layout.LoadingView
+        android:id="@+id/loadingView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="horizontal" />
+
+</RelativeLayout>

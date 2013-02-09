@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res/com.bluebitapps.fbclientbase"
+    android:background="#333333">
+
+    <com.larswerkman.colorpicker.ColorPicker
+        android:id="@+id/picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleX="0.7"
+        android:scaleY="0.7"/>
+
+    <com.larswerkman.colorpicker.SVBar
+        android:id="@+id/svbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/picker" 
+        android:paddingBottom="16dip"/>
+    
+    <Button 
+        android:id="@+id/selectionBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/picker"
+        android:layout_below="@id/svbar"
+        android:text="Set color as background"
+        android:padding="10dip"
+        />
+
+</RelativeLayout>
