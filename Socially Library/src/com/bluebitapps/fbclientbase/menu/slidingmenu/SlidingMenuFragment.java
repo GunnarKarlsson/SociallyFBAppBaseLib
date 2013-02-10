@@ -79,8 +79,8 @@ public class SlidingMenuFragment extends ListFragment {
 				mUnreadCount = intent.getIntExtra(Constants.NOTIFICATION_COUNT_KEY, 0);
 				mAdapter.notifyDataSetChanged();
 			}
-			
-			if(NotificationsAlertActivity.MARKED_AS_READ_IN_POP_UP.equals(intent.getAction())){
+
+			if (NotificationsAlertActivity.MARKED_AS_READ_IN_POP_UP.equals(intent.getAction())) {
 				mUnreadCount = (int) FBClientApplication.getApplication().getNotificationsData().getUnreadCount();
 				mAdapter.notifyDataSetChanged();
 			}
@@ -145,15 +145,14 @@ public class SlidingMenuFragment extends ListFragment {
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.sliding_menu_list, null);
-		
-		if(Constants.THEME_IS_COLOR_PICKER_COLOR.equals(mThemeSelection)){
+
+		if (Constants.THEME_IS_COLOR_PICKER_COLOR.equals(mThemeSelection)) {
 			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-			int color= prefs.getInt(Constants.COLOR_PICKER_CHOICE_SLIDING_MENU, 0x000000);
+			int color = prefs.getInt(Constants.COLOR_PICKER_CHOICE_SLIDING_MENU, 0x000000);
 			viewGroup.setBackgroundColor(color);
-		}else{			
+		} else {
 			viewGroup.setBackgroundResource(ThemeFactory.getSlidingMenuColor(getActivity(), mThemeSelection));
 		}
-		
 
 		// Remove over-scroll glow.
 		ListView list = (ListView) viewGroup.findViewById(android.R.id.list);
@@ -190,35 +189,38 @@ public class SlidingMenuFragment extends ListFragment {
 
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_THEMES, R.drawable.sliding_menu_icon_themes, MenuItemAdapter.TYPE_MAIN));
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_COLOR_PICKER, R.drawable.sliding_menu_icon_color_picker, MenuItemAdapter.TYPE_MAIN));
-		
+
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_NEWSFEED, R.drawable.sliding_menu_icon_newsfeed, MenuItemAdapter.TYPE_MAIN));
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_FRIENDS, R.drawable.sliding_menu_icon_friends, MenuItemAdapter.TYPE_MAIN));
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_PHOTOS, R.drawable.sliding_menu_icon_albums, MenuItemAdapter.TYPE_MAIN));
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_NOTIFICATIONS, R.drawable.sliding_menu_icon_notifications, MenuItemAdapter.TYPE_MAIN));
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_MESSAGES, R.drawable.sliding_menu_icon_messages, MenuItemAdapter.TYPE_MAIN));
-		mAdapter.add(new MenuItem(Constants.MENU_ITEM_CHECKINS, R.drawable.sliding_menu_icon_checkins, MenuItemAdapter.TYPE_MAIN));
-		
-		mAdapter.add(new MenuItem(Constants.MENU_ITEM_SUB_ITEM_FRIENDS_RECENT, R.drawable.sliding_menu_icon_submenu_mid, MenuItemAdapter.TYPE_SUB_MID));
-		mAdapter.add(new MenuItem(Constants.MENU_ITEM_SUB_ITEM_NEARBY_LOCATIONS, R.drawable.sliding_menu_icon_submenu_end, MenuItemAdapter.TYPE_SUB_END));
+
+		if (!FBClientApplication.getApplication().hasKindleFeatureSet()) {
+			mAdapter.add(new MenuItem(Constants.MENU_ITEM_CHECKINS, R.drawable.sliding_menu_icon_checkins, MenuItemAdapter.TYPE_MAIN));
+			mAdapter.add(new MenuItem(Constants.MENU_ITEM_SUB_ITEM_FRIENDS_RECENT, R.drawable.sliding_menu_icon_submenu_mid, MenuItemAdapter.TYPE_SUB_MID));
+			mAdapter.add(new MenuItem(Constants.MENU_ITEM_SUB_ITEM_NEARBY_LOCATIONS, R.drawable.sliding_menu_icon_submenu_end, MenuItemAdapter.TYPE_SUB_END));
+		}
 		
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_EVENTS, R.drawable.sliding_menu_icon_events, MenuItemAdapter.TYPE_MAIN));
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_SUB_ITEM_EVENT_LIST, R.drawable.sliding_menu_icon_submenu_mid, MenuItemAdapter.TYPE_SUB_MID));
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_SUB_ITEM_EVENT_INVITED, R.drawable.sliding_menu_icon_submenu_mid, MenuItemAdapter.TYPE_SUB_MID));
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_SUB_ITEM_BIRTHDAYS, R.drawable.sliding_menu_icon_submenu_end, MenuItemAdapter.TYPE_SUB_END));
-		
+
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_GROUPS, R.drawable.sliding_menu_icon_groups, MenuItemAdapter.TYPE_MAIN));
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_CHAT, R.drawable.sliding_menu_icon_chat, MenuItemAdapter.TYPE_MAIN));
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_PROFILE, R.drawable.sliding_menu_icon_profile, MenuItemAdapter.TYPE_MAIN));
-		
+
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_SUB_ITEM_ME, R.drawable.sliding_menu_icon_submenu_mid, MenuItemAdapter.TYPE_SUB_MID));
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_SUB_ITEM_WALL, R.drawable.sliding_menu_icon_submenu_mid, MenuItemAdapter.TYPE_SUB_MID));
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_SUB_ITEM_PHOTOS, R.drawable.sliding_menu_icon_submenu_end, MenuItemAdapter.TYPE_SUB_END));
-		
+
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_LIKES, R.drawable.sliding_menu_icon_likes, MenuItemAdapter.TYPE_MAIN));
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_SUBSCRIPTIONS, R.drawable.sliding_menu_icon_subscriptions, MenuItemAdapter.TYPE_MAIN));
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_FRIEND_REQUESTS, R.drawable.sliding_menu_icon_friend_requests, MenuItemAdapter.TYPE_MAIN));
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_SETTINGS, R.drawable.sliding_menu_icon_settings, MenuItemAdapter.TYPE_MAIN));
-		//mAdapter.add(new MenuItem(Constants.MENU_ITEM_RATE, R.drawable.sliding_menu_icon_rate, MenuItemAdapter.TYPE_MAIN));
+		// mAdapter.add(new MenuItem(Constants.MENU_ITEM_RATE,
+		// R.drawable.sliding_menu_icon_rate, MenuItemAdapter.TYPE_MAIN));
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_ABOUT, R.drawable.sliding_menu_icon_about, MenuItemAdapter.TYPE_MAIN));
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_LOGOUT, R.drawable.sliding_menu_icon_logout, MenuItemAdapter.TYPE_MAIN));
 

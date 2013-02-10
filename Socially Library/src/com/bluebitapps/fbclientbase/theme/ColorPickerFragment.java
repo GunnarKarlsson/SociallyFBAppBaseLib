@@ -97,7 +97,7 @@ public class ColorPickerFragment extends BaseFragment {
 						// TODO Auto-generated method stub
 						if (((CheckBox) checkBox).isChecked()) {
 							shouldBeAppliedToApp = true;
-						}else{
+						} else {
 							shouldBeAppliedToApp = false;
 						}
 
@@ -112,12 +112,19 @@ public class ColorPickerFragment extends BaseFragment {
 						// TODO Auto-generated method stub
 						if (((CheckBox) checkBox).isChecked()) {
 							shouldBeAppliedToDevice = true;
-						}else{
+						} else {
 							shouldBeAppliedToDevice = false;
 						}
 
 					}
 				});
+
+				if (getActivity() != null) {
+
+					if (getActivity().isFinishing()) {
+						return;
+					}
+				}
 
 				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(view).setMessage("Apply selection?");
 
@@ -141,22 +148,22 @@ public class ColorPickerFragment extends BaseFragment {
 
 								Bitmap bitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
 								bitmap.eraseColor(picker.getColor());
-								try{									
+								try {
 									mWallpaperManager.setBitmap(bitmap);
-								}catch(IOException e){
+								} catch (IOException e) {
 									OutputUtil.showCrouton(getActivity(), "Device Wallpaper could not be set");
 								}
-								
-								if(shouldBeAppliedToApp==false){
-									if(getActivity()!=null){
+
+								if (shouldBeAppliedToApp == false) {
+									if (getActivity() != null) {
 										getActivity().finish();
 										return;
 									}
 								}
 							}
-							
+
 						}
-						
+
 						if (shouldBeAppliedToApp) {
 
 							int color = picker.getColor();
@@ -191,8 +198,9 @@ public class ColorPickerFragment extends BaseFragment {
 							editor.apply();
 
 							// Restart
-
-							getActivity().finish();
+							if (getActivity() != null) {
+								getActivity().finish();
+							}
 						}
 
 					}

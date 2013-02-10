@@ -145,7 +145,11 @@ public class BaseNavigationFragment extends BaseFragment {
 		if (hasOnlyRefreshMenuItemInActionBar) {
 			inflater.inflate(R.menu.actionbar_with_only_refresh_menu_item, menu);
 		} else {
-			inflater.inflate(R.menu.actionbar_with_multiple_menu_items, menu);
+			if (FBClientApplication.getApplication().hasKindleFeatureSet()) {
+				inflater.inflate(R.menu.actionbar_for_kindle, menu);
+			} else {
+				inflater.inflate(R.menu.actionbar_with_multiple_menu_items, menu);
+			}
 		}
 
 		if (mRefreshMenuItem == null) {
@@ -308,7 +312,7 @@ public class BaseNavigationFragment extends BaseFragment {
 					Logger.i(Logger.getClassAndMethod() + e.toString());
 				} catch (IOException e) {
 					Logger.i(Logger.getClassAndMethod() + e.toString());
-				} catch(Exception e){
+				} catch (Exception e) {
 					Logger.i(Logger.getClassAndMethod() + e.toString());
 				}
 

@@ -12,7 +12,6 @@ import java.net.MalformedURLException;
 import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.SASLAuthentication;
 import org.jivesoftware.smack.XMPPConnection;
-import org.jivesoftware.smack.XMPPException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -26,7 +25,6 @@ import android.os.Bundle;
 import android.provider.MediaStore.Images.Media;
 import android.util.Log;
 
-import com.bluebitapps.fbclientbase.R;
 import com.bluebitapps.fbclientbase.base.BaseNavigationFragment;
 import com.bluebitapps.fbclientbase.base.BaseSlidingMenuActivity;
 import com.bluebitapps.fbclientbase.chat.SASLXFacebookPlatformMechanism;
@@ -128,43 +126,12 @@ public class MainActivity extends BaseSlidingMenuActivity {
 		if (requestCode == BaseNavigationFragment.PICK_EXISTING_PHOTO_RESULT_CODE) {
 			if (resultCode == Activity.RESULT_OK) {
 
-				Bitmap bitmap = null;
-				Uri uri = null;
-
-				try {
-					Uri chosenImageUri = data.getData();
-					bitmap = null;
-					bitmap = Media.getBitmap(FBClientApplication.getApplication().getContentResolver(), chosenImageUri);
-
-					if (data != null) {
-						uri = data.getData();
-					}
-
-				} catch (IOException e) {
-					Log.i("jan23", Logger.getClassAndMethod() + e);
-					Logger.i(e.toString());
-				}
-
-				startUploadActivity(bitmap, uri);
+				Uri uri = data.getData();
+				startUploadActivity(uri);
 			}
 		} else if (requestCode == BaseNavigationFragment.TAKE_PICTURE_WITH_CAMERA_RESULT_CODE) {
 			if (resultCode == Activity.RESULT_OK) {
-				Bitmap bitmap = null;
-				try {
-
-					InputStream is = FBClientApplication.getApplication().getContentResolver().openInputStream(getFileUri());
-					bitmap = BitmapFactory.decodeStream(is);
-					is.close();
-					Logger.i(bitmap.toString());
-
-				} catch (FileNotFoundException e) {
-					Logger.i(e.toString());
-				} catch (IOException e) {
-					Logger.i(e.toString());
-				}
-
-				startUploadActivity(bitmap, getFileUri());
-
+				startUploadActivity(getFileUri());
 			}
 
 		} else {
@@ -179,7 +146,7 @@ public class MainActivity extends BaseSlidingMenuActivity {
 		}
 	}
 	
-	private void startUploadActivity(Bitmap bitmap, Uri uri) {
+	private void startUploadActivity(Uri uri) {
 		Log.i("jan23", Logger.getClassAndMethod());
 			Intent intent = new Intent(MainActivity.this, UploadPhotoActivity.class);
 			intent.putExtra(UploadPhotoActivity.IMAGE_URI_KEY, uri);
@@ -295,6 +262,7 @@ public class MainActivity extends BaseSlidingMenuActivity {
 			public void run() {
 
 				ConnectionConfiguration config = new ConnectionConfiguration("chat.facebook.com", 5222, "chat.facebook.com");
+				
 				config.setDebuggerEnabled(true);
 				XMPPConnection connection = new XMPPConnection(config);
 				XMPPConnectionSingleton connectionSingleton = XMPPConnectionSingleton.getInstance();
@@ -312,12 +280,19 @@ public class MainActivity extends BaseSlidingMenuActivity {
 						Logger.i(MainActivity.class.getSimpleName() + "." + "connectToChat()." + "isConnected==false");
 					}
 
+				}catch(IllegalStateException e){
+					Logger.i(Logger.getClassAndMethod() + e);
+					try{
+						connection.disconnect();
+					}catch(Exception ex){
+						Logger.i(Logger.getClassAndMethod() + ex);
+					}
 				} catch (Exception e) {
 					Logger.i(MainActivity.class.getSimpleName() + "." + "connectToChat()." + e.toString());
 					try{						
 						connection.disconnect();
 					}catch(Exception ex){
-						
+						Logger.i(Logger.getClassAndMethod() + ex);
 					}
 				}
 			}

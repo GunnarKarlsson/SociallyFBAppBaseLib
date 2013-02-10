@@ -186,8 +186,16 @@ public class ChatRosterFragment extends BaseNavigationFragment implements OnClea
 
 				isConnected = true;
 				Roster roster = connection.getRoster();
+				
+				if(roster == null){
+					OutputUtil.showCrouton(getActivity(), "Could not retrieve friend list");
+				}
 
 				Collection<RosterEntry> entries = roster.getEntries();
+				
+				if(entries == null){
+					OutputUtil.showCrouton(getActivity(), "Could not retrieve friend list");
+				}
 
 				OutputUtil.showCrouton(getActivity(), "Connected to chat.");
 				stopRefreshMenuItemAnimation();
@@ -215,8 +223,9 @@ public class ChatRosterFragment extends BaseNavigationFragment implements OnClea
 							if (mAdapter != null) {
 								mAdapter.notifyDataSetChanged();
 							}
-
-							mLoadingView.setVisibility(View.GONE);
+							if(mLoadingView != null){								
+								mLoadingView.setVisibility(View.GONE);
+							}
 						}
 					});
 				}

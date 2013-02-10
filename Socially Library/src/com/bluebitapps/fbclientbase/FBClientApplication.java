@@ -15,6 +15,7 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
 
 import com.bluebitapps.fbclientbase.R;
@@ -60,8 +61,22 @@ public class FBClientApplication extends Application implements OnSharedPreferen
 	private ProfileData mProfileData;
 	private LikesData mLikesData;
 	private PageData mPageData;
+	private boolean hasCameraFeature = true;
+	private boolean hasLocationFeature = true;
 
 	private static XMPPConnection mXmppConnection;
+	
+	public boolean hasKindleFeatureSet(){
+		return !hasCameraFeature && !hasLocationFeature;
+	}
+	
+	public boolean hasCameraFeature(){
+		return hasCameraFeature;
+	}
+	
+	public boolean hasLocationFeature(){
+		return hasLocationFeature;
+	}
 	
 	public static XMPPConnection getXMPPConnection() {
 
@@ -215,6 +230,19 @@ public class FBClientApplication extends Application implements OnSharedPreferen
 		onSharedPreferenceChanged(null, null);
 
 		Logger.i(FBClientApplication.class.getSimpleName() + "#onCreated");
+		
+		checkSystemFeatures();
+		
+		
+	}
+	
+	private void checkSystemFeatures(){
+		PackageManager pm = getPackageManager();
+		if(pm == null){
+			return;
+		}
+		hasCameraFeature = pm.hasSystemFeature(PackageManager.FEATURE_CAMERA);
+		hasLocationFeature = pm.hasSystemFeature(PackageManager.FEATURE_LOCATION);
 	}
 
 	@Override

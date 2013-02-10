@@ -44,6 +44,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.Window;
+import android.view.WindowManager.BadTokenException;
 import android.view.inputmethod.InputMethodManager;
 
 import com.bluebitapps.utils.ExitUtil;
@@ -448,7 +449,11 @@ public class BaseSlidingMenuActivity extends SlidingFragmentActivity implements 
 
 		if (Constants.MENU_ITEM_LOGOUT.equalsIgnoreCase(selection)) {
 
-			new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_dialog_alert).setTitle("Louout")
+			if(BaseSlidingMenuActivity.this.isFinishing()){
+				return;
+			}
+			
+			new AlertDialog.Builder(BaseSlidingMenuActivity.this).setIcon(android.R.drawable.ic_dialog_alert).setTitle("Logout")
 					.setMessage("Do you want to logout from Socially. Next time you use Socially, you'll have to enter username and password.")
 					.setPositiveButton("Logout", new DialogInterface.OnClickListener() {
 
@@ -487,6 +492,8 @@ public class BaseSlidingMenuActivity extends SlidingFragmentActivity implements 
 
 				try {
 					FBClientApplication.getApplication().getFBConnection().getFacebook().logout(getApplicationContext());
+				}catch (BadTokenException e){
+					Logger.i(Logger.getClassAndMethod() + e);
 				} catch (MalformedURLException e) {
 					Logger.i(Logger.getClassAndMethod() + e);
 				} catch (IOException e) {

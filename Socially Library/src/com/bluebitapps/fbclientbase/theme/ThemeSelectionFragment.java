@@ -89,7 +89,7 @@ public class ThemeSelectionFragment extends BaseFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		ViewGroup vg = (ViewGroup) inflater.inflate(R.layout.theme_grid, null);
-		GridView gridView = (GridView)vg.findViewById(R.id.gridview);
+		GridView gridView = (GridView) vg.findViewById(R.id.gridview);
 		mAdapter = new ThemeAdapter();
 		gridView.setAdapter(mAdapter);
 
@@ -180,19 +180,19 @@ public class ThemeSelectionFragment extends BaseFragment {
 						final int positionToSave = position;
 
 						LayoutInflater inflater = LayoutInflater.from(getActivity());
-						
-						if(inflater==null){
+
+						if (inflater == null) {
 							return;
 						}
-						
+
 						final View alertView = inflater.inflate(R.layout.theme_picker_alert, null);
-						
-						if(alertView==null){
+
+						if (alertView == null) {
 							return;
 						}
 
 						CheckBox applyToAppCheckBox = (CheckBox) alertView.findViewById(R.id.applyToAppCheckBox);
-						
+
 						applyToAppCheckBox.setOnClickListener(new OnClickListener() {
 
 							@Override
@@ -220,6 +220,12 @@ public class ThemeSelectionFragment extends BaseFragment {
 							}
 						});
 
+						if (getActivity() != null) {
+							if (getActivity().isFinishing()) {
+								return;
+							}
+						}
+
 						AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(alertView).setMessage("Apply selection?");
 
 						builder.setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -230,7 +236,7 @@ public class ThemeSelectionFragment extends BaseFragment {
 								}
 
 								if (shouldBeAppliedToDevice) {
-									if (mWallpaperManager != null) {										
+									if (mWallpaperManager != null) {
 
 										int resId = 0;
 
