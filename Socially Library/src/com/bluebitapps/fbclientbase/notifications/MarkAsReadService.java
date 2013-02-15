@@ -60,9 +60,6 @@ public class MarkAsReadService extends IntentService {
 
 	public MarkAsReadService() {
 		super("MarkAsReadService");
-
-		Logger.i(Logger.getClassAndMethod());
-
 	}
 
 	@Override

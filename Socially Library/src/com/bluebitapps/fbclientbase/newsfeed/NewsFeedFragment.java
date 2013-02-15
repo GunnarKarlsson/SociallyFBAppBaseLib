@@ -201,9 +201,6 @@ public class NewsFeedFragment extends BaseNavigationFragment {
 
 			vg = ThemeFactory.getViewGroup(getThemeSelection(), getActivity(), inflater, container, R.layout.item_list_pull_to_refresh);
 
-			AdView adView = (AdView) vg.findViewById(R.id.adView);
-			setAdView(adView);
-
 			mLoadingView = (LoadingView) vg.findViewById(R.id.loadingView);
 
 			mNewsFeedItems = new ArrayList<NewsFeedItem>();

@@ -35,12 +35,13 @@ public class BaseFragment extends Fragment {
 	private String mObjectId;
 	private String mState;
 	private Boolean hasNoLoadingImage = false;
+	private boolean isPremiumVersion = false;
 
 	private AdView mAdView;
 
-	protected void setAdView(AdView adView) {
-		mAdView = adView;
-	}
+	/*
+	 * protected void setAdView(AdView adView) { mAdView = adView; }
+	 */
 
 	public BaseFragment() {
 	}
@@ -56,20 +57,26 @@ public class BaseFragment extends Fragment {
 
 		mThemeSelection = prefs.getString(Constants.THEME_PREFERENCES_KEY, Constants.THEME_DEFAULT);
 
+		isPremiumVersion = getActivity().getResources().getBoolean(R.bool.isPremiumVersion);
+
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
 		Log.i("jan23", Logger.getClassAndMethod());
-		if (getView() != null) {
-			AdView adView = (AdView) getView().findViewById(R.id.adView);
-			if (adView != null) {
 
-				adView = new AdView(getActivity(), AdSize.SMART_BANNER, Admob.getId());
-				AdRequest adRequest = new AdRequest();
-				adView.loadAd(adRequest);
-				if (Admob.isDebugging()) {
+		if (!isPremiumVersion) {
+
+			if (getView() != null) {
+				AdView adView = (AdView) getView().findViewById(R.id.adView);
+				if (adView != null) {
+
+					adView = new AdView(getActivity(), AdSize.SMART_BANNER, Admob.getId());
+					AdRequest adRequest = new AdRequest();
+					adView.loadAd(adRequest);
+					if (Admob.isDebugging()) {
+					}
 				}
 			}
 		}
@@ -79,20 +86,21 @@ public class BaseFragment extends Fragment {
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
 
-		AdView adView = (AdView) getView().findViewById(R.id.adView);
-		if (adView != null) {
+		if (!isPremiumVersion) {
 
-			RelativeLayout parent = (RelativeLayout) adView.getParent();
-			ViewGroup.LayoutParams adViewParams = adView.getLayoutParams();
-			parent.removeView(adView);
-			adView.destroy();
-			AdView newAdView = new AdView(getActivity(), AdSize.SMART_BANNER, Admob.getId());
-			newAdView.setId(R.id.adView);
-			parent.addView(newAdView, adViewParams);
-			AdRequest adRequest = new AdRequest();
-			newAdView.loadAd(new AdRequest());
+			AdView adView = (AdView) getView().findViewById(R.id.adView);
+			if (adView != null) {
+
+				RelativeLayout parent = (RelativeLayout) adView.getParent();
+				ViewGroup.LayoutParams adViewParams = adView.getLayoutParams();
+				parent.removeView(adView);
+				adView.destroy();
+				AdView newAdView = new AdView(getActivity(), AdSize.SMART_BANNER, Admob.getId());
+				newAdView.setId(R.id.adView);
+				parent.addView(newAdView, adViewParams);
+				newAdView.loadAd(new AdRequest());
+			}
 		}
-		Log.i("jan23", Logger.getClassAndMethod() + " config changed in fragment");
 	}
 
 	@Override

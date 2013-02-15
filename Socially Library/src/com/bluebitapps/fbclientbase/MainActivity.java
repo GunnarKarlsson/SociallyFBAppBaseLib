@@ -73,6 +73,8 @@ public class MainActivity extends BaseSlidingMenuActivity {
 		 */
 
 		mApplication.incrementUsageCount();
+		
+		Log.i("feb14", "appId: " + mApplication.getFBConnection().getAppId());
 
 		if (mApplication.getFBConnection().shouldForceAuth() || !mApplication.getFBConnection().isValidSession()) {
 			Log.i("jan21", Logger.getClassAndMethod() + "should force auth or not valid session");

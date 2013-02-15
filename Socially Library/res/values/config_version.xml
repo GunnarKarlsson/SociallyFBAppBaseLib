@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+     <string name="appid">no app id value for base library</string>
+     <bool name="isPinkVersion">false</bool>
+       <bool name="isPremiumVersion">false</bool>
+</resources>

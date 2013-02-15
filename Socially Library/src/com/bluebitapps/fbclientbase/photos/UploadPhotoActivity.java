@@ -164,7 +164,11 @@ public class UploadPhotoActivity extends BaseThemedActivity {
 				} while (c.moveToNext());
 			}
 		}
-		c.close();
+
+		// TODO: this fixes crash on Kindle
+		if (c != null) {
+			c.close();
+		}
 
 		if (mAlbums != null) {
 			mAlbums.clear();
