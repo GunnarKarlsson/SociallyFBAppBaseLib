@@ -132,7 +132,7 @@ public class NotificationsService extends IntentService {
 
 	private void getNotifications() {
 		Log.i("notiftype", Logger.getClassAndMethod());
-		final String query1 = "select notification_id, sender_id, created_time, title_text, body_text, app_id, is_unread, is_hidden, object_id, object_type from notification where recipient_id=me() and is_unread=0";
+		final String query1 = "select notification_id, sender_id, created_time, title_text, body_text, app_id, is_unread, is_hidden, object_id, object_type from notification where recipient_id=me() and is_unread=1";
 		final String query2 = "select name, uid from user where uid IN (SELECT sender_id FROM #query1)";
 
 		final JSONObject jsonQueries = new JSONObject() {
