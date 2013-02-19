@@ -45,7 +45,7 @@ public class SubscriptionActivity extends BaseThemedActivity {
 
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		actionBar.setTitle("Your Profile");// TODO change to any users name
+		actionBar.setTitle(R.string.profile);// TODO change to any users name
 
 		ProfileFragment profileFragment = ProfileFragment.newInstance(userId, Constants.STATE_PROFILE, title, true);
 		profileFragment.setRetainInstance(true);
@@ -54,11 +54,11 @@ public class SubscriptionActivity extends BaseThemedActivity {
 		NewsFeedFragment newsFeedFragment = NewsFeedFragment.newInstance(userId, Constants.STATE_PROFILE, title, true);
 		newsFeedFragment.setRetainInstance(true);
 
-		ActionBar.Tab tab = actionBar.newTab().setText("Profile").setTabListener(new CustomTabListener<ProfileFragment>(profileFragment));
+		ActionBar.Tab tab = actionBar.newTab().setText(R.string.profile).setTabListener(new CustomTabListener<ProfileFragment>(profileFragment));
 		actionBar.addTab(tab);
-		tab = actionBar.newTab().setText("Wall").setTabListener(new CustomTabListener<NewsFeedFragment>(newsFeedFragment));
+		tab = actionBar.newTab().setText(R.string.wall).setTabListener(new CustomTabListener<NewsFeedFragment>(newsFeedFragment));
 		actionBar.addTab(tab);
-		tab = actionBar.newTab().setText("Photos").setTabListener(new CustomTabListener<AlbumsFragment>(albumsFragment));
+		tab = actionBar.newTab().setText(R.string.photos).setTabListener(new CustomTabListener<AlbumsFragment>(albumsFragment));
 		actionBar.addTab(tab);
 	}
 }

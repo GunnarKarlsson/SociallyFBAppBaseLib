@@ -185,44 +185,46 @@ public class SlidingMenuFragment extends ListFragment {
 
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+
 		mAdapter = new MenuItemAdapter(getActivity());
 
-		mAdapter.add(new MenuItem(Constants.MENU_ITEM_THEMES, R.drawable.sliding_menu_icon_themes, MenuItemAdapter.TYPE_MAIN));
-		mAdapter.add(new MenuItem(Constants.MENU_ITEM_COLOR_PICKER, R.drawable.sliding_menu_icon_color_picker, MenuItemAdapter.TYPE_MAIN));
-
-		mAdapter.add(new MenuItem(Constants.MENU_ITEM_NEWSFEED, R.drawable.sliding_menu_icon_newsfeed, MenuItemAdapter.TYPE_MAIN));
-		mAdapter.add(new MenuItem(Constants.MENU_ITEM_FRIENDS, R.drawable.sliding_menu_icon_friends, MenuItemAdapter.TYPE_MAIN));
-		mAdapter.add(new MenuItem(Constants.MENU_ITEM_PHOTOS, R.drawable.sliding_menu_icon_albums, MenuItemAdapter.TYPE_MAIN));
-		mAdapter.add(new MenuItem(Constants.MENU_ITEM_NOTIFICATIONS, R.drawable.sliding_menu_icon_notifications, MenuItemAdapter.TYPE_MAIN));
-		mAdapter.add(new MenuItem(Constants.MENU_ITEM_MESSAGES, R.drawable.sliding_menu_icon_messages, MenuItemAdapter.TYPE_MAIN));
+		mAdapter.add(new MenuItem(Constants.MENU_ITEM_THEMES, getResources().getString(R.string.themes_menu_item), R.drawable.sliding_menu_icon_themes, MenuItemAdapter.TYPE_MAIN));
+		mAdapter.add(new MenuItem(Constants.MENU_ITEM_COLOR_PICKER, getResources().getString(R.string.color_picker_menu_item), R.drawable.sliding_menu_icon_color_picker, MenuItemAdapter.TYPE_MAIN));
+		mAdapter.add(new MenuItem(Constants.MENU_ITEM_NEWSFEED, getResources().getString(R.string.newsfeed_menu_item), R.drawable.sliding_menu_icon_newsfeed, MenuItemAdapter.TYPE_MAIN));
+		mAdapter.add(new MenuItem(Constants.MENU_ITEM_FRIENDS, getResources().getString(R.string.friends_menu_item), R.drawable.sliding_menu_icon_friends, MenuItemAdapter.TYPE_MAIN));
+		mAdapter.add(new MenuItem(Constants.MENU_ITEM_PHOTOS, getResources().getString(R.string.photos_albums_menu_item), R.drawable.sliding_menu_icon_albums, MenuItemAdapter.TYPE_MAIN));
+		mAdapter.add(new MenuItem(Constants.MENU_ITEM_NOTIFICATIONS, getResources().getString(R.string.notifications_menu_item), R.drawable.sliding_menu_icon_notifications, MenuItemAdapter.TYPE_MAIN));
+		mAdapter.add(new MenuItem(Constants.MENU_ITEM_MESSAGES, getResources().getString(R.string.messages_menu_item), R.drawable.sliding_menu_icon_messages, MenuItemAdapter.TYPE_MAIN));
 
 		if (!FBClientApplication.getApplication().hasKindleFeatureSet()) {
-			mAdapter.add(new MenuItem(Constants.MENU_ITEM_CHECKINS, R.drawable.sliding_menu_icon_checkins, MenuItemAdapter.TYPE_MAIN));
-			mAdapter.add(new MenuItem(Constants.MENU_ITEM_SUB_ITEM_FRIENDS_RECENT, R.drawable.sliding_menu_icon_submenu_mid, MenuItemAdapter.TYPE_SUB_MID));
-			mAdapter.add(new MenuItem(Constants.MENU_ITEM_SUB_ITEM_NEARBY_LOCATIONS, R.drawable.sliding_menu_icon_submenu_end, MenuItemAdapter.TYPE_SUB_END));
+			mAdapter.add(new MenuItem(Constants.MENU_ITEM_CHECKINS, getResources().getString(R.string.checkins_menu_item), R.drawable.sliding_menu_icon_checkins, MenuItemAdapter.TYPE_MAIN));
+			mAdapter.add(new MenuItem(Constants.MENU_ITEM_SUB_ITEM_FRIENDS_RECENT, getResources().getString(R.string.friends_recent_menu_item), R.drawable.sliding_menu_icon_submenu_mid,
+					MenuItemAdapter.TYPE_SUB_MID));
+			mAdapter.add(new MenuItem(Constants.MENU_ITEM_SUB_ITEM_NEARBY_LOCATIONS, getResources().getString(R.string.nearby_locations_menu_item), R.drawable.sliding_menu_icon_submenu_end,
+					MenuItemAdapter.TYPE_SUB_END));
 		}
-		
-		mAdapter.add(new MenuItem(Constants.MENU_ITEM_EVENTS, R.drawable.sliding_menu_icon_events, MenuItemAdapter.TYPE_MAIN));
-		mAdapter.add(new MenuItem(Constants.MENU_ITEM_SUB_ITEM_EVENT_LIST, R.drawable.sliding_menu_icon_submenu_mid, MenuItemAdapter.TYPE_SUB_MID));
-		mAdapter.add(new MenuItem(Constants.MENU_ITEM_SUB_ITEM_EVENT_INVITED, R.drawable.sliding_menu_icon_submenu_mid, MenuItemAdapter.TYPE_SUB_MID));
-		mAdapter.add(new MenuItem(Constants.MENU_ITEM_SUB_ITEM_BIRTHDAYS, R.drawable.sliding_menu_icon_submenu_end, MenuItemAdapter.TYPE_SUB_END));
 
-		mAdapter.add(new MenuItem(Constants.MENU_ITEM_GROUPS, R.drawable.sliding_menu_icon_groups, MenuItemAdapter.TYPE_MAIN));
-		mAdapter.add(new MenuItem(Constants.MENU_ITEM_CHAT, R.drawable.sliding_menu_icon_chat, MenuItemAdapter.TYPE_MAIN));
-		mAdapter.add(new MenuItem(Constants.MENU_ITEM_PROFILE, R.drawable.sliding_menu_icon_profile, MenuItemAdapter.TYPE_MAIN));
+		mAdapter.add(new MenuItem(Constants.MENU_ITEM_EVENTS, getResources().getString(R.string.events_menu_item),R.drawable.sliding_menu_icon_events, MenuItemAdapter.TYPE_MAIN));
+		mAdapter.add(new MenuItem(Constants.MENU_ITEM_SUB_ITEM_EVENT_LIST, getResources().getString(R.string.attending_menu_item),R.drawable.sliding_menu_icon_submenu_mid, MenuItemAdapter.TYPE_SUB_MID));
+		mAdapter.add(new MenuItem(Constants.MENU_ITEM_SUB_ITEM_EVENT_INVITED, getResources().getString(R.string.invitations_menu_item), R.drawable.sliding_menu_icon_submenu_mid, MenuItemAdapter.TYPE_SUB_MID));
+		mAdapter.add(new MenuItem(Constants.MENU_ITEM_SUB_ITEM_BIRTHDAYS, getResources().getString(R.string.birthdays_menu_item),R.drawable.sliding_menu_icon_submenu_end, MenuItemAdapter.TYPE_SUB_END));
 
-		mAdapter.add(new MenuItem(Constants.MENU_ITEM_SUB_ITEM_ME, R.drawable.sliding_menu_icon_submenu_mid, MenuItemAdapter.TYPE_SUB_MID));
-		mAdapter.add(new MenuItem(Constants.MENU_ITEM_SUB_ITEM_WALL, R.drawable.sliding_menu_icon_submenu_mid, MenuItemAdapter.TYPE_SUB_MID));
-		mAdapter.add(new MenuItem(Constants.MENU_ITEM_SUB_ITEM_PHOTOS, R.drawable.sliding_menu_icon_submenu_end, MenuItemAdapter.TYPE_SUB_END));
+		mAdapter.add(new MenuItem(Constants.MENU_ITEM_GROUPS, getResources().getString(R.string.groups_menu_item),R.drawable.sliding_menu_icon_groups, MenuItemAdapter.TYPE_MAIN));
+		mAdapter.add(new MenuItem(Constants.MENU_ITEM_CHAT, getResources().getString(R.string.chat_menu_item),R.drawable.sliding_menu_icon_chat, MenuItemAdapter.TYPE_MAIN));
+		mAdapter.add(new MenuItem(Constants.MENU_ITEM_PROFILE, getResources().getString(R.string.profile_menu_item),R.drawable.sliding_menu_icon_profile, MenuItemAdapter.TYPE_MAIN));
 
-		mAdapter.add(new MenuItem(Constants.MENU_ITEM_LIKES, R.drawable.sliding_menu_icon_likes, MenuItemAdapter.TYPE_MAIN));
-		mAdapter.add(new MenuItem(Constants.MENU_ITEM_SUBSCRIPTIONS, R.drawable.sliding_menu_icon_subscriptions, MenuItemAdapter.TYPE_MAIN));
-		mAdapter.add(new MenuItem(Constants.MENU_ITEM_FRIEND_REQUESTS, R.drawable.sliding_menu_icon_friend_requests, MenuItemAdapter.TYPE_MAIN));
-		mAdapter.add(new MenuItem(Constants.MENU_ITEM_SETTINGS, R.drawable.sliding_menu_icon_settings, MenuItemAdapter.TYPE_MAIN));
+		mAdapter.add(new MenuItem(Constants.MENU_ITEM_SUB_ITEM_ME, getResources().getString(R.string.me_menu_item),R.drawable.sliding_menu_icon_submenu_mid, MenuItemAdapter.TYPE_SUB_MID));
+		mAdapter.add(new MenuItem(Constants.MENU_ITEM_SUB_ITEM_WALL, getResources().getString(R.string.my_wall_menu_item),R.drawable.sliding_menu_icon_submenu_mid, MenuItemAdapter.TYPE_SUB_MID));
+		mAdapter.add(new MenuItem(Constants.MENU_ITEM_SUB_ITEM_PHOTOS, getResources().getString(R.string.my_photos_menu_item),R.drawable.sliding_menu_icon_submenu_end, MenuItemAdapter.TYPE_SUB_END));
+
+		mAdapter.add(new MenuItem(Constants.MENU_ITEM_LIKES, getResources().getString(R.string.likes_menu_item),R.drawable.sliding_menu_icon_likes, MenuItemAdapter.TYPE_MAIN));
+		mAdapter.add(new MenuItem(Constants.MENU_ITEM_SUBSCRIPTIONS, getResources().getString(R.string.subscriptions_menu_item),R.drawable.sliding_menu_icon_subscriptions, MenuItemAdapter.TYPE_MAIN));
+		mAdapter.add(new MenuItem(Constants.MENU_ITEM_FRIEND_REQUESTS, getResources().getString(R.string.friend_requests_menu_item), R.drawable.sliding_menu_icon_friend_requests, MenuItemAdapter.TYPE_MAIN));
+		mAdapter.add(new MenuItem(Constants.MENU_ITEM_SETTINGS, getResources().getString(R.string.settings_menu_item), R.drawable.sliding_menu_icon_settings, MenuItemAdapter.TYPE_MAIN));
 		// mAdapter.add(new MenuItem(Constants.MENU_ITEM_RATE,
 		// R.drawable.sliding_menu_icon_rate, MenuItemAdapter.TYPE_MAIN));
-		mAdapter.add(new MenuItem(Constants.MENU_ITEM_ABOUT, R.drawable.sliding_menu_icon_about, MenuItemAdapter.TYPE_MAIN));
-		mAdapter.add(new MenuItem(Constants.MENU_ITEM_LOGOUT, R.drawable.sliding_menu_icon_logout, MenuItemAdapter.TYPE_MAIN));
+		mAdapter.add(new MenuItem(Constants.MENU_ITEM_ABOUT, getResources().getString(R.string.about_menu_item),R.drawable.sliding_menu_icon_about, MenuItemAdapter.TYPE_MAIN));
+		mAdapter.add(new MenuItem(Constants.MENU_ITEM_LOGOUT, getResources().getString(R.string.logout_menu_item),R.drawable.sliding_menu_icon_logout, MenuItemAdapter.TYPE_MAIN));
 
 		for (int i = 0; i < mAdapter.getCount(); i++) {
 			mAdapter.addItemtoPositionMap(i, mAdapter.getItem(i).getType());
@@ -233,13 +235,15 @@ public class SlidingMenuFragment extends ListFragment {
 
 	private class MenuItem {
 		private String name;
+		private String displayName;
 		private Drawable drawable;
 		private int type;
 
-		public MenuItem(String tag, int iconRes, int type) {
+		public MenuItem(String tag, String displayName, int iconRes, int type) {
 			this.name = tag;
 			this.drawable = (Drawable) getResources().getDrawable(iconRes);
 			this.type = type;
+			this.displayName = displayName;
 		}
 
 		public Drawable getIcon() {
@@ -252,6 +256,10 @@ public class SlidingMenuFragment extends ListFragment {
 
 		public int getType() {
 			return type;
+		}
+
+		public String getDisplayName() {
+			return displayName;
 		}
 
 	}
@@ -327,7 +335,7 @@ public class SlidingMenuFragment extends ListFragment {
 			}
 
 			holder.icon.setImageDrawable(this.getItem(position).getIcon());
-			holder.title.setText(this.getItem(position).getName());
+			holder.title.setText(this.getItem(position).getDisplayName());
 
 			if (type == TYPE_MAIN) {
 

@@ -82,7 +82,7 @@ public class NearbyPlacesFragment extends BaseNavigationFragment {
 		Logger.i(Logger.getClassAndMethod());
 		getLocation();
 	}
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -103,11 +103,6 @@ public class NearbyPlacesFragment extends BaseNavigationFragment {
 
 		mCheckins = new ArrayList<Checkin>();
 		mListView = (ListView) vg.findViewById(R.id.image_list_view);
-		//TextView padding = new TextView(getActivity());
-		//padding.setHeight(getResources().getDimensionPixelOffset(R.dimen.item_list_padding));
-		//mListView.addHeaderView(padding);
-		//mListView.addFooterView(padding);
-
 		return vg;
 	}
 
@@ -117,8 +112,8 @@ public class NearbyPlacesFragment extends BaseNavigationFragment {
 		getLocation();
 
 		if (getActivity() != null) {
-			getActivity().getActionBar().setTitle("Checkins");
-			getActivity().getActionBar().setSubtitle("Nearby Locations");
+			getActivity().getActionBar().setTitle(R.string.checkins);
+			getActivity().getActionBar().setSubtitle(R.string.nearby_locations);
 		}
 	}
 
@@ -127,7 +122,7 @@ public class NearbyPlacesFragment extends BaseNavigationFragment {
 		 * launch a new Thread to get new location
 		 */
 		//
-		//OutputUtil.showCrouton(getActivity(), "Fetching locations...");
+		// OutputUtil.showCrouton(getActivity(), "Fetching locations...");
 
 		new Thread() {
 			@Override
@@ -152,12 +147,12 @@ public class NearbyPlacesFragment extends BaseNavigationFragment {
 					 * GPS not enabled, prompt user to enable GPS in the
 					 * Location menu
 					 */
-					new AlertDialog.Builder(getActivity()).setTitle("Enable GPS").setMessage("Enable GPS").setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					new AlertDialog.Builder(getActivity()).setTitle(R.string.enable_gps).setMessage(R.string.enable_gps).setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							startActivityForResult(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS), 0);
 						}
-					}).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+					}).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							// TODO: message if user doesn;t turn on gps.
@@ -208,7 +203,9 @@ public class NearbyPlacesFragment extends BaseNavigationFragment {
 		try {
 			params.putString("center", mLocation.getString("latitude") + "," + mLocation.getString("longitude"));
 		} catch (JSONException e) {
-			OutputUtil.showCrouton(getActivity(), "Locations could not be fetched.");
+			if (getActivity() != null) {
+				OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.locations_could_not_be_fetched));
+			}
 			return;
 		}
 		params.putString("distance", "1000");
@@ -227,13 +224,17 @@ public class NearbyPlacesFragment extends BaseNavigationFragment {
 			try {
 				mJsonArray = new JSONObject(response).getJSONArray("data");
 				if (mJsonArray == null) {
-					OutputUtil.showCrouton(getActivity(), "Locations could not be fetched");
+					if (getActivity() != null) {
+						OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.locations_could_not_be_fetched));
+					}
 					stopRefreshMenuItemAnimation();
 					return;
 				}
 			} catch (JSONException e) {
 				Logger.i(CheckinLocationSelectionActivity.class.getSimpleName() + "." + PlacesRequestListener.class.getSimpleName() + "." + e.toString());
-				OutputUtil.showCrouton(getActivity(), "Locations could not be fetched");
+				if (getActivity() != null) {
+					OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.locations_could_not_be_fetched));
+				}
 				stopRefreshMenuItemAnimation();
 				return;
 			}

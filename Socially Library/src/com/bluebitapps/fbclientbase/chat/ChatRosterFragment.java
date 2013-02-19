@@ -53,10 +53,10 @@ import com.bluebitapps.fbclientbase.friends.Friend;
 import com.bluebitapps.fbclientbase.layout.LoadingView;
 import com.bluebitapps.fbclientbase.theme.ThemeFactory;
 
-public class ChatRosterFragment extends BaseNavigationFragment implements OnClearClickListener{
+public class ChatRosterFragment extends BaseNavigationFragment implements OnClearClickListener {
 
 	private List<ChatUser> mRoster;
-	private List<ChatUser>mOriginalChatUserList;
+	private List<ChatUser> mOriginalChatUserList;
 	private ItemAdapter mAdapter;
 	private static final String SAVED_ROSTER_INSTANCE_STATE_KEY = "saved roster instance state key";
 
@@ -102,22 +102,21 @@ public class ChatRosterFragment extends BaseNavigationFragment implements OnClea
 		ViewGroup vg = null;
 
 		if (getActivity() != null) {
-//old: item_list
+			// old: item_list
 			vg = ThemeFactory.getViewGroup(getThemeSelection(), getActivity(), inflater, container, R.layout.image_list_search);
 
 			mLoadingView = (LoadingView) vg.findViewById(R.id.loadingView);
 
-			mEditText = (ClearableEditText)vg.findViewById(R.id.edit_text);
+			mEditText = (ClearableEditText) vg.findViewById(R.id.edit_text);
 			mEditText.setOnClearClickListener(this);
 			mTextWatcher = new CustomTextWatcher();
 			mEditText.addTextChangedListener(mTextWatcher);
-			
-		    mListView = (ListView) vg.findViewById(R.id.image_list_view);
+
+			mListView = (ListView) vg.findViewById(R.id.image_list_view);
 			TextView padding = new TextView(getActivity());
 			padding.setHeight(getResources().getDimensionPixelOffset(R.dimen.item_list_padding));
 			mListView.addHeaderView(padding);
 			mListView.addFooterView(padding);
-
 
 			mAdapter = new ItemAdapter();
 			mListView.setAdapter(mAdapter);
@@ -129,10 +128,10 @@ public class ChatRosterFragment extends BaseNavigationFragment implements OnClea
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
-		outState.putParcelableArrayList(SAVED_ROSTER_INSTANCE_STATE_KEY, (ArrayList<ChatUser>)mRoster);
+		outState.putParcelableArrayList(SAVED_ROSTER_INSTANCE_STATE_KEY, (ArrayList<ChatUser>) mRoster);
 		super.onSaveInstanceState(outState);
 	}
-	
+
 	@Override
 	public void onRefresh() {
 		Logger.i(Logger.getClassAndMethod());
@@ -159,7 +158,7 @@ public class ChatRosterFragment extends BaseNavigationFragment implements OnClea
 	 */
 
 	private void connect() {
-		
+
 		startRefreshMenuItemAnimation();
 
 		Thread thread = new Thread() {
@@ -167,69 +166,75 @@ public class ChatRosterFragment extends BaseNavigationFragment implements OnClea
 			@Override
 			public void run() {
 
-				OutputUtil.showCrouton(getActivity(), "Connecting to chat...");
-
+				if (getActivity() != null) {
+					OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.connecting_to_chat));
+				}
 				XMPPConnectionSingleton connectionSingleton = XMPPConnectionSingleton.getInstance();
 
-				try{
-					
-				XMPPConnection connection = connectionSingleton.getConnection();
-				
-				if(connection == null){
-					if(getActivity()!=null){						
-						OutputUtil.showCrouton(getActivity(), "Could not connect to chat");
-					}
-					return;
-				}
-				
-				connection.addConnectionListener(new FBChatConnectionListener());
+				try {
 
-				isConnected = true;
-				Roster roster = connection.getRoster();
-				
-				if(roster == null){
-					OutputUtil.showCrouton(getActivity(), "Could not retrieve friend list");
-				}
+					XMPPConnection connection = connectionSingleton.getConnection();
 
-				Collection<RosterEntry> entries = roster.getEntries();
-				
-				if(entries == null){
-					OutputUtil.showCrouton(getActivity(), "Could not retrieve friend list");
-				}
-
-				OutputUtil.showCrouton(getActivity(), "Connected to chat.");
-				stopRefreshMenuItemAnimation();
-
-				Logger.i(Logger.getClassAndMethod() + "connect(). \n\n" + entries.size() + " buddy(ies):");
-
-				final ArrayList<ChatUser> rosterList = new ArrayList<ChatUser>();
-
-				for (RosterEntry entry : entries) {
-					ChatUser chatUser = new ChatUser();
-					chatUser.setName(entry.getName());
-					chatUser.setJabberId(entry.getUser());
-					rosterList.add(chatUser);
-				}
-
-				if (getActivity() != null) {
-					getActivity().runOnUiThread(new Runnable() {
-
-						@Override
-						public void run() {
-							if (mRoster != null) {
-								mRoster.clear();
-								mRoster = rosterList;
-							}
-							if (mAdapter != null) {
-								mAdapter.notifyDataSetChanged();
-							}
-							if(mLoadingView != null){								
-								mLoadingView.setVisibility(View.GONE);
-							}
+					if (connection == null) {
+						if (getActivity() != null) {
+							OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.could_not_connect_to_chat));
 						}
-					});
-				}
-				}catch(IllegalStateException e){
+						return;
+					}
+
+					connection.addConnectionListener(new FBChatConnectionListener());
+
+					isConnected = true;
+					Roster roster = connection.getRoster();
+
+					if (roster == null) {
+						if (getActivity() != null) {
+							OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.could_not_retrieve_friend_list));
+						}
+					}
+
+					Collection<RosterEntry> entries = roster.getEntries();
+
+					if (entries == null) {
+						if (getActivity() != null) {
+							OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.could_not_retrieve_friend_list));
+						}
+					}
+
+					if (getActivity() != null) {
+						OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.connected_to_chat));
+					}
+
+					stopRefreshMenuItemAnimation();
+
+					final ArrayList<ChatUser> rosterList = new ArrayList<ChatUser>();
+
+					for (RosterEntry entry : entries) {
+						ChatUser chatUser = new ChatUser();
+						chatUser.setName(entry.getName());
+						chatUser.setJabberId(entry.getUser());
+						rosterList.add(chatUser);
+					}
+
+					if (getActivity() != null) {
+						getActivity().runOnUiThread(new Runnable() {
+
+							@Override
+							public void run() {
+								if (mRoster != null) {
+									mRoster.clear();
+									mRoster = rosterList;
+								}
+								if (mAdapter != null) {
+									mAdapter.notifyDataSetChanged();
+								}
+								if (mLoadingView != null) {
+									mLoadingView.setVisibility(View.GONE);
+								}
+							}
+						});
+					}
+				} catch (IllegalStateException e) {
 					OutputUtil.showCrouton(getActivity(), "Could not connect to chat server");
 				}
 			}
@@ -244,28 +249,33 @@ public class ChatRosterFragment extends BaseNavigationFragment implements OnClea
 		@Override
 		public void connectionClosed() {
 			Logger.i(ChatRosterFragment.class.getSimpleName() + "." + FBChatConnectionListener.class.getSimpleName() + "#connectionClosed");
-			OutputUtil.showCrouton(getActivity(), "Chat connection closed...");
-
+			if (getActivity() != null) {
+				OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.chat_connection_closed));
+			}
 		}
 
 		@Override
 		public void connectionClosedOnError(Exception arg0) {
 			Logger.i(ChatRosterFragment.class.getSimpleName() + "." + FBChatConnectionListener.class.getSimpleName() + "#connectionClosedOnError");
-			OutputUtil.showCrouton(getActivity(), "Chat connection error...");
-
+			if(getActivity()!=null){				
+				OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.chat_connection_error));
+			}
 		}
 
 		@Override
 		public void reconnectingIn(int arg0) {
 			Logger.i(ChatRosterFragment.class.getSimpleName() + "." + FBChatConnectionListener.class.getSimpleName() + "#reconnectingIn");
-			OutputUtil.showCrouton(getActivity(), "Reconnecting to chat...");
-
+			if(getActivity()!=null){				
+				OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.reconnecting_to_chat));
+			}
 		}
 
 		@Override
 		public void reconnectionFailed(Exception arg0) {
 			Logger.i(ChatRosterFragment.class.getSimpleName() + "." + FBChatConnectionListener.class.getSimpleName() + "#reconnectionFailer");
-			OutputUtil.showCrouton(getActivity(), "Chat reconnection failed...");
+			if(getActivity()!=null){
+				OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.chat_reconnection_failed));				
+			}
 
 		}
 
@@ -277,7 +287,7 @@ public class ChatRosterFragment extends BaseNavigationFragment implements OnClea
 
 	}
 
-	class ItemAdapter extends BaseAdapter implements Filterable{
+	class ItemAdapter extends BaseAdapter implements Filterable {
 
 		private class ViewHolder {
 			public ImageView picture;
@@ -342,7 +352,7 @@ public class ChatRosterFragment extends BaseNavigationFragment implements OnClea
 							intent.putExtra(Constants.CLEAR_TOP_ON_HOME_SELECTED, true);
 							getActivity().startActivity(intent);
 							getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-							
+
 						}
 					}
 				});
@@ -419,25 +429,25 @@ public class ChatRosterFragment extends BaseNavigationFragment implements OnClea
 		mAdapter.notifyDataSetChanged();
 		InputUtil.hideKeyboard(getActivity());
 	}
-	
-	class CustomTextWatcher implements TextWatcher{
+
+	class CustomTextWatcher implements TextWatcher {
 
 		@Override
 		public void afterTextChanged(Editable arg0) {
-			//Do nothing			
+			// Do nothing
 		}
 
 		@Override
 		public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-			//Do nothing			
+			// Do nothing
 		}
 
 		@Override
 		public void onTextChanged(CharSequence s, int start, int before, int count) {
 			mAdapter.getFilter().filter(s);
 			mAdapter.notifyDataSetChanged();
-			
+
 		}
-		
+
 	}
 }

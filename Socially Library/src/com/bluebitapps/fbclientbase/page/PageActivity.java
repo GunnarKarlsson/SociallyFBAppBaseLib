@@ -55,11 +55,11 @@ public class PageActivity extends BaseThemedActivity {
 		NewsFeedFragment newsFeedFragment = NewsFeedFragment.newInstance(objectId, Constants.STATE_PROFILE, title, true);
 		newsFeedFragment.setRetainInstance(true);
 
-		ActionBar.Tab tab = actionBar.newTab().setText("Profile").setTabListener(new CustomTabListener<PageFragment>(pageFragment));
+		ActionBar.Tab tab = actionBar.newTab().setText(getResources().getString(R.string.profile)).setTabListener(new CustomTabListener<PageFragment>(pageFragment));
 		actionBar.addTab(tab);
-		tab = actionBar.newTab().setText("Wall").setTabListener(new CustomTabListener<NewsFeedFragment>(newsFeedFragment));
+		tab = actionBar.newTab().setText(getResources().getString(R.string.wall)).setTabListener(new CustomTabListener<NewsFeedFragment>(newsFeedFragment));
 		actionBar.addTab(tab);
-		tab = actionBar.newTab().setText("Photos").setTabListener(new CustomTabListener<AlbumsFragment>(albumsFragment));
+		tab = actionBar.newTab().setText(getResources().getString(R.string.photos)).setTabListener(new CustomTabListener<AlbumsFragment>(albumsFragment));
 		actionBar.addTab(tab);
 
 		if (Constants.TAB_INDEX_WALL.equals(tabIndex)) {

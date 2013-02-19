@@ -74,7 +74,7 @@ public class PageFragment extends BaseNavigationFragment {
 
 				stopRefreshMenuItemAnimation();
 
-				OutputUtil.showCrouton(getActivity(), "Data could not be refreshed");
+				OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.data_could_not_be_refreshed));
 			}
 		}
 	}
@@ -148,7 +148,6 @@ public class PageFragment extends BaseNavigationFragment {
 				setLayout();
 			}
 
-			//getActivity().invalidateOptionsMenu();
 			getPageFromFB();
 			
 		} else {
@@ -158,7 +157,7 @@ public class PageFragment extends BaseNavigationFragment {
 			if (mPage != null && StringUtil.notEmpty(mPage.getId())) {
 				setLayout();
 			}else{
-				OutputUtil.showCrouton(getActivity(), "Page profile could not be retrieved");				
+				OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.data_could_not_be_retrieved));				
 			}
 			
 		}

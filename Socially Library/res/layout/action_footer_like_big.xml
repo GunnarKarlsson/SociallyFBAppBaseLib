@@ -36,7 +36,7 @@
             android:background="@drawable/custom_button"
             android:text="@string/like"
             android:textColor="#222222"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
     </RelativeLayout>
 
 </RelativeLayout>

@@ -35,7 +35,7 @@ public class NotificationsTypePreferenceActivity extends PreferenceActivity {
 	   
 	   getActionBar().setDisplayHomeAsUpEnabled(true);
 	   getActionBar().setDisplayShowTitleEnabled(true);
-	   getActionBar().setTitle("Notification Type Settings");
+	   getActionBar().setTitle(R.string.notification_type_settings);
 	   
 	   addPreferencesFromResource(com.bluebitapps.fbclientbase.R.xml.notification_type_preference);
 	}

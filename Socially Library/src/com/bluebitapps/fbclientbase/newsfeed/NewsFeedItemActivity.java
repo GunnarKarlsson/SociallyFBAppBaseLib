@@ -164,7 +164,8 @@ public class NewsFeedItemActivity extends BaseThemedActivity {
 				i.putExtra(Constants.OBJECT_ID_KEY, mItem.getId());
 				((Activity) context).setResult(NewsFeedItemActivity.RESULT_CODE_POSTED_COMMENT, i);
 
-				Crouton.makeText(NewsFeedItemActivity.this, "Your comment has been posted", Style.CONFIRM).show();
+				OutputUtil.showCrouton(NewsFeedItemActivity.this, getResources().getString(R.string.your_comment_has_been_posted));
+				
 				isAddingOwnPost = true;
 				mOffset = 0;
 				mCommentCount++;
@@ -173,7 +174,7 @@ public class NewsFeedItemActivity extends BaseThemedActivity {
 
 			if (intent.getAction().equals(CommentService.COMMENT_POST_FAIL)) {
 				Logger.i("intent received - fail posting action");
-				Crouton.makeText(NewsFeedItemActivity.this, "Comment could not be posted", Style.ALERT).show();
+				OutputUtil.showCrouton(NewsFeedItemActivity.this, getResources().getString(R.string.comment_could_not_be_posted));				
 			}
 		}
 	}
@@ -336,31 +337,14 @@ public class NewsFeedItemActivity extends BaseThemedActivity {
 			public void onClick(View v) {
 
 				if (menuIsOpen) {
-					//mEmoticonGrid.setVisibility(View.GONE);
-					//mEmoticonGrid.setVisibility(View.VISIBLE);
+					
 					mSlidingDrawer.animateClose();
 				} else {
-					//mEmoticonGrid.setVisibility(View.VISIBLE);
 					mSlidingDrawer.animateOpen();
 				}
 				
-
 				menuIsOpen = !menuIsOpen;
 
-				// TODO: this works but only once
-				/*
-				 * mEmoticonGrid.setVisibility(View.VISIBLE); float gridHeight =
-				 * mEmoticonGrid.getHeight(); float postFooterHeight =
-				 * mPostFooter.getHeight(); Display display =
-				 * getWindowManager().getDefaultDisplay(); Point size = new
-				 * Point(); display.getSize(size); int screenHeight = size.y;
-				 * ObjectAnimator.ofFloat(mEmoticonGrid, "translationY",
-				 * screenHeight+gridHeight,
-				 * gridHeight-postFooterHeight).start();
-				 */
-
-				// ObjectAnimator.ofFloat(mEmoticonGrid, "yFraction", 1.0f,
-				// 0.25f).start();
 			}
 		});
 
@@ -424,23 +408,21 @@ public class NewsFeedItemActivity extends BaseThemedActivity {
 					InputUtil.hideKeyboard(NewsFeedItemActivity.this);
 				}
 
-				Logger.i("post button clicked");
-
 				String userComment = mPostCommentEditText.getText().toString();
 
 				if (!StringUtil.notEmpty(userComment)) {
-					Crouton.makeText(NewsFeedItemActivity.this, "Please compose a message before posting", Style.ALERT).show();
+					
+					OutputUtil.showCrouton(NewsFeedItemActivity.this, getResources().getString(R.string.please_compose_a_message_before_posting));
+					
 				} else {
-
-					Crouton.makeText(NewsFeedItemActivity.this, "Posting your comment...", Style.ALERT).show();
+					
+					OutputUtil.showCrouton(NewsFeedItemActivity.this, getResources().getString(R.string.posting_your_comment));
 
 					Intent intent = new Intent(NewsFeedItemActivity.this, CommentService.class);
 
 					intent.putExtra(Constants.MESSAGE_KEY, userComment);
 					intent.putExtra(Constants.ACTION_TYPE, Constants.ACTION_TYPE_COMMENT);
 					intent.putExtra(Constants.COMMENT_OBJECT_ID_KEY, mItem.getId());
-
-					Logger.i("starting service");
 
 					startService(intent);
 				}
@@ -517,7 +499,7 @@ public class NewsFeedItemActivity extends BaseThemedActivity {
 		// time
 		if (StringUtil.notEmpty(mItem.getCreatedTime())) {
 			mHeaderCreatedTime = (TextView) view.findViewById(R.id.createdTime);
-			mHeaderCreatedTime.setText(FacebookUtils.getCreatedTimeInNewsFeed(mItem));
+			mHeaderCreatedTime.setText(FacebookUtils.getCreatedTimeInNewsFeed(mItem, NewsFeedItemActivity.this));
 		}
 
 		// Message
@@ -558,14 +540,12 @@ public class NewsFeedItemActivity extends BaseThemedActivity {
 		if (StringUtil.notEmpty(mItem.getName())) {
 			mHeaderName = (TextView) view.findViewById(R.id.newsFeedItemName);
 			mHeaderName.setText(mItem.getName());
-			// Linkify.addLinks(mHeaderName, Linkify.ALL);
 		}
 
 		// description
 		if (StringUtil.notEmpty(mItem.getDescription())) {
 			mHeaderDescription = (TextView) view.findViewById(R.id.newsFeedItemDescription);
 			mHeaderDescription.setText(mItem.getDescription());
-			// Linkify.addLinks(mHeaderDescription, Linkify.ALL);
 		}
 
 		final ViewGroup linkBox = (ViewGroup) view.findViewById(R.id.newsFeedItemPictureAndName);
@@ -612,7 +592,7 @@ public class NewsFeedItemActivity extends BaseThemedActivity {
 		// like button
 		final Button likeButton = (Button) view.findViewById(R.id.likeButton);
 
-		FacebookUtils.setLikeButtonState(likeButton, mItem);
+		FacebookUtils.setLikeButtonState(likeButton, mItem, NewsFeedItemActivity.this);
 
 		// like button click
 		likeButton.setOnClickListener(new OnClickListener() {
@@ -835,11 +815,11 @@ public class NewsFeedItemActivity extends BaseThemedActivity {
 			EmoticonUtil.addSmiledText(NewsFeedItemActivity.this, editable);
 			
 			holder.message.setText(editable);
-			holder.createdTime.setText(FacebookUtils.convertUnixTimeStampToRelativeTime(comment.getCreatedTime()));
+			holder.createdTime.setText(FacebookUtils.convertUnixTimeStampToRelativeTime(comment.getCreatedTime(),NewsFeedItemActivity.this));
 			holder.likeCount.setText(comment.getLikesCount());
 			getImageLoader().displayImage(comment.getFromPicture(), holder.fromPicture, getImageDisplayOptions());
 
-			FacebookUtils.setLikeButtonState(holder.likeButton, comment);
+			FacebookUtils.setLikeButtonState(holder.likeButton, comment, NewsFeedItemActivity.this);
 
 			holder.likeButton.setOnClickListener(new OnClickListener() {
 

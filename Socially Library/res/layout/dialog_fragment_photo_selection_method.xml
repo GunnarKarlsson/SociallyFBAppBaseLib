@@ -13,7 +13,7 @@
       
         android:text="@string/camera"
         android:textColor="#222222"
-        android:textSize="20dp" />
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/galleryButton"
@@ -22,6 +22,6 @@
       
         android:text="@string/gallery"
         android:textColor="#222222"
-        android:textSize="20dp" />
+        android:textSize="20sp" />
 
 </LinearLayout>

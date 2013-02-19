@@ -92,7 +92,9 @@ public class GroupsFragment extends BaseNavigationFragment {
 				}
 
 				stopRefreshMenuItemAnimation();
-				OutputUtil.showCrouton(getActivity(), "Groups data could not be retrieved");
+				if (getActivity() != null) {
+					OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.data_not_available));
+				}
 			}
 		}
 	}
@@ -148,7 +150,11 @@ public class GroupsFragment extends BaseNavigationFragment {
 		}
 		Logger.i(Logger.getClassAndMethod() + "mSearchString: " + mSearchString);
 
-		setTitle("Groups");
+		if (getActivity() != null) {
+			String title = getActivity().getResources().getString(R.string.groups);
+			setTitle(title);
+		}
+
 	}
 
 	@Override
@@ -159,10 +165,6 @@ public class GroupsFragment extends BaseNavigationFragment {
 			mLoadingView = (LoadingView) vg.findViewById(R.id.loadingView);
 			mGroups = new ArrayList<Group>();
 			mListView = (ListView) vg.findViewById(R.id.image_list_view);
-			TextView padding = new TextView(getActivity());
-			padding.setHeight(getResources().getDimensionPixelOffset(R.dimen.item_list_padding));
-			mListView.addHeaderView(padding);
-			mListView.addFooterView(padding);
 			mAdapter = new ItemAdapter();
 			mListView.setAdapter(mAdapter);
 		}
@@ -181,10 +183,8 @@ public class GroupsFragment extends BaseNavigationFragment {
 				if (getActivity() != null) {
 
 					Intent intent = new Intent(getActivity(), GroupActivity.class);
-					Log.i("jan16", "id: " + mGroups.get(position - 1).getId());
-					Log.i("jan16", "name: " + mGroups.get(position - 1).getName());
-					intent.putExtra(Constants.OBJECT_ID_KEY, mGroups.get(position - 1).getId());
-					intent.putExtra(Constants.OBJECT_TITLE_KEY, mGroups.get(position - 1).getName());
+					intent.putExtra(Constants.OBJECT_ID_KEY, mGroups.get(position).getId());
+					intent.putExtra(Constants.OBJECT_TITLE_KEY, mGroups.get(position).getName());
 					intent.putExtra(Constants.CLEAR_TOP_ON_HOME_SELECTED, true);
 					getActivity().startActivity(intent);
 					getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -207,7 +207,9 @@ public class GroupsFragment extends BaseNavigationFragment {
 		mGroups.clear();
 
 		if (getState() != null && getState().equals(STATE_SEARCH)) {
-			OutputUtil.showCrouton(getActivity(), "Searching for Groups...");
+			if (getActivity() != null) {
+				OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.searching));
+			}
 			doSearch();
 		} else {
 
@@ -245,7 +247,9 @@ public class GroupsFragment extends BaseNavigationFragment {
 			}
 
 			if (getActivity() != null) {
-				String groupWord = mGroups.size() == 1 ? "group" : "groups";
+				String groupString = getActivity().getResources().getString(R.string.group_lowercase);
+				String groupsString = getActivity().getResources().getString(R.string.groups_lowercase);
+				String groupWord = mGroups.size() == 1 ? groupString : groupsString;
 				String str = mGroups.size() + " " + groupWord;
 				getActivity().getActionBar().setSubtitle(str);
 			}
@@ -266,7 +270,9 @@ public class GroupsFragment extends BaseNavigationFragment {
 			} else {
 				if (mGroups.size() < 1) {
 					mLoadingView.setVisibility(View.GONE);
-					OutputUtil.showCrouton(getActivity(), "No groups could be retrieved");
+					if (getActivity() != null) {
+						OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.data_not_available));
+					}
 				}
 
 			}
@@ -376,7 +382,9 @@ public class GroupsFragment extends BaseNavigationFragment {
 				final ArrayList<Group> tempGroups = new ArrayList<Group>(groups);
 
 				if (tempGroups.size() < 1) {
-					Crouton.makeText(getActivity(), "No search results found", Style.INFO);
+					if (getActivity() != null) {
+						OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.data_not_available));
+					}
 				} else {
 
 					if (getActivity() != null) {

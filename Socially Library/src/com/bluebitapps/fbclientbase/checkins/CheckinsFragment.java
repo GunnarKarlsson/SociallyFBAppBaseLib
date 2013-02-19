@@ -89,7 +89,10 @@ public class CheckinsFragment extends BaseNavigationFragment {
 
 				stopRefreshMenuItemAnimation();
 
-				OutputUtil.showCrouton(getActivity(), "Checkins could not be fecthed");
+				if(getActivity()!=null){					
+					OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.checkins_could_not_be_retrieved));
+				}
+				
 
 			}
 		}
@@ -159,12 +162,6 @@ public class CheckinsFragment extends BaseNavigationFragment {
 
 		mListView = (ListView) vg.findViewById(R.id.image_list_view);
 
-		// Padding
-		TextView padding = new TextView(getActivity());
-		// padding.setHeight(getResources().getDimensionPixelOffset(R.dimen.item_list_padding));
-		// mListView.addHeaderView(padding);
-		// mListView.addFooterView(padding);
-
 		mAdapter = new ItemAdapter();
 
 		mListView.setAdapter(mAdapter);
@@ -213,7 +210,9 @@ public class CheckinsFragment extends BaseNavigationFragment {
 			getCheckinsFromFB();
 		} else {
 			if (mCheckins.size() < 1) {
-				OutputUtil.showCrouton(getActivity(), "No checkins available");
+				if(getActivity()!=null){					
+					OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.no_checkins_available));
+				}
 			}
 			mLoadingView.setVisibility(View.GONE);
 			getActivity().invalidateOptionsMenu();
@@ -326,7 +325,7 @@ public class CheckinsFragment extends BaseNavigationFragment {
 
 				holder.fromName.setText(checkin.getFromName());
 				holder.message.setText(checkin.getMessage());
-				holder.createdTime.setText(FacebookUtils.convertFacebookCreatedTimeToRelativeTime(checkin.getCreatedTime()));
+				holder.createdTime.setText(FacebookUtils.convertFacebookCreatedTimeToRelativeTime(checkin.getCreatedTime(), getActivity()));
 
 				String place = checkin.getPlaceName() + (StringUtil.notEmpty(checkin.getCity()) ? ", " + checkin.getCity() : "")
 						+ (StringUtil.notEmpty(checkin.getCountry()) ? ", " + checkin.getCountry() : "");

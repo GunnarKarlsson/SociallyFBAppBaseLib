@@ -24,7 +24,7 @@
         android:background="@drawable/custom_button"
         android:text="@string/post"
         android:textColor="#222222"
-        android:textSize="10dip"/>
+        android:textSize="10sp"/>
 
     <EditText
         android:id="@+id/editText"

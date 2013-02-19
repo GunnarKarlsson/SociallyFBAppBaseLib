@@ -56,7 +56,7 @@
         android:id="@+id/checkBoxLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Mark as read" 
+        android:text="@string/mark_as_read" 
         android:layout_below="@id/body"
         android:layout_toRightOf="@id/checkBox"
         android:visibility="gone"/>

@@ -115,7 +115,7 @@ public class NotificationsFragment extends BaseNavigationFragment {
 			if (MarkAsReadService.MARK_AS_READ_FAIL.equals(intent.getAction())) {
 				Logger.i(Logger.getClassAndMethod() + MarkAsReadService.MARK_AS_READ_FAIL);
 				stopRefreshMenuItemAnimation();
-				OutputUtil.showCrouton(getActivity(), "one or more notifications couldn't be marked as read");
+				OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.one_or_more_notifications_couldnt_be_marked_as_read));
 			}
 		}
 	}
@@ -151,7 +151,7 @@ public class NotificationsFragment extends BaseNavigationFragment {
 			}
 		}
 
-		setTitle("Notifications");
+		setTitle(getResources().getString(R.string.notifications_menu_item));
 	}
 
 	@Override
@@ -161,10 +161,6 @@ public class NotificationsFragment extends BaseNavigationFragment {
 
 		mLoadingView = (LoadingView) vg.findViewById(R.id.loadingView);
 		mListView = (ListView) vg.findViewById(R.id.notificationsListView);
-		// TextView padding = new TextView(getActivity());
-		// padding.setHeight(getResources().getDimensionPixelOffset(R.dimen.item_list_padding));
-		// mListView.addHeaderView(padding);
-		// mListView.addFooterView(padding);
 
 		mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
 		mListView.setMultiChoiceModeListener(new ModeCallback());
@@ -275,12 +271,6 @@ public class NotificationsFragment extends BaseNavigationFragment {
 				}
 			}
 		});
-		/*
-		 * AdRequest adRequest = new AdRequest();
-		 * adRequest.addTestDevice("E9A58317C31E13C81BDE2E72E4A29663"); AdView
-		 * adView = (AdView)vg.findViewById(R.id.adView);
-		 * adView.loadAd(adRequest);
-		 */
 		return vg;
 	}
 
@@ -343,9 +333,8 @@ public class NotificationsFragment extends BaseNavigationFragment {
 			mLoadingView.setVisibility(View.GONE);
 
 			if (mNotifications.size() < 1) {
-				OutputUtil.showCrouton(getActivity(), "No new notifications");
+				OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.no_new_notifications));
 			}
-			// Style.ALERT).show();
 		}
 
 		if (getActivity() != null) {
@@ -387,10 +376,8 @@ public class NotificationsFragment extends BaseNavigationFragment {
 
 					FBNotification notification = new FBNotification();
 					notification.setId(id);
-					Log.i("notif", "new notification from db table: " + notification.getId());
 					notification.setSenderId(senderId);
 					notification.setSenderName(senderName);
-					Log.i("jan27", createdTime);
 					notification.setCreatedTime(createdTime);
 					notification.setTitleText(titleText);
 					notification.setBodyText(bodyText);
@@ -422,7 +409,9 @@ public class NotificationsFragment extends BaseNavigationFragment {
 			getActivity().sendBroadcast(intent);
 
 			// Write subtitle
-			String notifiationWord = mNotifications.size() == 1 ? "notification" : "notifications";
+			String notificationString = getResources().getString(R.string.notification_lowercase);
+			String notificationsString = getResources().getString(R.string.notifications_lowercase);
+			String notifiationWord = mNotifications.size() == 1 ? notificationString : notificationsString;
 			String str = mNotifications.size() + " pending " + notifiationWord;
 			getActivity().getActionBar().setSubtitle(str);
 		}
@@ -500,7 +489,7 @@ public class NotificationsFragment extends BaseNavigationFragment {
 					holder = (ViewHolder) view.getTag();
 
 				holder.fromName.setText(notification.getSenderName());
-				holder.createdTime.setText(FacebookUtils.convertUnixTimeStampToRelativeTime(mNotifications.get(position).getCreatedTime()));
+				holder.createdTime.setText(FacebookUtils.convertUnixTimeStampToRelativeTime(mNotifications.get(position).getCreatedTime(), getActivity()));
 				holder.title.setText(notification.getTitleText());
 				getImageLoader().displayImage(notification.getProfilePicture(), holder.fromPicture, getImageDisplayOptions());
 
@@ -548,15 +537,9 @@ public class NotificationsFragment extends BaseNavigationFragment {
 					}
 				}
 
-				// for (int j = 0; j < ids.size(); j++) {
 				Intent intent = new Intent(NotificationsFragment.this.getActivity(), MarkAsReadService.class);
 				intent.putStringArrayListExtra(Constants.OBJECT_ID_KEY, ids);
-				// Extra(Constants.OBJECT_ID_KEY, ids.get(j));
-				// intent.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK |
-				// Intent.FLAG_ACTIVITY_NEW_TASK |
-				// Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
 				NotificationsFragment.this.getActivity().startService(intent);
-				// }
 
 				mode.finish();
 				return true;
@@ -582,10 +565,11 @@ public class NotificationsFragment extends BaseNavigationFragment {
 				mode.setSubtitle(null);
 				break;
 			case 1:
-				mode.setSubtitle("One item selected");
+				mode.setSubtitle(R.string.one_item_selected);
 				break;
 			default:
-				mode.setSubtitle("" + checkedCount + " items selected");
+				String subTitle = checkedCount + " " + getResources().getString(R.string.items_selected);
+				mode.setSubtitle(subTitle);
 				break;
 			}
 		}
@@ -596,10 +580,6 @@ public class NotificationsFragment extends BaseNavigationFragment {
 		ids.add(id);
 		Intent intent = new Intent(NotificationsFragment.this.getActivity(), MarkAsReadService.class);
 		intent.putStringArrayListExtra(Constants.OBJECT_ID_KEY, ids);
-		// Extra(Constants.OBJECT_ID_KEY, ids.get(j));
-		// intent.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK |
-		// Intent.FLAG_ACTIVITY_NEW_TASK |
-		// Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
 		NotificationsFragment.this.getActivity().startService(intent);
 	}
 }

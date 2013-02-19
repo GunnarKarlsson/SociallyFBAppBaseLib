@@ -51,12 +51,7 @@ public class LoadingView extends RelativeLayout {
 
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			addView(inflater.inflate(R.layout.loading, null));
-/*
-			ImageView img = (ImageView) findViewById(com.bluebitapps.fbclientbase.R.id.loadingImageView);
-			img.setBackgroundResource(R.drawable.loading_animation);
-			AnimationDrawable frameAnimation = (AnimationDrawable) img.getBackground();
-			frameAnimation.start();
-*/
+
 			setBackgroundResource(R.drawable.roundcorner_shape);
 			GradientDrawable shape = (GradientDrawable)getBackground();
 			int color = 0x000000;

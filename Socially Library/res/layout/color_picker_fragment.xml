@@ -23,6 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/svbar"
         android:layout_centerHorizontal="true"
-        android:text="Set color as background" />
+        android:text="@string/set_color_as_background" />
 
 </RelativeLayout>

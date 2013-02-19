@@ -258,17 +258,14 @@ public class ImageGridFragment extends BaseNavigationFragment {
 								mPhotos = asyncPhotos;
 								mAdapter.notifyDataSetChanged();
 								if (mPhotos.size() > 0) {
-									/*
-									String str = mPhotos.size() > 1 ? "images" : "image";
-									String message = mPhotos.size() + " " + str + " retrieved";
-									OutputUtil.showCrouton(getActivity(), message);
-									*/ 
 								} else {
-									OutputUtil.showCrouton(getActivity(), "No images retrieved for this album");
+									OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.data_could_not_be_retrieved));
 								}
 							}
-							
-							String photoWord = mPhotos.size() == 1?"photo":"photos";
+
+							String photoString = getResources().getString(R.string.photo_lowercase);
+							String photosString = getResources().getString(R.string.photos_lowercase);
+							String photoWord = mPhotos.size() == 1 ? photoString : photosString;
 							String str = mPhotos.size() + " " + photoWord;
 							getActivity().getActionBar().setSubtitle(str);
 
@@ -311,20 +308,8 @@ public class ImageGridFragment extends BaseNavigationFragment {
 		mLoadingView.setVisibility(View.GONE);
 
 		if (mPhotos == null || mPhotos.size() < 1) {
-			// TODO: show message if no photos. Currently logic for this message
-			// doesn't work.
-			/*
-			 * Toast toast = Toast.makeText(getActivity(),
-			 * "Your photo album is empty", Toast.LENGTH_SHORT);
-			 * 
-			 * toast.setGravity(Gravity.CENTER, toast.getXOffset() / 2,
-			 * toast.getYOffset() / 2);
-			 * 
-			 * toast.show();
-			 */
 
 		} else {
-
 			mAdapter.notifyDataSetChanged();
 
 		}

@@ -61,64 +61,6 @@ public class UploadPhotoService extends IntentService {
 	}
 
 	/**
-	 * Need to 
-import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.app.ActivityManager;
-import android.app.IntentService;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.net.Uri;
-import android.os.Bundle;
-import android.util.Log;
-
-import com.bluebitapps.fbclientbase.Constants;
-import com.bluebitapps.fbclientbase.FBClientApplication;
-import com.bluebitapps.fbclientbase.MainActivity;
-import com.bluebitapps.fbclientbase.debug.Logger;
-import com.bluebitapps.utils.ImageUtil;
-import com.bluebitapps.utils.StringUtil;
-import com.facebook.android.AsyncFacebookRunner.RequestListener;
-import com.facebook.android.FacebookError;
-import com.bluebitapps.fbclientbase.R;
-
-//TODO: need to remove albums from db that have been deleted on FB. Need to clear db, then insert new albums.
-
-public class UploadPhotoService extends IntentService {
-
-	public static final String PHOTO_URI_KEY = "photo uri key";
-	public static final String CAPTION_KEY = "caption key";
-	public static final String PRIVACY_SETTING_KEY = "privacy setting key";
-	public static final String ALBUM_ID_KEY = "album name key";
-	private Uri mImageUri;
-	private Bitmap mBitmap;
-
-	com.facebook.android.UploadDataProgress mUploadListener;
-	Notification mNotification;
-	Notification.Builder mBuilder;
-	NotificationManager mNotificationManager;
-	String mCaption = "";
-	String mPrivacySetting = "";
-	String mAlbumId = "";
-
-	public UploadPhotoService() {
-		super("UploadPhotoService");
-	}
-
-	/**
 	 * Need to override onStartCommand() or onHandleIntent() will not be called.
 	 * Is called for every call from e.g. alarm manager started in
 	 * broadcastReceiver.
@@ -169,7 +111,7 @@ public class UploadPhotoService extends IntentService {
 		NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		Notification.Builder builder = new Notification.Builder(this);
 		builder.setContentIntent(contentIntent);
-		builder.setContentTitle("Picture Upload").setContentText("Upload in progress").setSmallIcon(R.drawable.upload_icon);
+		builder.setContentTitle(getResources().getString(R.string.picture_upload)).setContentText(getResources().getString(R.string.upload_in_progress)).setSmallIcon(R.drawable.upload_icon);
 		builder.setProgress(100, 100, true);
 		Notification notification = builder.getNotification();
 		notificationManager.notify(42, notification);
@@ -293,7 +235,7 @@ public class UploadPhotoService extends IntentService {
 		NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		Notification.Builder builder = new Notification.Builder(this);
 		builder.setContentIntent(contentIntent);
-		builder.setContentTitle("Picture has been uploaded to Facebook").setContentText("Picture successfully uploaded from Socially").setSmallIcon(R.drawable.upload_ok);
+		builder.setContentTitle(getResources().getString(R.string.picture_has_been_uploaded_to_facebook)).setContentText(getResources().getString(R.string.picture_successfully_uploaded_from_socially)).setSmallIcon(R.drawable.upload_ok);
 
 		Notification notification = builder.getNotification();
 		notificationManager.notify(42, notification);
@@ -308,7 +250,7 @@ public class UploadPhotoService extends IntentService {
 		NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		Notification.Builder builder = new Notification.Builder(this);
 		builder.setContentIntent(contentIntent);
-		builder.setContentTitle("Picture could not be uploaded to Facebook").setContentText("Upload error. Please try again").setSmallIcon(R.drawable.upload_fail);
+		builder.setContentTitle(getResources().getString(R.string.picture_could_not_be_uploaded_to_facebook)).setContentText(getResources().getString(R.string.upload_error_please_try_again)).setSmallIcon(R.drawable.upload_fail);
 		Notification notification = builder.getNotification();
 		notificationManager.notify(42, notification);
 	}

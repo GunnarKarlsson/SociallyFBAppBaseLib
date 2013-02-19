@@ -86,8 +86,6 @@ public class ImagePagerFragment extends BaseFragment {
 	private static final String PAGER_INDEX = "pager index";
 	private boolean hasRetrievedComments = false;
 	private boolean needToRetrievePhotoDetailsFromFb = false;
-	private int mPositionInPager;
-	// private int pagerIndex = 0;
 
 	private CommentPostResultReceiver mCommentPostResultReceiver;
 
@@ -101,13 +99,13 @@ public class ImagePagerFragment extends BaseFragment {
 
 			if (CommentService.COMMENT_POST_SUCCESS.equals(intent.getAction())) {
 				Logger.i(ImagePagerFragment.class.getSimpleName() + "." + CommentPostResultReceiver.class.getSimpleName() + "." + CommentService.COMMENT_POST_SUCCESS);
-				OutputUtil.showCrouton(getActivity(), "Your comment has been posted");
+				OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.your_comment_has_been_posted));
 				getComments();
 			}
 
 			if (CommentService.COMMENT_POST_FAIL.equals(intent.getAction())) {
 				Logger.i(ImagePagerFragment.class.getSimpleName() + CommentPostResultReceiver.class.getSimpleName() + "." + CommentService.COMMENT_POST_FAIL);
-				OutputUtil.showCrouton(getActivity(), "Comment could not be posted");
+				OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.comment_could_not_be_posted));
 			}
 		}
 	}
@@ -115,11 +113,10 @@ public class ImagePagerFragment extends BaseFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Log.i("jan22", Logger.getClassAndMethod());
 
 		setHasOptionsMenu(true);
 		setHasNoLoadingImage(true);
-		
+
 		if (savedInstanceState != null) {
 			hasRetrievedComments = savedInstanceState.getBoolean(SAVED_STATE);
 		}
@@ -131,7 +128,6 @@ public class ImagePagerFragment extends BaseFragment {
 		mPhotos = bundle.getParcelableArrayList("photos");
 		mPosition = bundle.getInt("position");
 		mTitle = bundle.getString(Album.ALBUM_NAME_KEY);
-		Log.i("jan9", "mTitle: " + mTitle);
 		mPhotoCount = bundle.getInt(Album.ALBUM_PHOTO_COUNT);
 
 		if (Constants.TRUE.equalsIgnoreCase(bundle.getString(Constants.PHOTO_ACCESS_VIA_NOTIFICATION))) {
@@ -181,12 +177,12 @@ public class ImagePagerFragment extends BaseFragment {
 
 		if (getActivity() != null) {
 			if (StringUtil.notEmpty(mTitle)) {
-				Log.i("jan9", "onResume " + mTitle);
 				getActivity().getActionBar().setDisplayShowTitleEnabled(true);
 				getActivity().getActionBar().setTitle(mTitle);
-
-				String photoWord = mPhotoCount == 1 ? "photo" : "photos";
-				String str = mPhotoCount + " " + photoWord + ". Swipe to see next.";
+				String photoString = getResources().getString(R.string.photo_lowercase);
+				String photosString = getResources().getString(R.string.photos_lowercase);
+				String photoWord = mPhotoCount == 1 ? photoString : photosString;
+				String str = mPhotoCount + " " + photoWord + ". " + getResources().getString(R.string.swipe_to_see_next);
 				getActivity().getActionBar().setSubtitle(str);
 			}
 		}
@@ -259,31 +255,32 @@ public class ImagePagerFragment extends BaseFragment {
 
 			} catch (JSONException e) {
 				Logger.i(PhotosFragment.class.getSimpleName() + "." + PhotosRequestListener.class.getSimpleName() + ": " + e.toString());
-				OutputUtil.showCrouton(getActivity(), "Photos could not be retrieved");
+				OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.photos_could_not_be_retrieved));
 			}
 		}
 
 		@Override
 		public void onIOException(IOException e, Object state) {
 			Logger.i(PhotosFragment.class.getSimpleName() + "." + PhotosRequestListener.class.getSimpleName() + ": " + e.toString());
-			OutputUtil.showCrouton(getActivity(), "Photos could not be retrieved");
+			OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.photos_could_not_be_retrieved));
 		}
 
 		@Override
 		public void onFileNotFoundException(FileNotFoundException e, Object state) {
 			Logger.i(PhotosFragment.class.getSimpleName() + "." + PhotosRequestListener.class.getSimpleName() + ": " + e.toString());
-			OutputUtil.showCrouton(getActivity(), "Photos could not be retrieved");
+			OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.photos_could_not_be_retrieved));
 		}
 
 		@Override
 		public void onMalformedURLException(MalformedURLException e, Object state) {
 			Logger.i(PhotosFragment.class.getSimpleName() + "." + PhotosRequestListener.class.getSimpleName() + ": " + e.toString());
-			OutputUtil.showCrouton(getActivity(), "Photos could not be retrieved");
+			OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.photos_could_not_be_retrieved));
 		}
 
 		@Override
 		public void onFacebookError(FacebookError e, Object state) {
 			Logger.i(PhotosFragment.class.getSimpleName() + "." + PhotosRequestListener.class.getSimpleName() + ": " + e.toString());
+			OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.photos_could_not_be_retrieved));
 		}
 
 	}
@@ -441,7 +438,7 @@ public class ImagePagerFragment extends BaseFragment {
 
 			} catch (JSONException e) {
 				Logger.i(Logger.getClassAndMethod() + e.toString());
-				OutputUtil.showCrouton(getActivity(), "Images could not be retrieved");
+				OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.photos_could_not_be_retrieved));
 			}
 
 		}
@@ -449,28 +446,28 @@ public class ImagePagerFragment extends BaseFragment {
 		@Override
 		public void onIOException(IOException e, Object state) {
 			Logger.i(Logger.getClassAndMethod() + e.toString());
-			OutputUtil.showCrouton(getActivity(), "Images could not be retrieved");
+			OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.photos_could_not_be_retrieved));
 
 		}
 
 		@Override
 		public void onFileNotFoundException(FileNotFoundException e, Object state) {
 			Logger.i(Logger.getClassAndMethod() + e.toString());
-			OutputUtil.showCrouton(getActivity(), "Images could not be retrieved");
+			OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.photos_could_not_be_retrieved));
 
 		}
 
 		@Override
 		public void onMalformedURLException(MalformedURLException e, Object state) {
 			Logger.i(Logger.getClassAndMethod() + e.toString());
-			OutputUtil.showCrouton(getActivity(), "Images could not be retrieved");
+			OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.photos_could_not_be_retrieved));
 
 		}
 
 		@Override
 		public void onFacebookError(FacebookError e, Object state) {
 			Logger.i(Logger.getClassAndMethod() + e.toString());
-			OutputUtil.showCrouton(getActivity(), "Images could not be retrieved");
+			OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.photos_could_not_be_retrieved));
 
 		}
 
@@ -519,7 +516,7 @@ public class ImagePagerFragment extends BaseFragment {
 			final Likeable photo = mPhotos.get(position);
 			final View parentView = view;
 
-			FacebookUtils.setLikeButtonState(likeButton, mPhotos.get(position));
+			FacebookUtils.setLikeButtonState(likeButton, mPhotos.get(position), getActivity());
 
 			likeButton.setOnClickListener(new OnClickListener() {
 
@@ -555,10 +552,10 @@ public class ImagePagerFragment extends BaseFragment {
 					String userComment = messageEditText.getText().toString();
 
 					if (!StringUtil.notEmpty(userComment)) {
-						OutputUtil.showCrouton(getActivity(), "Please compose a message before posting");
+						OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.please_compose_a_message_before_posting));
 					} else {
 
-						OutputUtil.showCrouton(getActivity(), "Posting your comment...");
+						OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.posting_your_comment));
 
 						Intent intent = new Intent(getActivity(), CommentService.class);
 
@@ -572,11 +569,6 @@ public class ImagePagerFragment extends BaseFragment {
 				}
 			});
 
-			// Logger.i(Logger.getClassAndMethod() + "item.getPicture: " +
-			// mPhotos.get(position).getPicture());
-
-			Log.i("jan22", "mPhotos.get(position).getPicture(): " + mPhotos.get(position).getPicture());
-
 			getImageLoader().displayImage(mPhotos.get(position).getPicture(), imageView, getImageDisplayOptions(), new ImageLoadingListener() {
 				@Override
 				public void onLoadingStarted() {
@@ -586,7 +578,7 @@ public class ImagePagerFragment extends BaseFragment {
 				@Override
 				public void onLoadingFailed(FailReason failReason) {
 
-					OutputUtil.showCrouton(getActivity(), "Error loading image");
+					OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.data_could_not_be_retrieved));
 					loadingView.setVisibility(View.GONE);
 					imageView.setImageResource(android.R.drawable.ic_delete);
 				}
@@ -708,7 +700,7 @@ public class ImagePagerFragment extends BaseFragment {
 
 				getImageLoader().displayImage(photoComments.get(position).getFromPicture(), holder.fromPicture, getImageDisplayOptions());
 
-				FacebookUtils.setLikeButtonState(holder.likeButton, comment);
+				FacebookUtils.setLikeButtonState(holder.likeButton, comment, getActivity());
 
 				holder.likeButton.setOnClickListener(new OnClickListener() {
 
@@ -735,17 +727,19 @@ public class ImagePagerFragment extends BaseFragment {
 
 		if (item.getItemId() == R.id.saveMenuItem) {
 
-			new AlertDialog.Builder(getActivity()).setIcon(android.R.drawable.ic_menu_save).setTitle("Save Image to SD Card").setPositiveButton("Save", new DialogInterface.OnClickListener() {
+			new AlertDialog.Builder(getActivity()).setIcon(android.R.drawable.ic_menu_save).setTitle(R.string.save_to_sd_card).setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 
 					int position = mPager.getCurrentItem();
 					String urlString = mPhotos.get(position).getPicture();
-					OutputUtil.saveImageFromUrlToSDCard(getActivity(), "Socially", null, urlString);
+					String folderName = "Socially";
+					folderName = getResources().getString(R.string.socially_name);
+					OutputUtil.saveImageFromUrlToSDCard(getActivity(), folderName, null, urlString);
 				}
 
-			}).setNegativeButton("Cancel", null).show();
+			}).setNegativeButton(R.string.cancel, null).show();
 			return true;
 		} else {
 			return false;

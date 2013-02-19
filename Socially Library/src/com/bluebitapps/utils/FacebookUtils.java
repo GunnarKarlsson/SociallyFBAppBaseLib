@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bluebitapps.fbclientbase.Constants;
+import com.bluebitapps.fbclientbase.FBClientApplication;
 import com.bluebitapps.fbclientbase.R;
 import com.bluebitapps.fbclientbase.actions.LikeService;
 import com.bluebitapps.fbclientbase.actions.Likeable;
@@ -55,11 +56,16 @@ public class FacebookUtils {
 		return match.group();
 	}
 
-	public static void setLikeButtonState(Button likeButton, Likeable item) {
+	public static void setLikeButtonState(Button likeButton, Likeable item, Context context) {
+
+		if (context == null) {
+			return;
+		}
+
 		if (StringUtil.notEmpty(item.getUserLikes()) && item.getUserLikes().equalsIgnoreCase(Constants.TRUE)) {
-			likeButton.setText("Unlike");
+			likeButton.setText(context.getResources().getString(R.string.unlike_on_button));
 		} else {
-			likeButton.setText("Like");
+			likeButton.setText(context.getResources().getString(R.string.like_on_button));
 		}
 	}
 
@@ -82,7 +88,7 @@ public class FacebookUtils {
 		}
 
 		if (item.getUserLikes() != null && item.getUserLikes().equalsIgnoreCase(Constants.TRUE)) {
-			likeButton.setText("Like");
+			likeButton.setText(context.getResources().getString(R.string.like_on_button));
 			// Logger.i(FacebookUtils.class.getSimpleName() +
 			// "handleLikeButtonClick()" +
 			// "Like btn clicked: User used to like it, now he doesn't and btn should say Like");
@@ -95,7 +101,7 @@ public class FacebookUtils {
 			}
 			likesCount.setText(Integer.toString(count));
 		} else {
-			likeButton.setText("Unlike");
+			likeButton.setText(context.getResources().getString(R.string.unlike_on_button));
 			intent.putExtra(Constants.ACTION_TYPE, Constants.ACTION_TYPE_LIKE);
 			item.setUserLikes(Constants.TRUE);
 			// Logger.i(FacebookUtils.class.getSimpleName() +
@@ -131,31 +137,48 @@ public class FacebookUtils {
 	}
 
 	public static String getFromStringForNewsFeedItem(NewsFeedItem item) {
-		String from = "<font><font color=\"#000000\">" + item.getFromName() + "</font>" + "<font><font color=\"#aaaaaa\">";
-		if (StringUtil.notEmpty(item.getStatusType()) && item.getStatusType().equalsIgnoreCase(NewsFeedItem.NEWSFEED_ITEM_STATUS_TYPE_SHARED_STORY)) {
-			from += " shared a story" + "</font>";
-		} else if (item.getStatusType() != null && item.getStatusType().equalsIgnoreCase(NewsFeedItem.NEWSFEED_ITEM_STATUS_TYPE_MOBILE_STATUS_UPDATE)) {
-			from += " posted a status update" + "</font>";
-		} else if (StringUtil.notEmpty(item.getStatusType()) && item.getStatusType().equalsIgnoreCase(NewsFeedItem.NEWSFEED_ITEM_STATUS_TYPE_ADDED_PHOTOS)) {
-			from += " added photos." + "</font>";
-		} else if (StringUtil.notEmpty(item.getStatusType()) && item.getStatusType().equalsIgnoreCase(NewsFeedItem.NEWSFEED_ITEM_STATUS_TYPE_TAGGED_IN_PHOTO)) {
-			from += " was tagged in a photo." + "</font>";
-		} else if (StringUtil.notEmpty(item.getStatusType()) && item.getStatusType().equalsIgnoreCase(NewsFeedItem.NEWSFEED_ITEM_TYPE_CHECKIN)) {
-			from += " checked in at a place." + "</font>";
-		} else {
 
-			from += "</font>";
+		String from;
+
+		if (FBClientApplication.getApplication().isEnglish()) {
+
+			from = "<font><font color=\"#000000\">" + item.getFromName() + "</font>" + "<font><font color=\"#aaaaaa\">";
+			if (StringUtil.notEmpty(item.getStatusType()) && item.getStatusType().equalsIgnoreCase(NewsFeedItem.NEWSFEED_ITEM_STATUS_TYPE_SHARED_STORY)) {
+				from += " shared a story" + "</font>";
+			} else if (item.getStatusType() != null && item.getStatusType().equalsIgnoreCase(NewsFeedItem.NEWSFEED_ITEM_STATUS_TYPE_MOBILE_STATUS_UPDATE)) {
+				from += " posted a status update" + "</font>";
+			} else if (StringUtil.notEmpty(item.getStatusType()) && item.getStatusType().equalsIgnoreCase(NewsFeedItem.NEWSFEED_ITEM_STATUS_TYPE_ADDED_PHOTOS)) {
+				from += " added photos." + "</font>";
+			} else if (StringUtil.notEmpty(item.getStatusType()) && item.getStatusType().equalsIgnoreCase(NewsFeedItem.NEWSFEED_ITEM_STATUS_TYPE_TAGGED_IN_PHOTO)) {
+				from += " was tagged in a photo." + "</font>";
+			} else if (StringUtil.notEmpty(item.getStatusType()) && item.getStatusType().equalsIgnoreCase(NewsFeedItem.NEWSFEED_ITEM_TYPE_CHECKIN)) {
+				from += " checked in at a place." + "</font>";
+			} else {
+
+				from += "</font>";
+			}
+			return from;
+		} else {
+			return from = "<font><font color=\"#000000\">" + item.getFromName() + "</font>" + "<font><font color=\"#aaaaaa\">";
 		}
-		return from;
 	}
 
-	public static String getCreatedTimeInNewsFeed(NewsFeedItem item) {
-		String createdTime = (String) FacebookUtils.convertFacebookCreatedTimeToRelativeTime(item.getCreatedTime());
+	public static String getCreatedTimeInNewsFeed(NewsFeedItem item, Context context) {
+		
+		if(context == null){
+			return null;
+		}
+		
+		String createdTime = (String) FacebookUtils.convertFacebookCreatedTimeToRelativeTime(item.getCreatedTime(), context);
 		return createdTime;
 	}
 
-	public static CharSequence convertFacebookCreatedTimeToRelativeTime(String createdTime) {
+	public static CharSequence convertFacebookCreatedTimeToRelativeTime(String createdTime, Context context) {
 
+		if(context == null){
+			return null;
+		}
+		
 		if (!StringUtil.notEmpty(createdTime)) {
 			return "";
 		}
@@ -173,43 +196,51 @@ public class FacebookUtils {
 
 			return DateUtils.getRelativeTimeSpanString(longDate);// date.toString();//relativeTime;
 		} catch (ParseException e) {
-			return "a while ago";
+			return context.getResources().getString(R.string.a_while_ago);
 		}
 
 	}
 
-	public static CharSequence convertFacebookEventTimeToRelativeTime(String time) {
+	public static CharSequence convertFacebookEventTimeToRelativeTime(String time, Context context) {
 
+		if(context==null){
+			return null;
+		}
+		
 		if (!StringUtil.notEmpty(time)) {
-			return "a while ago";
+			return context.getResources().getString(R.string.a_while_ago);
 		}
 
 		try {
 
-			SimpleDateFormat sdfSource = new SimpleDateFormat("yyy-MM-dd'T'HH:mm:ss");
+			SimpleDateFormat sdfSource = new SimpleDateFormat("yyy-MM-dd'T'HH:mm:ss", context.getResources().getConfiguration().locale);
 			Date date = sdfSource.parse(time);
-			SimpleDateFormat sdfDestination = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm", Locale.ENGLISH);
+			SimpleDateFormat sdfDestination = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm", context.getResources().getConfiguration().locale);
 			return sdfDestination.format(date).toString();
 
 		} catch (ParseException e) {
-			return "a while ago";
+			return context.getResources().getString(R.string.a_while_ago);
 		}
 
 	}
 
-	public static String convertInvitedToEventTimeStamp(String timestamp){
+	public static String convertInvitedToEventTimeStamp(String timestamp) {
 		int stamp = Integer.parseInt(timestamp);
-		java.util.Date time=new java.util.Date((long)stamp*1000);
+		java.util.Date time = new java.util.Date((long) stamp * 1000);
 		return time.toString();
 	}
-	
-	public static CharSequence convertUnixTimeStampToRelativeTime(String timeStamp) {
 
+	public static CharSequence convertUnixTimeStampToRelativeTime(String timeStamp, Context context) {
+
+		if(context==null){
+			return null;
+		}
+		
 		// Logger.i(FacebookUtils.class.getSimpleName() +
 		// "convertUnixTimeStampToRelativeTime()" + "in: " + timeStamp);
 
 		if (!StringUtil.notEmpty(timeStamp)) {
-			return "A while ago";
+			return context.getResources().getString(R.string.a_while_ago);
 		} else {
 			Date time = new java.util.Date(Long.parseLong(timeStamp) * 1000);
 			long longDate = time.getTime();

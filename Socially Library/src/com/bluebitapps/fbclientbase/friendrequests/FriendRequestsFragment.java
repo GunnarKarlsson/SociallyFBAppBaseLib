@@ -70,15 +70,13 @@ public class FriendRequestsFragment extends BaseNavigationFragment {
 
 		mFriendRequests = new ArrayList<FriendRequest>();
 
-		if (savedInstanceState != null && savedInstanceState.getParcelableArrayList(INSTANCE_STATE_KEY) != null) {
-			//mFriendRequests = savedInstanceState.getParcelableArrayList(INSTANCE_STATE_KEY);
-		} 
-
 		setHasOptionsMenu(true);
-		
-		setTitle("Friend Requests");
+
+		if (getActivity() != null) {
+			String title = getActivity().getResources().getString(R.string.friend_requests);
+			setTitle(title);
+		}
 	}
-	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -104,14 +102,14 @@ public class FriendRequestsFragment extends BaseNavigationFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		if(mFriendRequests.size() < 1){
+		if (mFriendRequests.size() < 1) {
 			getFriendRequests();
 		}
 	}
 
 	@Override
 	protected void onRefresh() {
-		//super.onRefresh();
+		// super.onRefresh();
 		Log.i("frtest2", "OnRefresh()");
 		getFriendRequests();
 	}
@@ -146,7 +144,7 @@ public class FriendRequestsFragment extends BaseNavigationFragment {
 
 			try {
 				JSONArray a = new JSONArray(response);
-			    Log.i("frtest2", response.toString());
+				Log.i("frtest2", response.toString());
 				JSONObject friendRequestsObj = a.getJSONObject(0);
 				JSONObject userNamesObj = a.getJSONObject(1);
 				JSONArray friendRequestsJsonArray = friendRequestsObj.getJSONArray("fql_result_set");
@@ -188,7 +186,9 @@ public class FriendRequestsFragment extends BaseNavigationFragment {
 
 			} catch (JSONException e) {
 				Logger.i(FriendRequestsFragment.class.getSimpleName() + "." + FriendRequestListener.class.getSimpleName() + "." + e.toString());
-				OutputUtil.showCrouton(getActivity(), "Friends request data could not be retrieved");
+				if (getActivity() != null) {
+					OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.friend_requests_data_could_not_be_retrieved));
+				}
 			}
 
 			if (getActivity() != null) {
@@ -203,36 +203,33 @@ public class FriendRequestsFragment extends BaseNavigationFragment {
 							mFriendRequests.addAll(requests);
 							Log.i("frtest2", Integer.toString(mFriendRequests.size()));
 							mAdapter.notifyDataSetChanged();
-							
-							String requestWord = mFriendRequests.size()==1?"request":"requests";
+
+							String requestString = getActivity().getResources().getString(R.string.request_lowercase);
+							String requestsString = getActivity().getResources().getString(R.string.requests_lowercase);
+							String requestWord = mFriendRequests.size() == 1 ? requestString : requestsString;
 							String str = mFriendRequests.size() + " " + requestWord;
 							getActivity().getActionBar().setSubtitle(str);
 						}
-
-						//if (mListView != null) {
-							//mListView.setVisibility(View.VISIBLE);
-						//}
 
 						if (mLoadingView != null) {
 							mLoadingView.setVisibility(View.GONE);
 						}
 
-						//if (mAdapter != null) {
-						//}
-
 						if (mFriendRequests.size() < 1) {
-							OutputUtil.showCrouton(getActivity(), "No pending friend requests");
+							if (getActivity() != null) {
+								OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.no_pending_friends_requests));
+							}
 						}
-						
+
 						stopRefreshMenuItemAnimation();
-						//getActivity().invalidateOptionsMenu();
-						
 
 					}
 				});
 			} else {
 				Logger.i(FriendRequestsFragment.class.getSimpleName() + FriendRequestListener.class.getSimpleName() + ".getActivity()==null");
-				OutputUtil.showCrouton(getActivity(), "Friends request data could not be retrieved");
+				if (getActivity() != null) {
+					OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.friend_requests_data_could_not_be_retrieved));
+				}
 			}
 
 		}
@@ -304,9 +301,9 @@ public class FriendRequestsFragment extends BaseNavigationFragment {
 					holder = new ViewHolder();
 					holder.fromName = (TextView) view.findViewById(R.id.userName);
 					configBodyText(holder.fromName);
-					
+
 					holder.fromPicture = (ImageView) view.findViewById(R.id.userImage);
-					
+
 					holder.button = (Button) view.findViewById(R.id.respondButton);
 
 					view.setTag(holder);

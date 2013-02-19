@@ -39,7 +39,6 @@ public class ImageGridActivity extends BaseThemedActivity {
 		Bundle extras = getIntent().getExtras();
 		String objectId = extras.getString(Album.ALBUM_ID_KEY);
 		String objectTitle = extras.getString(Album.ALBUM_NAME_KEY);
-		Log.i("jan9", "albumId: " + objectId);
 		Boolean clearTop = extras.getBoolean(BaseThemedActivity.CLEAR_TOP_ON_HOME_SELECTED);
 		
 		Bundle bundle = new Bundle();

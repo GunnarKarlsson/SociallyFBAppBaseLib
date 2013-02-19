@@ -22,6 +22,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.bluebitapps.fbclientbase.R;
 import com.bluebitapps.fbclientbase.debug.Logger;
 
 public class PhotoSelectorActivity extends Activity {
@@ -40,8 +41,10 @@ public class PhotoSelectorActivity extends Activity {
 	private void showEditDialog() {
 		
 		AlertDialog.Builder dialog = new AlertDialog.Builder(PhotoSelectorActivity.this);
-		dialog.setTitle("Select:");
-		final String[] selectionItems = {"Camera", "Gallery"};
+		dialog.setTitle(R.string.select);
+		String cameraString = getResources().getString(R.string.camera);
+		String galleryString = getResources().getString(R.string.gallery);
+		final String[] selectionItems = {cameraString, galleryString};
 		dialog.setItems(selectionItems, new android.content.DialogInterface.OnClickListener() {
 			
 			@Override

@@ -19,6 +19,7 @@ package com.bluebitapps.utils;
 public class Admob {
 
 	private final static String id = "a150ab340c1545c";//For Socially
+	private final static String pinkId = "a1511b12cb7ae45";//For Socially Pink
 	private final static String testDevice = "E9A58317C31E13C81BDE2E72E4A29663";
 	
 	private static boolean isDebugging = true;
@@ -26,6 +27,11 @@ public class Admob {
 	public static String getId() {
 		return id;
 	}
+	
+	public static String getPinkId(){
+		return pinkId;
+	}
+	
 	public static String getTestdevice() {
 		return testDevice;
 	}

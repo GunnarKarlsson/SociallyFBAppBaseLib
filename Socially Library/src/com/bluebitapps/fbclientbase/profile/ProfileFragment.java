@@ -85,7 +85,7 @@ public class ProfileFragment extends BaseNavigationFragment {
 				}
 
 				stopRefreshMenuItemAnimation();
-				OutputUtil.showCrouton(getActivity(), "New profile data could not be retrieved");
+				OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.data_could_not_be_retrieved));
 			}
 		}
 	}
@@ -158,7 +158,7 @@ public class ProfileFragment extends BaseNavigationFragment {
 		if(StringUtil.notEmpty(bundle.getString(Constants.OBJECT_TITLE_KEY))){
 			setTitle(bundle.getString(Constants.OBJECT_TITLE_KEY));
 		}else{
-			setTitle("Profile");
+			setTitle(getResources().getString(R.string.profile));
 		}
 
 	}
@@ -210,7 +210,7 @@ public class ProfileFragment extends BaseNavigationFragment {
 			if (mProfile != null && StringUtil.notEmpty(mProfile.getId())) {
 				setLayout();
 			}else{
-				OutputUtil.showCrouton(getActivity(), "Profile could not be retrieved");				
+				OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.data_could_not_be_retrieved));				
 			}
 			
 			//getActivity().invalidateOptionsMenu();

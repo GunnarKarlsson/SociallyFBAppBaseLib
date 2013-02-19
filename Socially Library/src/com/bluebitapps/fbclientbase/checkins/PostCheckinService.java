@@ -158,7 +158,7 @@ public class PostCheckinService extends IntentService {
 		
 		NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		Notification.Builder builder = new Notification.Builder(PostCheckinService.this);
-		builder.setContentIntent(contentIntent).setSmallIcon(R.drawable.sliding_menu_icon_checkins).setTicker("Checkin successfully posted").setWhen(System.currentTimeMillis()).setAutoCancel(true).setContentTitle("Checkin posted to Facebook").setContentText("Your checkin was posted to Facebook");
+		builder.setContentIntent(contentIntent).setSmallIcon(R.drawable.sliding_menu_icon_checkins).setTicker(getResources().getString(R.string.checkin_successfully_posted)).setWhen(System.currentTimeMillis()).setAutoCancel(true).setContentTitle(getResources().getString(R.string.checkin_posted_to_facebook)).setContentText(getResources().getString(R.string.your_checkin_was_posted_to_facebook));
 		Notification notification = builder.getNotification();
 		notificationManager.notify(CHECKIN_NOTIFICATION_ID, notification);
 	}
@@ -171,7 +171,7 @@ public class PostCheckinService extends IntentService {
 		
 		NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		Notification.Builder builder = new Notification.Builder(PostCheckinService.this);
-		builder.setContentIntent(contentIntent).setSmallIcon(R.drawable.sliding_menu_icon_checkins).setTicker("Checkin not posted").setWhen(System.currentTimeMillis()).setAutoCancel(true).setContentTitle("Checkin not posted to Facebook").setContentText("Your checkin was not posted. Please try again.");
+		builder.setContentIntent(contentIntent).setSmallIcon(R.drawable.sliding_menu_icon_checkins).setTicker(getResources().getString(R.string.checkin_not_posted)).setWhen(System.currentTimeMillis()).setAutoCancel(true).setContentTitle(getResources().getString(R.string.checkin_not_posted_to_facebook)).setContentText(getResources().getString(R.string.your_checkin_was_not_posted_please_try_again));
 		Notification notification = builder.getNotification();
 		notificationManager.notify(CHECKIN_NOTIFICATION_ID, notification);
 	}

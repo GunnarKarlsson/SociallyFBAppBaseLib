@@ -57,11 +57,11 @@ public class GroupActivity extends BaseThemedActivity {
 		GroupMembersFragment membersFragment = GroupMembersFragment.newInstance(groupId,title,true);
 		membersFragment.setRetainInstance(true);
 
-		ActionBar.Tab tab = actionBar.newTab().setText("Info").setTabListener(new CustomTabListener<ProfileFragment>(profileFragment));
+		ActionBar.Tab tab = actionBar.newTab().setText(R.string.info).setTabListener(new CustomTabListener<ProfileFragment>(profileFragment));
 		actionBar.addTab(tab);
-		tab = actionBar.newTab().setText("Wall").setTabListener(new CustomTabListener<NewsFeedFragment>(wallFragment));
+		tab = actionBar.newTab().setText(R.string.wall).setTabListener(new CustomTabListener<NewsFeedFragment>(wallFragment));
 		actionBar.addTab(tab);
-		tab = actionBar.newTab().setText("Members").setTabListener(new CustomTabListener<GroupMembersFragment>(membersFragment));
+		tab = actionBar.newTab().setText(R.string.members).setTabListener(new CustomTabListener<GroupMembersFragment>(membersFragment));
 		actionBar.addTab(tab);
 
 		if (Constants.TAB_INDEX_WALL.equals(tabIndex)) {

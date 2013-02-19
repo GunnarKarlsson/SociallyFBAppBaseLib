@@ -18,8 +18,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/fromHeader"
         android:padding="5dip"
-        android:text="checked in at" 
-        android:textAppearance="@style/bodyTextStyle"/>
+        android:text="@string/checked_in_at"
+        android:textAppearance="@style/bodyTextStyle" />
 
     <TextView
         android:id="@+id/placeName"

@@ -63,30 +63,10 @@ public class TextSettingsFragment extends PreferenceFragment {
 			if (getActivity().getActionBar() != null) {
 				getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
 				getActivity().getActionBar().setDisplayShowTitleEnabled(true);
-				getActivity().getActionBar().setTitle("TextSettings");
+				getActivity().getActionBar().setTitle(R.string.text_settings);
 				getActivity().getActionBar().setSubtitle(null);
 			}
 		}
 	}
-
-	/*
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		Logger.i(Logger.getClassAndMethod());
-		//super.onOptionsItemSelected(item);
-
-		// Can't handle this in the activity since then onOptionsItemSelected in
-		// the fragment doesn't get called.
-		if (item.getItemId() == android.R.id.home && getActivity() != null) {
-
-			getActivity().getFragmentManager().beginTransaction().remove(this).commit();
-			// getActivity().overridePendingTransition(R.anim.slide_in_left,
-			// R.anim.slide_out_right);
-			return true;
-		}
-
-		return super.onOptionsItemSelected(item);
-	}
-	*/
 
 }

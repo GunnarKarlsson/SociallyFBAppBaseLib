@@ -89,8 +89,9 @@ public class LikesFragment extends BaseNavigationFragment {
 				}
 
 				stopRefreshMenuItemAnimation();
-
-				OutputUtil.showCrouton(getActivity(), "Data could not be retrieved");
+				if (getActivity() != null) {
+					OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.data_not_available));
+				}
 			}
 		}
 	}
@@ -140,10 +141,6 @@ public class LikesFragment extends BaseNavigationFragment {
 			mLoadingView = (LoadingView) vg.findViewById(R.id.loadingView);
 			mLikes = new ArrayList<LikedObject>();
 			mListView = (ListView) vg.findViewById(R.id.image_list_view);
-			// TextView padding = new TextView(getActivity());
-			// padding.setHeight(getResources().getDimensionPixelOffset(R.dimen.item_list_padding));
-			// mListView.addHeaderView(padding);
-			// mListView.addFooterView(padding);
 			mAdapter = new ItemAdapter();
 			mListView.setAdapter(mAdapter);
 		}
@@ -219,12 +216,12 @@ public class LikesFragment extends BaseNavigationFragment {
 			if (getActivity() != null) {
 				ActionBar actionBar = getActivity().getActionBar();
 				if (actionBar != null) {
-					actionBar.setTitle("Search");
+
+					String title = getResources().getString(R.string.search);
+					actionBar.setTitle(title);
 					actionBar.setSubtitle(null);
 				}
 			}
-			// Crouton.makeText(getActivity(), "Searching for Pages...",
-			// Style.INFO);
 			doSearch();
 		} else {
 
@@ -241,7 +238,7 @@ public class LikesFragment extends BaseNavigationFragment {
 				getLikesFromFB();
 			} else {
 				if (mLikes.size() < 1) {
-					OutputUtil.showCrouton(getActivity(), "No likes items available");
+					OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.data_not_available));
 				}
 				mLoadingView.setVisibility(View.GONE);
 				if (getActivity() != null) {
@@ -252,7 +249,6 @@ public class LikesFragment extends BaseNavigationFragment {
 	}
 
 	private void getLikesFromFB() {
-		// OutputUtil.showCrouton(getActivity(), "Loading Liked Pages");
 		Intent intent = new Intent(getActivity(), LikesService.class);
 		Logger.i(Logger.getClassAndMethod() + " getObjectId " + getObjectId());
 		intent.putExtra(Constants.OBJECT_ID_KEY, getObjectId());
@@ -297,7 +293,7 @@ public class LikesFragment extends BaseNavigationFragment {
 				final ArrayList<LikedObject> tempLikes = new ArrayList<LikedObject>(likes);
 
 				if (tempLikes.size() < 1) {
-					OutputUtil.showCrouton(getActivity(), "No search results found");
+					OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.no_search_results_found));
 				} else {
 
 					if (getActivity() != null) {
@@ -312,8 +308,8 @@ public class LikesFragment extends BaseNavigationFragment {
 								mLoadingView.setVisibility(View.GONE);
 
 								if (!getState().equals(STATE_SEARCH)) {
-									String pageWord = mLikes.size() == 1 ? "page" : "pages";
-									String str = mLikes.size() + " liked " + pageWord;
+									String pageWord = mLikes.size() == 1 ? getResources().getString(R.string.page_lowercase): getResources().getString(R.string.pages_lowercase);
+									String str = mLikes.size() + " " + getResources().getString(R.string.liked_pasttense_lowercase)+ " " + pageWord;
 									getActivity().getActionBar().setSubtitle(str);
 								}
 
@@ -324,7 +320,7 @@ public class LikesFragment extends BaseNavigationFragment {
 
 			} catch (JSONException e) {
 				Logger.i(Logger.getClassAndMethod() + e.toString());
-				OutputUtil.showCrouton(getActivity(), "Search results could not be retrieved");
+				OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.search_results_could_not_be_fetched));
 			}
 
 		}

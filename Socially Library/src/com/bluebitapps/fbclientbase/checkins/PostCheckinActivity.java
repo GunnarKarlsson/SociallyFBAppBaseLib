@@ -108,25 +108,24 @@ public class PostCheckinActivity extends BaseThemedActivity {
 			return true;
 		}
 
-		if (item.getTitle().toString().equalsIgnoreCase("Post")) {
+		
+		if (item.getTitle().toString().equalsIgnoreCase(getResources().getString(R.string.post))) {
 			
 			String selection = mPrivacySpinner.getSelectedItem().toString();
 			String privacySetting = "";
 
-			Log.i("feb6", Logger.getClassAndMethod() + selection);
-
-			if ("Everyone".equalsIgnoreCase(selection)) {
+			if (getResources().getString(R.string.everyone).equalsIgnoreCase(selection)) {
 				privacySetting = "EVERYONE";
-			} else if ("Friend of friends".equalsIgnoreCase(selection)) {
+			} else if (getResources().getString(R.string.friends_of_friends).equalsIgnoreCase(selection)) {
 				privacySetting = "FRIENDS_OF_FRIENDS";
-			} else if ("Myself".equalsIgnoreCase(selection)) {
+			} else if (getResources().getString(R.string.myself).equalsIgnoreCase(selection)) {
 				privacySetting = "SELF";
 			} else {
 				privacySetting = "ALL_FRIENDS";
 			}
 
-			OutputUtil.showCrouton(this, "You'll receive a notification when your checkin has been posted");
-			OutputUtil.showCrouton(this, "Returning to previous screen...");
+			OutputUtil.showCrouton(this, getResources().getString(R.string.youll_receive_a_notification_when_your_checkin_has_been_posted));
+			OutputUtil.showCrouton(this, getResources().getString(R.string.returning_to_previous_screen));
 			
 			Intent intent = new Intent(this, PostCheckinService.class);
 			intent.putExtra(MESSAGE_KEY, mEditText.getText().toString());

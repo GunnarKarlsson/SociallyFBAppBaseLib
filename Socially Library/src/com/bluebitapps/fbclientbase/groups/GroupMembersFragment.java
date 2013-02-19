@@ -107,10 +107,6 @@ public class GroupMembersFragment extends BaseNavigationFragment {
 			vg = ThemeFactory.getViewGroup(getThemeSelection(), getActivity(), inflater, container, R.layout.image_list);
 			mLoadingView = (LoadingView) vg.findViewById(R.id.loadingView);
 			mListView = (ListView) vg.findViewById(R.id.image_list_view);
-			//TextView padding = new TextView(getActivity());
-			//padding.setHeight(getResources().getDimensionPixelOffset(R.dimen.item_list_padding));
-			//mListView.addHeaderView(padding);
-			//mListView.addFooterView(padding);
 			mAdapter = new ItemAdapter();
 			mListView.setAdapter(mAdapter);
 
@@ -168,13 +164,17 @@ public class GroupMembersFragment extends BaseNavigationFragment {
 
 				} catch (Exception e) {
 					Logger.i(Logger.getClassAndMethod() + e.toString());
-					OutputUtil.showCrouton(getActivity(), "Group members list not available");
+					if(getActivity()!=null){						
+						OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.data_not_available));
+					}
 					stopRefreshMenuItemAnimation();
 				}
 
 			} catch (JSONException e) {
 				Logger.i(Logger.getClassAndMethod() + e.toString());
-				OutputUtil.showCrouton(getActivity(), "Group members list not available");
+				if(getActivity()!=null){						
+					OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.data_not_available));
+				}
 				stopRefreshMenuItemAnimation();
 			}
 		}
@@ -182,28 +182,36 @@ public class GroupMembersFragment extends BaseNavigationFragment {
 		@Override
 		public void onIOException(IOException e, Object state) {
 			Logger.i(Logger.getClassAndMethod() + e.toString());
-			OutputUtil.showCrouton(getActivity(), "Group members list not available");
+			if(getActivity()!=null){						
+				OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.data_not_available));
+			}
 			stopRefreshMenuItemAnimation();
 		}
 
 		@Override
 		public void onFileNotFoundException(FileNotFoundException e, Object state) {
 			Logger.i(Logger.getClassAndMethod() + e.toString());
-			OutputUtil.showCrouton(getActivity(), "Group members list not available");
+			if(getActivity()!=null){						
+				OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.data_not_available));
+			}
 			stopRefreshMenuItemAnimation();
 		}
 
 		@Override
 		public void onMalformedURLException(MalformedURLException e, Object state) {
 			Logger.i(Logger.getClassAndMethod() + e.toString());
-			OutputUtil.showCrouton(getActivity(), "Group members list not available");
+			if(getActivity()!=null){						
+				OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.data_not_available));
+			}
 			stopRefreshMenuItemAnimation();
 		}
 
 		@Override
 		public void onFacebookError(FacebookError e, Object state) {
 			Logger.i(Logger.getClassAndMethod() + e.toString());
-			OutputUtil.showCrouton(getActivity(), "Group members list not available");
+			if(getActivity()!=null){						
+				OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.data_not_available));
+			}
 			stopRefreshMenuItemAnimation();
 		}
 	}

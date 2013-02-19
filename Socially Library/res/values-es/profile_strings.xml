@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="profile_name">Name</string>
+    <string name="profile_first_name">First name</string>
+    <string name="profile_last_name">Last name</string>
+    <string name="profile_user_name">Username</string>
+    <string name="profile_birthday">Birthday</string>
+    <string name="profile_home_town">Home town</string>
+    <string name="profile_location_dot_name">Location</string>
+    <string name="profile_gender">Gender</string>
+    <string name="profile_relationship_status">Relationship status</string>
+    <string name="profile_owner_name">Owner</string>
+    <string name="profile_owner_category">Category</string>
+    <string name="profile_description">Description</string>
+    <string name="profile_start_time">Start time</string>
+    <string name="profile_end_time">End time</string>
+    <string name="profile_location">Location</string>
+    <string name="profile_venue_name">Venue name</string>
+    <string name="profile_privacy">Privacy</string>
+    <string name="profile_updated_time">Updated on</string>
+    <string name="profile_icon">Icon</string>
+    <string name="profile_email">Email</string>
+
+</resources>

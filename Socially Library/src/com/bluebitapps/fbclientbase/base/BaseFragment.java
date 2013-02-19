@@ -36,35 +36,28 @@ public class BaseFragment extends Fragment {
 	private String mState;
 	private Boolean hasNoLoadingImage = false;
 	private boolean isPremiumVersion = false;
-
-	private AdView mAdView;
-
-	/*
-	 * protected void setAdView(AdView adView) { mAdView = adView; }
-	 */
+	private boolean isPinkVersion = false;
 
 	public BaseFragment() {
 	}
 
-	// TODO: destroy AdView...
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		Logger.i(BaseFragment.class.getSimpleName() + "#onCreate()");
 		super.onCreate(savedInstanceState);
 
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
 		mThemeSelection = prefs.getString(Constants.THEME_PREFERENCES_KEY, Constants.THEME_DEFAULT);
 
-		isPremiumVersion = getActivity().getResources().getBoolean(R.bool.isPremiumVersion);
-
+		if (getActivity() != null) {
+			isPremiumVersion = getActivity().getResources().getBoolean(R.bool.isPremiumVersion);
+			isPinkVersion = getActivity().getResources().getBoolean(R.bool.isPinkVersion);
+		}
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		Log.i("jan23", Logger.getClassAndMethod());
 
 		if (!isPremiumVersion) {
 
@@ -72,11 +65,16 @@ public class BaseFragment extends Fragment {
 				AdView adView = (AdView) getView().findViewById(R.id.adView);
 				if (adView != null) {
 
-					adView = new AdView(getActivity(), AdSize.SMART_BANNER, Admob.getId());
+					if (getActivity() != null) {
+						
+						if (isPinkVersion) {
+							adView = new AdView(getActivity(), AdSize.SMART_BANNER, Admob.getPinkId());
+						} else {
+							adView = new AdView(getActivity(), AdSize.SMART_BANNER, Admob.getId());
+						}
+					}
 					AdRequest adRequest = new AdRequest();
 					adView.loadAd(adRequest);
-					if (Admob.isDebugging()) {
-					}
 				}
 			}
 		}
@@ -92,21 +90,34 @@ public class BaseFragment extends Fragment {
 			if (adView != null) {
 
 				RelativeLayout parent = (RelativeLayout) adView.getParent();
-				ViewGroup.LayoutParams adViewParams = adView.getLayoutParams();
-				parent.removeView(adView);
-				adView.destroy();
-				AdView newAdView = new AdView(getActivity(), AdSize.SMART_BANNER, Admob.getId());
-				newAdView.setId(R.id.adView);
-				parent.addView(newAdView, adViewParams);
-				newAdView.loadAd(new AdRequest());
+
+				if (parent != null) {
+
+					ViewGroup.LayoutParams adViewParams = adView.getLayoutParams();
+					parent.removeView(adView);
+					adView.destroy();
+					AdView newAdView;
+
+					if (getActivity() != null) {
+						Boolean isPinkVersion = getActivity().getResources().getBoolean(R.bool.isPinkVersion);
+						if (isPinkVersion) {
+							newAdView = new AdView(getActivity(), AdSize.SMART_BANNER, Admob.getPinkId());
+						} else {
+							newAdView = new AdView(getActivity(), AdSize.SMART_BANNER, Admob.getId());
+						}
+
+						newAdView.setId(R.id.adView);
+						parent.addView(newAdView, adViewParams);
+						newAdView.loadAd(new AdRequest());
+					}
+
+				}
 			}
 		}
 	}
 
 	@Override
 	public void onPause() {
-		Log.i("jan23", Logger.getClassAndMethod());
-		// TODO Auto-generated method stub
 		super.onPause();
 		// mAdView.destroy();
 	}

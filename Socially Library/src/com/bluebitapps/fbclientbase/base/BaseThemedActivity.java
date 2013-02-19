@@ -70,7 +70,6 @@ public class BaseThemedActivity extends Activity {
 	 */
 	@Override
 	protected void onStart() {
-		// TODO Auto-generated method stub
 		super.onStart();
 	}
 
@@ -79,7 +78,6 @@ public class BaseThemedActivity extends Activity {
 		super.onResume();
 		FBClientApplication app = FBClientApplication.getApplication();
 		setTextSize(ThemeFactory.getFontSize(app));
-		Log.i("nftest2", "ThemeFactory.getFontColor: " + ThemeFactory.getFontColor(app));
 		int color = ThemeFactory.getFontColor(app);
 		setTextColor(getResources().getColor(color));
 		setTypeFace(ThemeFactory.getFontType(app));
@@ -147,7 +145,6 @@ public class BaseThemedActivity extends Activity {
 		case android.R.id.home:
 
 			if (clearTop) {
-				Log.i("jan12", "home pressed - clear top");
 				Intent intent = new Intent(this, MainActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
@@ -157,17 +154,14 @@ public class BaseThemedActivity extends Activity {
 
 			} else {
 				finish();
-				Log.i("jan12", "home pressed - don't clear top");
 				overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 				return true;
 			}
 		}
 		return false;
-		// return super.onOptionsItemSelected(item);
 	}
 
 	public int getTextSize() {
-		Log.i("nftest2", Logger.getClassAndMethod() + "mTextSize" + mTextSize);
 		return mTextSize;
 	}
 
@@ -204,7 +198,6 @@ public class BaseThemedActivity extends Activity {
 	}
 
 	public int getTextColor() {
-		Log.i("nftest2", Logger.getClassAndMethod() + "mTextColor" + mTextColor);
 		return mTextColor;
 	}
 
@@ -213,7 +206,6 @@ public class BaseThemedActivity extends Activity {
 	}
 
 	public Typeface getTypeFace() {
-		Log.i("nftest2", Logger.getClassAndMethod() + "mTextTypeface" + mTypeface);
 		return mTypeface;
 	}
 
@@ -223,7 +215,6 @@ public class BaseThemedActivity extends Activity {
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		// TODO Auto-generated method stub
 
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			if (getFragmentManager().getBackStackEntryCount() < 2) {

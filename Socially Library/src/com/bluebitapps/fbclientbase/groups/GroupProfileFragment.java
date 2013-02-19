@@ -96,7 +96,10 @@ public class GroupProfileFragment extends BaseNavigationFragment {
 		if(StringUtil.notEmpty(bundle.getString(Constants.OBJECT_TITLE_KEY))){
 			setTitle(bundle.getString(Constants.OBJECT_TITLE_KEY));
 		}else{
-			setTitle("Profile");
+			if(getActivity()!=null){
+				String title = getActivity().getResources().getString(R.string.profile);
+				setTitle(title);
+			}
 		}
 
 	}
@@ -112,7 +115,6 @@ public class GroupProfileFragment extends BaseNavigationFragment {
 		vg = ThemeFactory.getViewGroup(getThemeSelection(), getActivity(), inflater, container, R.layout.group_fragment_profile);
 		mRootView = (ViewGroup) vg.findViewById(R.id.contentRoot);
 		mLoadingView = (LoadingView) vg.findViewById(R.id.loadingView);
-		//mCoverPhoto = (ImageView) vg.findViewById(R.id.coverPhoto);
 		mProfilePhoto = (ImageView) vg.findViewById(R.id.profilePhoto);
 		mRootView.setVisibility(View.GONE);
 		mLoadingView.setVisibility(View.VISIBLE);

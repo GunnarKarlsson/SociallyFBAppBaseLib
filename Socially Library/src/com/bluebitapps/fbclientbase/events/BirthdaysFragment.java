@@ -77,8 +77,9 @@ public class BirthdaysFragment extends BaseNavigationFragment {
 				}
 
 				stopRefreshMenuItemAnimation();
-
-				OutputUtil.showCrouton(getActivity(), "Birthdays could not be refreshed");
+				if (getActivity() != null) {
+					OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.birthday_list_could_not_be_refreshed));
+				}
 			}
 		}
 	}
@@ -125,7 +126,9 @@ public class BirthdaysFragment extends BaseNavigationFragment {
 
 		mBirthdays = new ArrayList<Birthday>();
 
-		setTitle("Birthdays");
+		if (getActivity() != null) {
+			setTitle(getActivity().getResources().getString(R.string.birthdays));
+		}
 	}
 
 	@Override
@@ -142,10 +145,6 @@ public class BirthdaysFragment extends BaseNavigationFragment {
 			vg = ThemeFactory.getViewGroup(getThemeSelection(), getActivity(), inflater, container, R.layout.image_list);
 			mLoadingView = (LoadingView) vg.findViewById(R.id.loadingView);
 			mListView = (ListView) vg.findViewById(R.id.image_list_view);
-			// TextView padding = new TextView(getActivity());
-			// padding.setHeight(getResources().getDimensionPixelOffset(R.dimen.item_list_padding));
-			// mListView.addHeaderView(padding);
-			// mListView.addFooterView(padding);
 
 			mAdapter = new ItemAdapter();
 
@@ -185,7 +184,9 @@ public class BirthdaysFragment extends BaseNavigationFragment {
 			getBirthdaysFromFB();
 		} else {
 			if (mBirthdays.size() < 1) {
-				OutputUtil.showCrouton(getActivity(), "No birthdays data available");
+				if (getActivity() != null) {
+					OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.no_birthdays_data_available));
+				}
 			}
 			mLoadingView.setVisibility(View.GONE);
 
@@ -307,11 +308,16 @@ public class BirthdaysFragment extends BaseNavigationFragment {
 				if (StringUtil.notEmpty(birthday.getBirthdayDate())) {
 					holder.birthday.setText(mBirthdays.get(position).getBirthdayDate());
 				} else {
-					holder.birthday.setText("Not available.");
+					if (getActivity() != null) {
+
+						holder.birthday.setText(getActivity().getResources().getString(R.string.not_available));
+					}
 				}
 				// hack
 				if (!holder.birthday.getText().toString().contains("/")) {
-					holder.birthday.setText("Not available.");
+					if(getActivity()!=null){						
+						holder.birthday.setText(getActivity().getResources().getString(R.string.not_available));
+					}
 				}
 
 				String token = getApplication().getFBConnection().getFacebook().getAccessToken();

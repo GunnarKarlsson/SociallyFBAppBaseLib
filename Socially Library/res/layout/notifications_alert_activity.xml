@@ -35,7 +35,7 @@
             android:ellipsize="end"
             android:paddingBottom="10dip"
             android:singleLine="true"
-            android:text="Notification"
+            android:text="@string/notification"
             android:layout_alignParentTop="true"
             android:textColor="#000000"
             android:textSize="20sp" />
@@ -50,7 +50,7 @@
             android:paddingBottom="10dip"
             android:layout_above="@+id/buttonTable"
             android:textColor="#222222"
-            android:textSize="15dip" />
+            android:textSize="15sp" />
 
         <TableLayout
             android:id="@+id/buttonTable"
@@ -69,7 +69,7 @@
                     android:layout_marginBottom="6dip"
                     android:layout_marginRight="6dip"
                     android:background="@drawable/custom_button"
-                    android:text="Close"
+                    android:text="@string/close"
                     android:textSize="14sp" />
 
                 <Button
@@ -78,7 +78,7 @@
                     android:layout_height="30dip"
                     android:layout_marginBottom="6dip"
                     android:background="@drawable/custom_button"
-                    android:text="Mark as read"
+                    android:text="@string/mark_as_read"
                     android:textSize="14sp" />
             </TableRow>
 
@@ -90,7 +90,7 @@
                     android:layout_height="30dip"
                     android:layout_marginRight="6dip"
                     android:background="@drawable/custom_button"
-                    android:text="Next"
+                    android:text="@string/next"
                     android:textSize="14sp" />
 
                 <Button
@@ -98,7 +98,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dip"
                     android:background="@drawable/custom_button"
-                    android:text="View"
+                    android:text="@string/view"
                     android:textSize="14sp" />
             </TableRow>
         </TableLayout>

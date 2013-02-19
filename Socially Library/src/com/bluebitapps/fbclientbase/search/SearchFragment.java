@@ -108,7 +108,7 @@ public class SearchFragment extends BaseFragment {
 		if(getActivity()!=null){
 			ActionBar actionBar = getActivity().getActionBar();
 			if(actionBar!=null){
-				actionBar.setTitle("Search");
+				actionBar.setTitle(R.string.search);
 				actionBar.setSubtitle(null);
 			}
 		}

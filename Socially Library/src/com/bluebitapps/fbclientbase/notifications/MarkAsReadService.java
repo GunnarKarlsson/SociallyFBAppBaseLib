@@ -174,19 +174,7 @@ public class MarkAsReadService extends IntentService {
 				}
 			}
 		}
-		/*
-		 * 
-		 * 
-		 * Bundle params = new Bundle(); params.putString("unread", "0");
-		 * 
-		 * String userId =
-		 * FBClientApplication.getApplication().getFBConnection().getUserId();
-		 * String query = "notif_" + userId + "_" + mNotificationId;
-		 * 
-		 * FBClientApplication.getApplication().getFBConnection().
-		 * getAsyncFacebookRunner().request(query, params, "POST", new
-		 * MarkAsReadListener(), null);
-		 */
+	
 	}
 
 	private void sendFailMessage() {
@@ -196,50 +184,5 @@ public class MarkAsReadService extends IntentService {
 		intent.setAction(MarkAsReadService.MARK_AS_READ_FAIL);
 		sendBroadcast(intent);
 	}
-	/*
-	 * private class MarkAsReadListener implements RequestListener {
-	 * 
-	 * @Override public void onComplete(String response, Object state) {
-	 * 
-	 * Log.i("jan23", Logger.getClassAndMethod() + response + mNotificationId);
-	 * 
-	 * if ("true".equalsIgnoreCase(response)) {
-	 * 
-	 * // Remove item from database boolean isDeleted =
-	 * FBClientApplication.getApplication
-	 * ().getNotificationsData().deleteTitle(mNotificationId);
-	 * 
-	 * Log.i("jan23", "isDeleted: " + isDeleted + " " + mNotificationId);
-	 * 
-	 * if (isDeleted) { Log.i("jan23", "success: " + mNotificationId);
-	 * Logger.i(Logger.getClassAndMethod() + "is deleted: true" +
-	 * response.toLowerCase()); Intent intent = new Intent();
-	 * intent.putExtra("notification_id", mNotificationId);
-	 * intent.setAction(MarkAsReadService.MARK_AS_READ_SUCCESS);
-	 * sendBroadcast(intent); } else { Log.i("jan23", "fail: " +
-	 * mNotificationId); sendFailMessage(); } } else { Log.i("jan23", "fail: " +
-	 * mNotificationId); sendFailMessage(); }
-	 * 
-	 * }
-	 * 
-	 * @Override public void onIOException(IOException e, Object state) {
-	 * Logger.i(NotificationsService.class.getSimpleName() + "." +
-	 * MarkAsReadListener.class.getSimpleName() + "." + e.toString());
-	 * sendFailMessage(); }
-	 * 
-	 * @Override public void onFileNotFoundException(FileNotFoundException e,
-	 * Object state) { Logger.i(NotificationsService.class.getSimpleName() + "."
-	 * + MarkAsReadListener.class.getSimpleName() + "." + e.toString());
-	 * sendFailMessage(); }
-	 * 
-	 * @Override public void onMalformedURLException(MalformedURLException e,
-	 * Object state) { Logger.i(NotificationsService.class.getSimpleName() + "."
-	 * + MarkAsReadListener.class.getSimpleName() + "." + e.toString());
-	 * sendFailMessage(); }
-	 * 
-	 * @Override public void onFacebookError(FacebookError e, Object state) {
-	 * Logger.i(NotificationsService.class.getSimpleName() + "." +
-	 * MarkAsReadListener.class.getSimpleName() + "." + e.toString());
-	 * sendFailMessage(); } }
-	 */
+	
 }

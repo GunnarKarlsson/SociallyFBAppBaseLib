@@ -126,9 +126,9 @@ public class ColorPickerFragment extends BaseFragment {
 					}
 				}
 
-				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(view).setMessage("Apply selection?");
+				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(view).setMessage(getResources().getString(R.string.apply_selection));
 
-				builder.setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+				builder.setCancelable(false).setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 
 						/*
@@ -151,7 +151,7 @@ public class ColorPickerFragment extends BaseFragment {
 								try {
 									mWallpaperManager.setBitmap(bitmap);
 								} catch (IOException e) {
-									OutputUtil.showCrouton(getActivity(), "Device Wallpaper could not be set");
+									OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.device_wallpaper_could_not_be_set));
 								}
 
 								if (shouldBeAppliedToApp == false) {
@@ -204,7 +204,7 @@ public class ColorPickerFragment extends BaseFragment {
 						}
 
 					}
-				}).setNegativeButton("No", new DialogInterface.OnClickListener() {
+				}).setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 						dialog.cancel();
 					}
@@ -220,13 +220,12 @@ public class ColorPickerFragment extends BaseFragment {
 
 	@Override
 	public void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		if (getActivity() != null) {
 			ActionBar actionBar = getActivity().getActionBar();
 			if (actionBar != null) {
 				actionBar.setDisplayShowTitleEnabled(true);
-				actionBar.setTitle("Color Picker");
+				actionBar.setTitle(R.string.color_picker_menu_item);
 			}
 		}
 	}

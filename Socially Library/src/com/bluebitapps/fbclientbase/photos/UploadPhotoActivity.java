@@ -105,7 +105,9 @@ public class UploadPhotoActivity extends BaseThemedActivity {
 		}
 
 		if (mBitmap == null) {
-			Crouton.makeText(this, "Error: Photo cound not be found", Style.ALERT);
+			
+			
+			OutputUtil.showCrouton(UploadPhotoActivity.this, getResources().getString(R.string.photo_could_not_be_found));
 		} else {
 
 			try {
@@ -214,8 +216,8 @@ public class UploadPhotoActivity extends BaseThemedActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-
-		menu.add("Post").setTitle("Post").setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+ 
+		menu.add(R.string.post).setTitle(R.string.post).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
 		return true;
 	}
@@ -244,25 +246,25 @@ public class UploadPhotoActivity extends BaseThemedActivity {
 			return true;
 		}
 
-		if (item.getTitle().toString().equalsIgnoreCase("Post")) {
+		if (item.getTitle().toString().equalsIgnoreCase(getResources().getString(R.string.post))) {
 
 			String selection = mPrivacySpinner.getSelectedItem().toString();
 			String privacySetting = "";
 
 			Log.i("feb6", Logger.getClassAndMethod() + selection);
 
-			if ("Everyone".equalsIgnoreCase(selection)) {
+			if (getResources().getString(R.string.everyone).equalsIgnoreCase(selection)) {
 				privacySetting = "EVERYONE";
-			} else if ("Friend of friends".equalsIgnoreCase(selection)) {
+			} else if (getResources().getString(R.string.friends_of_friends).equalsIgnoreCase(selection)) {
 				privacySetting = "FRIENDS_OF_FRIENDS";
-			} else if ("Myself".equalsIgnoreCase(selection)) {
+			} else if (getResources().getString(R.string.myself).equalsIgnoreCase(selection)) {
 				privacySetting = "SELF";
 			} else {
 				privacySetting = "ALL_FRIENDS";
 			}
 
-			OutputUtil.showCrouton(UploadPhotoActivity.this, "You'll get a notification when the upload is finished");
-			Crouton.makeText(this, "Returning to previous screen...", Style.INFO).show();
+			OutputUtil.showCrouton(UploadPhotoActivity.this, getResources().getString(R.string.youll_get_a_notification_when_the_upload_is_finished));
+			Crouton.makeText(this, getResources().getString(R.string.returning_to_previous_screen), Style.INFO).show();
 			Intent intent = new Intent(this, UploadPhotoService.class);
 			mCaption = mCaptionEditText.getText().toString();
 			intent.putExtra(UploadPhotoService.CAPTION_KEY, mCaption);

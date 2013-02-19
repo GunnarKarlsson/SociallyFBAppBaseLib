@@ -61,7 +61,6 @@
         <item>xmpp_login</item>
         <item>create_event</item>
         <item>friends_online_presence</item>
-        <item>manage_pages</item>
         <item>publish_checkins</item>
         <item>read_requests</item>
         <item>share_item</item>

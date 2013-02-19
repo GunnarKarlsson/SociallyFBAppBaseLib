@@ -49,23 +49,12 @@ public class EventActivity extends BaseThemedActivity {
 
 		setTitle(title);
 
-		Log.i("jan9", Logger.getClassAndMethod() + "object id " + objectId);
-
 		ViewGroup rootView = (ViewGroup) findViewById(R.id.rootView);
 
 		setThemeAndConfigureActionBar(rootView);
 
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-		/*
-		 * ProfileFragment profileFragment =
-		 * ProfileFragment.newInstance(objectId, Constants.STATE_PROFILE,
-		 * title); profileFragment.setRetainInstance(true); NewsFeedFragment
-		 * wallFragment = NewsFeedFragment.newInstance(objectId,
-		 * Constants.STATE_PROFILE, title);
-		 * wallFragment.setRetainInstance(true);
-		 */
 
 		EventProfileFragment profileFragment = EventProfileFragment.newInstance(objectId, true, isInvitation);
 		profileFragment.setRetainInstance(true);
@@ -80,15 +69,15 @@ public class EventActivity extends BaseThemedActivity {
 		EventUserListFragment maybeFragment = EventUserListFragment.newInstance(Constants.STATE_EVENT_MAYBE, objectId, title, true);
 		maybeFragment.setRetainInstance(true);
 
-		ActionBar.Tab tab = actionBar.newTab().setText("Event Details").setTabListener(new CustomTabListener<Fragment>(profileFragment));
+		ActionBar.Tab tab = actionBar.newTab().setText(R.string.event_details).setTabListener(new CustomTabListener<Fragment>(profileFragment));
 		actionBar.addTab(tab);
-		tab = actionBar.newTab().setText("Invited").setTabListener(new CustomTabListener<Fragment>(invitedFragment));
+		tab = actionBar.newTab().setText(R.string.invited).setTabListener(new CustomTabListener<Fragment>(invitedFragment));
 		actionBar.addTab(tab);
-		tab = actionBar.newTab().setText("Attending").setTabListener(new CustomTabListener<Fragment>(attendingFragment));
+		tab = actionBar.newTab().setText(R.string.attending).setTabListener(new CustomTabListener<Fragment>(attendingFragment));
 		actionBar.addTab(tab);
-		tab = actionBar.newTab().setText("Declined").setTabListener(new CustomTabListener<Fragment>(declinedFragment));
+		tab = actionBar.newTab().setText(R.string.declined).setTabListener(new CustomTabListener<Fragment>(declinedFragment));
 		actionBar.addTab(tab);
-		tab = actionBar.newTab().setText("Maybe").setTabListener(new CustomTabListener<Fragment>(maybeFragment));
+		tab = actionBar.newTab().setText(R.string.maybe).setTabListener(new CustomTabListener<Fragment>(maybeFragment));
 		actionBar.addTab(tab);
 
 		if (Constants.TAB_INDEX_WALL.equals(tabIndex)) {

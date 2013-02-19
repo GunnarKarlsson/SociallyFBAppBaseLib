@@ -5,29 +5,29 @@
         android:id="@+id/refreshMenuItem"
         android:icon="@drawable/icon_refresh"
         android:showAsAction="always"
-        android:title="Refresh">
+        android:title="@string/refresh">
     </item>
     <item
         android:id="@+id/postMenuItem"
         android:icon="@drawable/actionbar_icon_megaphone"
         android:showAsAction="always"
-        android:title="Post">
+        android:title="@string/post">
         <menu>
             <item
                 android:id="@+id/postStatusMenuItem"
                 android:icon="@drawable/actionbar_icon_status_update"
-                android:title="Post Status Update or Link"/>
+                android:title="@string/post_status_update_or_link"/>
             <item
                 android:id="@+id/GalleryMenuItem"
                 android:icon="@drawable/sliding_menu_icon_albums"
-                android:title="Upload from Gallery"/>
+                android:title="@string/upload_from_gallery"/>
         </menu>
     </item>
     <item
         android:id="@+id/textStyleMenuItem"
         android:icon="@drawable/actionbar_icon_text_style"
         android:showAsAction="always"
-        android:title="Text Style">
+        android:title="@string/text_style">
     </item>
 
 </menu>

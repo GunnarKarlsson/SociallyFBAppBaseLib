@@ -241,9 +241,11 @@ public class ChatConversationFragment extends BaseNavigationFragment {
 		if (StringUtil.notEmpty(threadId)) {
 			((FBClientApplication) getApplication()).getFBConnection().getAsyncFacebookRunner().request(threadId, new MessageHistoryListener());
 		} else {
-			OutputUtil.showCrouton(getActivity(), "Error retrieving message history");
-			Log.i("chat", Logger.getClassAndMethod() + "threadId is null");
-			stopRefreshMenuItemAnimation();
+			if (getActivity() != null) {
+				OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.error_retrieving_message_history));
+				Log.i("chat", Logger.getClassAndMethod() + "threadId is null");
+				stopRefreshMenuItemAnimation();
+			}
 		}
 	}
 
@@ -289,9 +291,7 @@ public class ChatConversationFragment extends BaseNavigationFragment {
 				}
 
 				// add 'comments' to list
-				Log.i("chat", "before asking for comments");
 				if (obj.has("comments")) {
-					Log.i("chat", "after asking for comments");
 
 					JSONObject comments = obj.getJSONObject("comments");
 					JSONArray data = comments.getJSONArray("data");
@@ -328,8 +328,10 @@ public class ChatConversationFragment extends BaseNavigationFragment {
 				}
 			} catch (JSONException e) {
 				Log.i("chat", ChatConversationFragment.class.getSimpleName() + "." + MessageHistoryListener.class.getSimpleName() + "." + e.toString());
-				OutputUtil.showCrouton(getActivity(), "Error retrieving message history");
-				stopRefreshMenuItemAnimation();
+				if (getActivity() != null) {
+					OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.error_retrieving_message_history));
+					stopRefreshMenuItemAnimation();
+				}
 			}
 
 			if (getActivity() != null) {
@@ -341,9 +343,7 @@ public class ChatConversationFragment extends BaseNavigationFragment {
 
 						if (mMessages != null) {
 							mMessages.clear();
-							Log.i("chat", Logger.getClassAndMethod() + ". Adding old messages to chat history list");
 							mMessages.addAll(messages);
-							Log.i("chat", Logger.getClassAndMethod() + " mMessages.size(): " + mMessages.size());
 						}
 
 						mOffset += mOffsetIncrement;
@@ -371,30 +371,38 @@ public class ChatConversationFragment extends BaseNavigationFragment {
 		@Override
 		public void onIOException(IOException e, Object state) {
 			Logger.i(ChatConversationFragment.class.getSimpleName() + "." + MessageHistoryListener.class.getSimpleName() + "." + e.toString());
-			OutputUtil.showCrouton(getActivity(), "Message History could not be retrieved");
-			stopRefreshMenuItemAnimation();
+			if (getActivity() != null) {
+				OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.message_history_could_not_be_retrieved));
+				stopRefreshMenuItemAnimation();
+			}
 
 		}
 
 		@Override
 		public void onFileNotFoundException(FileNotFoundException e, Object state) {
 			Logger.i(ChatConversationFragment.class.getSimpleName() + "." + MessageHistoryListener.class.getSimpleName() + "." + e.toString());
-			OutputUtil.showCrouton(getActivity(), "Message History could not be retrieved");
-			stopRefreshMenuItemAnimation();
+			if (getActivity() != null) {
+				OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.message_history_could_not_be_retrieved));
+				stopRefreshMenuItemAnimation();
+			}
 		}
 
 		@Override
 		public void onMalformedURLException(MalformedURLException e, Object state) {
 			Logger.i(ChatConversationFragment.class.getSimpleName() + "." + MessageHistoryListener.class.getSimpleName() + "." + e.toString());
-			OutputUtil.showCrouton(getActivity(), "Message History could not be retrieved");
-			stopRefreshMenuItemAnimation();
+			if (getActivity() != null) {
+				OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.message_history_could_not_be_retrieved));
+				stopRefreshMenuItemAnimation();
+			}
 		}
 
 		@Override
 		public void onFacebookError(FacebookError e, Object state) {
 			Logger.i(ChatConversationFragment.class.getSimpleName() + "." + MessageHistoryListener.class.getSimpleName() + "." + e.toString());
-			OutputUtil.showCrouton(getActivity(), "Message History could not be retrieved");
-			stopRefreshMenuItemAnimation();
+			if (getActivity() != null) {
+				OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.message_history_could_not_be_retrieved));
+				stopRefreshMenuItemAnimation();
+			}
 		}
 	}
 
@@ -416,8 +424,10 @@ public class ChatConversationFragment extends BaseNavigationFragment {
 				try {
 
 					if (!StringUtil.notEmpty(mMessage)) {
-						OutputUtil.showCrouton(getActivity(), "Enter a message");
-						return;
+						if (getActivity() != null) {
+							OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.enter_a_message));
+							return;
+						}
 					}
 
 					org.jivesoftware.smack.packet.Message newMessage = new org.jivesoftware.smack.packet.Message();
@@ -427,22 +437,24 @@ public class ChatConversationFragment extends BaseNavigationFragment {
 
 					String fromName = FBClientApplication.getApplication().getFBConnection().getUserName();
 					String fromId = FBClientApplication.getApplication().getFBConnection().getUserId();
-					Logger.i(ChatConversationFragment.class.getSimpleName() + "." + MessageHistoryListener.class.getSimpleName() + ".sendMessage..fromName: " + fromName);
 					long currentTimeStamp = System.currentTimeMillis() / 1000;
-
-					Logger.i(ChatConversationFragment.class.getSimpleName() + "." + MessageHistoryListener.class.getSimpleName() + ".Sending message at time: " + currentTimeStamp);
-					
 					addMessageToList(fromName, Long.toString(currentTimeStamp), mMessage, fromId);
 
 				} catch (XMPPException e) {
 					Logger.i(ChatConversationFragment.class.getSimpleName() + "." + MessageHistoryListener.class.getSimpleName() + "." + e.toString());
-					OutputUtil.showCrouton(getActivity(), "Message could not be delivered");
+					if (getActivity() != null) {
+						OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.message_could_not_be_delivered));
+					}
 				} catch (IllegalStateException e) {
 					Logger.i(ChatConversationFragment.class.getSimpleName() + "." + MessageHistoryListener.class.getSimpleName() + "." + e.toString());
-					OutputUtil.showCrouton(getActivity(), "Message could not be delivered");
+					if (getActivity() != null) {
+						OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.message_could_not_be_delivered));
+					}
 				} catch (Exception e) {
 					Logger.i(ChatConversationFragment.class.getSimpleName() + "." + MessageHistoryListener.class.getSimpleName() + "." + e.toString());
-					OutputUtil.showCrouton(getActivity(), "Message could not be delivered");
+					if (getActivity() != null) {
+						OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.message_could_not_be_delivered));
+					}
 				}
 
 			}
@@ -510,7 +522,7 @@ public class ChatConversationFragment extends BaseNavigationFragment {
 				getImageLoader().displayImage(query, holder.picture, getImageDisplayOptions());
 
 				if (mMessages.get(position).getCreatedTime().contains(":")) {
-					holder.createdTime.setText(FacebookUtils.convertFacebookCreatedTimeToRelativeTime(mMessages.get(position).getCreatedTime()));
+					holder.createdTime.setText(FacebookUtils.convertFacebookCreatedTimeToRelativeTime(mMessages.get(position).getCreatedTime(), getActivity()));
 				}
 
 				holder.message.setText(mMessages.get(position).getMessageText());

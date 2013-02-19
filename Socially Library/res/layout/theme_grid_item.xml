@@ -38,14 +38,13 @@
         android:id="@+id/themeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Theme Name"
         android:textAppearance="@style/smallGreyTextStyle" />
 
     <TextView
         android:id="@+id/themeAvailability"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Free"
+        android:text="@string/free"
         android:textAppearance="@style/smallGreyTextStyle" />
     
     <ImageView 

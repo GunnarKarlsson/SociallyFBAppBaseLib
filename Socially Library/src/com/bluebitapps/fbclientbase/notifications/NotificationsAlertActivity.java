@@ -95,7 +95,7 @@ public class NotificationsAlertActivity extends BaseThemedActivity {
 					}
 					if (mMarkAsReadButton != null) {
 
-						mMarkAsReadButton.setText("Mark as read");
+						mMarkAsReadButton.setText(getResources().getString(R.string.mark_as_read_on_button));
 						mMarkAsReadButton.setEnabled(true);
 						mNextButton.setEnabled(true);
 					}
@@ -104,7 +104,7 @@ public class NotificationsAlertActivity extends BaseThemedActivity {
 
 			if (MarkAsReadService.MARK_AS_READ_FAIL.equals(intent.getAction())) {
 				Logger.i(Logger.getClassAndMethod() + MarkAsReadService.MARK_AS_READ_FAIL);
-				mMarkAsReadButton.setText("Mark as read");
+				mMarkAsReadButton.setText(getResources().getString(R.string.mark_as_read_on_button));
 			}
 		}
 	}
@@ -164,7 +164,7 @@ public class NotificationsAlertActivity extends BaseThemedActivity {
 
 			@Override
 			public void onClick(View v) {
-				mMarkAsReadButton.setText("wait a sec...");
+				mMarkAsReadButton.setText(getResources().getString(R.string.wait_a_sec));
 				mMarkAsReadButton.setEnabled(false);
 				mNextButton.setEnabled(false);
 				mPositionsWaitingToBeMarkedRead.add(mNotificationsIndex);
@@ -369,7 +369,7 @@ public class NotificationsAlertActivity extends BaseThemedActivity {
 		if (mNotifications.size() > 0) {
 			mMessageTextView.setText(mNotifications.get(0).getTitleText());
 		} else {
-			mMessageTextView.setText("All notifications marked as read");
+			mMessageTextView.setText(getResources().getString(R.string.all_notifications_marked_as_read));
 			mViewButton.setEnabled(false);
 		}
 

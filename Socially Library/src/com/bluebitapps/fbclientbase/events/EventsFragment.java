@@ -95,7 +95,7 @@ public class EventsFragment extends BaseNavigationFragment {
 
 				stopRefreshMenuItemAnimation();
 				if (getActivity() != null) {
-					OutputUtil.showCrouton(getActivity(), "Latest events could not be fetched");
+					OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.latest_events_could_not_be_fetched));
 				}
 			}
 		}
@@ -163,10 +163,6 @@ public class EventsFragment extends BaseNavigationFragment {
 		mLoadingView = (LoadingView) vg.findViewById(R.id.loadingView);
 
 		mListView = (ListView) vg.findViewById(R.id.image_list_view);
-		// TextView padding = new TextView(getActivity());
-		// padding.setHeight(getResources().getDimensionPixelOffset(R.dimen.item_list_padding));
-		// mListView.addHeaderView(padding);
-		// mListView.addFooterView(padding);
 
 		mAdapter = new ItemAdapter();
 
@@ -187,13 +183,14 @@ public class EventsFragment extends BaseNavigationFragment {
 		Log.i("jan16", Logger.getClassAndMethod());
 
 		if (getState() != null && getState().equals(STATE_SEARCH)) {
-			OutputUtil.showCrouton(getActivity(), "Searching for Events");
+			if (getActivity() != null) {
+				OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.searching));
+			}
 			doSearch();
+
 		} else {
 
 			getEventsFromDatabase();
-
-			Log.i("jan16", Logger.getClassAndMethod() + "after events retrieved from db. mEvents.size(): " + mEvents.size());
 
 			if (isFirstDataRequest) {
 
@@ -204,16 +201,14 @@ public class EventsFragment extends BaseNavigationFragment {
 					getActivity().invalidateOptionsMenu();
 				}
 
-				Log.i("jan16", Logger.getClassAndMethod() + "isFirstDataRequest");
-
 				getEventsFromFB();
 
 			} else {
 				if (mEvents.size() < 1) {
-					OutputUtil.showCrouton(getActivity(), "No events available");
+					if (getActivity() != null) {
+						OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.no_search_results_found));
+					}
 				}
-
-				Log.i("jan16", Logger.getClassAndMethod() + "is not first datarequest");
 
 				mLoadingView.setVisibility(View.GONE);
 
@@ -263,12 +258,14 @@ public class EventsFragment extends BaseNavigationFragment {
 		}
 
 		if (getActivity() != null) {
-			String eventWord = mEvents.size() == 1 ? "event" : "events";
+			String eventString = getActivity().getResources().getString(R.string.event_lowercase);
+			String eventsString = getActivity().getResources().getString(R.string.events_lowercase);
+
+			String eventWord = mEvents.size() == 1 ? eventString : eventsString;
 			String str = mEvents.size() + " " + eventWord;
 			getActivity().getActionBar().setSubtitle(str);
 		}
 
-		// mAdapter.notifyDataSetChanged();
 	}
 
 	private void getEventsFromFB() {
@@ -345,10 +342,10 @@ public class EventsFragment extends BaseNavigationFragment {
 
 				if (mEvents.get(position).getStartTime().contains(":")) {
 
-					String startTime = (String) FacebookUtils.convertFacebookEventTimeToRelativeTime(mEvents.get(position).getStartTime());
+					String startTime = (String) FacebookUtils.convertFacebookEventTimeToRelativeTime(mEvents.get(position).getStartTime(), getActivity());
 					holder.startTime.setText(startTime);
 
-					String endTime = (String) FacebookUtils.convertFacebookEventTimeToRelativeTime(mEvents.get(position).getEndTime());
+					String endTime = (String) FacebookUtils.convertFacebookEventTimeToRelativeTime(mEvents.get(position).getEndTime(), getActivity());
 					holder.endTime.setText(endTime);
 				} else {
 					String startTime = (String) FacebookUtils.convertInvitedToEventTimeStamp(mEvents.get(position).getStartTime());
@@ -421,14 +418,15 @@ public class EventsFragment extends BaseNavigationFragment {
 				final ArrayList<Event> tempEvents = new ArrayList<Event>(events);
 
 				if (tempEvents.size() < 1) {
-					OutputUtil.showCrouton(getActivity(), "No search results found");
+					if (getActivity() != null) {
+						OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.no_search_results_found));
+					}
 				} else {
 
 					getActivity().runOnUiThread(new Runnable() {
 
 						@Override
 						public void run() {
-							// TODO Auto-generated method stub
 							mEvents = tempEvents;
 							mAdapter.notifyDataSetChanged();
 							mLoadingView.setVisibility(View.GONE);
@@ -437,38 +435,42 @@ public class EventsFragment extends BaseNavigationFragment {
 				}
 
 			} catch (JSONException e) {
-				OutputUtil.showCrouton(getActivity(), "Search results could not be fetched");
+				if (getActivity() != null) {
+					OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.search_results_could_not_be_fetched));
+				}
 			}
-
 		}
 
 		@Override
 		public void onIOException(IOException e, Object state) {
 			Logger.i("EventsFragment: " + e.toString());
-			OutputUtil.showCrouton(getActivity(), "Search results could not be fetched");
-
+			if (getActivity() != null) {
+				OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.search_results_could_not_be_fetched));
+			}
 		}
 
 		@Override
 		public void onFileNotFoundException(FileNotFoundException e, Object state) {
 			Logger.i("EventsFragment: " + e.toString());
-			OutputUtil.showCrouton(getActivity(), "Search results could not be fetched");
-
+			if (getActivity() != null) {
+				OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.search_results_could_not_be_fetched));
+			}
 		}
 
 		@Override
 		public void onMalformedURLException(MalformedURLException e, Object state) {
 			Logger.i("EventsFragment: " + e.toString());
-			OutputUtil.showCrouton(getActivity(), "Search results could not be fetched");
-
+			if (getActivity() != null) {
+				OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.search_results_could_not_be_fetched));
+			}
 		}
 
 		@Override
 		public void onFacebookError(FacebookError e, Object state) {
 			Logger.i("EventsFragment: " + e.toString());
-			OutputUtil.showCrouton(getActivity(), "Search results could not be fetched");
+			if (getActivity() != null) {
+				OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.search_results_could_not_be_fetched));
+			}
 		}
-
 	}
-
 }

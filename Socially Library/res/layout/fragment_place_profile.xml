@@ -6,7 +6,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">"
+        android:layout_height="wrap_content">
 
         <RelativeLayout
             android:id="@+id/contentRoot"
@@ -106,7 +106,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dip"
                         android:singleLine="false"
-                        android:text="# Likes" />
+                        android:text="@string/number_of_likes" />
 
                     <TextView
                         android:id="@+id/likesCountValue"
@@ -126,7 +126,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dip"
                         android:singleLine="false"
-                        android:text="# talking about this" />
+                        android:text="@string/number_talking_about_this" />
 
                     <TextView
                         android:id="@+id/talkingAboutValue"

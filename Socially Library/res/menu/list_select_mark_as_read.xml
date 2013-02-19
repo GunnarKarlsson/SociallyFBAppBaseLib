@@ -5,6 +5,6 @@
         android:id="@+id/markAsRead"
         android:icon="@drawable/actionbar_mark_as_read"
         android:showAsAction="always"
-        android:title="Mark as read"/>
+        android:title="@string/mark_as_read"/>
 
 </menu>

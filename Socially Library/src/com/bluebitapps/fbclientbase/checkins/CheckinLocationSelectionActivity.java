@@ -94,7 +94,8 @@ public class CheckinLocationSelectionActivity extends BaseThemedActivity impleme
 		/*
 		 * launch a new Thread to get new location
 		 */
-		OutputUtil.showCrouton(CheckinLocationSelectionActivity.this, "Fetching locations...");
+
+		OutputUtil.showCrouton(CheckinLocationSelectionActivity.this, CheckinLocationSelectionActivity.this.getResources().getString(R.string.fetching_locations));
 
 		new Thread() {
 			@Override
@@ -119,17 +120,18 @@ public class CheckinLocationSelectionActivity extends BaseThemedActivity impleme
 					 * GPS not enabled, prompt user to enable GPS in the
 					 * Location menu
 					 */
-					new AlertDialog.Builder(CheckinLocationSelectionActivity.this).setTitle("Enable GPS").setMessage("Enable GPS").setPositiveButton("OK", new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							startActivityForResult(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS), 0);
-						}
-					}).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							CheckinLocationSelectionActivity.this.finish();
-						}
-					}).show();
+					new AlertDialog.Builder(CheckinLocationSelectionActivity.this).setTitle(R.string.enable_gps)
+							.setMessage(R.string.enable_gps).setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									startActivityForResult(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS), 0);
+								}
+							}).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									CheckinLocationSelectionActivity.this.finish();
+								}
+							}).show();
 				}
 				Looper.loop();
 			}
@@ -327,7 +329,7 @@ public class CheckinLocationSelectionActivity extends BaseThemedActivity impleme
 				view = mInflater.inflate(R.layout.image_list_item, null);
 				ViewHolder holder = new ViewHolder();
 				holder.name = (TextView) view.findViewById(R.id.titleText);
-				holder.image = (ImageView)view.findViewById(R.id.image);
+				holder.image = (ImageView) view.findViewById(R.id.image);
 				view.setTag(holder);
 			}
 
@@ -339,18 +341,17 @@ public class CheckinLocationSelectionActivity extends BaseThemedActivity impleme
 			} catch (JSONException e) {
 				holder.name.setText("");
 			}
-			
-			
-			try{
-				if(jsonObject !=null){
+
+			try {
+				if (jsonObject != null) {
 					String token = FBClientApplication.getApplication().getFBConnection().getFacebook().getAccessToken();
 					String imageUrl = "https://graph.facebook.com/" + jsonObject.getString("id") + "/picture?access_token=" + token;
 					getImageLoader().displayImage(imageUrl, holder.image, getImageDisplayOptions());
 				}
-			}catch(JSONException e){
-				
+			} catch (JSONException e) {
+
 			}
-			
+
 			return view;
 		}
 	}
@@ -369,7 +370,7 @@ public class CheckinLocationSelectionActivity extends BaseThemedActivity impleme
 					location.put("latitude", Double.valueOf(loc.getLatitude()));
 					location.put("longitude", Double.valueOf(loc.getLongitude()));
 				} catch (JSONException e) {
-					Logger.i(CheckinLocationSelectionActivity.class.getSimpleName() + "." + MyLocationListener.class.getSimpleName() +"." + e.toString());
+					Logger.i(CheckinLocationSelectionActivity.class.getSimpleName() + "." + MyLocationListener.class.getSimpleName() + "." + e.toString());
 				}
 				mLocationManager.removeUpdates(this);
 				fetchPlaces();
@@ -378,17 +379,17 @@ public class CheckinLocationSelectionActivity extends BaseThemedActivity impleme
 
 		@Override
 		public void onProviderDisabled(String provider) {
-			Logger.i(CheckinLocationSelectionActivity.class.getSimpleName() + "." + MyLocationListener.class.getSimpleName() +"#onProviderDisabled");
+			Logger.i(CheckinLocationSelectionActivity.class.getSimpleName() + "." + MyLocationListener.class.getSimpleName() + "#onProviderDisabled");
 		}
 
 		@Override
 		public void onProviderEnabled(String provider) {
-			Logger.i(CheckinLocationSelectionActivity.class.getSimpleName() + "." + MyLocationListener.class.getSimpleName() +"#onProviderEnabled");
+			Logger.i(CheckinLocationSelectionActivity.class.getSimpleName() + "." + MyLocationListener.class.getSimpleName() + "#onProviderEnabled");
 		}
 
 		@Override
 		public void onStatusChanged(String provider, int status, Bundle extras) {
-			Logger.i(CheckinLocationSelectionActivity.class.getSimpleName() + "." + MyLocationListener.class.getSimpleName() +"#onStatusChanged");
+			Logger.i(CheckinLocationSelectionActivity.class.getSimpleName() + "." + MyLocationListener.class.getSimpleName() + "#onStatusChanged");
 		}
 	}
 

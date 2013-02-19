@@ -74,7 +74,9 @@ public class EventProfileFragment extends BaseNavigationFragment {
 			if (EventInvitationResponseService.RESPONSE_POST_FAIL.equals(intent.getAction())) {
 				stopRefreshMenuItemAnimation();
 				enableAllButtons();
-				OutputUtil.showCrouton(getActivity(), "Response couldn't be sent");
+				if (getActivity() != null) {
+					OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.response_couldnt_be_sent));
+				}
 			}
 		}
 	}
@@ -155,7 +157,7 @@ public class EventProfileFragment extends BaseNavigationFragment {
 		configText(mEndTextView);
 
 		mStatusTextView = (TextView) vg.findViewById(R.id.status);
-		//configText(mStatusTextView);
+		// configText(mStatusTextView);
 
 		mButtons = (ViewGroup) vg.findViewById(R.id.buttons);
 
@@ -206,8 +208,8 @@ public class EventProfileFragment extends BaseNavigationFragment {
 		// }
 
 		// if (!isInvitation) {
-		//mButtons.setVisibility(View.GONE);
-		//mStatusTextView.setText("attending");
+		// mButtons.setVisibility(View.GONE);
+		// mStatusTextView.setText("attending");
 		// }
 		return vg;
 	}
@@ -234,29 +236,6 @@ public class EventProfileFragment extends BaseNavigationFragment {
 		mDeclineBtn.setEnabled(true);
 		mDeclineBtn.setTextColor(color);
 	}
-/*
-	private void setStatus() {
-
-		if (StringUtil.notEmpty(mRequestType)) {
-
-			mButtons.setVisibility(View.GONE);
-
-			String status = "";
-			if (Constants.EVENT_INVITATION_RESPONSE_DECLINE.equals(mRequestType)) {
-				status = "Declined";
-			} else if (Constants.EVENT_INVITATION_RESPONSE_JOIN.equals(mRequestType)) {
-				status = "Joined";
-			} else if (Constants.EVENT_INVITATION_RESPONSE_MAYBE.equals(mRequestType)) {
-				status = "Maybe will join";
-			}
-			mStatusTextView.setVisibility(View.VISIBLE);
-			mStatusTextView.setText(status);
-		} else {
-			// enableAllButtons();
-			OutputUtil.showCrouton(getActivity(), "Response could not be processed");
-		}
-	}
-	*/
 
 	private void respondToEvent(String action) {
 		Log.i("jan30", Logger.getClassAndMethod());
@@ -303,11 +282,6 @@ public class EventProfileFragment extends BaseNavigationFragment {
 		}
 
 		mEvent = event;
-		Log.i("jan30", "event details:");
-		Log.i("jan30", "event id:" + event.getId());
-		Log.i("jan30", "event name: " + event.getName());
-		Log.i("jan30", "mEvent.getName(): " + mEvent.getName());
-		Log.i("jan30", "event.getRsvpStatus(): " + event.getRsvpStatus());
 		if (c != null) {
 			c.close();
 		}
@@ -329,10 +303,10 @@ public class EventProfileFragment extends BaseNavigationFragment {
 
 			if (mEvent.getStartTime().contains(":")) {
 
-				String startTime = (String) FacebookUtils.convertFacebookEventTimeToRelativeTime(mEvent.getStartTime());
+				String startTime = (String) FacebookUtils.convertFacebookEventTimeToRelativeTime(mEvent.getStartTime(), getActivity());
 				mStartTextView.setText(startTime);
 
-				String endTime = (String) FacebookUtils.convertFacebookEventTimeToRelativeTime(mEvent.getEndTime());
+				String endTime = (String) FacebookUtils.convertFacebookEventTimeToRelativeTime(mEvent.getEndTime(), getActivity());
 				mEndTextView.setText(endTime);
 			} else {
 				String startTime = (String) FacebookUtils.convertInvitedToEventTimeStamp(mEvent.getStartTime());
@@ -345,15 +319,23 @@ public class EventProfileFragment extends BaseNavigationFragment {
 		if ("attending".equals(mEvent.getRsvpStatus())) {
 			Log.i("jan30", "pos A");
 			mButtons.setVisibility(View.GONE);
-			String str = "You've joined this event";
-			mStatusTextView.setVisibility(View.VISIBLE);
-			mStatusTextView.setText(str);
-		}else if("maybe".equals(mEvent.getRsvpStatus())){
-			mButtons.setVisibility(View.GONE);
-			mStatusTextView.setText("Maybe you'll join");
-		}else if("declined".equals(mEvent.getRsvpStatus())){
-			mButtons.setVisibility(View.GONE);
-			mStatusTextView.setText("You've declined this event");
+			if (getActivity() != null) {
+				String str = getActivity().getResources().getString(R.string.youve_joined_this_event);
+				mStatusTextView.setVisibility(View.VISIBLE);
+				mStatusTextView.setText(str);
+			}
+		} else if ("maybe".equals(mEvent.getRsvpStatus())) {
+			if (getActivity() != null) {
+				String str = getActivity().getResources().getString(R.string.maybe_youll_join);
+				mButtons.setVisibility(View.GONE);
+				mStatusTextView.setText(str);
+			}
+		} else if ("declined".equals(mEvent.getRsvpStatus())) {
+			if (getActivity() != null) {
+				String str = getActivity().getResources().getString(R.string.youve_declined_this_event);
+				mButtons.setVisibility(View.GONE);
+				mStatusTextView.setText(str);
+			}
 		} else if ("not_replied".equals(mEvent.getRsvpStatus())) {
 			Log.i("jan30", "pos B");
 			mButtons.setVisibility(View.VISIBLE);

@@ -93,9 +93,6 @@ public class MessageThread implements Parcelable {
 
 			if (obj.has("thread_id")) {
 				messageThread.setId(obj.getString("thread_id"));
-				if(obj.getString("thread_id").equals("25733147624219")){					
-					Log.i("chat", "threadId set in message object: " + obj.getString("thread_id"));
-				}
 			}
 
 			if (obj.has("subject")) {
@@ -121,7 +118,6 @@ public class MessageThread implements Parcelable {
 			}
 
 			if (obj.has("updated_time")) {
-				Log.i("jan27", Logger.getClassAndMethod() + obj.getString("updated_time"));
 				messageThread.setUpdatedTime(obj.getString("updated_time"));
 			}
 

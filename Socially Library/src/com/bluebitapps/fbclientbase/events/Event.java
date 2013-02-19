@@ -34,8 +34,6 @@ public class Event {
 	
 	public static Event fromJSON(JSONObject obj){
 		
-		Log.i("jan29", Logger.getClassAndMethod() + obj.toString());
-		
 		Event event= new Event();
 
 		try {
@@ -55,7 +53,6 @@ public class Event {
 				event.setEndTime(obj.getString("end_time"));
 			}
 			if(obj.has("rsvp_status")){
-				Log.i("jan29", "rsvp set in Event instance");
 				event.setRsvpStatus(obj.getString("rsvp_status"));
 			}
 

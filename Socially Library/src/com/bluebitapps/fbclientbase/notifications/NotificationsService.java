@@ -286,9 +286,9 @@ public class NotificationsService extends IntentService {
 
 		String notificationTitle;
 		if (unreadCount > 1) {
-			notificationTitle = unreadCount + " new notifications";
+			notificationTitle = unreadCount + " " + getResources().getString(R.string.new_notifications);
 		} else if (unreadCount == 1) {
-			notificationTitle = "1 new notification";
+			notificationTitle = getResources().getString(R.string.one_new_notification);
 		} else {
 			return;
 		}		
@@ -322,10 +322,10 @@ public class NotificationsService extends IntentService {
 		sendBroadcast(intent);
 
 		NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-		Notification notification = new Notification(com.bluebitapps.fbclientbase.R.drawable.notification_icon_for_notifications_drawer, "Notification!", System.currentTimeMillis());
+		Notification notification = new Notification(com.bluebitapps.fbclientbase.R.drawable.notification_icon_for_notifications_drawer, getResources().getString(R.string.notification), System.currentTimeMillis());
 		Context context = getApplicationContext();
 
-		String notificationText = "Go to Socially to read new notifications";
+		String notificationText = getResources().getString(R.string.go_to_socially_to_read_new_notifications);
 
 		Intent notificationIntent = new Intent(this, MainActivity.class);
 		notificationIntent.setAction(Constants.REQUEST_NOTIFICATIONS);
@@ -336,8 +336,6 @@ public class NotificationsService extends IntentService {
 
 		// if setLastestEventInfo isn't set, notification will not appear.
 		notification.setLatestEventInfo(context, title, notificationText, pendingIntent);
-
-		Log.i("notiftype", "sending notification");
 
 		notificationManager.notify(1, notification);
 	}

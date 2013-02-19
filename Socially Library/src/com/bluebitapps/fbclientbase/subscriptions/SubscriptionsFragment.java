@@ -76,10 +76,6 @@ public class SubscriptionsFragment extends BaseNavigationFragment {
 			vg = ThemeFactory.getViewGroup(getThemeSelection(), getActivity(), inflater, container, R.layout.item_list);
 
 			mListView = (ListView) vg.findViewById(R.id.list);
-			//TextView padding = new TextView(getActivity());
-			//padding.setHeight(getResources().getDimensionPixelOffset(R.dimen.item_list_padding));
-			//mListView.addHeaderView(padding);
-			//mListView.addFooterView(padding);
 			mAdapter = new ItemAdapter();
 			mListView.setAdapter(mAdapter);
 			mListView.setVisibility(View.GONE);
@@ -178,7 +174,7 @@ public class SubscriptionsFragment extends BaseNavigationFragment {
 
 			} catch (JSONException e) {
 				Logger.i(Logger.getClassAndMethod() + e.toString());
-				OutputUtil.showCrouton(getActivity(), "Subscriptions could not be retrieved");
+				OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.data_could_not_be_retrieved));
 				stopRefreshMenuItemAnimation();
 			}
 
@@ -195,10 +191,13 @@ public class SubscriptionsFragment extends BaseNavigationFragment {
 							mSubscriptions.addAll(subscriptions);
 
 							if (mSubscriptions.size() < 1) {
-								OutputUtil.showCrouton(getActivity(), "No subscriptions available");
+								OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.no_subscriptions_available));
 							}
 
-							String subscriptionWord = mSubscriptions.size() == 1 ? "subscription" : "subscription";
+							String subscriptionString = getResources().getString(R.string.subscription_lowercase);
+							String subscriptionsString = getResources().getString(R.string.subscriptions_lowercase);
+							
+							String subscriptionWord = mSubscriptions.size() == 1 ? subscriptionString : subscriptionsString;
 							String str = mSubscriptions.size() + " " + subscriptionWord;
 							getActivity().getActionBar().setSubtitle(str);
 						}
@@ -229,7 +228,7 @@ public class SubscriptionsFragment extends BaseNavigationFragment {
 		@Override
 		public void onIOException(IOException e, Object state) {
 			Logger.i(SubscriptionsFragment.class.getSimpleName() + "." + SubscriptionRequestListener.class.getSimpleName() + "." + e.toString());
-			OutputUtil.showCrouton(getActivity(), "Subscriptions could not be retrieved");
+			OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.data_could_not_be_retrieved));
 			stopRefreshMenuItemAnimation();
 
 		}
@@ -237,21 +236,21 @@ public class SubscriptionsFragment extends BaseNavigationFragment {
 		@Override
 		public void onFileNotFoundException(FileNotFoundException e, Object state) {
 			Logger.i(SubscriptionsFragment.class.getSimpleName() + "." + SubscriptionRequestListener.class.getSimpleName() + "." + e.toString());
-			OutputUtil.showCrouton(getActivity(), "Subscriptions could not be retrieved");
+			OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.data_could_not_be_retrieved));
 			stopRefreshMenuItemAnimation();
 		}
 
 		@Override
 		public void onMalformedURLException(MalformedURLException e, Object state) {
 			Logger.i(SubscriptionsFragment.class.getSimpleName() + "." + SubscriptionRequestListener.class.getSimpleName() + "." + e.toString());
-			OutputUtil.showCrouton(getActivity(), "Subscriptions could not be retrieved");
+			OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.data_could_not_be_retrieved));
 			stopRefreshMenuItemAnimation();
 		}
 
 		@Override
 		public void onFacebookError(FacebookError e, Object state) {
 			Logger.i(SubscriptionsFragment.class.getSimpleName() + "." + SubscriptionRequestListener.class.getSimpleName() + "." + e.toString());
-			OutputUtil.showCrouton(getActivity(), "Subscriptions could not be retrieved");
+			OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.data_could_not_be_retrieved));
 			stopRefreshMenuItemAnimation();
 		}
 	}

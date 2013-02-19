@@ -54,10 +54,10 @@ public class PlaceMapFragment extends BaseNavigationFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setRetainInstance(true);
-		if(getArguments()!=null){			
+		if (getArguments() != null) {
 			setObjectId(getArguments().getString(Constants.OBJECT_ID_KEY));
 			String title = getArguments().getString(Constants.OBJECT_TITLE_KEY);
-			if(StringUtil.notEmpty(title)){
+			if (StringUtil.notEmpty(title)) {
 				setTitle(title);
 			}
 		}
@@ -81,8 +81,8 @@ public class PlaceMapFragment extends BaseNavigationFragment {
 		super.onResume();
 		getCoordinates();
 	}
-	
-	private void getCoordinates(){
+
+	private void getCoordinates() {
 		FBClientApplication app = (FBClientApplication) getActivity().getApplication();
 		PageData data = app.getPageData();
 		Cursor c = data.getPageById(getObjectId());
@@ -104,20 +104,25 @@ public class PlaceMapFragment extends BaseNavigationFragment {
 
 		getMap();
 	}
-	
-	private void getMap(){
-		
+
+	private void getMap() {
+
 		String url;
-		
-		if(mLatitude != null && mLongitude != null){			
-			//example: url = "http://www.google.com/maps?q=37.423156,-122.084917";
-			url = "http://www.google.com/maps?q=" + mLatitude + ","+mLongitude;
-			OutputUtil.showCrouton(getActivity(), "Retrieving map...");
-		}else{
+
+		if (mLatitude != null && mLongitude != null) {
+			// example: url =
+			// "http://www.google.com/maps?q=37.423156,-122.084917";
+			url = "http://www.google.com/maps?q=" + mLatitude + "," + mLongitude;
+			if (getActivity() != null) {
+				OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.retrieving_map));
+			}
+		} else {
 			url = "http://www.google.com/maps";
-			OutputUtil.showCrouton(getActivity(), "Location coordinates not available");
+			if (getActivity() != null) {
+				OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.location_coordinates_not_available));
+			}
 		}
-		
+
 		mWebView.loadUrl(url);
 	}
 

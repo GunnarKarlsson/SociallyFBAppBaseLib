@@ -85,11 +85,10 @@ public class NewsFeedFragment extends BaseNavigationFragment {
 		public void onReceive(Context context, Intent intent) {
 
 			Logger.i(NewsFeedFragment.class.getSimpleName() + "." + DataUpdateReceiver.class.getSimpleName());
-			Log.i("feb7", Logger.getClassAndMethod() + "onReceive intent");
 
 			if (NewsFeedService.REFRESH_NEWSFEED_DATA_FAIL.equals(intent.getAction())) {
 				Logger.i(NewsFeedFragment.class.getSimpleName() + "." + DataUpdateReceiver.class.getSimpleName() + "." + NewsFeedService.REFRESH_NEWSFEED_DATA_FAIL);
-				OutputUtil.showCrouton(getActivity(), "Data could not be retrieved");
+				OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.data_could_not_be_retrieved));
 
 				if (isFirstDataRequest) {
 					isFirstDataRequest = false;
@@ -186,7 +185,7 @@ public class NewsFeedFragment extends BaseNavigationFragment {
 		if (StringUtil.notEmpty(title)) {
 			setTitle(title);
 		} else {
-			setTitle("Newsfeed");
+			setTitle(getResources().getString(R.string.newsfeed_menu_item));
 		}
 
 	}
@@ -197,7 +196,7 @@ public class NewsFeedFragment extends BaseNavigationFragment {
 		ViewGroup vg = null;
 
 		if (getActivity() != null) {
-			Log.i("jan17nf" , Logger.getClassAndMethod() + "getActivity() != null");
+			Log.i("jan17nf", Logger.getClassAndMethod() + "getActivity() != null");
 
 			vg = ThemeFactory.getViewGroup(getThemeSelection(), getActivity(), inflater, container, R.layout.item_list_pull_to_refresh);
 
@@ -253,7 +252,6 @@ public class NewsFeedFragment extends BaseNavigationFragment {
 			}
 		}
 
-		Log.i("feb7", "willRefreshOnStart: " + willRefreshOnStart);
 
 		if (mDataUpdateReceiver == null) {
 			mDataUpdateReceiver = new DataUpdateReceiver();
@@ -276,7 +274,6 @@ public class NewsFeedFragment extends BaseNavigationFragment {
 	@Override
 	public void onPause() {
 		super.onPause();
-		Log.i("jan17nf", Logger.getClassAndMethod());
 		if (mDataUpdateReceiver != null && getActivity() != null) {
 			getActivity().unregisterReceiver(mDataUpdateReceiver);
 			// An activity can be resumed after pausing, so the activity may not
@@ -286,7 +283,6 @@ public class NewsFeedFragment extends BaseNavigationFragment {
 	}
 
 	private void startNewsFeedService() {
-		Log.i("jan17nf", Logger.getClassAndMethod());
 		Logger.i(NewsFeedFragment.class.getSimpleName() + "#startNewsFeedService()");
 		Logger.i("mUserId: " + mUserId);
 		Logger.i("mState:" + mState);
@@ -299,7 +295,6 @@ public class NewsFeedFragment extends BaseNavigationFragment {
 	}
 
 	private void startNewsfeedServiceForOlderPosts() {
-		Log.i("jan17nf", Logger.getClassAndMethod());
 		Log.i("nftest", Logger.getClassAndMethod());
 		Intent intent = new Intent(getActivity(), NewsFeedService.class);
 		intent.putExtra(Constants.USER_ID_KEY, mUserId);
@@ -342,7 +337,7 @@ public class NewsFeedFragment extends BaseNavigationFragment {
 			if (getActivity() != null) {
 				getActivity().invalidateOptionsMenu();
 			}
-			
+
 			if (mNewsFeedItems.size() < 1) {
 				startRefreshMenuItemAnimation();
 				startNewsFeedService();
@@ -352,7 +347,7 @@ public class NewsFeedFragment extends BaseNavigationFragment {
 					Log.i("feb7", "startNewsFeedService");
 					startRefreshMenuItemAnimation();
 					startNewsFeedService();
-				}else{
+				} else {
 					Log.i("feb7", "stop animation");
 					stopRefreshMenuItemAnimation();
 				}
@@ -361,7 +356,7 @@ public class NewsFeedFragment extends BaseNavigationFragment {
 		} else {
 			Log.i("jan21", Logger.getClassAndMethod() + "isFirstDataRequest == false");
 			if (mNewsFeedItems.size() < 1) {
-				OutputUtil.showCrouton(getActivity(), "No newsfeed posts available");
+				OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.no_newsfeed_posts_available));
 			}
 			mLoadingView.setVisibility(View.GONE);
 			if (getActivity() != null) {
@@ -372,7 +367,6 @@ public class NewsFeedFragment extends BaseNavigationFragment {
 	}
 
 	private void getNewsFeedFromDatabase() {
-		Log.i("jan17nf", Logger.getClassAndMethod());
 		Cursor c;
 
 		if (mState == Constants.STATE_PROFILE) {
@@ -414,7 +408,6 @@ public class NewsFeedFragment extends BaseNavigationFragment {
 	}
 
 	private void getOlderNewsFeed() {
-		Log.i("jan17nf", Logger.getClassAndMethod());
 
 		getOlderNewsFeedFromDatabase();
 		mListView.onRefreshComplete();
@@ -430,8 +423,6 @@ public class NewsFeedFragment extends BaseNavigationFragment {
 			c = ((FBClientApplication) getActivity().getApplication()).getNewsFeedData(NewsFeedData.REQUEST_NEWSFEED_OLDER_FROM_DB).getPostsByUserId(mUserId);
 		}
 
-		int testCounter = 0;
-
 		if (c != null) {
 			try {
 
@@ -441,17 +432,15 @@ public class NewsFeedFragment extends BaseNavigationFragment {
 						NewsFeedItem item = new NewsFeedItem();
 						item.set(c);
 						mNewsFeedItems.add(item);
-						testCounter++;
-						// Log.i("nftest", "items added: " + testCounter);
 
 					} while (c.moveToNext());
 				}
 			} catch (SQLiteMisuseException e) {
 				Logger.i(NewsFeedFragment.class.getSimpleName() + "#getNewsFeed" + ": " + e.toString());
-				OutputUtil.showCrouton(getActivity(), "Older posts could not be retrieved");
+				OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.older_posts_could_not_be_retrieved));
 			} catch (SQLiteException e) {
 				Logger.i(NewsFeedFragment.class.getSimpleName() + "#getNewsFeed" + ": " + e.toString());
-				OutputUtil.showCrouton(getActivity(), "Older posts could not be retrieved");
+				OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.older_posts_could_not_be_retrieved));
 			}
 		} else {
 			return;
@@ -560,20 +549,16 @@ public class NewsFeedFragment extends BaseNavigationFragment {
 			holder.createdTime = (TextView) view.findViewById(R.id.createdTime);
 			configFromText(holder.createdTime);
 
-			// holder.name = (TextView)
-			// view.findViewById(R.id.newsFeedItemName);
 			holder.fromPicture = (ImageView) view.findViewById(R.id.fromPicture);
 		}
 
 		private void setFromHeaderValues(NewsFeedItem item, ViewHolder holder) {
 			holder.fromName.setText(Html.fromHtml(FacebookUtils.getFromStringForNewsFeedItem(item)));
-			holder.createdTime.setText(Html.fromHtml(FacebookUtils.getCreatedTimeInNewsFeed(item)));
+			holder.createdTime.setText(Html.fromHtml(FacebookUtils.getCreatedTimeInNewsFeed(item,getActivity())));
 			getImageLoader().displayImage(item.getProfilePicture(), holder.fromPicture, getImageDisplayOptions());
 		}
 
 		private void setActionFooterReferences(View view, ViewHolder holder) {
-			// holder.actions = (ViewGroup)
-			// view.findViewById(R.id.actionsFooter);
 			holder.likeButton = (Button) view.findViewById(R.id.likeButton);
 			holder.commentsButton = (Button) view.findViewById(R.id.commentButton);
 			holder.likesCount = (TextView) view.findViewById(R.id.likeCount);
@@ -603,9 +588,9 @@ public class NewsFeedFragment extends BaseNavigationFragment {
 			}
 
 			if (StringUtil.notEmpty(item.getUserLikes()) && item.getUserLikes().equalsIgnoreCase(Constants.TRUE)) {
-				holder.likeButton.setText("Unlike");
+				holder.likeButton.setText(R.string.unlike_on_button);
 			} else {
-				holder.likeButton.setText("Like");
+				holder.likeButton.setText(R.string.like_on_button);
 			}
 
 			holder.likeButton.setOnClickListener(new OnClickListener() {
@@ -712,15 +697,21 @@ public class NewsFeedFragment extends BaseNavigationFragment {
 					int end = tag.getOffset() + tag.getLength();
 					Logger.i("offset" + tag.getOffset());
 					Logger.i("end: " + end);
-					spans.setSpan(clickSpan, tag.getOffset(), end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+					try {
+						spans.setSpan(clickSpan, tag.getOffset(), end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+					} catch (IndexOutOfBoundsException e) {
+						// TODO Handle
+					}
 				}
 			}
 
-			if (holder.message != null && holder.message.getText() != null && holder.message.getText().toString().contains("are now friends")) {
+			String areNowFriendsString = getResources().getString(R.string.are_now_friends_forbibben_string);
+			if (holder.message != null && holder.message.getText() != null && holder.message.getText().toString().contains(areNowFriendsString)) {
 				holder.storyBox.setVisibility(View.GONE);
 			}
 
-			if (holder.message != null && holder.message.getText() != null && holder.message.getText().toString().contains("is going to an event")) {
+			String isGoingToAnEventString = getResources().getString(R.string.is_going_to_an_event_forbidden_string);
+			if (holder.message != null && holder.message.getText() != null && holder.message.getText().toString().contains(isGoingToAnEventString)) {
 				holder.storyBox.setVisibility(View.GONE);
 			}
 
@@ -834,7 +825,11 @@ public class NewsFeedFragment extends BaseNavigationFragment {
 					int end = tag.getOffset() + tag.getLength();
 					Logger.i("offset" + tag.getOffset());
 					Logger.i("end: " + end);
-					spans.setSpan(clickSpan, tag.getOffset(), end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+					try {
+						spans.setSpan(clickSpan, tag.getOffset(), end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+					} catch (IndexOutOfBoundsException e) {
+
+					}
 				}
 			}
 
@@ -921,7 +916,11 @@ public class NewsFeedFragment extends BaseNavigationFragment {
 						int end = tag.getOffset() + tag.getLength();
 						Logger.i("offset" + tag.getOffset());
 						Logger.i("end: " + end);
+						try{
 						spans.setSpan(clickSpan, tag.getOffset(), end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+						}catch(IndexOutOfBoundsException e){
+							
+						}
 					}
 				}
 			}

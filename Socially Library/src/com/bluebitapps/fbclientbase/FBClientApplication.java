@@ -16,10 +16,9 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.preference.PreferenceManager;
 
-import com.bluebitapps.fbclientbase.R;
-import com.bluebitapps.fbclientbase.account.AccountData;
 import com.bluebitapps.fbclientbase.albums.AlbumsData;
 import com.bluebitapps.fbclientbase.chat.SASLXFacebookPlatformMechanism;
 import com.bluebitapps.fbclientbase.checkins.CheckinsData;
@@ -51,7 +50,6 @@ public class FBClientApplication extends Application implements OnSharedPreferen
 
 	private NotificationsData mNotificationsData;
 	private AlbumsData mAlbumsData;
-	private AccountData mAccountData;
 	private EventsData mEventsData;
 	private GroupsData mGroupsData;
 	private MessageThreadData mMessagesData;
@@ -65,6 +63,15 @@ public class FBClientApplication extends Application implements OnSharedPreferen
 	private boolean hasLocationFeature = true;
 
 	private static XMPPConnection mXmppConnection;
+	
+	public boolean isEnglish(){
+		Configuration conf = getResources().getConfiguration();
+		if(conf.locale.toString().contains("en")){
+			return true;
+		}
+		
+		return false;
+	}
 	
 	public boolean hasKindleFeatureSet(){
 		return !hasCameraFeature && !hasLocationFeature;
@@ -154,13 +161,6 @@ public class FBClientApplication extends Application implements OnSharedPreferen
 			mMessagesData = new MessageThreadData(this);
 		}
 		return mMessagesData;
-	}
-
-	public AccountData getAccountData() {
-		if (mAccountData == null) {
-			mAccountData = new AccountData(this);
-		}
-		return mAccountData;
 	}
 
 	public GroupsData getGroupsData() {

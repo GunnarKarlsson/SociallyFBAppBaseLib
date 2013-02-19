@@ -74,7 +74,7 @@ public class PostStatusUpdateActivity extends BaseThemedActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 
-		menu.add("Post").setTitle("Post").setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		menu.add(getResources().getString(R.string.post)).setTitle(R.string.post).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
 		return true;//
 	}
@@ -90,29 +90,29 @@ public class PostStatusUpdateActivity extends BaseThemedActivity {
 			return true;
 		}
 
-		if (item.getTitle().toString().equalsIgnoreCase("Post")) {
+		if (item.getTitle().toString().equalsIgnoreCase(getResources().getString(R.string.post))) {
 			Logger.i(PostStatusUpdateActivity.class.getSimpleName() + "onOptionsItemSelected" + "Post");
 
 			if (!StringUtil.notEmpty(mMessageEditText.getText().toString())) {
-				OutputUtil.showCrouton(this, "Enter a message before you post");
+				OutputUtil.showCrouton(this, getResources().getString(R.string.enter_a_message));
 				return false;
 			}
 
 			// Crouton.makeText(this, "Posting your status update",
 			// Style.INFO).show();
-			OutputUtil.showCrouton(this, "You'll receive a notification when your status has been posted");
-			OutputUtil.showCrouton(this, "Returning to previous screen...");
+			OutputUtil.showCrouton(this, getResources().getString(R.string.youll_receive_a_notification_when_your_message_has_been_posted));
+			OutputUtil.showCrouton(this, getResources().getString(R.string.returning_to_previous_screen));
 
 			String selection = mPrivacySpinner.getSelectedItem().toString();
 			String privacySetting = "";
 
 			Log.i("feb6", Logger.getClassAndMethod() + selection);
 			
-			if ("Everyone".equalsIgnoreCase(selection)) {
+			if (getResources().getString(R.string.everyone).equalsIgnoreCase(selection)) {
 				privacySetting = "EVERYONE";
-			} else if ("Friend of friends".equalsIgnoreCase(selection)) {
+			} else if (getResources().getString(R.string.friends_of_friends).equalsIgnoreCase(selection)) {
 				privacySetting = "FRIENDS_OF_FRIENDS";
-			} else if ("Myself".equalsIgnoreCase(selection)) {
+			} else if (getResources().getString(R.string.myself).equalsIgnoreCase(selection)) {
 				privacySetting = "SELF";
 			} else {
 				privacySetting = "ALL_FRIENDS";

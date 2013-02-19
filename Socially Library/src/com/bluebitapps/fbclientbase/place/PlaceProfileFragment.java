@@ -55,7 +55,7 @@ import com.bluebitapps.fbclientbase.theme.ThemeFactory;
 import de.neofonie.mobile.app.android.widget.crouton.Crouton;
 import de.neofonie.mobile.app.android.widget.crouton.Style;
 
-public class PlaceProfileFragment extends BaseNavigationFragment{
+public class PlaceProfileFragment extends BaseNavigationFragment {
 
 	private PlaceProfileUpdateReceiver mDataUpdateReceiver;
 	private LoadingView mLoadingView;
@@ -78,7 +78,7 @@ public class PlaceProfileFragment extends BaseNavigationFragment{
 
 			if (PlaceService.REFRESH_PLACE_DATA_FAIL.equals(intent.getAction())) {
 				Logger.i(Logger.getClassAndMethod() + PlaceService.REFRESH_PLACE_DATA_FAIL);
-				OutputUtil.showCrouton(getActivity(), "Place profile could not be refreshed");
+				OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.data_could_not_be_refreshed));
 			}
 		}
 	}
@@ -125,16 +125,16 @@ public class PlaceProfileFragment extends BaseNavigationFragment{
 
 		isFirstDataRequest = true;
 		Bundle bundle = getArguments();
-		
-		if(bundle!=null){			
+
+		if (bundle != null) {
 			setObjectId(bundle.getString(Constants.OBJECT_ID_KEY));
-			if(bundle.getString(Constants.OBJECT_TITLE_KEY)!=null){
+			if (bundle.getString(Constants.OBJECT_TITLE_KEY) != null) {
 				setTitle(bundle.getString(Constants.OBJECT_TITLE_KEY));
-			}else{
-				setTitle("Place Profile");
+			} else {
+				setTitle(getResources().getString(R.string.place_profile));
 			}
 		}
-	
+
 		Log.i("jan9", "objectId: " + getObjectId());
 		setHasOptionsMenu(true);
 	}
@@ -166,10 +166,10 @@ public class PlaceProfileFragment extends BaseNavigationFragment{
 
 	private void getProfile() {
 
-		if(getActivity()==null){
+		if (getActivity() == null) {
 			return;
 		}
-		
+
 		FBClientApplication app = (FBClientApplication) getActivity().getApplication();
 		PageData data = app.getPageData();
 		Cursor c = data.getPageById(getObjectId());
@@ -208,11 +208,11 @@ public class PlaceProfileFragment extends BaseNavigationFragment{
 				Intent intent = new Intent(getActivity(), PlaceService.class);
 				intent.putExtra(Constants.OBJECT_ID_KEY, getObjectId());
 				Logger.i(Logger.getClassAndMethod() + " getObjectId(): " + getObjectId());
-				if(getActivity()!=null){					
+				if (getActivity() != null) {
 					getActivity().startService(intent);
 				}
 			} else {
-				OutputUtil.showCrouton(getActivity(), "The place profile isn't available via mobile");
+				OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.data_not_available));
 			}
 		}
 	}
@@ -220,7 +220,7 @@ public class PlaceProfileFragment extends BaseNavigationFragment{
 	private void setLayout() {
 
 		if (StringUtil.notEmpty(mPlace.getName())) {
-			TextView name = (TextView)mRootView.findViewById(R.id.nameValue);
+			TextView name = (TextView) mRootView.findViewById(R.id.nameValue);
 			name.setText(mPlace.getName());
 			configText(name);
 		} else {
@@ -228,7 +228,7 @@ public class PlaceProfileFragment extends BaseNavigationFragment{
 		}
 
 		if (StringUtil.notEmpty(mPlace.getDescription())) {
-			TextView description = (TextView)mRootView.findViewById(R.id.descriptionValue);
+			TextView description = (TextView) mRootView.findViewById(R.id.descriptionValue);
 			description.setText(mPlace.getDescription());
 			configText(description);
 		} else {
@@ -246,8 +246,6 @@ public class PlaceProfileFragment extends BaseNavigationFragment{
 		} else {
 			((TableRow) mRootView.findViewById(R.id.country)).setVisibility(View.GONE);
 		}
-
-		
 
 		String token = getApplication().getFBConnection().getFacebook().getAccessToken();
 		String query = "https://graph.facebook.com/" + mPlace.getId() + "/picture?width=600&height=600&access_token=" + token;

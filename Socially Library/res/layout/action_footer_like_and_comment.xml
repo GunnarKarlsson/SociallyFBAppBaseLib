@@ -40,7 +40,7 @@
             android:background="@drawable/custom_button"
             android:text="@string/comment"
             android:textColor="#222222"
-            android:textSize="12dp" />
+            android:textSize="12sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -74,7 +74,7 @@
             android:layout_height="28dip"
             android:background="@drawable/custom_button"
             android:textColor="#222222"
-            android:textSize="12dp" />
+            android:textSize="12sp" />
     </LinearLayout>
 
 </LinearLayout>

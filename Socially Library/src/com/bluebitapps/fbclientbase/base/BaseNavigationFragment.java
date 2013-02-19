@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -169,36 +170,29 @@ public class BaseNavigationFragment extends BaseFragment {
 		// Can't handle this in the activity since then onOptionsItemSelected in
 		// the fragment doesn't get called.
 		if (item.getItemId() == android.R.id.home && getActivity() != null) {
-
 			getActivity().finish();
-			// getActivity().overridePendingTransition(R.anim.slide_in_left,
-			// R.anim.slide_out_right);
 		}
 
-		if (item.getTitle().toString().equals("Refresh")) {
+		if (getActivity() != null && item.getTitle().toString().equalsIgnoreCase(getActivity().getResources().getString(R.string.refresh))) {
 			setIsRefreshing(true);
 			item.setActionView(R.layout.action_bar_indeterminate_progress);
-
 			onRefresh();
 			return true;
-		} else if (item.getTitle().toString().equalsIgnoreCase("Post status update or link") && getActivity() != null) {
+		} else if (getActivity() != null && item.getTitle().toString().equalsIgnoreCase(getActivity().getResources().getString(R.string.post_status_update_or_link))) {
 			getActivity().startActivity(new Intent(getActivity(), PostStatusUpdateActivity.class));
 			return true;
-		} else if (item.getTitle().toString().equals("Checkin") && getActivity() != null) {
+		} else if (getActivity() != null && item.getTitle().toString().equalsIgnoreCase(getActivity().getResources().getString(R.string.checkin))) {
 			getActivity().startActivity(new Intent(getActivity(), CheckinLocationSelectionActivity.class));
-
 			return true;
-		} else if (item.getTitle().toString().equals("Upload from Gallery")) {
-			Log.i("jan23", Logger.getClassAndMethod() + "item == upload from gallery");
+		} else if (getActivity() != null && item.getTitle().toString().equalsIgnoreCase(getActivity().getResources().getString(R.string.upload_from_gallery))) {
 			Intent intent = new Intent();
 			intent.setType("image/*");
 			intent.setAction(Intent.ACTION_GET_CONTENT);
 			if (getActivity() != null) {
-				getActivity().startActivityForResult(Intent.createChooser(intent, "Pick Gallery"), PICK_EXISTING_PHOTO_RESULT_CODE);
+				getActivity().startActivityForResult(Intent.createChooser(intent, getActivity().getResources().getString(R.string.pick_gallery)), PICK_EXISTING_PHOTO_RESULT_CODE);
 			}
 			return true;
-		} else if (item.getTitle().toString().equals("Snapshot + Upload") && getActivity() != null) {
-
+		} else if (getActivity() != null && item.getTitle().toString().equals(getActivity().getResources().getString(R.string.snapshot_and_upload))) {
 			String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 			ContentValues values = new ContentValues();
 			values.put(MediaStore.Images.Media.TITLE, "IMG_" + timeStamp + ".jpg");
@@ -210,22 +204,17 @@ public class BaseNavigationFragment extends BaseFragment {
 
 			startActivityForResult(intent, TAKE_PICTURE_WITH_CAMERA_RESULT_CODE);
 			return true;
-		} else if (item.getTitle().toString().equalsIgnoreCase("text style")) {
+		} else if (getActivity() != null && item.getTitle().toString().equalsIgnoreCase(getActivity().getResources().getString(R.string.text_style))) {
 			if (getActivity() != null) {
-				// Launch TextSettingsFragment.
-				// TODO: has to be managed by SectionManager to avoid bugs with
-				// tabs.
-
-				TextSettingsFragment fragment = new TextSettingsFragment();
-				android.app.FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
-				ft.addToBackStack(null);
-				ft.replace(android.R.id.content, fragment).commit();
-
-				/*
-				 * Intent intent = new Intent(getActivity(),
-				 * TextSettingsActivity.class);
-				 * getActivity().startActivity(intent);
-				 */
+				//Kindle test crash ANFE
+				try {
+					TextSettingsFragment fragment = new TextSettingsFragment();
+					android.app.FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
+					ft.addToBackStack(null);
+					ft.replace(android.R.id.content, fragment).commit();
+				} catch (ActivityNotFoundException e) {
+					//TODO: handle
+				}
 				return true;
 			} else {
 				return false;
@@ -267,8 +256,6 @@ public class BaseNavigationFragment extends BaseFragment {
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		Log.i("jan23", BaseNavigationFragment.class.getSimpleName() + "#onActivityResult(): resultCode " + resultCode + ", Activity.RESULT_OK:" + Activity.RESULT_OK);
-		Logger.i("RequestCode: " + requestCode);
 		switch (requestCode) {
 
 		case PICK_EXISTING_PHOTO_RESULT_CODE:
@@ -288,7 +275,6 @@ public class BaseNavigationFragment extends BaseFragment {
 					}
 
 				} catch (IOException e) {
-					Log.i("jan23", Logger.getClassAndMethod() + e);
 					Logger.i(e.toString());
 				}
 
@@ -325,7 +311,6 @@ public class BaseNavigationFragment extends BaseFragment {
 	}
 
 	private void startUploadActivity(Bitmap bitmap, Uri uri) {
-		Log.i("jan23", Logger.getClassAndMethod());
 		if (getActivity() != null) {
 			Intent intent = new Intent(getActivity(), UploadPhotoActivity.class);
 			intent.putExtra(UploadPhotoActivity.IMAGE_URI_KEY, uri);

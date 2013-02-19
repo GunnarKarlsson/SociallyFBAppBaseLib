@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/picker"
         android:layout_below="@id/svbar"
-        android:text="Set color as background"
+        android:text="@string/set_color_as_background"
         android:padding="10dip"
         />
 

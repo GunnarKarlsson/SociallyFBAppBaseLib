@@ -27,6 +27,7 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceFragment;
 import android.util.Log;
 
+import com.bluebitapps.fbclientbase.R;
 import com.bluebitapps.fbclientbase.debug.Logger;
 import com.bluebitapps.utils.OutputUtil;
 
@@ -72,7 +73,7 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 			if (getActivity().getActionBar() != null) {
 				//getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
 				getActivity().getActionBar().setDisplayShowTitleEnabled(true);
-				getActivity().getActionBar().setTitle("Settings");
+				getActivity().getActionBar().setTitle(R.string.settings_menu_item);
 				getActivity().getActionBar().setSubtitle(null);
 			}
 		}

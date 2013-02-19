@@ -453,9 +453,9 @@ public class BaseSlidingMenuActivity extends SlidingFragmentActivity implements 
 				return;
 			}
 			
-			new AlertDialog.Builder(BaseSlidingMenuActivity.this).setIcon(android.R.drawable.ic_dialog_alert).setTitle("Logout")
-					.setMessage("Do you want to logout from Socially. Next time you use Socially, you'll have to enter username and password.")
-					.setPositiveButton("Logout", new DialogInterface.OnClickListener() {
+			new AlertDialog.Builder(BaseSlidingMenuActivity.this).setIcon(android.R.drawable.ic_dialog_alert).setTitle(getResources().getString(R.string.logout))
+					.setMessage(getResources().getString(R.string.do_you_want_to_logout))
+					.setPositiveButton(getResources().getString(R.string.logout), new DialogInterface.OnClickListener() {
 
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
@@ -616,31 +616,6 @@ public class BaseSlidingMenuActivity extends SlidingFragmentActivity implements 
 			startActivity(intent);
 			break;
 		}
-		// switch (requestCode) {
-
-		/*
-		 * if this is the result for a photo picker from the gallery, upload the
-		 * image after scaling it. You can use the Utility.scaleImage() function
-		 * for scaling
-		 */
-		/*
-		 * case BaseNavigationFragment.PICK_EXISTING_PHOTO_RESULT_CODE: if
-		 * (resultCode == Activity.RESULT_OK) { Uri photoUri = data.getData();
-		 * if (photoUri != null) { Log.i(TAG, "Photo selected from Gallery");
-		 * Crouton.makeText(this, "Image selected from gallery.",
-		 * Style.INFO).show();
-		 * 
-		 * } else { Crouton.makeText(this,
-		 * "Error selecting image from the gallery.", Style.INFO).show(); } }
-		 * else { Crouton.makeText(this, "No image selected for upload.",
-		 * Style.INFO).show(); } break;
-		 * 
-		 * case BaseNavigationFragment.TAKE_PICTURE_WITH_CAMERA_RESULT_CODE:
-		 * if(resultCode == Activity.RESULT_OK){ Crouton.makeText(this,
-		 * "Image taken with camera", Style.INFO); }
-		 * 
-		 * break; }
-		 */
 	}
 
 	/**
@@ -669,8 +644,8 @@ public class BaseSlidingMenuActivity extends SlidingFragmentActivity implements 
 
 	private void showDialog() {
 
-		new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_dialog_alert).setTitle("Quit App").setMessage("Do you want to exit Socially")
-				.setPositiveButton("Exit", new DialogInterface.OnClickListener() {
+		new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_dialog_alert).setTitle(getResources().getString(R.string.quit_app)).setMessage(getResources().getString(R.string.do_you_want_to_exit_socially))
+				.setPositiveButton(getResources().getString(R.string.exit), new DialogInterface.OnClickListener() {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -678,7 +653,7 @@ public class BaseSlidingMenuActivity extends SlidingFragmentActivity implements 
 						BaseSlidingMenuActivity.this.finish();
 					}
 
-				}).setNegativeButton("Stay", null).show();
+				}).setNegativeButton(getResources().getString(R.string.stay), null).show();
 	}
 
 }

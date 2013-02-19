@@ -352,11 +352,11 @@ public class SectionManager {
 					NewsFeedFragment newsFeedFragment = NewsFeedFragment.newInstance(userId, Constants.STATE_PROFILE, null, false);
 					newsFeedFragment.setRetainInstance(true);
 
-					ActionBar.Tab tab = mActionBar.newTab().setText("Profile").setTabListener(new CustomTabListener<PageFragment>(pageFragment));
+					ActionBar.Tab tab = mActionBar.newTab().setText(mActivity.getResources().getString(R.string.profile)).setTabListener(new CustomTabListener<PageFragment>(pageFragment));
 					mActionBar.addTab(tab);
-					tab = mActionBar.newTab().setText("Wall").setTabListener(new CustomTabListener<NewsFeedFragment>(newsFeedFragment));
+					tab = mActionBar.newTab().setText(mActivity.getResources().getString(R.string.wall)).setTabListener(new CustomTabListener<NewsFeedFragment>(newsFeedFragment));
 					mActionBar.addTab(tab);
-					tab = mActionBar.newTab().setText("Photos").setTabListener(new CustomTabListener<AlbumsFragment>(albumsFragment));
+					tab = mActionBar.newTab().setText(mActivity.getResources().getString(R.string.photos)).setTabListener(new CustomTabListener<AlbumsFragment>(albumsFragment));
 					mActionBar.addTab(tab);
 
 					mActionBar.setSelectedNavigationItem(mSelectedTabIndex);
@@ -415,9 +415,9 @@ public class SectionManager {
 					AboutFragment licenseFragment = AboutFragment.newInstance(AboutFragment.STATE_LICENSE);
 					licenseFragment.setRetainInstance(true);
 
-					ActionBar.Tab tab = mActionBar.newTab().setText("About").setTabListener(new CustomTabListener<AboutFragment>(aboutFragment));
+					ActionBar.Tab tab = mActionBar.newTab().setText(mActivity.getResources().getString(R.string.about)).setTabListener(new CustomTabListener<AboutFragment>(aboutFragment));
 					mActionBar.addTab(tab);
-					tab = mActionBar.newTab().setText("License").setTabListener(new CustomTabListener<AboutFragment>(licenseFragment));
+					tab = mActionBar.newTab().setText(mActivity.getResources().getString(R.string.license)).setTabListener(new CustomTabListener<AboutFragment>(licenseFragment));
 					mActionBar.addTab(tab);
 
 					mActionBar.setSelectedNavigationItem(mSelectedTabIndex);
@@ -445,9 +445,9 @@ public class SectionManager {
 					NearbyPlacesFragment nearbyPlacesFragment = new NearbyPlacesFragment();
 					nearbyPlacesFragment.setRetainInstance(true);
 
-					ActionBar.Tab tab = mActionBar.newTab().setText("Friends' recent").setTabListener(new CustomTabListener<CheckinsFragment>(friendsCheckinsFragment));
+					ActionBar.Tab tab = mActionBar.newTab().setText(mActivity.getResources().getString(R.string.friends_recent)).setTabListener(new CustomTabListener<CheckinsFragment>(friendsCheckinsFragment));
 					mActionBar.addTab(tab);
-					tab = mActionBar.newTab().setText("Nearby").setTabListener(new CustomTabListener<NewsFeedFragment>(nearbyPlacesFragment));
+					tab = mActionBar.newTab().setText(mActivity.getResources().getString(R.string.nearby)).setTabListener(new CustomTabListener<NewsFeedFragment>(nearbyPlacesFragment));
 					mActionBar.addTab(tab);
 
 					mActionBar.setSelectedNavigationItem(mSelectedTabIndex);
@@ -476,11 +476,11 @@ public class SectionManager {
 					GroupMembersFragment membersFragment = GroupMembersFragment.newInstance(groupId, title, false);
 					membersFragment.setRetainInstance(true);
 
-					ActionBar.Tab tab = mActionBar.newTab().setText("Info").setTabListener(new CustomTabListener<ProfileFragment>(profileFragment));
+					ActionBar.Tab tab = mActionBar.newTab().setText(mActivity.getResources().getString(R.string.info)).setTabListener(new CustomTabListener<ProfileFragment>(profileFragment));
 					mActionBar.addTab(tab);
-					tab = mActionBar.newTab().setText("Wall").setTabListener(new CustomTabListener<NewsFeedFragment>(wallFragment));
+					tab = mActionBar.newTab().setText(mActivity.getResources().getString(R.string.wall)).setTabListener(new CustomTabListener<NewsFeedFragment>(wallFragment));
 					mActionBar.addTab(tab);
-					tab = mActionBar.newTab().setText("Members").setTabListener(new CustomTabListener<GroupMembersFragment>(membersFragment));
+					tab = mActionBar.newTab().setText(mActivity.getResources().getString(R.string.members)).setTabListener(new CustomTabListener<GroupMembersFragment>(membersFragment));
 					mActionBar.addTab(tab);
 
 					mActionBar.setSelectedNavigationItem(mSelectedTabIndex);
@@ -514,7 +514,7 @@ public class SectionManager {
 				@Override
 				public void run() {
 					mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-					mActionBar.setTitle("Your Profile");// TODO change to any
+					mActionBar.setTitle(mActivity.getResources().getString(R.string.your_profile));// TODO change to any
 														// users name
 
 					ProfileFragment profileFragment = ProfileFragment.newInstance(userId, Constants.STATE_PROFILE, null, false);
@@ -524,11 +524,11 @@ public class SectionManager {
 					NewsFeedFragment newsFeedFragment = NewsFeedFragment.newInstance(userId, Constants.STATE_PROFILE, null, false);
 					newsFeedFragment.setRetainInstance(true);
 
-					ActionBar.Tab tab = mActionBar.newTab().setText("Profile").setTabListener(new CustomTabListener<ProfileFragment>(profileFragment));
+					ActionBar.Tab tab = mActionBar.newTab().setText(mActivity.getResources().getString(R.string.profile)).setTabListener(new CustomTabListener<ProfileFragment>(profileFragment));
 					mActionBar.addTab(tab);
-					tab = mActionBar.newTab().setText("Wall").setTabListener(new CustomTabListener<NewsFeedFragment>(newsFeedFragment));
+					tab = mActionBar.newTab().setText(mActivity.getResources().getString(R.string.wall)).setTabListener(new CustomTabListener<NewsFeedFragment>(newsFeedFragment));
 					mActionBar.addTab(tab);
-					tab = mActionBar.newTab().setText("Photos").setTabListener(new CustomTabListener<AlbumsFragment>(albumsFragment));
+					tab = mActionBar.newTab().setText(mActivity.getResources().getString(R.string.photos)).setTabListener(new CustomTabListener<AlbumsFragment>(albumsFragment));
 					mActionBar.addTab(tab);
 
 					Logger.i(Logger.getClassAndMethod() + "mSelectedTabIndex" + mSelectedTabIndex);
@@ -554,8 +554,7 @@ public class SectionManager {
 				@Override
 				public void run() {
 					mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-					mActionBar.setTitle("Place Profile");// TODO change to
-															// place's name
+					mActionBar.setTitle(mActivity.getResources().getString(R.string.place_profile));//TODO: change to place name
 
 					PlaceProfileFragment placeProfileFragment = PlaceProfileFragment.newInstance(placeId, null, false);
 					placeProfileFragment.setRetainInstance(true);
@@ -569,16 +568,16 @@ public class SectionManager {
 					NewsFeedFragment newsFeedFragment = NewsFeedFragment.newInstance(placeId, Constants.STATE_PROFILE, null, false);
 					newsFeedFragment.setRetainInstance(true);
 
-					ActionBar.Tab tab = mActionBar.newTab().setText("Profile").setTabListener(new CustomTabListener<ProfileFragment>(placeProfileFragment));
+					ActionBar.Tab tab = mActionBar.newTab().setText(mActivity.getResources().getString(R.string.profile)).setTabListener(new CustomTabListener<ProfileFragment>(placeProfileFragment));
 					mActionBar.addTab(tab);
 
-					tab = mActionBar.newTab().setText("Wall").setTabListener(new CustomTabListener<NewsFeedFragment>(newsFeedFragment));
+					tab = mActionBar.newTab().setText(mActivity.getResources().getString(R.string.wall)).setTabListener(new CustomTabListener<NewsFeedFragment>(newsFeedFragment));
 					mActionBar.addTab(tab);
 
-					tab = mActionBar.newTab().setText("Photos").setTabListener(new CustomTabListener<AlbumsFragment>(albumsFragment));
+					tab = mActionBar.newTab().setText(mActivity.getResources().getString(R.string.photos)).setTabListener(new CustomTabListener<AlbumsFragment>(albumsFragment));
 					mActionBar.addTab(tab);
 
-					tab = mActionBar.newTab().setText("Map").setTabListener(new CustomTabListener<PlaceMapFragment>(mapFragment));
+					tab = mActionBar.newTab().setText(mActivity.getResources().getString(R.string.map)).setTabListener(new CustomTabListener<PlaceMapFragment>(mapFragment));
 					mActionBar.addTab(tab);
 
 					mActionBar.setSelectedNavigationItem(mSelectedTabIndex);
@@ -602,7 +601,7 @@ public class SectionManager {
 				@Override
 				public void run() {
 					mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-					mActionBar.setTitle("Notificatons");
+					mActionBar.setTitle(mActivity.getResources().getString(R.string.notifications));
 				}
 			});
 		}
@@ -628,7 +627,7 @@ public class SectionManager {
 				@Override
 				public void run() {
 					mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-					mActionBar.setTitle("Events");
+					mActionBar.setTitle(mActivity.getResources().getString(R.string.events));
 
 					EventsFragment eventsFragment = EventsFragment.newInstance(null, null);
 					eventsFragment.setRetainInstance(true);
@@ -637,11 +636,11 @@ public class SectionManager {
 					BirthdaysFragment birthdaysFragment = new BirthdaysFragment();
 					birthdaysFragment.setRetainInstance(true);
 
-					ActionBar.Tab tab = mActionBar.newTab().setText("Attending").setTabListener(new CustomTabListener<Fragment>(eventsFragment));
+					ActionBar.Tab tab = mActionBar.newTab().setText(mActivity.getResources().getString(R.string.attending)).setTabListener(new CustomTabListener<Fragment>(eventsFragment));
 					mActionBar.addTab(tab);
-					tab = mActionBar.newTab().setText("Invitations").setTabListener(new CustomTabListener<Fragment>(invitesFragment));
+					tab = mActionBar.newTab().setText(mActivity.getResources().getString(R.string.invitations)).setTabListener(new CustomTabListener<Fragment>(invitesFragment));
 					mActionBar.addTab(tab);
-					tab = mActionBar.newTab().setText("Birthdays").setTabListener(new CustomTabListener<Fragment>(birthdaysFragment));
+					tab = mActionBar.newTab().setText(mActivity.getResources().getString(R.string.birthdays)).setTabListener(new CustomTabListener<Fragment>(birthdaysFragment));
 					mActionBar.addTab(tab);
 
 					mActionBar.setSelectedNavigationItem(mSelectedTabIndex);
@@ -684,18 +683,18 @@ public class SectionManager {
 					EventUserListFragment maybeFragment = EventUserListFragment.newInstance(Constants.STATE_EVENT_MAYBE, objectId, null, false);
 					maybeFragment.setRetainInstance(true);
 
-					ActionBar.Tab tab = mActionBar.newTab().setText("Event Info").setTabListener(new CustomTabListener<Fragment>(profileFragment));
+					ActionBar.Tab tab = mActionBar.newTab().setText(mActivity.getResources().getString(R.string.event_info)).setTabListener(new CustomTabListener<Fragment>(profileFragment));
 					mActionBar.addTab(tab);
-					tab = mActionBar.newTab().setText("Wall").setTabListener(new CustomTabListener<Fragment>(wallFragment));
+					tab = mActionBar.newTab().setText(mActivity.getResources().getString(R.string.wall)).setTabListener(new CustomTabListener<Fragment>(wallFragment));
 					mActionBar.addTab(tab);
 
-					tab = mActionBar.newTab().setText("Invited").setTabListener(new CustomTabListener<Fragment>(invitedFragment));
+					tab = mActionBar.newTab().setText(mActivity.getResources().getString(R.string.invited)).setTabListener(new CustomTabListener<Fragment>(invitedFragment));
 					mActionBar.addTab(tab);
-					tab = mActionBar.newTab().setText("Attending").setTabListener(new CustomTabListener<Fragment>(attendingFragment));
+					tab = mActionBar.newTab().setText(mActivity.getResources().getString(R.string.attending)).setTabListener(new CustomTabListener<Fragment>(attendingFragment));
 					mActionBar.addTab(tab);
-					tab = mActionBar.newTab().setText("Declined").setTabListener(new CustomTabListener<Fragment>(declinedFragment));
+					tab = mActionBar.newTab().setText(mActivity.getResources().getString(R.string.declined)).setTabListener(new CustomTabListener<Fragment>(declinedFragment));
 					mActionBar.addTab(tab);
-					tab = mActionBar.newTab().setText("Maybe").setTabListener(new CustomTabListener<Fragment>(maybeFragment));
+					tab = mActionBar.newTab().setText(mActivity.getResources().getString(R.string.maybe)).setTabListener(new CustomTabListener<Fragment>(maybeFragment));
 					mActionBar.addTab(tab);
 
 					mActionBar.setSelectedNavigationItem(mSelectedTabIndex);
@@ -728,18 +727,6 @@ public class SectionManager {
 		FragmentTransaction ft = mActivity.getFragmentManager().beginTransaction();
 		ft.addToBackStack(null);
 		ft.replace(android.R.id.content, mThemeSelectionFragment).commit();
-/*
-		ColorPickerFragment colorPickerFragment = new ColorPickerFragment();
-		colorPickerFragment.setRetainInstance(true);
-
-		ActionBar.Tab tab = mActionBar.newTab().setText("Themes").setTabListener(new CustomTabListener<ThemeSelectionFragment>(mThemeSelectionFragment));
-		mActionBar.addTab(tab);
-		tab = mActionBar.newTab().setText("ColorPicker").setTabListener(new CustomTabListener<ColorPickerFragment>(colorPickerFragment));
-		mActionBar.addTab(tab);
-
-		mActionBar.setSelectedNavigationItem(mSelectedTabIndex);
-		*/
-
 	}
 
 	public void displayNewsFeed() {
@@ -790,8 +777,6 @@ public class SectionManager {
 		if (mSettingsFragment == null) {
 			mSettingsFragment = new SettingsFragment();
 		}
-
-		SettingsFragment fragment = new SettingsFragment();
 
 		FragmentTransaction ft = mActivity.getFragmentManager().beginTransaction();
 		ft.addToBackStack(null);
@@ -917,9 +902,7 @@ public class SectionManager {
 			});
 		}
 
-		// if (mFriendRequestsFragment == null) {
 		FriendRequestsFragment fragment = new FriendRequestsFragment();
-		// }
 
 		FragmentTransaction ft = mActivity.getFragmentManager().beginTransaction();
 		ft.addToBackStack(null);

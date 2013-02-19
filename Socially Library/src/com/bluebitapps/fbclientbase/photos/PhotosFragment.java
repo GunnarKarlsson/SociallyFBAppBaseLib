@@ -83,32 +83,32 @@ public class PhotosFragment extends BaseFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 		ViewGroup vg = null;
-		
-		if(getActivity()!=null){
-			
-		ThemeFactory.getViewGroup(getThemeSelection(), getActivity(), inflater, container, R.layout.image_grid);
 
-		mPhotos = new ArrayList<Photo>();
-		mGridView = (GridView) vg.findViewById(R.id.image_grid_view);
-		mAdapter = new ImageAdapter();
-		mGridView.setAdapter(mAdapter);
+		if (getActivity() != null) {
 
-		mGridView.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				// TODO action on click
-			}
-		});
+			ThemeFactory.getViewGroup(getThemeSelection(), getActivity(), inflater, container, R.layout.image_grid);
 
-		// mProgressBar = (ProgressBar) vg.findViewById(R.id.progressBar);
+			mPhotos = new ArrayList<Photo>();
+			mGridView = (GridView) vg.findViewById(R.id.image_grid_view);
+			mAdapter = new ImageAdapter();
+			mGridView.setAdapter(mAdapter);
+
+			mGridView.setOnItemClickListener(new OnItemClickListener() {
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+					// TODO action on click
+				}
+			});
+
+			// mProgressBar = (ProgressBar) vg.findViewById(R.id.progressBar);
 		}
 
 		return vg;
 	}
 
 	private void getPhotos() {
-		
-		if(getActivity()==null){
+
+		if (getActivity() == null) {
 			return;
 		}
 
@@ -117,11 +117,9 @@ public class PhotosFragment extends BaseFragment {
 
 	public class ImageAdapter extends BaseAdapter {
 		/*
-		private class ViewHolder {
-			public TextView text;
-			public ImageView image;
-		}
-		*/
+		 * private class ViewHolder { public TextView text; public ImageView
+		 * image; }
+		 */
 
 		@Override
 		public int getCount() {
@@ -148,7 +146,7 @@ public class PhotosFragment extends BaseFragment {
 		public View getView(final int position, View convertView, ViewGroup parent) {
 
 			final ImageView imageView;
-			if (convertView == null && getActivity()!=null) {
+			if (convertView == null && getActivity() != null) {
 				imageView = (ImageView) getActivity().getLayoutInflater().inflate(R.layout.image_grid_item, parent, false);
 			} else {
 				imageView = (ImageView) convertView;
@@ -217,31 +215,32 @@ public class PhotosFragment extends BaseFragment {
 
 			} catch (JSONException e) {
 				Logger.i(PhotosFragment.class.getSimpleName() + "." + PhotosRequestListener.class.getSimpleName() + ": " + e.toString());
-				OutputUtil.showCrouton(getActivity(), "Photos could not be retrieved");
+				OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.photos_could_not_be_retrieved));
 			}
 		}
 
 		@Override
 		public void onIOException(IOException e, Object state) {
 			Logger.i(PhotosFragment.class.getSimpleName() + "." + PhotosRequestListener.class.getSimpleName() + ": " + e.toString());
-			OutputUtil.showCrouton(getActivity(), "Photos could not be retrieved");
+			OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.photos_could_not_be_retrieved));
 		}
 
 		@Override
 		public void onFileNotFoundException(FileNotFoundException e, Object state) {
 			Logger.i(PhotosFragment.class.getSimpleName() + "." + PhotosRequestListener.class.getSimpleName() + ": " + e.toString());
-			OutputUtil.showCrouton(getActivity(), "Photos could not be retrieved");
+			OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.photos_could_not_be_retrieved));
 		}
 
 		@Override
 		public void onMalformedURLException(MalformedURLException e, Object state) {
 			Logger.i(PhotosFragment.class.getSimpleName() + "." + PhotosRequestListener.class.getSimpleName() + ": " + e.toString());
-			OutputUtil.showCrouton(getActivity(), "Photos could not be retrieved");
+			OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.photos_could_not_be_retrieved));
 		}
 
 		@Override
 		public void onFacebookError(FacebookError e, Object state) {
 			Logger.i(PhotosFragment.class.getSimpleName() + "." + PhotosRequestListener.class.getSimpleName() + ": " + e.toString());
+			OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.photos_could_not_be_retrieved));
 		}
 
 	}
@@ -249,14 +248,6 @@ public class PhotosFragment extends BaseFragment {
 	private void setItems() {
 
 		if (mPhotos == null || mPhotos.size() < 1) {
-			//TODO fix logic for empty album message
-			/*
-			Toast toast = Toast.makeText(getActivity(), "Your photo album is empty", Toast.LENGTH_SHORT);
-
-			toast.setGravity(Gravity.CENTER, toast.getXOffset() / 2, toast.getYOffset() / 2);
-
-			toast.show();
-*/
 		} else {
 
 			mAdapter.notifyDataSetChanged();

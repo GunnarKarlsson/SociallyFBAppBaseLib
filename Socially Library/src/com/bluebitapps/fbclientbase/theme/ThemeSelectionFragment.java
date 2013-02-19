@@ -100,9 +100,9 @@ public class ThemeSelectionFragment extends BaseFragment {
 	public void onResume() {
 		if (getActivity() != null) {
 			getActivity().getActionBar().setDisplayShowTitleEnabled(true);
-			String str = mThemes.size() + " free themes";
+			String str = mThemes.size() + " " + getResources().getString(R.string.free_themes_lowercase);
 			getActivity().getActionBar().setTitle(str);
-			getActivity().getActionBar().setSubtitle("Tap a theme to apply it");
+			getActivity().getActionBar().setSubtitle(R.string.tap_a_theme_to_apply_it);
 		}
 		super.onResume();
 	}
@@ -228,7 +228,7 @@ public class ThemeSelectionFragment extends BaseFragment {
 
 						AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(alertView).setMessage("Apply selection?");
 
-						builder.setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+						builder.setCancelable(false).setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
 
 								if (shouldBeAppliedToApp == false && shouldBeAppliedToDevice == false) {
@@ -245,11 +245,11 @@ public class ThemeSelectionFragment extends BaseFragment {
 										try {
 											imageFileName = resName.substring(0, resName.lastIndexOf('_')) + "_image";
 										} catch (Exception e) {
-											OutputUtil.showCrouton(getActivity(), "Error: theme could not be set");
+											OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.error_theme_could_not_be_set));
 										}
 
 										if (!StringUtil.notEmpty(imageFileName)) {
-											OutputUtil.showCrouton(getActivity(), "Error: theme could not be set");
+											OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.error_theme_could_not_be_set));
 										}
 										String packageName = getActivity().getPackageName();
 										resId = getResources().getIdentifier(imageFileName, "drawable", packageName);
@@ -279,7 +279,7 @@ public class ThemeSelectionFragment extends BaseFragment {
 
 											mWallpaperManager.setBitmap(bgBitmap);
 										} catch (IOException e) {
-											OutputUtil.showCrouton(getActivity(), "Wallpaper could not be set");
+											OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.wallpaper_could_not_be_set));
 										}
 
 									}
@@ -306,7 +306,7 @@ public class ThemeSelectionFragment extends BaseFragment {
 									startActivity(intent);
 								}
 							}
-						}).setNegativeButton("No", new DialogInterface.OnClickListener() {
+						}).setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
 								dialog.cancel();
 							}

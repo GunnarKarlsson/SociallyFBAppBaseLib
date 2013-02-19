@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="PREFS_NOTIFICATION_DELIVERY_KEY">notifdeliverykey</string>
+    <string name="PREFS_NOTIFICATION_TYPE_KEY">notiftype</string>
+    <string name="PREFS_NOTIFICATION_FREQUENCY_KEY">notification_frequency_key</string>
+    <string name="PREFS_FONT_COLOR_KEY">font_color_key</string>
+    <string name="PREFS_FONT_TYPE_KEY">font_type_key</string>
+    <string name="PREFS_NEWSFEED_REFRESH_KEY">newsfeed_refresh_key</string>
+    <string name="INTENT_THEME_KEY">intent theme key</string>
+    <string name="PREFS_THEME_KEY">theme_key</string>
+    
+    <string name="PREFS_NOTIFICATION_DELIVERY_DEFAULT_VALUE">statusbar</string>
+    <string name="PREFS_NOTIFICATION_TYPE_DEFAULT_VALUE"></string>
+    <string name="PREFS_NOTIFICATION_FREQUENCY_DEFAULT_VALUE">60</string>
+    <string name="PREFS_FONT_SIZE_KEY">font_size_key</string>
+    <string name="PREFS_FONT_SIZE_DEFAULT_VALUE">12</string>
+    <string name="PREFS_FONT_COLOR_DEFAULT_VALUE">black</string>
+    <string name="PREFS_FONT_TYPE_DEFAULT_VALUE">roboto</string>
+    <string name="PREFS_NEWSFEED_REFRESH_DEFAULT_VALUE">true</string>
+    <string name="PREFS_THEME_DEFAULT_VALUE">white</string>
+
+</resources>

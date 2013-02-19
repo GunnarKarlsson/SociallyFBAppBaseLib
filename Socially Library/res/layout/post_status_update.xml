@@ -26,9 +26,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Message"
+                android:text="@string/message"
                 android:textColor="#000000"
-                android:textSize="20dip" />
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/message"
@@ -41,41 +41,41 @@
                 android:textColorHint="#999999"
                 android:minHeight="100dip"
                 android:textColor="#000000"
-                android:textSize="16dip" />
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="20dip"
-                android:text="Link"
+                android:text="@string/link"
                 android:textColor="#000000"
-                android:textSize="20dip" />
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/link"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edit_text_holo_light"
-                android:hint="URL"
+                android:hint="@string/url"
                 android:textColor="#000000"
-                android:textSize="16dip" />
+                android:textSize="16sp" />
 
             <EditText
                 android:id="@+id/linkName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edit_text_holo_light"
-                android:hint="Name "
+                android:hint="@string/name"
                 android:textColor="#000000"
-                android:textSize="16dip" />
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="20dip"
-                android:text="Privacy"
+                android:text="@string/privacy"
                 android:textColor="#000000"
-                android:textSize="20dip" />
+                android:textSize="20sp" />
 
             <Spinner
                 android:id="@+id/privacySpinner"

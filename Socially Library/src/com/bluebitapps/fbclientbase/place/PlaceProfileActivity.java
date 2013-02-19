@@ -66,16 +66,16 @@ public class PlaceProfileActivity extends BaseThemedActivity{
 		NewsFeedFragment newsFeedFragment = NewsFeedFragment.newInstance(placeId, Constants.STATE_PROFILE, placeName,true);
 		newsFeedFragment.setRetainInstance(true);
 
-		ActionBar.Tab tab = mActionBar.newTab().setText("Profile").setTabListener(new CustomTabListener<ProfileFragment>(placeProfileFragment));
+		ActionBar.Tab tab = mActionBar.newTab().setText(R.string.profile).setTabListener(new CustomTabListener<ProfileFragment>(placeProfileFragment));
 		mActionBar.addTab(tab);
 
-		tab = mActionBar.newTab().setText("Wall").setTabListener(new CustomTabListener<NewsFeedFragment>(newsFeedFragment));
+		tab = mActionBar.newTab().setText(R.string.wall).setTabListener(new CustomTabListener<NewsFeedFragment>(newsFeedFragment));
 		mActionBar.addTab(tab);
 
-		tab = mActionBar.newTab().setText("Photos").setTabListener(new CustomTabListener<AlbumsFragment>(albumsFragment));
+		tab = mActionBar.newTab().setText(R.string.photos).setTabListener(new CustomTabListener<AlbumsFragment>(albumsFragment));
 		mActionBar.addTab(tab);
 
-		tab = mActionBar.newTab().setText("Map").setTabListener(new CustomTabListener<PlaceMapFragment>(mapFragment));
+		tab = mActionBar.newTab().setText(R.string.map).setTabListener(new CustomTabListener<PlaceMapFragment>(mapFragment));
 		mActionBar.addTab(tab);
 
 		if (Constants.TAB_INDEX_WALL.equals(tabIndex)) {

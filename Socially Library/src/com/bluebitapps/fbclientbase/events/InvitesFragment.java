@@ -92,7 +92,7 @@ public class InvitesFragment extends BaseNavigationFragment {
 
 				stopRefreshMenuItemAnimation();
 				if (getActivity() != null) {
-					OutputUtil.showCrouton(getActivity(), "No new invitations");
+					OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.no_new_invitations));
 				}
 			}
 		}
@@ -189,7 +189,9 @@ public class InvitesFragment extends BaseNavigationFragment {
 
 		} else {
 			if (mEvents.size() < 1) {
-				OutputUtil.showCrouton(getActivity(), "No invitations available");
+				if(getActivity()!=null){					
+					OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.no_new_invitations));
+				}
 			}
 
 			mLoadingView.setVisibility(View.GONE);
@@ -242,7 +244,10 @@ public class InvitesFragment extends BaseNavigationFragment {
 		}
 
 		if (getActivity() != null) {
-			String eventWord = mEvents.size() == 1 ? "invitation" : "invitations";
+			
+			String invitationString = getActivity().getResources().getString(R.string.invitation_lowercase);
+			String invitationsString = getActivity().getResources().getString(R.string.invitations_lowercase);
+			String eventWord = mEvents.size() == 1 ? invitationString : invitationsString;
 			String str = mEvents.size() + " " + eventWord;
 			getActivity().getActionBar().setSubtitle(str);
 		}
@@ -326,7 +331,7 @@ public class InvitesFragment extends BaseNavigationFragment {
 				String endTime = (String) FacebookUtils.convertInvitedToEventTimeStamp(mEvents.get(position).getEndTime());
 				holder.endTime.setText(endTime);
 
-				holder.rsvpStatus.setText("Tap to respond");
+				holder.rsvpStatus.setText(R.string.tap_to_respond);
 
 				String token = getApplication().getFBConnection().getFacebook().getAccessToken();
 

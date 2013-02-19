@@ -52,7 +52,6 @@ import com.bluebitapps.fbclientbase.debug.Logger;
 import com.bluebitapps.fbclientbase.layout.LoadingView;
 import com.bluebitapps.fbclientbase.profile.ProfileActivity;
 import com.bluebitapps.fbclientbase.theme.ThemeFactory;
-import com.bluebitapps.fbclientbase.user.UserActivity;
 
 public class EventUserListFragment extends BaseNavigationFragment {
 
@@ -97,10 +96,6 @@ public class EventUserListFragment extends BaseNavigationFragment {
 		ViewGroup vg = ThemeFactory.getViewGroup(getThemeSelection(), getActivity(), inflater, container, R.layout.image_list);
 		mLoadingView = (LoadingView) vg.findViewById(R.id.loadingView);
 		mListView = (ListView) vg.findViewById(R.id.image_list_view);
-		//TextView padding = new TextView(getActivity());
-		//padding.setHeight(getResources().getDimensionPixelOffset(R.dimen.item_list_padding));
-		//mListView.addHeaderView(padding);
-		//mListView.addFooterView(padding);
 		mAdapter = new ItemAdapter();
 		mListView.setAdapter(mAdapter);
 
@@ -205,8 +200,9 @@ public class EventUserListFragment extends BaseNavigationFragment {
 		mLoadingView.setVisibility(View.GONE);
 
 		if (mUsers == null || mUsers.size() < 1) {
-			OutputUtil.showCrouton(getActivity(), "This list is empty");
-			
+			if(getActivity()!=null){				
+				OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.this_list_is_empty));
+			}	
 
 		} else {
 
@@ -255,8 +251,6 @@ public class EventUserListFragment extends BaseNavigationFragment {
 					holder = new ViewHolder();
 					holder.picture = (ImageView) view.findViewById(R.id.image);
 					holder.name = (TextView) view.findViewById(R.id.friendName);
-					// holder.rsvpStatus = (TextView)
-					// view.findViewById(R.id.rsvpStatus);
 
 					view.setTag(holder);
 				} else
@@ -268,22 +262,11 @@ public class EventUserListFragment extends BaseNavigationFragment {
 
 				holder.name.setText(eventUser.getName());
 				configText(holder.name);
-				// holder.rsvpStatus.setText(eventUser.getRsvpStatus());
 
 				view.setOnClickListener(new OnClickListener() {
 
 					@Override
 					public void onClick(View v) {
-						/*
-						 * Logger.i("FriendsFragment id: " + eventUser.getId());
-						 * Intent intent = new Intent(getActivity(),
-						 * UserActivity.class);
-						 * intent.putExtra(Constants.USER_ID_KEY,
-						 * eventUser.getId()); startActivity(intent);
-						 * getActivity
-						 * ().overridePendingTransition(R.anim.slide_in_right,
-						 * R.anim.slide_out_left);
-						 */
 
 						Intent intent = new Intent(getActivity(), ProfileActivity.class);
 						intent.putExtra(Constants.OBJECT_ID_KEY, eventUser.getId());

@@ -107,8 +107,9 @@ public class FriendsFragment extends BaseNavigationFragment implements OnClearCl
 				}
 
 				stopRefreshMenuItemAnimation();
-
-				OutputUtil.showCrouton(getActivity(), "Friends List could not be refreshed");
+				if (getActivity() != null) {
+					OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.friends_list_could_not_be_retrieved));
+				}
 			}
 		}
 	}
@@ -171,7 +172,11 @@ public class FriendsFragment extends BaseNavigationFragment implements OnClearCl
 			mSearchString = getArguments().getString(Constants.SEARCH_STRING);
 		}
 
-		setTitle("Friends");
+		if(getActivity()!=null){
+			String title = getActivity().getResources().getString(R.string.friends);
+			setTitle(title);
+		}
+		
 
 	}
 
@@ -188,10 +193,6 @@ public class FriendsFragment extends BaseNavigationFragment implements OnClearCl
 		mEditText.addTextChangedListener(mTextWatcher);
 
 		mListView = (ListView) vg.findViewById(R.id.image_list_view);
-		// TextView padding = new TextView(getActivity());
-		// padding.setHeight(getResources().getDimensionPixelOffset(R.dimen.item_list_padding));
-		// mListView.addHeaderView(padding);
-		// mListView.addFooterView(padding);
 
 		mFriends = new ArrayList<Friend>();
 		mAdapter = new ItemAdapter();
@@ -219,8 +220,11 @@ public class FriendsFragment extends BaseNavigationFragment implements OnClearCl
 
 	private void getFriends() {
 
-		Log.i("jan17", Logger.getClassAndMethod());
-
+		//NPE Crash on Kindle Fire testing
+		if(mFriends==null){
+			mFriends = new ArrayList<Friend>();
+		}
+		
 		mFriends.clear();
 
 		if (getState() != null && getState().equals(STATE_SEARCH)) {
@@ -228,7 +232,7 @@ public class FriendsFragment extends BaseNavigationFragment implements OnClearCl
 			if (getActivity() != null) {
 				ActionBar actionBar = getActivity().getActionBar();
 				if (actionBar != null) {
-					actionBar.setTitle("Search");
+					actionBar.setTitle(getActivity().getResources().getString(R.string.search));
 					actionBar.setSubtitle(null);
 				}
 			}
@@ -253,7 +257,9 @@ public class FriendsFragment extends BaseNavigationFragment implements OnClearCl
 			} else {
 				Log.i("jan17", Logger.getClassAndMethod() + "isFirstDataRequest==false");
 				if (mFriends.size() < 1) {
-					OutputUtil.showCrouton(getActivity(), "No friends data available");
+					if(getActivity()!=null){						
+						OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.no_friends_data_available));
+					}
 				}
 				mLoadingView.setVisibility(View.GONE);
 
@@ -297,7 +303,10 @@ public class FriendsFragment extends BaseNavigationFragment implements OnClearCl
 		mAdapter.notifyDataSetChanged();
 
 		if (getActivity() != null) {
-			String str = mFriends.size() + " friends";
+			
+			
+			String friendsString = getActivity().getResources().getString(R.string.friends_lowercase);
+			String str = mFriends.size() + friendsString;
 			getActivity().getActionBar().setSubtitle(str);
 		}
 

@@ -15,8 +15,6 @@ import com.facebook.android.Facebook;
 import com.bluebitapps.fbclientbase.Constants;
 import com.bluebitapps.fbclientbase.FBClientApplication;
 import com.bluebitapps.fbclientbase.R;
-import com.bluebitapps.fbclientbase.account.Account;
-import com.bluebitapps.fbclientbase.account.AccountData;
 import com.bluebitapps.fbclientbase.debug.Logger;
 
 public class FBConnection {
@@ -111,29 +109,7 @@ public class FBConnection {
 		editor.apply();
 	}
 
-	public synchronized void saveAccount(String userId, String userName) {
-		String accessToken = mFacebook.getAccessToken();
-		String expires = Long.toString(mFacebook.getAccessExpires());
-		Account account = new Account();
-		account.setName(userName);
-		account.setUserId(userId);
-		account.setExpires(expires);
-		account.setAccessToken(accessToken);
-
-		AccountData data = mApplication.getAccountData();
-
-		data.insertOrIgnore(account.toContentValues());
-	}
-
-	public synchronized long getAccountCount() {
-		AccountData data = mApplication.getAccountData();
-		return data.getRowCount();
-	}
-
-	public synchronized void saveExpiresTime() {
-
-	}
-
+	
 	public synchronized void saveUserNameInPersistentMemory(String name) {
 		Editor editor = mSharedPreferences.edit();
 		editor.putString(FBConnection.USER_NAME_KEY, name);

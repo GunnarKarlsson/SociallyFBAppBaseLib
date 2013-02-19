@@ -56,12 +56,12 @@ public class TouchImageViewActivity extends BaseThemedActivity {
 		Bundle bundle = getIntent().getExtras();
 		mUrl = bundle.getString(Constants.OBJECT_URL_KEY);
 
-		mLoadingView = (LoadingView)findViewById(R.id.loadingView);
+		mLoadingView = (LoadingView) findViewById(R.id.loadingView);
 		mTouchView = (TouchImageView) findViewById(R.id.image);
 		mTouchView.setMaxZoom(4f);
 
 		getImageLoader().displayImage(mUrl, mTouchView);
-		
+
 		getImageLoader().displayImage(mUrl, mTouchView, getImageDisplayOptions(), new ImageLoadingListener() {
 			@Override
 			public void onLoadingStarted() {
@@ -71,7 +71,7 @@ public class TouchImageViewActivity extends BaseThemedActivity {
 			@Override
 			public void onLoadingFailed(FailReason failReason) {
 
-				OutputUtil.showCrouton(TouchImageViewActivity.this, "Error loading image");
+				OutputUtil.showCrouton(TouchImageViewActivity.this, getResources().getString(R.string.photos_could_not_be_retrieved));
 				mLoadingView.setVisibility(View.GONE);
 				mTouchView.setImageResource(android.R.drawable.ic_delete);
 			}
@@ -81,11 +81,11 @@ public class TouchImageViewActivity extends BaseThemedActivity {
 				if (mLoadingView != null) {
 					mLoadingView.setVisibility(View.GONE);
 				}
-					Animation anim = AnimationUtils.loadAnimation(TouchImageViewActivity.this, android.R.anim.fade_in);
-					if (anim != null) {
-						mTouchView.setAnimation(anim);
-					}
-					anim.start();
+				Animation anim = AnimationUtils.loadAnimation(TouchImageViewActivity.this, android.R.anim.fade_in);
+				if (anim != null) {
+					mTouchView.setAnimation(anim);
+				}
+				anim.start();
 			}
 
 			@Override
@@ -101,11 +101,11 @@ public class TouchImageViewActivity extends BaseThemedActivity {
 		inflater.inflate(R.menu.imagepagermenu, menu);
 		return true;
 	}
-	
+
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+
 		if (getActionBar() != null) {
 			getActionBar().setDisplayShowTitleEnabled(true);
 			getActionBar().setTitle("Socially Image Viewer");
@@ -119,15 +119,17 @@ public class TouchImageViewActivity extends BaseThemedActivity {
 
 		if (item.getItemId() == R.id.saveMenuItem) {
 
-			new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_menu_save).setTitle("Save Image to SD Card").setPositiveButton("Save", new DialogInterface.OnClickListener() {
+			new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_menu_save).setTitle(R.string.save_to_sd_card).setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 
-					OutputUtil.saveImageFromUrlToSDCard(TouchImageViewActivity.this, "Socially", null, mUrl);
+					String folderName = "Socially";
+					folderName = getResources().getString(R.string.socially_name);
+					OutputUtil.saveImageFromUrlToSDCard(TouchImageViewActivity.this, folderName, null, mUrl);
 				}
 
-			}).setNegativeButton("Cancel", null).show();
+			}).setNegativeButton(R.string.cancel, null).show();
 			return true;
 		} else {
 			return false;

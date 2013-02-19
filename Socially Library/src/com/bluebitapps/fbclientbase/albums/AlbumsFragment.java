@@ -58,6 +58,10 @@ public class AlbumsFragment extends BaseNavigationFragment {
 	private LoadingView mLoadingView;
 	private DataUpdateReceiver mDataUpdateReceiver;
 	private boolean isFirstDataRequest;
+	
+	private String lastUpdatedWordsString = "";
+	private String photoWordString = "";
+	private String photosWordString = "";
 
 	private class DataUpdateReceiver extends BroadcastReceiver {
 		@Override
@@ -88,7 +92,10 @@ public class AlbumsFragment extends BaseNavigationFragment {
 
 				stopRefreshMenuItemAnimation();
 
-				OutputUtil.showCrouton(getActivity(), "Albums could not be retrieved");
+				if (getActivity() != null) {
+					String message = getActivity().getResources().getString(R.string.albums_could_not_be_retrieved);
+					OutputUtil.showCrouton(getActivity(), message);
+				}
 
 			}
 		}
@@ -102,7 +109,6 @@ public class AlbumsFragment extends BaseNavigationFragment {
 		bundle.putString(Constants.OBJECT_ID_KEY, objectId);
 		bundle.putString(Constants.OBJECT_TITLE_KEY, title);
 		bundle.putString(Constants.STATE_KEY, state);
-		
 
 		bundle.putBoolean(FLAG_HAS_ONLY_REFRESH_MENU_ITEM_IN_ACTIONBAR, refreshOnlyMenuFlag);
 		f.setArguments(bundle);
@@ -121,15 +127,26 @@ public class AlbumsFragment extends BaseNavigationFragment {
 		setState(getArguments().getString(Constants.STATE_KEY));
 		setObjectId(getArguments().getString(Constants.OBJECT_ID_KEY));
 		Logger.i(Logger.getClassAndMethod() + "onCreate getObjectId(): " + getArguments().getString(Constants.OBJECT_ID_KEY));
-		
+
 		String title = getArguments().getString(Constants.OBJECT_TITLE_KEY);
 		
-		if(StringUtil.notEmpty(title)){
+		if (StringUtil.notEmpty(title)) {
 			setTitle(title);
-		}else{
-			setTitle("Albums");			
+		} else {
+			if (getActivity() != null) {
+				String albumsTitle = getActivity().getResources().getString(R.string.albums);
+				if (albumsTitle != null) {
+					setTitle(albumsTitle);
+				}
+			}
 		}
 		
+		if(getActivity()!=null){
+			photoWordString = getActivity().getResources().getString(R.string.photo_lowercase);
+			photosWordString = getActivity().getResources().getString(R.string.photos_lowercase);
+			lastUpdatedWordsString = getActivity().getResources().getString(R.string.last_updated);
+		}
+
 	}
 
 	@Override
@@ -143,10 +160,6 @@ public class AlbumsFragment extends BaseNavigationFragment {
 			mLoadingView = (LoadingView) vg.findViewById(R.id.loadingView);
 			mAlbums = new ArrayList<Album>();
 			mListView = (ListView) vg.findViewById(R.id.image_list_view);
-			//TextView padding = new TextView(getActivity());
-			//padding.setHeight(getResources().getDimensionPixelOffset(R.dimen.item_list_padding));
-			//mListView.addHeaderView(padding);
-			//mListView.addFooterView(padding);
 			mAdapter = new ItemAdapter();
 			mListView.setAdapter(mAdapter);
 		}
@@ -219,7 +232,14 @@ public class AlbumsFragment extends BaseNavigationFragment {
 			getAlbumsFromFB();
 		} else {
 			if (mAlbums.size() < 1) {
-				OutputUtil.showCrouton(getActivity(), "No albums available");
+
+				if (getActivity() != null) {
+					String message = getActivity().getResources().getString(R.string.no_albums_available);
+					if (message != null) {
+						OutputUtil.showCrouton(getActivity(), message);
+					}
+				}
+
 			}
 			mLoadingView.setVisibility(View.GONE);
 			if (getActivity() != null) {
@@ -269,7 +289,7 @@ public class AlbumsFragment extends BaseNavigationFragment {
 				} while (c.moveToNext());
 			}
 		}
-		if(c!=null){			
+		if (c != null) {
 			c.close();
 		}
 
@@ -277,11 +297,17 @@ public class AlbumsFragment extends BaseNavigationFragment {
 			mAlbums.clear();
 			mAlbums = albums;
 		}
-		
-		if(getActivity()!=null){
-			String albumWord = mAlbums.size() == 1? "album":"albums";
-			String str = mAlbums.size() + " " + albumWord;
-			getActivity().getActionBar().setSubtitle(str);
+
+		if (getActivity() != null) {
+
+			String albumString = getActivity().getResources().getString(R.string.album_lowercase);
+			String albumsString = getActivity().getResources().getString(R.string.albums_lowercase);
+
+			if (albumString != null && albumsString != null) {
+				String albumWord = mAlbums.size() == 1 ? "album" : "albums";
+				String str = mAlbums.size() + " " + albumWord;
+				getActivity().getActionBar().setSubtitle(str);
+			}
 		}
 
 		if (mAdapter != null) {
@@ -291,19 +317,19 @@ public class AlbumsFragment extends BaseNavigationFragment {
 
 	private void startImageGrid(int position) {
 		if (mAlbums != null && mAlbums.get(position) != null && mAlbums.get(position).getId() != null) {
-			
-			if(getActivity()!=null){
-				//Intent intent = new Intent(Constants.STATE_IMAGE_GRID);
+
+			if (getActivity() != null) {
+				// Intent intent = new Intent(Constants.STATE_IMAGE_GRID);
 				Intent intent = new Intent(getActivity(), ImageGridActivity.class);
 				Log.i("jan9", "album id: " + mAlbums.get(position).getId());
-				Log.i("jan9", "album title: "+ mAlbums.get(position).getName());
+				Log.i("jan9", "album title: " + mAlbums.get(position).getName());
 				intent.putExtra(Album.ALBUM_ID_KEY, mAlbums.get(position).getId());
 				intent.putExtra(Album.ALBUM_NAME_KEY, mAlbums.get(position).getName());
 				intent.putExtra(ImageGridActivity.CLEAR_TOP_ON_HOME_SELECTED, true);
 				getActivity().startActivity(intent);
 				getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 			}
-			
+
 		}
 	}
 
@@ -353,7 +379,7 @@ public class AlbumsFragment extends BaseNavigationFragment {
 				view.setTag(holder);
 
 			} else
-				holder = (ViewHolder)view.getTag();
+				holder = (ViewHolder) view.getTag();
 
 			if (mAlbums != null) {
 				holder.title.setText(mAlbums.get(position).getName());
@@ -362,18 +388,18 @@ public class AlbumsFragment extends BaseNavigationFragment {
 				if (mAlbums.get(position).getCount() != null) {
 
 					int count = Integer.parseInt(mAlbums.get(position).getCount());
-					
+
 					if (count > 1 || count < 1) {
-						countText = " photos";
+						countText = " " + photosWordString;
 					} else {
-						countText = " photos";
+						countText = " " + photoWordString;
 					}
-					
+
 					holder.photoCount.setText(mAlbums.get(position).getCount() + countText);
 				}
 
-				String updatedTime = (String) FacebookUtils.convertFacebookCreatedTimeToRelativeTime(mAlbums.get(position).getUpdatedTime());
-				holder.updatedTime.setText("Last updated " + updatedTime);
+				String updatedTime = (String) FacebookUtils.convertFacebookCreatedTimeToRelativeTime(mAlbums.get(position).getUpdatedTime(), getActivity());
+				holder.updatedTime.setText(lastUpdatedWordsString + " " + updatedTime);
 
 				getImageLoader().displayImage(mAlbums.get(position).getCoverPhoto(), holder.image, getImageDisplayOptions());
 			}

@@ -85,7 +85,7 @@ public class MessagesFragment extends BaseNavigationFragment {
 
 				stopRefreshMenuItemAnimation();
 
-				OutputUtil.showCrouton(getActivity(), "New messages could not be retrieved");
+				OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.new_messages_could_not_be_retrieved));
 			}
 		}
 	}
@@ -134,7 +134,7 @@ public class MessagesFragment extends BaseNavigationFragment {
 		isFirstDataRequest = true;
 		prepareRefreshMenuItemAnimation();
 
-		setTitle("Messages");
+		setTitle(getResources().getString(R.string.messages_menu_item));
 	}
 
 	@Override
@@ -150,10 +150,6 @@ public class MessagesFragment extends BaseNavigationFragment {
 			mLoadingView = (LoadingView) vg.findViewById(R.id.loadingView);
 
 			mListView = (ListView) vg.findViewById(R.id.message_threads_listview);
-			// TextView padding = new TextView(getActivity());
-			// padding.setHeight(getResources().getDimensionPixelOffset(R.dimen.item_list_padding));
-			// mListView.addHeaderView(padding);
-			// mListView.addFooterView(padding);
 
 			mAdapter = new ItemAdapter();
 
@@ -184,7 +180,7 @@ public class MessagesFragment extends BaseNavigationFragment {
 			getMessagesFromFB();
 		} else {
 			if (mMessageThreads.size() < 1) {
-				OutputUtil.showCrouton(getActivity(), "No albums available");
+				OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.no_messages_available));
 			}
 			mLoadingView.setVisibility(View.GONE);
 			if (getActivity() != null) {
@@ -210,11 +206,8 @@ public class MessagesFragment extends BaseNavigationFragment {
 					String subject = c.getString(c.getColumnIndex(MessageThreadData.C_SUBJECT));
 					String recipients = c.getString(c.getColumnIndex(MessageThreadData.C_RECIPIENTS));
 					String snippet = c.getString(c.getColumnIndex(MessageThreadData.C_SNIPPET));
-					// String messageCount =
-					// c.getString(c.getColumnIndex(MessageThreadData.C_MESSAGE_COUNT));
 					String unread = c.getString(c.getColumnIndex(MessageThreadData.C_UNREAD));
 					String updatedTime = c.getString(c.getColumnIndex(MessageThreadData.C_UPDATED_TIME));
-					Log.i("jan27", "updatedTime: " + updatedTime);
 					String friendName = c.getString(c.getColumnIndex(MessageThreadData.C_FRIEND_NAME));
 
 					MessageThread message = new MessageThread();
@@ -226,8 +219,6 @@ public class MessagesFragment extends BaseNavigationFragment {
 					message.setUpdatedTime(updatedTime);
 					message.setFriendName(friendName);
 
-					Log.i("messagedebug", "message: " + message.toString());
-
 					mMessageThreads.add(message);
 
 				} while (c.moveToNext());
@@ -237,8 +228,6 @@ public class MessagesFragment extends BaseNavigationFragment {
 
 			c.close();
 		}
-
-		Log.i("messagedebug", "mMessageThreads.size(): " + mMessageThreads.size());
 
 		mAdapter.notifyDataSetChanged();
 	}
@@ -306,7 +295,7 @@ public class MessagesFragment extends BaseNavigationFragment {
 
 				holder.fromName.setText(thread.getFriendName());
 
-				String updatedTime = (String) FacebookUtils.convertUnixTimeStampToRelativeTime(thread.getUpdatedTime());
+				String updatedTime = (String) FacebookUtils.convertUnixTimeStampToRelativeTime(thread.getUpdatedTime(), getActivity());
 
 				holder.updatedTime.setText(updatedTime);
 				Logger.i("thread.getSnippet: " + thread.getSnippet());

@@ -156,7 +156,7 @@ public class PostStatusUpdateService extends IntentService {
 		NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		Notification.Builder builder = new Notification.Builder(this);
 		builder.setContentIntent(contentIntent);
-		builder.setContentTitle("Status update successfully posted").setContentText("Your status update has been posted to FaceBook from Socially").setSmallIcon(R.drawable.status_update_ok);
+		builder.setContentTitle(getResources().getString(R.string.your_post_successfully_posted)).setContentText(getResources().getString(R.string.your_post_has_been_successfully_posted_to_facebook_from_socially)).setSmallIcon(R.drawable.status_update_ok);
 
 		Notification notification = builder.getNotification();
 		notificationManager.notify(STATUS_UPDATE_NOTIFICATION_ID, notification);
@@ -171,7 +171,7 @@ public class PostStatusUpdateService extends IntentService {
 		NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		Notification.Builder builder = new Notification.Builder(this);
 		builder.setContentIntent(contentIntent);
-		builder.setContentTitle("Status update could not be posted").setContentText("Your status update could not be posted. Please try again.").setSmallIcon(R.drawable.status_update_fail);
+		builder.setContentTitle(getResources().getString(R.string.post_could_not_be_posted)).setContentText(getResources().getString(R.string.your_post_could_not_be_posted_please_try_again)).setSmallIcon(R.drawable.status_update_fail);
 		Notification notification = builder.getNotification();
 		notificationManager.notify(STATUS_UPDATE_NOTIFICATION_ID, notification);
 	}

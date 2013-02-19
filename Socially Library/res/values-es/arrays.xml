@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="pref_notification_delivery_entries">
-        <item>Statusbar message (default)</item>
-        <item>Themed pop-up</item>
+        <item>Statusbar mensaje (configuración original)</item>
+        <item>Pop-up temática</item>
     </string-array>
     <string-array name="pref_notification_delivery_values">
         <item>statusbar</item>
         <item>popup</item>
     </string-array>
     <string-array name="pref_font_size_entries">
-        <item>Smallest (10 dip)</item>
-        <item>Smaller (12 dip)</item>
-        <item>Small (Default) (15 dip)</item>
-        <item>Medium (18 dip)</item>
-        <item>Large (22 dip)</item>
-        <item>Larger (26 dip)</item>
-        <item>Largest (30 dip)</item>
+        <item>Más pequeño (10 dip)</item>
+        <item>Menor (12 dip)</item>
+        <item>Pequeño (configuración original) (15 dip)</item>
+        <item>Medio (18 dip)</item>
+        <item>Grande (22 dip)</item>
+        <item>Ampliar (26 dip)</item>
+        <item>Más grande (30 dip)</item>
     </string-array>
     <string-array name="pref_font_size_values">
         <item>10</item>
@@ -27,18 +27,18 @@
         <item>30</item>
     </string-array>
     <string-array name="pref_font_color_entries">
-        <item>Black</item>
-        <item>Grey</item>
-        <item>Purple</item>
-        <item>Blue (dark)</item>
-        <item>Blue (bright)</item>
-        <item>Blue (light)</item>
-        <item>Green (dark)</item>
-        <item>Green (light)</item>
-        <item>Orange (dark)</item>
-        <item>Orange (light)</item>
-        <item>Red(dark)</item>
-        <item>Red (light)</item>
+        <item>Negro</item>
+        <item>Gris</item>
+        <item>Púrpura</item>
+        <item>Azul (oscuro)</item>
+        <item>Blue (brillante)</item>
+        <item>Blue (claro)</item>
+        <item>Verde (oscuro)</item>
+        <item>Verde (brillante)</item>
+        <item>Verde (oscuro)</item>
+        <item>Naranja</item>
+        <item>Rojo(oscuro)</item>
+        <item>Rojo (claro)</item>
     </string-array>
     <string-array name="pref_font_color_values">
         <item>Black</item>
@@ -55,8 +55,8 @@
         <item>RedLight</item>
     </string-array>
     <string-array name="pref_font_type_entries">
-        <item>Cute</item>
-        <item>Droid (default)</item>
+        <item>Lindo</item>
+        <item>Droid (configuración original)</item>
         <item>Future</item>
         <item>Garamond</item>
         <item>Gill</item>
@@ -73,18 +73,18 @@
         <item>verdana</item>
     </string-array>
     <string-array name="pref_notifications_request_frequency_entries">
-        <item>Every 12 hours</item>
-        <item>Every 10 hours</item>
-        <item>Every 8 hours</item>
-        <item>Every 6 hours</item>
-        <item>Every 4 hours</item>
-        <item>Every 2 hours</item>
-        <item>Every 1 hour</item>
-        <item>Every 30 minutes</item>
-        <item>Every 15 minutes</item>
-        <item>Every 5 minutes</item>
-        <item>Every minute</item>
-        <item>Don\'t fetch notifications</item>
+        <item>Cada 12 horas</item>
+        <item>Cada 10 horas</item>
+        <item>Cada 8 horas</item>
+        <item>Cada 6 horas</item>
+        <item>Cada 4 horas</item>
+        <item>Cada 2 horas</item>
+        <item>Cada hora</item>
+        <item>Cada 30 minutos</item>
+        <item>Cada 15 minutos</item>
+        <item>Cada 5 minutos</item>
+        <item>Cada minuto</item>
+        <item>No solicitar notificaciones</item>
     </string-array>
     <string-array name="pref_notifications_request_frequency_values">
         <item>720</item>

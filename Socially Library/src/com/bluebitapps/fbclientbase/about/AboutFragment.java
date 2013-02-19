@@ -72,13 +72,6 @@ public class AboutFragment extends BaseNavigationFragment {
 			vg = ThemeFactory.getViewGroup(getThemeSelection(), getActivity(), inflater, container, R.layout.about_app);
 
 			mTextView = (TextView) vg.findViewById(R.id.aboutTextView);
-/*
-			if(getState().equals(STATE_ABOUT)){
-				mTextView.setText(getString(R.string.aboutText));
-			}else{
-				mTextView.setText(getString(R.string.licenseText));
-			}
-	*/		
 			mTextView.setMovementMethod(new ScrollingMovementMethod());
 			mTextView.setMovementMethod(LinkMovementMethod.getInstance());
 
@@ -91,7 +84,6 @@ public class AboutFragment extends BaseNavigationFragment {
 			}
 			mTextView.setText(sp);
 			
-			//Linkify.addLinks(mTextView, Linkify.ALL);
 		}
 
 		return vg;
