@@ -109,7 +109,7 @@ public class NotificationsData {
 
 	public Cursor getUnreadNotifications() {
 		SQLiteDatabase db = this.dbHelper.getReadableDatabase();
-		String readValue = "1";
+		String readValue = "0";//OBS CHANGE BACK TO 1
 		return db.query(TABLE, null, C_IS_UNREAD + "=" + readValue, null, null, null, GET_ALL_ORDER_BY);
 	}
 

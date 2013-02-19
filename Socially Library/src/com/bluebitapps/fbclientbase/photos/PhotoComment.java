@@ -107,7 +107,7 @@ class PhotoComment implements Likeable{
 	}
 
 	public String getFromPicture(){
-		return "https://graph.facebook.com/" + getFromId() + "/picture&size=normal";
+		return "https://graph.facebook.com/" + getFromId() + "/picture?width=50&height=50";
 	}
 
 	@Override

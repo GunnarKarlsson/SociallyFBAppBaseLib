@@ -202,6 +202,7 @@ public class NotificationsFragment extends BaseNavigationFragment {
 					ArrayList<Photo> photos = new ArrayList<Photo>();
 					Photo photo = new Photo();
 					photo.setId(objectId);
+					Log.i("feb19", Logger.getClassAndMethod() + " objectId: " + objectId);
 					photos.add(photo);
 
 					Intent intent = new Intent(getActivity(), ImagePagerActivity.class);

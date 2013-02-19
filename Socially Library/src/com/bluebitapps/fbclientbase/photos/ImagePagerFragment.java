@@ -121,6 +121,8 @@ public class ImagePagerFragment extends BaseFragment {
 			hasRetrievedComments = savedInstanceState.getBoolean(SAVED_STATE);
 		}
 
+		Log.i("feb19", Logger.getClassAndMethod() + " hasRetrievedComments: " + hasRetrievedComments);
+
 		setRetainInstance(true);
 		Bundle bundle = getArguments();
 
@@ -149,13 +151,18 @@ public class ImagePagerFragment extends BaseFragment {
 		if (mPhotos.size() > 0) {
 			mIds = "(";
 
-			for (int i = 0; i < mPhotos.size(); i++) {
-				mIds += mPhotos.get(i).getId() + ",";
+			if (mPhotos.size() > 1) {
+				for (int i = 0; i < mPhotos.size(); i++) {
+					mIds += mPhotos.get(i).getId() + ",";
+				}
+				mIds = mIds.substring(0, mIds.length() - 2);
+				mIds += ")";
+			}else if(mPhotos.size()==1){
+				mIds = "(" + mPhotos.get(0).getId() + ")";
 			}
-			mIds = mIds.substring(0, mIds.length() - 2);
-			mIds += ")";
 		}
 		Logger.i("mIds: " + mIds);
+		Log.i("feb19", "ids: " + mIds);
 
 	}
 
@@ -198,11 +205,15 @@ public class ImagePagerFragment extends BaseFragment {
 			}
 		}
 
+		Log.i("feb19", "before need to retrieve");
 		if (needToRetrievePhotoDetailsFromFb) {
+			Log.i("feb19", "needToRetrieve");
 			getPhotoDetailsFromFB();
 		}
 
+		Log.i("feb19", "before getting comments");
 		if (!hasRetrievedComments) {
+			Log.i("feb19", "will get comments");
 			getComments();
 		} else {
 			mPager.setAdapter(mAdapter);
@@ -230,6 +241,8 @@ public class ImagePagerFragment extends BaseFragment {
 
 			Logger.i(Logger.getClassAndMethod() + response.toString());
 
+			Log.i("feb19", Logger.getClassAndMethod() + response.toString());
+
 			try {
 
 				final JSONObject dataJsonObject = new JSONObject(response);
@@ -249,6 +262,7 @@ public class ImagePagerFragment extends BaseFragment {
 							mPager.setAdapter(mAdapter);
 							mPager.setCurrentItem(0);
 							mAdapter.notifyDataSetChanged();
+							getComments();
 						}
 					});
 				}
@@ -305,6 +319,9 @@ public class ImagePagerFragment extends BaseFragment {
 	}
 
 	private void getComments() {
+
+		Log.i("feb19", "getComments");
+
 		final String query1 = "SELECT id, object_id, fromid, text, time, user_likes, likes FROM comment WHERE object_id IN " + mIds;
 		Logger.i("query1: " + query1);
 		final String query2 = "SELECT uid, name FROM user WHERE uid IN (SELECT fromid FROM #query1)";
@@ -332,6 +349,8 @@ public class ImagePagerFragment extends BaseFragment {
 
 		@Override
 		public void onComplete(String response, Object state) {
+			
+			Log.i("feb19", Logger.getClassAndMethod() + " response: " + response);
 
 			try {
 				JSONArray a = new JSONArray(response);
@@ -391,26 +410,37 @@ public class ImagePagerFragment extends BaseFragment {
 						if (photo != null) {
 							photo.setUserLikes(userLikes);
 							photo.setLikesCount(likesCount);
+							if(mPhotos.size()==1){
+								mPhotos.get(0).setUserLikes(userLikes);
+								mPhotos.get(0).setLikesCount(likesCount);
+							}
 						}
 					}
 				}
 
 				if (commentsJsonArray.length() > 0) {
+					Log.i("feb19", "# comments in json: " + commentsJsonArray.length());
 					for (int i = 0; i < commentsJsonArray.length(); i++) {
 						JSONObject obj = commentsJsonArray.getJSONObject(i);
 						// Create comment object
 						PhotoComment comment = PhotoComment.fromJSON(obj);
 						// Set comment's fromName from userNamesMap
 						comment.setFromName(userNamesMap.get(comment.getFromId()));
+						//comment.setFromId(comment.getFromId());
 						// Add comment to comments ArrayList for that photo in
 						// commentsMap.
-						Logger.i("comment.getObjectId(): " + comment.getObjectId());
+						Log.i("feb19", "comment.getObjectId(): " + comment.getObjectId());
 
 						String key = comment.getObjectId();
 						Photo photo = mPhotosMap.get(key);
 						// add comments to photo
 						photo.addComment(comment);
 						// set likes count on photo
+						
+						if(mPhotos.size()==1){
+							mPhotos.get(0).addComment(comment);
+						}
+						
 					}
 				}
 
@@ -530,6 +560,8 @@ public class ImagePagerFragment extends BaseFragment {
 			commentCount.setText(mPhotos.get(position).getCommentsCount());
 
 			ArrayList<PhotoComment> comments = mPhotos.get(position).getComments();
+			
+			Log.i("feb19", "comments: " + comments.size());
 
 			Logger.i(ImagePagerFragment.class.getSimpleName() + "comments.size(): " + comments.size());
 
@@ -568,6 +600,8 @@ public class ImagePagerFragment extends BaseFragment {
 					}
 				}
 			});
+
+			Log.i("feb19", "mPhoto.get(position).getPicture():" + mPhotos.get(position).getPicture());
 
 			getImageLoader().displayImage(mPhotos.get(position).getPicture(), imageView, getImageDisplayOptions(), new ImageLoadingListener() {
 				@Override
@@ -697,6 +731,8 @@ public class ImagePagerFragment extends BaseFragment {
 				if (StringUtil.notEmpty(comment.getTime())) {
 					holder.createdTime.setText(comment.getTime());
 				}
+				
+				Log.i("feb19", "fromPicture: "+ photoComments.get(position).getFromPicture());
 
 				getImageLoader().displayImage(photoComments.get(position).getFromPicture(), holder.fromPicture, getImageDisplayOptions());
 

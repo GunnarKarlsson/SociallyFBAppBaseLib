@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="aboutText"><![CDATA[Thank you for using Socially. If you have suggestion for new themes, requests for new features, or have found a bug, please <a href="mailto:bluebitapps@gmail.com">email us</a>. We will do our best to help you.</br></br>You can read our Privacy Policy on our site\'s <a href="http://bluebitapps.blogspot.com/p/privacy-policy.html">Privacy Policy Page</a>]]></string>
-
 </resources>
