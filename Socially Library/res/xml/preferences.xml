@@ -1,58 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <PreferenceCategory android:title="Notifications" >
+    <PreferenceCategory android:title="@string/notifications_menu_item" >
         <ListPreference
             android:defaultValue="@string/PREFS_NOTIFICATION_DELIVERY_DEFAULT_VALUE"
             android:entries="@array/pref_notification_delivery_entries"
             android:entryValues="@array/pref_notification_delivery_values"
             android:key="@string/PREFS_NOTIFICATION_DELIVERY_KEY"
-            android:summary="Statusbar or themed pop-up"
-            android:title="Notification Delivery" />
+            android:summary="@string/statusbar_or_themed_pop_up"
+            android:title="@string/notification_delivery_method" />
         <ListPreference
             android:defaultValue="@string/PREFS_NOTIFICATION_FREQUENCY_DEFAULT_VALUE"
             android:entries="@array/pref_notifications_request_frequency_entries"
             android:entryValues="@array/pref_notifications_request_frequency_values"
             android:key="@string/PREFS_NOTIFICATION_FREQUENCY_KEY"
-            android:summary="Choose how often to check for new notifications"
-            android:title="Notifications Poll Frequency" />
+            android:summary="@string/choose_how_often_to_check_for_new_notifications"
+            android:title="@string/notifications_frequency" />
 
         <Preference
             android:key="notiftype"
-            android:summary="Choose what type of notification to receive"
-            android:title="Notification Type" />
+            android:summary="@string/choose_what_type_of_notification_to_receive"
+            android:title="@string/notification_type" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="NewsFeed" >
+    <PreferenceCategory android:title="@string/newsfeed_preference_category" >
         <ListPreference
             android:defaultValue="@string/PREFS_NEWSFEED_REFRESH_DEFAULT_VALUE"
             android:entries="@array/pref_newsfeed_refresh_entries"
             android:entryValues="@array/pref_newsfeed_refresh_values"
             android:key="@string/PREFS_NEWSFEED_REFRESH_KEY"
-            android:summary="When opening Newsfeed, fetch latest posts automatically"
-            android:title="Refresh Newsfeed Automatically" />
+            android:summary="@string/when_opening_newsfeed_fetch_latest_posts_automatically"
+            android:title="@string/refresh_newsfeed_automatically" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="Text Appearance" >
+    <PreferenceCategory android:title="@string/text_appearance" >
         <ListPreference
             android:defaultValue="@string/PREFS_FONT_SIZE_DEFAULT_VALUE"
             android:entries="@array/pref_font_size_entries"
             android:entryValues="@array/pref_font_size_values"
             android:key="@string/PREFS_FONT_SIZE_KEY"
-            android:summary="Choose font size"
-            android:title="Text Size" />
+            android:summary="@string/choose_font_size"
+            android:title="@string/text_size" />
         <ListPreference
             android:defaultValue="@string/PREFS_FONT_COLOR_DEFAULT_VALUE"
             android:entries="@array/pref_font_color_entries"
             android:entryValues="@array/pref_font_color_values"
             android:key="@string/PREFS_FONT_COLOR_KEY"
-            android:summary="Choose font color"
-            android:title="Text Color" />
+            android:summary="@string/choose_font_color"
+            android:title="@string/text_color" />
         <ListPreference
             android:defaultValue="@string/PREFS_FONT_TYPE_DEFAULT_VALUE"
             android:entries="@array/pref_font_type_entries"
             android:entryValues="@array/pref_font_type_values"
             android:key="@string/PREFS_FONT_TYPE_KEY"
-            android:summary="Choose font"
-            android:title="Text Typeface" />
+            android:summary="@string/choose_font"
+            android:title="@string/text_typeface" />
     </PreferenceCategory>
 
 </PreferenceScreen>

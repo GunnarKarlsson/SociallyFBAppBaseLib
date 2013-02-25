@@ -126,7 +126,7 @@ public class NewsFeedService extends IntentService {
 	private void getNewsFeed() {
 
 		Log.i("jan17nf", Logger.getClassAndMethod());
-		
+
 		Bundle params = new Bundle();
 
 		if (mCreatedTime != null) {
@@ -188,8 +188,22 @@ public class NewsFeedService extends IntentService {
 						// provide an object reference to them in the post).
 
 						if (StringUtil.notEmpty(newsFeedItem.getStory())) {
-							if (StringUtil.stringContainsItemFromList(newsFeedItem.getStory(), Constants.forbiddenStrings)) {
-								continue;
+
+							String languageCode = getResources().getConfiguration().locale.getLanguage();
+
+							if (languageCode.contains("es")) {
+								if (StringUtil.stringContainsItemFromList(newsFeedItem.getStory(), Constants.forbiddenStrings_ES)) {
+									continue;
+								}
+							} else if (languageCode.contains("pt")) {
+
+								if (StringUtil.stringContainsItemFromList(newsFeedItem.getStory(), Constants.forbiddenStrings_PT)) {
+									continue;
+								}
+							} else {
+								if (StringUtil.stringContainsItemFromList(newsFeedItem.getStory(), Constants.forbiddenStrings)) {
+									continue;
+								}
 							}
 						}
 

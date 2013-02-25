@@ -83,7 +83,7 @@ public class PostCheckinActivity extends BaseThemedActivity {
 
 		mPrivacySpinner = (Spinner) findViewById(R.id.privacySpinner);
 		TextView heading = (TextView)findViewById(R.id.heading);
-		String str = "Checking in at " + mPlaceName;
+		String str = getResources().getString(R.string.checkin) + ": " + mPlaceName;
 		heading.setText(str);
 		
 		mEditText = (EditText) findViewById(R.id.message);
@@ -93,7 +93,7 @@ public class PostCheckinActivity extends BaseThemedActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 
-		menu.add("Post").setTitle("Post").setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		menu.add(R.string.post).setTitle(R.string.post).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
 		return true;
 	}

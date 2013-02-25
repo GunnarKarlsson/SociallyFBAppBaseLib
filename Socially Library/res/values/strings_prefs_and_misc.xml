@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="pinch_to_zoom">Pinch to zoom</string>
+    <string name="image_zoom">Image Zoom</string>
+    <string name="notifications_preference_category">Notifications"</string>
+    <string name="notifications_type_preference_category">Notifications Type</string>
+    <string name="choose_which_type_of_notifications_to_receive">Choose which type of notifications to receive</string>
+    <string name="stream_pref_word">Stream</string>
+    <string name="close_friends_status_updates_to_newsfeed_and_wall">Close friend\'s status updates</string>
+    <string name="photo_pref_word">Photo</string>
+    <string name="close_friends_photo_uploads">Close friends\'s photo uploads</string>
+    <string name="page_pref_word">Page</string>
+    <string name="invitations_from_friends_to_like_pages">Invitations from friends to like pages</string>
+    <string name="invitations_to_events">Invitations to events</string>
+    <string name="event_pref_word">Event</string>
+    <string name="group_pref_word">Group</string>
+    <string name="invitations_to_groups">Invitations to groups</string>
+    <string name="friend_request_pref_word">Friend request</string>
+    <string name="requests_to_approve_or_decline_friend_requests">Requests to approve or decline friend requests</string>
+    <string name="remove_ads_menu_item_error_message">Link could not be found</string>
+    <string name="statusbar_or_themed_pop_up">Statusbar or themed pop-up</string>
+    <string name="notification_delivery_method">Notification Delivery Method</string>
+    <string name="choose_how_often_to_check_for_new_notifications">Choose how often to check for new notifications</string>
+    <string name="notifications_frequency">Notifications Frequency</string>
+    <string name="choose_what_type_of_notification_to_receive">Choose what type of notification to receive"</string>
+    <string name="notification_type">Notification Type"</string>
+    <string name="newsfeed_preference_category">Newsfeed</string>
+    <string name="when_opening_newsfeed_fetch_latest_posts_automatically">When opening Newsfeed, fetch latest posts automatically"</string>
+    <string name="refresh_newsfeed_automatically">Refresh Newsfeed Automatically" </string>
+    <string name="text_appearance">Text Appearance" </string>
+    <string name="choose_font_size">Choose font size</string>
+    <string name="text_size">Text Size</string>
+    <string name="choose_font_color">Choose font color</string>
+    <string name="text_color">Text Color</string>
+    <string name="choose_font">Choose font</string>
+    <string name="text_typeface">Text Typeface</string>
+    <string name="font">font</string>
+
+</resources>

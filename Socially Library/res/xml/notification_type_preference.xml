@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <PreferenceCategory android:title="Notification Type" 
-        android:summary="Which type of notification to receive:">
+    <PreferenceCategory android:title="@string/notifications_type_preference_category" 
+        android:summary="@string/choose_which_type_of_notifications_to_receive">
         <CheckBoxPreference
             android:key="stream"
-            android:title="Stream" 
+            android:title="@string/stream_pref_word" 
             android:defaultValue="true"
-            android:summary="Close friends' status updates to newsfeed and wall"/>
+            android:summary="@string/close_friends_status_updates_to_newsfeed_and_wall"/>
         <CheckBoxPreference
             android:key="photo"
-            android:title="Photo" 
+            android:title="@string/photo_pref_word" 
             android:defaultValue="true"
-            android:summary="Close friends' photo uploads"/>
+            android:summary="@string/close_friends_photo_uploads"/>
         <CheckBoxPreference
             android:key="page"
-            android:title="Page" 
+            android:title="@string/page_pref_word" 
             android:defaultValue="true"
-            android:summary="Invitations from friends to like pages"/>
+            android:summary="@string/invitations_from_friends_to_like_pages"/>
         <CheckBoxPreference
             android:key="event"
-            android:title="Event" 
+            android:title="@string/event_pref_word" 
             android:defaultValue="true"
-            android:summary="Invitations to events"/>
+            android:summary="@string/invitations_to_events"/>
         <CheckBoxPreference
             android:key="group"
-            android:title="Group" 
+            android:title="@string/group_pref_word" 
             android:defaultValue="true"
-            android:summary="Invitations to groups"/>
+            android:summary="@string/invitations_to_groups"/>
         <CheckBoxPreference
             android:key="friendrequest"
-            android:title="Friend request" 
+            android:title="@string/friend_request_pref_word" 
             android:defaultValue="true"
-            android:summary="Requests to approve/decline friend requests"/>
+            android:summary="@string/requests_to_approve_or_decline_friend_requests"/>
     </PreferenceCategory>
 
 </PreferenceScreen>

@@ -202,6 +202,7 @@
     <string name="settings_menu_item">Settings</string>
     <string name="about_menu_item">About</string>
     <string name="logout_menu_item">Logout</string>
+    <string name="remove_ads_menu_item">Remove ads</string>
     <string name="new_messages_could_not_be_retrieved">New messages could not be retrieved</string>
     <string name="no_messages_available">No messages available</string>
     <string name="data_could_not_be_retrieved">Data could not be retrieved</string>
@@ -266,4 +267,5 @@
     <string name="new_notifications">new notifications</string>
     <string name="one_new_notification">1 new notification</string>
     <string name="a_while_ago">a while ago</string>        
+    <string name="remove_ads_menu_item_error_message">Link could not be found</string>
 </resources>

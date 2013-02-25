@@ -305,13 +305,20 @@ public class ImageGridFragment extends BaseNavigationFragment {
 
 	private void setItems() {
 
-		mLoadingView.setVisibility(View.GONE);
+		if (mLoadingView != null) {
+			mLoadingView.setVisibility(View.GONE);
+		}
 
-		if (mPhotos == null || mPhotos.size() < 1) {
+		if (mPhotos == null) {
+			return;
+		}
 
-		} else {
+		if (mPhotos.size() < 1) {
+			return;
+		}
+
+		if (mAdapter != null) {
 			mAdapter.notifyDataSetChanged();
-
 		}
 	}
 }

@@ -98,18 +98,18 @@ public class NotificationsService extends IntentService {
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		
-		if(intent == null){
+
+		if (intent == null) {
 			return;
 		}
-		
+
 		boolean isValidSession = ((FBClientApplication) getApplication()).getFBConnection().isValidSession();
 
 		isRequestFromFragment = intent.getBooleanExtra(NotificationsService.FLAG_IS_REQUEST_FROM_FRAGMENT, false);
 		Log.i("jan22", "isRequestFromFragment: " + isRequestFromFragment);
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-		
-		if(prefs==null){
+
+		if (prefs == null) {
 			return;
 		}
 
@@ -197,10 +197,31 @@ public class NotificationsService extends IntentService {
 							String name = userNamesMap.get(notification.getSenderId());
 							notification.setSenderName(name);
 						}
+
 						
-						if (StringUtil.notEmpty(notification.getTitleText())) {
-							if (StringUtil.stringContainsItemFromList(notification.getTitleText(), Constants.forbiddenStringsForNotifications)) {
-								continue;
+						String languageCode = getResources().getConfiguration().locale.getLanguage();
+						
+						if (languageCode.contains("es")) {
+							//check for forbidden Strings in Spanish
+							if(StringUtil.notEmpty(notification.getTitleText())){
+								if (StringUtil.stringContainsItemFromList(notification.getTitleText(), Constants.forbiddenStringsForNotifications_ES)) {
+									continue;
+								}
+							}
+
+						}else if(languageCode.contains("pt")){
+							if(StringUtil.notEmpty(notification.getTitleText())){
+								if (StringUtil.stringContainsItemFromList(notification.getTitleText(), Constants.forbiddenStringsForNotifications_PT)) {
+									continue;
+								}
+							}
+							
+						} else {
+							//default: check for forbidden Strings in English
+							if (StringUtil.notEmpty(notification.getTitleText())) {
+								if (StringUtil.stringContainsItemFromList(notification.getTitleText(), Constants.forbiddenStringsForNotifications)) {
+									continue;
+								}
 							}
 						}
 
@@ -226,22 +247,22 @@ public class NotificationsService extends IntentService {
 			}
 
 			int notificationsCount = notifications.size();
-			
+
 			// Add notifications to database
-			try{
-			for (FBNotification notification : notifications) {
-				FBClientApplication application = (FBClientApplication) getApplication();
-				application.getNotificationsData().insertOrIgnore(notification.getContentValues());
-			}
-			}catch(ConcurrentModificationException e){
+			try {
+				for (FBNotification notification : notifications) {
+					FBClientApplication application = (FBClientApplication) getApplication();
+					application.getNotificationsData().insertOrIgnore(notification.getContentValues());
+				}
+			} catch (ConcurrentModificationException e) {
 				sendBroadcast(new Intent(NotificationsService.REFRESH_NOTIFICATIONS_FAIL));
 				return;
 			}
 
-			//Notify fragment
+			// Notify fragment
 			sendBroadcast(new Intent(NotificationsService.REFRESH_NOTIFICATIONS_DATA_SUCCESS));
 
-			//Notify SlidingMenu
+			// Notify SlidingMenu
 			Intent intent = new Intent(Constants.ACTION_NEW_NOTIFICATIONS);
 			intent.putExtra(Constants.NOTIFICATION_COUNT_KEY, notificationsCount);
 			sendBroadcast(intent);
@@ -280,7 +301,6 @@ public class NotificationsService extends IntentService {
 
 	private void createSystemNotification() {
 
-		
 		long unreadCount = FBClientApplication.getApplication().getNotificationsData().getUnreadCount();
 		Log.i("notiftype", "unreadCount: " + unreadCount);
 
@@ -291,10 +311,10 @@ public class NotificationsService extends IntentService {
 			notificationTitle = getResources().getString(R.string.one_new_notification);
 		} else {
 			return;
-		}		
-		
+		}
+
 		FBClientApplication app = FBClientApplication.getApplication();
-		
+
 		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(app);
 
 		String notifDeliveryTypeKey = "";
@@ -303,26 +323,27 @@ public class NotificationsService extends IntentService {
 			notifDeliveryTypeKey = app.getResources().getString(com.bluebitapps.fbclientbase.R.string.PREFS_NOTIFICATION_DELIVERY_KEY);
 
 		} catch (NotFoundException e) {
-			//TODO: handle ?
+			// TODO: handle ?
 		}
 
 		String type = sharedPreferences.getString(notifDeliveryTypeKey, "statusbar");
-		
-		if("statusbar".equals(type)){
+
+		if ("statusbar".equals(type)) {
 			postToStatusBar(unreadCount, notificationTitle);
-		}else if("popup".equals(type)){
+		} else if ("popup".equals(type)) {
 			launchPopup();
 		}
-		
+
 	}
-	
-	private void postToStatusBar(long unreadCount, String title){
+
+	private void postToStatusBar(long unreadCount, String title) {
 		Intent intent = new Intent(Constants.ACTION_NEW_NOTIFICATIONS);
 		intent.putExtra(Constants.NOTIFICATION_COUNT_KEY, unreadCount);
 		sendBroadcast(intent);
 
 		NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-		Notification notification = new Notification(com.bluebitapps.fbclientbase.R.drawable.notification_icon_for_notifications_drawer, getResources().getString(R.string.notification), System.currentTimeMillis());
+		Notification notification = new Notification(com.bluebitapps.fbclientbase.R.drawable.notification_icon_for_notifications_drawer, getResources().getString(R.string.notification),
+				System.currentTimeMillis());
 		Context context = getApplicationContext();
 
 		String notificationText = getResources().getString(R.string.go_to_socially_to_read_new_notifications);
@@ -339,11 +360,25 @@ public class NotificationsService extends IntentService {
 
 		notificationManager.notify(1, notification);
 	}
-	
-	private void launchPopup(){
+
+	private void launchPopup() {
 		Intent dialogIntent = new Intent(getBaseContext(), NotificationsAlertActivity.class);
-		dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //NEEDS TO BE LAUNCHED ONLY ONCE OR REPLACE THE LATEST
-		dialogIntent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);//DON'T MOVE  OUR APP TO FRONT IF USER IS LOOKING AT SOMETHING ELSE, JUST SHOW NOTIFICATION.
+		dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // NEEDS TO BE
+																// LAUNCHED ONLY
+																// ONCE OR
+																// REPLACE THE
+																// LATEST
+		dialogIntent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);// DON'T MOVE
+																	// OUR APP
+																	// TO FRONT
+																	// IF USER
+																	// IS
+																	// LOOKING
+																	// AT
+																	// SOMETHING
+																	// ELSE,
+																	// JUST SHOW
+																	// NOTIFICATION.
 		getApplication().startActivity(dialogIntent);
 	}
 

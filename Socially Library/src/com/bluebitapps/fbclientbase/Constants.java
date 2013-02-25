@@ -27,6 +27,13 @@ public class Constants {
 	
 	public static final String[] forbiddenStrings = {"shared a page","likes a photo", "is going to an event", "attended an event", "likes a link", "likes a status", "created an event","commented on an", "commented on a"};
 	public static final String[] forbiddenStringsForNotifications =  {"shared","likes a photo", "is going to an event", "attended an event", "likes a link", "likes a status", "created an event","commented on an", "commented on a"};
+
+	public static final String[] forbiddenStrings_ES = {"compartió una página","le gusta una foto","asistirá a un evento","asistió a un evento","le gusta un enlace","le gusta una actualización de estado","ha creado un evento","ha comentado"};
+	public static final String[] forbiddenStringsForNotifications_ES = {"compartió","le gusta una foto","asistirá a un evento","asistió a un evento","le gusta un enlace","le gusta una actualización de estado","ha creado un evento","ha comentado"};
+	
+	public static final String[]forbiddenStrings_PT = {"compartilhou uma página","curtiu uma foto","vai participar de um evento","participou de um evento","curtiu um link","curtiu uma atualização de status","criou um evento","comentou"};
+	public static final String[]forbiddenStringsForNotifications_PT = {"compartilhou","curtiu uma foto","vai participar de um evento","participou de um evento","curtiu um link","curtiu uma atualização de status","criou um evento","comentou"};
+	
 	public static final String ACTION_PHOTO_UPLOAD_RESULT = "action photo upload result";
 	
 	public static final String USAGE_COUNT_KEY = "usage counter key";
@@ -78,7 +85,7 @@ public class Constants {
 	public static final String MENU_ITEM_SUB_ITEM_EVENT_INVITED = "Invitations";
 	public static final String MENU_ITEM_SUB_ITEM_BIRTHDAYS = "Birthdays";
 	public static final String MENU_ITEM_RATE ="Rate in market";
-	
+	public static final String MENU_ITEM_REMOVE_ADS = "Remove ads";
 	
 	public static final String MENU_ITEM_SUB_ITEM_ME = "Me";
 	public static final String MENU_ITEM_SUB_ITEM_WALL = "My wall";

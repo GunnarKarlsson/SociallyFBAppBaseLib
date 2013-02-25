@@ -12,8 +12,8 @@
         android:layout_alignParentTop="true"
         android:divider="@android:color/transparent"
         android:dividerHeight="-1sp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp" />
+        android:paddingLeft="@dimen/list_padding_left"
+        android:paddingRight="@dimen/list_padding_right" />
 
     <com.bluebitapps.utils.WrappingSlidingDrawer
         android:id="@+id/slidingDrawer"
@@ -51,7 +51,7 @@
                     android:id="@+id/gridView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    
+                    android:layout_centerInParent="true"
                     android:background="@drawable/square_white"
                     android:columnWidth="40dp"
                     android:gravity="center"
@@ -59,8 +59,7 @@
                     android:numColumns="auto_fit"
                     android:padding="10dip"
                     android:stretchMode="columnWidth"
-                    android:verticalSpacing="6dp" 
-                    android:layout_centerInParent="true">
+                    android:verticalSpacing="6dp" >
                 </GridView>
             </RelativeLayout>
         </RelativeLayout>

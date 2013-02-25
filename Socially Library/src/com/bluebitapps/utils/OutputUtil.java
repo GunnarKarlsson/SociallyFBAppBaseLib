@@ -87,6 +87,15 @@ public class OutputUtil {
 	}
 
 	private static final void doDownLoad(Context context, String appName, String imgName, String urlString) {
+		
+		if(context == null){
+			return;
+		}
+		
+		if(urlString == null){
+			return;
+		}
+		
 		String folderPathInGallery = "/DCIM/" + appName;
 
 		String imageName;

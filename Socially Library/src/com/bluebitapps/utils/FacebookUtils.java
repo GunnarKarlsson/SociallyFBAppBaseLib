@@ -164,21 +164,21 @@ public class FacebookUtils {
 	}
 
 	public static String getCreatedTimeInNewsFeed(NewsFeedItem item, Context context) {
-		
-		if(context == null){
+
+		if (context == null) {
 			return null;
 		}
-		
+
 		String createdTime = (String) FacebookUtils.convertFacebookCreatedTimeToRelativeTime(item.getCreatedTime(), context);
 		return createdTime;
 	}
 
 	public static CharSequence convertFacebookCreatedTimeToRelativeTime(String createdTime, Context context) {
 
-		if(context == null){
+		if (context == null) {
 			return null;
 		}
-		
+
 		if (!StringUtil.notEmpty(createdTime)) {
 			return "";
 		}
@@ -203,10 +203,10 @@ public class FacebookUtils {
 
 	public static CharSequence convertFacebookEventTimeToRelativeTime(String time, Context context) {
 
-		if(context==null){
+		if (context == null) {
 			return null;
 		}
-		
+
 		if (!StringUtil.notEmpty(time)) {
 			return context.getResources().getString(R.string.a_while_ago);
 		}
@@ -225,17 +225,24 @@ public class FacebookUtils {
 	}
 
 	public static String convertInvitedToEventTimeStamp(String timestamp) {
-		int stamp = Integer.parseInt(timestamp);
+
+		int stamp;
+		try {
+			stamp = Integer.parseInt(timestamp);
+		} catch (NumberFormatException e) {
+			return null;
+		}
+		
 		java.util.Date time = new java.util.Date((long) stamp * 1000);
 		return time.toString();
 	}
 
 	public static CharSequence convertUnixTimeStampToRelativeTime(String timeStamp, Context context) {
 
-		if(context==null){
+		if (context == null) {
 			return null;
 		}
-		
+
 		// Logger.i(FacebookUtils.class.getSimpleName() +
 		// "convertUnixTimeStampToRelativeTime()" + "in: " + timeStamp);
 

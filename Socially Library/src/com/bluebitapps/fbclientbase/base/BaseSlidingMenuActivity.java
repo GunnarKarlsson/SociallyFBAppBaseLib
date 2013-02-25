@@ -46,8 +46,10 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager.BadTokenException;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import com.bluebitapps.utils.ExitUtil;
+import com.bluebitapps.utils.OutputUtil;
 import com.bluebitapps.utils.StringUtil;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.bluebitapps.fbclientbase.Constants;
@@ -371,8 +373,8 @@ public class BaseSlidingMenuActivity extends SlidingFragmentActivity implements 
 			hasToPopulateMessagesDb = false;
 			populateMessageDatabase();
 		}
-		
-		if(hasToPopulateAlbumsDb){
+
+		if (hasToPopulateAlbumsDb) {
 			hasToPopulateAlbumsDb = false;
 			Intent intent = new Intent(this, AlbumsService.class);
 			intent.putExtra(Constants.OBJECT_ID_KEY, FBClientApplication.getApplication().getFBConnection().getUserId());
@@ -449,13 +451,12 @@ public class BaseSlidingMenuActivity extends SlidingFragmentActivity implements 
 
 		if (Constants.MENU_ITEM_LOGOUT.equalsIgnoreCase(selection)) {
 
-			if(BaseSlidingMenuActivity.this.isFinishing()){
+			if (BaseSlidingMenuActivity.this.isFinishing()) {
 				return;
 			}
-			
+
 			new AlertDialog.Builder(BaseSlidingMenuActivity.this).setIcon(android.R.drawable.ic_dialog_alert).setTitle(getResources().getString(R.string.logout))
-					.setMessage(getResources().getString(R.string.do_you_want_to_logout))
-					.setPositiveButton(getResources().getString(R.string.logout), new DialogInterface.OnClickListener() {
+					.setMessage(getResources().getString(R.string.do_you_want_to_logout)).setPositiveButton(getResources().getString(R.string.logout), new DialogInterface.OnClickListener() {
 
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
@@ -465,14 +466,66 @@ public class BaseSlidingMenuActivity extends SlidingFragmentActivity implements 
 
 					}).setNegativeButton("Cancel", null).show();
 
-		} else if (Constants.MENU_ITEM_RATE.equalsIgnoreCase(selection)) {
-			Uri uri = Uri.parse("market://details?id=" + getPackageName());
-			Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-			try {
-				startActivity(intent);
-			} catch (ActivityNotFoundException e) {
-				// crouton: "Cloudn't launch Google Play"
+		} else if (Constants.MENU_ITEM_REMOVE_ADS.equalsIgnoreCase(selection)) {
+
+			if (FBClientApplication.getApplication().hasKindleFeatureSet()) {
+				if (getResources().getBoolean(R.bool.isPinkVersion)) {
+					//is Kindle and Pink
+				} else {
+					//is not Kindle and Blue
+					Uri uriToAmazonAppStore = Uri.parse("amzn://apps.android?p=com.bluebitapps.sociallypremium");
+					Intent intentToLaunchAmazonAppStore = new Intent(Intent.ACTION_VIEW, uriToAmazonAppStore);
+					try {
+						startActivity(intentToLaunchAmazonAppStore);
+					} catch (ActivityNotFoundException e) {
+						// Amazon AppStore not found, link to Amazon web store.
+						Uri uriToAmazonWebStore = Uri.parse("http://www.amazon.com/gp/mas/dl/android?p=com.bluebitapps.sociallypremium");
+						Intent intentToLaunchAmazonWebStore = new Intent(Intent.ACTION_VIEW, uriToAmazonWebStore);
+						try {
+							startActivity(intentToLaunchAmazonWebStore);
+						} catch (ActivityNotFoundException ex) {
+							Toast.makeText(BaseSlidingMenuActivity.this, R.string.remove_ads_menu_item_error_message, Toast.LENGTH_SHORT).show();
+						}
+					}
+				}
+			} else {
+				
+				if (getResources().getBoolean(R.bool.isPinkVersion)) {
+					// is non-Kindle and pink version
+					Uri uriToGooglePlayApp = Uri.parse("market://details?id=com.bluebitapps.sociallypinkpremium");
+					Intent intentToLaunchGooglePlayApp = new Intent(Intent.ACTION_VIEW, uriToGooglePlayApp);
+					try {
+						startActivity(intentToLaunchGooglePlayApp);
+					} catch (ActivityNotFoundException e) {
+						// Google Play store not found, link to web store
+						Uri uriToGooglePlayWebStore = Uri.parse("http://google.play.com/store/apps/details?id=com.bluebitapps.sociallypinkpremium");
+						Intent intentTolaunchGooglePlayWebStore = new Intent(Intent.ACTION_VIEW, uriToGooglePlayWebStore);
+						try {
+							startActivity(intentTolaunchGooglePlayWebStore);
+						} catch (ActivityNotFoundException ex) {
+							Toast.makeText(BaseSlidingMenuActivity.this, R.string.remove_ads_menu_item_error_message, Toast.LENGTH_SHORT).show();
+						}
+					}
+
+				} else {
+					// is non-Kindle and blue version
+					Uri uriToGooglePlayApp = Uri.parse("market://details?id=com.bluebitapps.sociallypremium");
+					Intent intentToLaunchGooglePlayApp = new Intent(Intent.ACTION_VIEW, uriToGooglePlayApp);
+					try {
+						startActivity(intentToLaunchGooglePlayApp);
+					} catch (ActivityNotFoundException e) {
+						// Google Play store not found, link to web store
+						Uri uriToGooglePlayWebStore = Uri.parse("http://google.play.com/store/apps/details?id=com.bluebitapps.sociallypremium");
+						Intent intentTolaunchGooglePlayWebStore = new Intent(Intent.ACTION_VIEW, uriToGooglePlayWebStore);
+						try {
+							startActivity(intentTolaunchGooglePlayWebStore);
+						} catch (ActivityNotFoundException ex) {
+							Toast.makeText(BaseSlidingMenuActivity.this, R.string.remove_ads_menu_item_error_message, Toast.LENGTH_SHORT).show();
+						}
+					}
+				}
 			}
+
 		} else {
 
 			toggle();// moves menu back to closed state
@@ -492,7 +545,7 @@ public class BaseSlidingMenuActivity extends SlidingFragmentActivity implements 
 
 				try {
 					FBClientApplication.getApplication().getFBConnection().getFacebook().logout(getApplicationContext());
-				}catch (BadTokenException e){
+				} catch (BadTokenException e) {
 					Logger.i(Logger.getClassAndMethod() + e);
 				} catch (MalformedURLException e) {
 					Logger.i(Logger.getClassAndMethod() + e);
@@ -644,8 +697,8 @@ public class BaseSlidingMenuActivity extends SlidingFragmentActivity implements 
 
 	private void showDialog() {
 
-		new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_dialog_alert).setTitle(getResources().getString(R.string.quit_app)).setMessage(getResources().getString(R.string.do_you_want_to_exit_socially))
-				.setPositiveButton(getResources().getString(R.string.exit), new DialogInterface.OnClickListener() {
+		new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_dialog_alert).setTitle(getResources().getString(R.string.quit_app))
+				.setMessage(getResources().getString(R.string.do_you_want_to_exit_socially)).setPositiveButton(getResources().getString(R.string.exit), new DialogInterface.OnClickListener() {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {

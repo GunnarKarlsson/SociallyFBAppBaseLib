@@ -306,7 +306,7 @@ public class FriendsFragment extends BaseNavigationFragment implements OnClearCl
 			
 			
 			String friendsString = getActivity().getResources().getString(R.string.friends_lowercase);
-			String str = mFriends.size() + friendsString;
+			String str = mFriends.size() + " " + friendsString;
 			getActivity().getActionBar().setSubtitle(str);
 		}
 

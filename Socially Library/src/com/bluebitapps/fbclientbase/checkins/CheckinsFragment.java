@@ -148,7 +148,7 @@ public class CheckinsFragment extends BaseNavigationFragment {
 		Bundle bundle = getArguments();
 		mUserId = bundle.getString(Constants.OBJECT_ID_KEY);
 
-		setTitle("Checkins");
+		setTitle(getResources().getString(R.string.checkins_menu_item));
 
 	}
 

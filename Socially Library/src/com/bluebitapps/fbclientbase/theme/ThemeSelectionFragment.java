@@ -226,7 +226,7 @@ public class ThemeSelectionFragment extends BaseFragment {
 							}
 						}
 
-						AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(alertView).setMessage("Apply selection?");
+						AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(alertView).setMessage(R.string.apply_selection);
 
 						builder.setCancelable(false).setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {

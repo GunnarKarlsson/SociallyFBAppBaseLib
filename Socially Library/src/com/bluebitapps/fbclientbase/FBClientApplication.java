@@ -4,6 +4,8 @@ m * Copyright 2012 Gunnar Karlsson
 
 package com.bluebitapps.fbclientbase;
 
+import java.util.Locale;
+
 import org.acra.ACRA;
 import org.acra.annotation.ReportsCrashes;
 import org.jivesoftware.smack.ConnectionConfiguration;
@@ -18,6 +20,7 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.bluebitapps.fbclientbase.albums.AlbumsData;
 import com.bluebitapps.fbclientbase.chat.SASLXFacebookPlatformMechanism;
@@ -225,6 +228,15 @@ public class FBClientApplication extends Application implements OnSharedPreferen
 		super.onCreate();
 
 		mApplication = this;
+		
+		//TODO: test: set locale to PT
+		/*
+		Configuration configuration = getResources().getConfiguration();
+		configuration.locale = new Locale("es");
+		getResources().updateConfiguration(configuration, getResources().getDisplayMetrics());
+		*/
+		//TODO: end test
+		
 		mFBConnection = new FBConnection(this);
 		PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
 		onSharedPreferenceChanged(null, null);
@@ -233,6 +245,7 @@ public class FBClientApplication extends Application implements OnSharedPreferen
 		
 		checkSystemFeatures();
 		
+		Log.i("feb22", "language code: " + getResources().getConfiguration().locale.getLanguage());
 		
 	}
 	

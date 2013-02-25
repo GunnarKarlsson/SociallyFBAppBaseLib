@@ -26,12 +26,8 @@
 
         <Button
             android:id="@+id/likeButton"
-            android:layout_width="48dip"
-            android:layout_height="28dip"
+            style="@style/ButtonStyleSmall"
             android:layout_toRightOf="@id/likeCount"
-            android:background="@drawable/custom_button"
-            android:text="@string/like"
-            android:textColor="#222222"
-            android:textSize="12sp" />
+            android:text="@string/like"/>
 
 </RelativeLayout>

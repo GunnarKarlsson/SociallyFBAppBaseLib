@@ -412,8 +412,8 @@ public class NotificationsFragment extends BaseNavigationFragment {
 			// Write subtitle
 			String notificationString = getResources().getString(R.string.notification_lowercase);
 			String notificationsString = getResources().getString(R.string.notifications_lowercase);
-			String notifiationWord = mNotifications.size() == 1 ? notificationString : notificationsString;
-			String str = mNotifications.size() + " pending " + notifiationWord;
+			String notificationWord = mNotifications.size() == 1 ? notificationString : notificationsString;
+			String str = mNotifications.size() + " " + notificationWord;
 			getActivity().getActionBar().setSubtitle(str);
 		}
 

@@ -127,7 +127,7 @@ public class LikesFragment extends BaseNavigationFragment {
 			Logger.i(Logger.getClassAndMethod() + " mSearchString: " + mSearchString);
 		}
 
-		setTitle("Likes");
+		setTitle(getResources().getString(R.string.likes_menu_item));
 	}
 
 	@Override

@@ -68,6 +68,14 @@ public class EmoticonUtil {
 	     }
 
 	     public static Spannable addSmiledText(Context ch, Editable s) {
+	    	 
+	    	 if(s.toString().contains("https://")){
+	    		 return s;
+	    	 }
+	    	 
+	    	 if(s.toString().contains("http://")){
+	    		 return s;
+	    	 }
 
 	            int index;
 	            for (index = 0; index < s.length(); index++) {
@@ -75,6 +83,7 @@ public class EmoticonUtil {
 	                    int length = entry.getKey().length();
 	                    if (index + length > s.length())
 	                        continue;
+	                   
 	                    if (s.subSequence(index, index + length).toString().equals(entry.getKey())) {
 	                        s.setSpan(new ImageSpan(ch, entry.getValue()), index, index + length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 	                        index += length - 1;

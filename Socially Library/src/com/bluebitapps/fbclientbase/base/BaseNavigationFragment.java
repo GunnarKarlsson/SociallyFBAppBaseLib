@@ -206,14 +206,14 @@ public class BaseNavigationFragment extends BaseFragment {
 			return true;
 		} else if (getActivity() != null && item.getTitle().toString().equalsIgnoreCase(getActivity().getResources().getString(R.string.text_style))) {
 			if (getActivity() != null) {
-				//Kindle test crash ANFE
+				// Kindle test crash ANFE
 				try {
 					TextSettingsFragment fragment = new TextSettingsFragment();
 					android.app.FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
 					ft.addToBackStack(null);
 					ft.replace(android.R.id.content, fragment).commit();
 				} catch (ActivityNotFoundException e) {
-					//TODO: handle
+					// TODO: handle
 				}
 				return true;
 			} else {
@@ -262,23 +262,13 @@ public class BaseNavigationFragment extends BaseFragment {
 
 			if (resultCode == Activity.RESULT_OK) {
 
-				Bitmap bitmap = null;
 				Uri uri = null;
 
-				try {
-					Uri chosenImageUri = data.getData();
-					bitmap = null;
-					bitmap = Media.getBitmap(FBClientApplication.getApplication().getContentResolver(), chosenImageUri);
-
-					if (data != null) {
-						uri = data.getData();
-					}
-
-				} catch (IOException e) {
-					Logger.i(e.toString());
+				if (data != null) {
+					uri = data.getData();
+					startUploadActivity(uri);
 				}
 
-				startUploadActivity(bitmap, uri);
 			}
 			break;
 
@@ -286,23 +276,8 @@ public class BaseNavigationFragment extends BaseFragment {
 
 			Logger.i(BaseNavigationFragment.class.getSimpleName() + "#onActivityResult(): " + TAKE_PICTURE_WITH_CAMERA_RESULT_CODE);
 			if (resultCode == Activity.RESULT_OK) {
-				Bitmap bitmap = null;
-				try {
 
-					InputStream is = FBClientApplication.getApplication().getContentResolver().openInputStream(mFileUri);
-					bitmap = BitmapFactory.decodeStream(is);
-					is.close();
-					Logger.i(bitmap.toString());
-
-				} catch (FileNotFoundException e) {
-					Logger.i(Logger.getClassAndMethod() + e.toString());
-				} catch (IOException e) {
-					Logger.i(Logger.getClassAndMethod() + e.toString());
-				} catch (Exception e) {
-					Logger.i(Logger.getClassAndMethod() + e.toString());
-				}
-
-				startUploadActivity(bitmap, mFileUri);
+				startUploadActivity(mFileUri);
 
 			}
 
@@ -310,7 +285,7 @@ public class BaseNavigationFragment extends BaseFragment {
 		}
 	}
 
-	private void startUploadActivity(Bitmap bitmap, Uri uri) {
+	private void startUploadActivity(Uri uri) {
 		if (getActivity() != null) {
 			Intent intent = new Intent(getActivity(), UploadPhotoActivity.class);
 			intent.putExtra(UploadPhotoActivity.IMAGE_URI_KEY, uri);

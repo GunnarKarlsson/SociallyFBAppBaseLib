@@ -10,8 +10,8 @@
     <dimen name="indicator_internal_padding">4dp</dimen>
     <dimen name="list_padding_top">10dip</dimen>
     <dimen name="list_padding_bottom">10dip</dimen>
-    <dimen name="list_padding_left">16dip</dimen>
-    <dimen name="list_padding_right">16dip</dimen>
+    <dimen name="list_padding_left">10dip</dimen>
+    <dimen name="list_padding_right">10dip</dimen>
     <dimen name="divider_height">10sp</dimen>
 
     <!-- color picker -->
@@ -28,5 +28,8 @@
     <dimen name="bar_length">240dp</dimen>
     <dimen name="bar_pointer_radius">6dp</dimen>
     <dimen name="bar_pointer_halo_radius">20dp</dimen>
+    
+    <!-- Buttons -->
+    <dimen name="button_height_small">28dp</dimen>
 
 </resources>

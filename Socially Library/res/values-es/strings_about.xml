@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="aboutText"><![CDATA[Thank you for using Socially. If you have suggestion for new themes, requests for new features, or have found a bug, please <a href="mailto:bluebitapps@gmail.com">email us</a>. We will do our best to help you.]]></string>
-
+	<string name="aboutText"><![CDATA[Gracias por usar Socially. Si tienes alguna sugerencia sobre nuevos temas, solicitudes de nuevas características, o si has encontrado un problema; por favor, <a href=\"mailto:bluebitapps@gmail.com\">envíanos un correo electrónico</a> . Nos esforzaremos al máximo para ayudarte.]]></string>
 </resources>

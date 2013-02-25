@@ -108,8 +108,8 @@ public class TouchImageViewActivity extends BaseThemedActivity {
 
 		if (getActionBar() != null) {
 			getActionBar().setDisplayShowTitleEnabled(true);
-			getActionBar().setTitle("Socially Image Viewer");
-			getActionBar().setSubtitle("Pinch to zoom");
+			getActionBar().setTitle(R.string.image_zoom);
+			getActionBar().setSubtitle(R.string.pinch_to_zoom);
 		}
 	}
 
@@ -124,7 +124,7 @@ public class TouchImageViewActivity extends BaseThemedActivity {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 
-					String folderName = "Socially";
+					String folderName = getResources().getString(R.string.app_name);
 					folderName = getResources().getString(R.string.socially_name);
 					OutputUtil.saveImageFromUrlToSDCard(TouchImageViewActivity.this, folderName, null, mUrl);
 				}

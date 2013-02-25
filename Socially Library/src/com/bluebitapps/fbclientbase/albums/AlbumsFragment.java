@@ -304,7 +304,7 @@ public class AlbumsFragment extends BaseNavigationFragment {
 			String albumsString = getActivity().getResources().getString(R.string.albums_lowercase);
 
 			if (albumString != null && albumsString != null) {
-				String albumWord = mAlbums.size() == 1 ? "album" : "albums";
+				String albumWord = mAlbums.size() == 1 ? getResources().getString(R.string.album_lowercase) : getResources().getString(R.string.albums_lowercase);
 				String str = mAlbums.size() + " " + albumWord;
 				getActivity().getActionBar().setSubtitle(str);
 			}

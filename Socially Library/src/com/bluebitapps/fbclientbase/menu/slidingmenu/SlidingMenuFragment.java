@@ -220,6 +220,12 @@ public class SlidingMenuFragment extends ListFragment {
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_LIKES, getResources().getString(R.string.likes_menu_item),R.drawable.sliding_menu_icon_likes, MenuItemAdapter.TYPE_MAIN));
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_SUBSCRIPTIONS, getResources().getString(R.string.subscriptions_menu_item),R.drawable.sliding_menu_icon_subscriptions, MenuItemAdapter.TYPE_MAIN));
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_FRIEND_REQUESTS, getResources().getString(R.string.friend_requests_menu_item), R.drawable.sliding_menu_icon_friend_requests, MenuItemAdapter.TYPE_MAIN));
+	
+		if(!getResources().getBoolean(R.bool.isPremiumVersion)){
+			mAdapter.add(new MenuItem(Constants.MENU_ITEM_REMOVE_ADS, getResources().getString(R.string.remove_ads_menu_item), R.drawable.sliding_menu_icon_remove_ads, MenuItemAdapter.TYPE_MAIN));
+		}
+		
+		
 		mAdapter.add(new MenuItem(Constants.MENU_ITEM_SETTINGS, getResources().getString(R.string.settings_menu_item), R.drawable.sliding_menu_icon_settings, MenuItemAdapter.TYPE_MAIN));
 		// mAdapter.add(new MenuItem(Constants.MENU_ITEM_RATE,
 		// R.drawable.sliding_menu_icon_rate, MenuItemAdapter.TYPE_MAIN));

@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <PreferenceCategory android:title="Text Appearance" >
+    <PreferenceCategory android:title="@string/text_appearance" >
         <ListPreference
             android:defaultValue="@string/PREFS_FONT_SIZE_DEFAULT_VALUE"
             android:entries="@array/pref_font_size_entries"
             android:entryValues="@array/pref_font_size_values"
             android:key="@string/PREFS_FONT_SIZE_KEY"
-            android:title="Text Size" />
+            android:title="@string/text_size" />
         <ListPreference
             android:defaultValue="@string/PREFS_FONT_COLOR_DEFAULT_VALUE"
             android:entries="@array/pref_font_color_entries"
             android:entryValues="@array/pref_font_color_values"
             android:key="@string/PREFS_FONT_COLOR_KEY"
-            android:title="Text Color" />
+            android:title="@string/text_color" />
         <ListPreference
             android:defaultValue="@string/PREFS_FONT_TYPE_DEFAULT_VALUE"
             android:entries="@array/pref_font_type_entries"
             android:entryValues="@array/pref_font_type_values"
             android:key="@string/PREFS_FONT_TYPE_KEY"
-            android:title="Font" />
+            android:title="@string/font" />
     </PreferenceCategory>
 
 </PreferenceScreen>
