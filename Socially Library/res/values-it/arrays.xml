@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="pref_notification_delivery_entries">
+		<item>Messaggio (default) della barra di status</item>
+		<item>Notifica a comparsa con tema</item>
+	</string-array>
+	
+	<string-array name="pref_font_size_entries">
+		<item>Il più piccolo (10 dip)</item>
+		<item>Più piccolo (12 dip)</item>
+		<item>Piccolo (Default) (15 dip)</item>
+		<item>Medio (18 dip)</item>
+		<item>Grande (22 dip)</item>
+		<item>Più grande (26 dip)</item>
+		<item>Il più grande (30 dip)</item>
+	</string-array>
+	<string-array name="pref_font_color_entries">
+		<item>Nero</item>
+		<item>Grigio</item>
+		<item>Viola</item>
+		<item>Blu (scuro)</item>
+		<item>Blu (carico)</item>
+		<item>Blu (chiaro)</item>
+		<item>Verde (scuro)</item>
+		<item>Verde (chiaro)</item>
+		<item>Arancione (scuro)</item>
+		<item>Arancione (chiaro)</item>
+		<item>Rosso (scuro)</item>
+		<item>Rosso (chiaro)</item>
+	</string-array>
+	<string-array name="pref_notifications_request_frequency_entries">
+		<item>Ogni 12 ore</item>
+		<item>Ogni 10 ore</item>
+		<item>Ogni 8 ore</item>
+		<item>Ogni 6 ore</item>
+		<item>Ogni 4 ore</item>
+		<item>Ogni 2 ore</item>
+		<item>Ogni ora</item>
+		<item>Ogni 30 minuti</item>
+		<item>Ogni 15 minuti</item>
+		<item>Ogni 5 minuti</item>
+		<item>Ogni minuto</item>
+		<item>Ignora le notifiche</item>
+	</string-array>
+	<string-array name="pref_notifications_type_entries">
+		<item>Aggiornamenti di status</item>
+		<item>Foto</item>
+		<item>Eventi</item>
+		<item>Gruppo</item>
+		<item>Compleanno</item>
+	</string-array>
+	<string-array name="pref_newsfeed_refresh_entries">
+		<item>Sì, in automatico</item>
+		<item>No, clicco io su aggiorna</item>
+	</string-array>
+</resources>

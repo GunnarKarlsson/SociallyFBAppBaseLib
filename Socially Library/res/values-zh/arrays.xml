@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="pref_notification_delivery_entries">
+        <item>通知欄通知(default)</item>
+        <item>特式彈出通知</item>
+    </string-array>
+    <string-array name="pref_font_size_entries">
+        <item>最小 (10 dip)</item>
+        <item>較小 (12 dip)</item>
+        <item>小 (原設) (15 dip)</item>
+        <item>中等(18 dip)</item>
+        <item>大 (22 dip)</item>
+        <item>較大 (26 dip)</item>
+        <item>最大 (30 dip)</item>
+    </string-array>
+    <string-array name="pref_font_color_entries">
+        <item>黑色</item>
+        <item>灰色</item>
+        <item>紫色</item>
+        <item>藍色 (暗)</item>
+        <item>藍色 (光亮)</item>
+        <item>藍色 (淺)</item>
+        <item>綠色 (暗)</item>
+        <item>綠色 (淺)</item>
+        <item>橙色 (暗)</item>
+        <item>橙色 (淺)</item>
+        <item>紅色(暗)</item>
+        <item>紅色 (淺)</item>
+    </string-array>
+    <string-array name="pref_font_type_entries">
+        <item>Cute</item>
+        <item>Droid (原設)</item>
+        <item>Future</item>
+        <item>Garamond</item>
+        <item>Gill</item>
+        <item>Roboto </item>
+        <item>Verdana</item>
+    </string-array>
+    <string-array name="pref_notifications_request_frequency_entries">
+        <item>每十二小時</item>
+        <item>每十小時</item>
+        <item>每八小時</item>
+        <item>每六小時</item>
+        <item>每四小時</item>
+        <item>每兩小時</item>
+        <item>每小時</item>
+        <item>每三十分鐘</item>
+        <item>每十五分鐘</item>
+        <item>每五分鐘</item>
+        <item>每分鐘</item>
+        <item>不要取得通知</item>
+    </string-array>
+    <string-array name="pref_notifications_type_entries">
+        <item>動態更新</item>
+        <item>圖片</item>
+        <item>事件</item>
+        <item>群組</item>
+        <item>生日</item>
+    </string-array>
+    <string-array name="pref_newsfeed_refresh_entries">
+        <item>是，自動的</item>
+        <item>不，直到我自己按更新</item>
+    </string-array>
+
+</resources>

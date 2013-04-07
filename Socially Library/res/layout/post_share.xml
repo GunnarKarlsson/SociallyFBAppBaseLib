@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    style="@android:style/Theme.Holo.Light"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:padding="10dip" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/square_white_four_borders"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:padding="10dip" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/message"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_holo_light"
+                android:cursorVisible="true"
+                android:gravity="top"
+                android:minHeight="100dip"
+                android:textColor="#000000"
+                android:textColorHint="#999999"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dip"
+                android:text="@string/link"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <RelativeLayout
+                android:id="@+id/sharedContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="6dip"
+                android:paddingRight="6dip"
+                android:paddingTop="6dip"
+                android:paddingBottom="12dip" 
+                android:background="#efefef">
+
+                <ImageView
+                    android:id="@+id/sharedImage"
+                    android:layout_width="100dip"
+                    android:layout_height="100dip"
+                    android:layout_margin="6dip"
+                    android:background="@drawable/image_background" >
+                </ImageView>
+
+                <TextView
+                    android:id="@+id/sharedTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dip"
+                    android:layout_toRightOf="@id/sharedImage"
+                    android:textColor="#222222"
+                    android:text="..." />
+
+                <TextView
+                    android:id="@+id/sharedSubTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/sharedTitle"
+                    android:layout_toRightOf="@id/sharedImage"
+                    android:text="..." 
+                    android:textColor="#222222"
+                    android:layout_margin="6dip"/>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dip"
+                android:text="@string/privacy"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <Spinner
+                android:id="@+id/privacySpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/privacy_for_post_array"
+                android:prompt="@string/privacy_spinner_prompt" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

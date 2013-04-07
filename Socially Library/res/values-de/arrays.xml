@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="pref_notification_delivery_entries">
+		<item>Nachricht auf der Statusleiste (Standard)</item>
+		<item>Gestaltetes Pop-up</item>
+	</string-array>
+
+	<string-array name="pref_font_size_entries">
+		<item>Winzig (10)</item>
+		<item>Sehr klein (12)</item>
+		<item>Klein (15)</item>
+		<item>Mittel (18) </item>
+		<item>Groß (22)</item>
+		<item>Sehr groß (26)</item>
+		<item>Riesig (30)</item>
+	</string-array>
+	<string-array name="pref_font_color_entries">
+		<item>Schwarz</item>
+		<item>Grau</item>
+		<item>Lila</item>
+		<item>Blau (dunkel)</item>
+		<item>Blau (leuchtend)</item>
+		<item>Blau (hell)</item>
+		<item>Grün (dunkel)</item>
+		<item>Grün (hell)</item>
+		<item>Orange (dunkel)</item>
+		<item>Orange (hell)</item>
+		<item>Rot (dunkel)</item>
+		<item>Rot (hell)</item>
+	</string-array>
+	<string-array name="pref_notifications_request_frequency_entries">
+		<item>Alle 12 Stunden</item>
+		<item>Alle 10 Stunden</item>
+		<item>Alle 8 Stunden</item>
+		<item>Alle 6 Stunden</item>
+		<item>Alle 4 Stunden</item>
+		<item>Alle 2 Stunden</item>
+		<item>Alle 1 Stunde</item>
+		<item>Alle 30 Minuten</item>
+		<item>Alle 15 Minuten</item>
+		<item>Alle 5 Minuten</item>
+		<item>Alle 1 Minute</item>
+		<item>Keine Benachrichtigungen abrufen</item>
+	</string-array>
+	<string-array name="pref_notifications_type_entries">
+		<item>Status-Aktualisierungen</item>
+		<item>Foto</item>
+		<item>Ereignis</item>
+		<item>Gruppe</item>
+		<item>Geburtstag</item>
+	</string-array>
+	<string-array name="pref_newsfeed_refresh_entries">
+		<item>Ja, automatisch</item>
+		<item>Nein, erst wenn ich selbst auf „Neu laden“ tippe</item>
+	</string-array>
+</resources>

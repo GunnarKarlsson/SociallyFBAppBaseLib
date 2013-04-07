@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="pref_notification_delivery_entries">
+		<item>Message de barre de statut (par défaut)</item>
+		<item>Pop-up à thème</item>
+	</string-array>
+	
+	<string-array name="pref_font_size_entries">
+		<item>Plus petit (10 dip)</item>
+		<item>Très petit (12 dip)</item>
+		<item>Petit (par défaut) (15 dip)</item>
+		<item>Moyen (18 dip)</item>
+		<item>Grand (22 dip)</item>
+		<item>Très grand (26 dip)</item>
+		<item>Plus grand (30 dip)</item>
+	</string-array>
+	<string-array name="pref_font_color_entries">
+		<item>Noir</item>
+		<item>Gris</item>
+		<item>Pourpre</item>
+		<item>Bleu (foncé)</item>
+		<item>Bleu (vif)</item>
+		<item>Bleu (clair)</item>
+		<item>Vert (foncé)</item>
+		<item>Vert (clair)</item>
+		<item>Orange (foncé)</item>
+		<item>Orange (clair)</item>
+		<item>Rouge (foncé)</item>
+		<item>Rouge (clair)</item>
+	</string-array>
+
+	<string-array name="pref_notifications_request_frequency_entries">
+		<item>Toutes les 12 heures</item>
+		<item>Toutes les 10 heures</item>
+		<item>Toutes les 8 heures</item>
+		<item>Toutes les 6 heures</item>
+		<item>Toutes les 4 heures</item>
+		<item>Toutes les 2 heures</item>
+		<item>Toutes les heures</item>
+		<item>Toutes les 30 minutes</item>
+		<item>Toutes les 15 minutes</item>
+		<item>Toutes les 5 minutes</item>
+		<item>Toutes les minutes</item>
+		<item>Ne pas chercher de notifications</item>
+	</string-array>
+	<string-array name="pref_notifications_type_entries">
+		<item>Mises à jour de statut</item>
+		<item>Photo</item>
+		<item>Évènement</item>
+		<item>Groupe</item>
+		<item>Anniversaire</item>
+	</string-array>
+	<string-array name="pref_newsfeed_refresh_entries">
+		<item>Oui, automatiquement</item>
+		<item>Non, pas avant que j\'appuie sur rafraîchir moi-même</item>
+	</string-array>
+</resources>

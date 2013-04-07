@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="pinch_to_zoom">Pincez pour zoomer</string>
+	<string name="image_zoom">Zoom de l\'image</string>
+	<string name="notifications_preference_category">Notifications</string>
+	<string name="notifications_type_preference_category">Type de notifications</string>
+	<string name="choose_which_type_of_notifications_to_receive">Choisissez quel type de notifications vous souhaitez recevoir</string>
+	<string name="stream_pref_word">Fil d\'actualité</string>
+	<string name="close_friends_status_updates_to_newsfeed_and_wall">Mises à jour de statut d\'ami proche</string>
+	<string name="photo_pref_word">Photo</string>
+	<string name="close_friends_photo_uploads">Téléchargements de photo d\'ami proche</string>
+	<string name="page_pref_word">Page</string>
+	<string name="invitations_from_friends_to_like_pages">Invitations d\'amis a aimer les pages</string>
+	<string name="invitations_to_events">Invitations aux évènements</string>
+	<string name="event_pref_word">Évènement</string>
+	<string name="group_pref_word">Groupe</string>
+	<string name="invitations_to_groups">Invitations aux groupes</string>
+	<string name="friend_request_pref_word">Demande d\'amitié</string>
+	<string name="requests_to_approve_or_decline_friend_requests">Demandes pour accepter ou décliner des demandes d\'amitié</string>
+	<string name="remove_ads_menu_item_error_message">Impossible de trouver le lien</string>
+	<string name="statusbar_or_themed_pop_up">Barre de statut ou pop-up à thème</string>
+	<string name="notification_delivery_method">Méthode de livraison de notification</string>
+	<string name="choose_how_often_to_check_for_new_notifications">Choisissez la fréquence de vérification de vos nouvelles notifications</string>
+	<string name="notifications_frequency">Fréquence des notifications</string>
+	<string name="choose_what_type_of_notification_to_receive">Choisissez le type de notification que vous souhaitez recevoir</string>
+	<string name="notification_type">Type de notification</string>
+	<string name="newsfeed_preference_category">Fil d\'actualité</string>
+	<string name="when_opening_newsfeed_fetch_latest_posts_automatically">En ouvrant le fil d\'actualité, recherchez les postes les plus récents automatiquement</string>
+	<string name="refresh_newsfeed_automatically">Rafraîchir le fil d\'actualité automatiquement</string>
+	<string name="text_appearance">Apparence du texte</string>
+	<string name="choose_font_size">Choisir la taille du texte</string>
+	<string name="text_size">Taille du texte</string>
+	<string name="choose_font_color">Choisir la couleur du texte</string>
+	<string name="text_color">Couleur du texte</string>
+	<string name="choose_font">Choisir la police</string>
+	<string name="text_typeface">Police de caractères du texte</string>
+	<string name="font">police</string>
+</resources>
