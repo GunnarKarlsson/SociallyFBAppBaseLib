@@ -30,11 +30,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.bluebitapps.utils.OutputUtil;
 import com.bluebitapps.utils.StringUtil;
+import com.bluebitapps.fbclientbase.Constants;
+import com.bluebitapps.fbclientbase.FBClientApplication;
 import com.bluebitapps.fbclientbase.R;
 import com.bluebitapps.fbclientbase.base.BaseThemedActivity;
 import com.bluebitapps.fbclientbase.debug.Logger;
@@ -46,19 +51,66 @@ public class PostStatusUpdateActivity extends BaseThemedActivity {
 	private EditText mUrlNameEditText;
 	private ViewGroup mRoot;
 	private Spinner mPrivacySpinner;
+	private boolean isShare = false;
+	private String mUrl;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		Logger.i(Logger.getClassAndMethod());
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.post_status_update);
+
+		String title = "";
+		String subtitle = "";
+		String imageUrl = "";
+
+		if (getIntent() != null) {
+			if (getIntent().getExtras() != null) {
+				if (getIntent().getExtras().getBoolean(Constants.IS_SHARE_KEY)) {
+					isShare = true;
+					mUrl = getIntent().getExtras().getString(Constants.URL_KEY);
+					title = getIntent().getExtras().getString(Constants.OBJECT_TITLE_KEY);
+					subtitle = getIntent().getExtras().getString(Constants.OBJECT_SUBTITLE_KEY);
+					imageUrl = getIntent().getExtras().getString(Constants.OBJECT_IMAGE_URL_KEY);
+				}
+			}
+		}
+
+		if (isShare) {
+			setContentView(R.layout.post_share);
+			TextView sharedTitle = (TextView) findViewById(R.id.sharedTitle);
+			sharedTitle.setText(title);
+			TextView sharedSubtitle = (TextView) findViewById(R.id.sharedSubTitle);
+			
+			if(subtitle.equalsIgnoreCase("photo")){
+				subtitle = getResources().getString(R.string.photo_lowercase);
+			}else if(subtitle.equalsIgnoreCase("status")){
+				subtitle = getResources().getString(R.string.status_update);
+			}else{
+				subtitle = getResources().getString(R.string.link);
+			}
+			
+			sharedSubtitle.setText(subtitle);
+		} else {
+			setContentView(R.layout.post_status_update);
+			mUrlEditText = (EditText) findViewById(R.id.link);
+		}
 		mMessageEditText = (EditText) findViewById(R.id.message);
-		mUrlEditText = (EditText) findViewById(R.id.link);
+
 		mUrlNameEditText = (EditText) findViewById(R.id.linkName);
 		mPrivacySpinner = (Spinner) findViewById(R.id.privacySpinner);
 		mRoot = (ViewGroup) findViewById(R.id.root);
 		View view = findViewById(R.id.root);
 		setThemeAndConfigureActionBar(view);
+
+		if (isShare) {
+
+			ImageView iv = (ImageView) findViewById(R.id.sharedImage);
+
+			Log.i("ae3", "imageUrl: " + imageUrl);
+
+			getImageLoader().displayImage(imageUrl, iv, getImageDisplayOptions());
+
+		}
 	}
 
 	@Override
@@ -93,9 +145,11 @@ public class PostStatusUpdateActivity extends BaseThemedActivity {
 		if (item.getTitle().toString().equalsIgnoreCase(getResources().getString(R.string.post))) {
 			Logger.i(PostStatusUpdateActivity.class.getSimpleName() + "onOptionsItemSelected" + "Post");
 
-			if (!StringUtil.notEmpty(mMessageEditText.getText().toString())) {
-				OutputUtil.showCrouton(this, getResources().getString(R.string.enter_a_message));
-				return false;
+			if (!isShare) {
+				if (!StringUtil.notEmpty(mMessageEditText.getText().toString())) {
+					OutputUtil.showCrouton(this, getResources().getString(R.string.enter_a_message));
+					return false;
+				}
 			}
 
 			// Crouton.makeText(this, "Posting your status update",
@@ -107,7 +161,7 @@ public class PostStatusUpdateActivity extends BaseThemedActivity {
 			String privacySetting = "";
 
 			Log.i("feb6", Logger.getClassAndMethod() + selection);
-			
+
 			if (getResources().getString(R.string.everyone).equalsIgnoreCase(selection)) {
 				privacySetting = "EVERYONE";
 			} else if (getResources().getString(R.string.friends_of_friends).equalsIgnoreCase(selection)) {
@@ -117,14 +171,20 @@ public class PostStatusUpdateActivity extends BaseThemedActivity {
 			} else {
 				privacySetting = "ALL_FRIENDS";
 			}
-			
-			Log.i("feb" , Logger.getClassAndMethod() + privacySetting);
+
+			Log.i("feb", Logger.getClassAndMethod() + privacySetting);
+
+			if (!isShare) {
+				mUrl = mUrlEditText.getText().toString();
+			}
 
 			Intent intent = new Intent(this, PostStatusUpdateService.class);
 			Logger.i(Logger.getClassAndMethod() + "mEditText.getText().toString(): " + mMessageEditText.getText().toString());
 			intent.putExtra(PostStatusUpdateService.MESSAGE_KEY, mMessageEditText.getText().toString());
-			intent.putExtra(PostStatusUpdateService.LINK_KEY, mUrlEditText.getText().toString());
-			intent.putExtra(PostStatusUpdateService.LINK_NAME_KEY, mUrlNameEditText.getText().toString());
+			intent.putExtra(PostStatusUpdateService.LINK_KEY, mUrl);
+			if (!isShare) {
+				intent.putExtra(PostStatusUpdateService.LINK_NAME_KEY, mUrlNameEditText.getText().toString());
+			}
 			intent.putExtra(PostStatusUpdateService.PRIVACY_KEY, privacySetting);
 			startService(intent);
 

@@ -5,6 +5,8 @@
     <string name="search_hint">Search Pages, Events, Groups&#8230;</string>
     <string name="like">Like</string>
     <string name="comment">Comment</string>
+    <string name="share_button">Share</string>
+    <string name="status_update">Status update</string>
     <string name="loading">Loading&#8230;</string>
     <string name="add_your_message">Add your message</string>
     <string name="send">send</string>
@@ -21,14 +23,12 @@
     <string name="loading_comments">Loading comments&#8230;</string>
     <string name="earlier_comments">Earlier comments&#8230;</string>
     <string name="long_click_to_mark_as_read">Long click to mark as read</string>
-    <string name="post">Post</string>
     <string name="type_your_message">Type your message</string>
     <string name="write_your_message">write your message</string>
     <string name="zero">0</string>
     <string name="choose_content_type">Choose content type</string>
     <string name="start_search">Start search</string>
     <string name="respond">Respond</string>
-    
 
     <string name="search_options_prompt">Specify search</string>
 
@@ -166,7 +166,6 @@
     <string name="no_pending_friends_requests">No pending friends requests</string>
     <string name="friends_list_could_not_be_retrieved">Friends list could not be retrieved</string>
     <string name="friends">Friends</string>
-    <string name="search">Search</string>
     <string name="no_friends_data_available">No friends data available</string>
     <string name="friends_lowercase">friends</string>
     <string name="data_not_available">Data not available</string>
@@ -267,5 +266,8 @@
     <string name="new_notifications">new notifications</string>
     <string name="one_new_notification">1 new notification</string>
     <string name="a_while_ago">a while ago</string>        
+    
     <string name="remove_ads_menu_item_error_message">Link could not be found</string>
+    <string name="are_now_friends_forbidden_string">are now friends</string>
+    
 </resources>

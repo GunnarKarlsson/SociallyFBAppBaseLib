@@ -22,6 +22,11 @@ import com.bluebitapps.fbclientbase.R;
 
 public class Constants {
 
+	public static final String URL_KEY = "url key";
+	public static final String OBJECT_SUBTITLE_KEY = "object subtitle key";
+	public static final String OBJECT_IMAGE_URL_KEY = "object image key";
+	public static final String IS_SHARE_KEY = "is share key";
+	
 	public static final String TAB_INDEX_KEY = "tab index key";
 	public static final String TAB_INDEX_WALL ="wall";
 	
@@ -33,6 +38,16 @@ public class Constants {
 	
 	public static final String[]forbiddenStrings_PT = {"compartilhou uma página","curtiu uma foto","vai participar de um evento","participou de um evento","curtiu um link","curtiu uma atualização de status","criou um evento","comentou"};
 	public static final String[]forbiddenStringsForNotifications_PT = {"compartilhou","curtiu uma foto","vai participar de um evento","participou de um evento","curtiu um link","curtiu uma atualização de status","criou um evento","comentou"};
+	
+	public static final String[]forbiddenStrings_DE = {"hat eine Seite geteilt","gefällt ein Foto","nimmt an einem Ereignis teil","hat an einem Ereignis teil genommen","gefällt ein Link","gefällt eine Status-Aktualisierung","hat ein Ereignis initiiert","kommentiert"};
+	public static final String[]forbiddenStringsForNotifications_DE = {"geteilt","gefällt ein Foto","nimmt an einem Ereignis teil","hat an einem Ereignis teil genommen","gefällt ein Link","gefällt eine Status-Aktualisierung","hat ein Ereignis initiiert","kommentiert"};
+
+	public static final String[]forbiddenStrings_IT = {"condiviso una pagina", "è piaciuta una foto","parteciperà ad un evento","partecipato ad un evento","piace un link","piace uno status","creato un evento","commentato su"};
+	
+	public static final String[]forbiddenStringsForNotifications_IT = {"condiviso una pagina", "è piaciuta una foto","parteciperà ad un evento","partecipato ad un evento","piace un link","piace uno status","creato un evento","commentato su"};
+	
+	public static final String[]forbiddenStringsForNotifications_FR = {"partagé","partagée","aime une photo","va se rendre à un évènement","est allé à","est allée à","aime un lien","aime une mise à jour de statut","a créé un événement","a créée un événement","a commenté","a commenté"};
+	public static final String[]forbiddenStrings_FR = {"a partagé une page","a partagée une page","aime une photo","va se rendre à un évènement","est allé à","est allée à","aime un lien","aime une mise à jour de statut","a créé un événement","a créée un événement","a commenté","a commenté"};
 	
 	public static final String ACTION_PHOTO_UPLOAD_RESULT = "action photo upload result";
 	

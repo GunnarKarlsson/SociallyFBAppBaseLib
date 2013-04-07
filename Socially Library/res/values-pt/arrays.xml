@@ -4,10 +4,7 @@
 		<item>Mensagem da barra de status (padrão)</item>
 		<item>Pop-up temático</item>
 	</string-array>
-	<string-array name="pref_notification_delivery_values">
-		<item>barra de status</item>
-		<item>popup</item>
-	</string-array>
+	
 	<string-array name="pref_font_size_entries">
 		<item>Menor (10 dip)</item>
 		<item>Muito pequeno (12 dip)</item>

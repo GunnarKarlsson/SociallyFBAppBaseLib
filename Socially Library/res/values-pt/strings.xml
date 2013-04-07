@@ -4,6 +4,8 @@
 	<string name="search_hint">Buscar Páginas, Eventos, Grupos&#8230;</string>
 	<string name="like">Curtir</string>
 	<string name="comment">Comentar</string>
+	<string name="share_button">Compartilhar</string>
+	<string name="status_update">Atualização de Status</string>
 	<string name="loading">Carregando&#8230;</string>
 	<string name="add_your_message">Adicionar a sua mensagem</string>
 	<string name="send">enviar</string>

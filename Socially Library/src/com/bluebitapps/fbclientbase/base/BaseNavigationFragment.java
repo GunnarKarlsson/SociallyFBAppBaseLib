@@ -169,9 +169,11 @@ public class BaseNavigationFragment extends BaseFragment {
 
 		// Can't handle this in the activity since then onOptionsItemSelected in
 		// the fragment doesn't get called.
+		/*
 		if (item.getItemId() == android.R.id.home && getActivity() != null) {
 			getActivity().finish();
 		}
+		*/
 
 		if (getActivity() != null && item.getTitle().toString().equalsIgnoreCase(getActivity().getResources().getString(R.string.refresh))) {
 			setIsRefreshing(true);

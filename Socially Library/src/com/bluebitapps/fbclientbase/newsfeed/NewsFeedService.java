@@ -94,6 +94,8 @@ public class NewsFeedService extends IntentService {
 	@Override
 	protected void onHandleIntent(Intent intent) {
 
+		Log.i("april5","onHandleIntent");
+		
 		if (intent == null) {
 			return;
 		}
@@ -108,6 +110,7 @@ public class NewsFeedService extends IntentService {
 			mCreatedTime = bundle.getString(Constants.CREATED_TIME_KEY);
 			mUserId = bundle.getString(Constants.USER_ID_KEY);
 			mState = bundle.getString(Constants.STATE_KEY);
+			Log.i("april5", mCreatedTime);
 		}
 
 		boolean isValidSession = ((FBClientApplication) getApplication()).getFBConnection().isValidSession();
@@ -166,6 +169,8 @@ public class NewsFeedService extends IntentService {
 		public void onComplete(String response, Object state) {
 
 			Log.i("jan21", Logger.getClassAndMethod() + response);
+			
+			Log.i("april5",response);
 
 			try {
 
@@ -195,9 +200,25 @@ public class NewsFeedService extends IntentService {
 								if (StringUtil.stringContainsItemFromList(newsFeedItem.getStory(), Constants.forbiddenStrings_ES)) {
 									continue;
 								}
+							} else if (languageCode.contains("de")) {
+
+								if (StringUtil.stringContainsItemFromList(newsFeedItem.getStory(), Constants.forbiddenStrings_DE)) {
+									continue;
+								}
+							} else if (languageCode.contains("it")) {
+
+								if (StringUtil.stringContainsItemFromList(newsFeedItem.getStory(), Constants.forbiddenStrings_IT)) {
+									continue;
+								}
+
 							} else if (languageCode.contains("pt")) {
 
 								if (StringUtil.stringContainsItemFromList(newsFeedItem.getStory(), Constants.forbiddenStrings_PT)) {
+									continue;
+								}
+							} else if (languageCode.contains("fr")) {
+
+								if (StringUtil.stringContainsItemFromList(newsFeedItem.getStory(), Constants.forbiddenStrings_FR)) {
 									continue;
 								}
 							} else {
@@ -236,13 +257,18 @@ public class NewsFeedService extends IntentService {
 				} else {
 
 					String query = "SELECT likes, post_id FROM stream WHERE post_id IN (";
-					for (int i = 0; i < mNewsFeedItems.size(); i++) {
-						if (mNewsFeedItems.get(i).getId() != null) {
-							query += "'" + mNewsFeedItems.get(i).getId() + "'";
-							if (i < (mNewsFeedItems.size() - 1)) {
-								query += ",";
+
+					try {
+						for (int i = 0; i < mNewsFeedItems.size(); i++) {
+							if (mNewsFeedItems.get(i).getId() != null) {
+								query += "'" + mNewsFeedItems.get(i).getId() + "'";
+								if (i < (mNewsFeedItems.size() - 1)) {
+									query += ",";
+								}
 							}
 						}
+					} catch (IndexOutOfBoundsException e) {
+						return;
 					}
 
 					query += ")";

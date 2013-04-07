@@ -229,10 +229,10 @@ public class FBClientApplication extends Application implements OnSharedPreferen
 
 		mApplication = this;
 		
-		//TODO: test: set locale to PT
+		//TODO: test: set locale
 		/*
 		Configuration configuration = getResources().getConfiguration();
-		configuration.locale = new Locale("es");
+		configuration.locale = new Locale("fr");
 		getResources().updateConfiguration(configuration, getResources().getDisplayMetrics());
 		*/
 		//TODO: end test
@@ -245,7 +245,10 @@ public class FBClientApplication extends Application implements OnSharedPreferen
 		
 		checkSystemFeatures();
 		
-		Log.i("feb22", "language code: " + getResources().getConfiguration().locale.getLanguage());
+		Log.i("ae3", "language code: " + getResources().getConfiguration().locale.getLanguage());
+		
+		NotificationAlarm alarm = new NotificationAlarm(this);
+		alarm.start();
 		
 	}
 	

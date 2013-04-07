@@ -63,7 +63,7 @@ public class SubscriptionsFragment extends BaseNavigationFragment {
 
 		setHasOptionsMenu(true);
 
-		setTitle("Subscriptions");
+		setTitle(getResources().getString(R.string.subscriptions_menu_item));
 	}
 
 	@Override

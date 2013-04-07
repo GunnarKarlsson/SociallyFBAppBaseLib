@@ -256,7 +256,9 @@ public class ImageGridFragment extends BaseNavigationFragment {
 
 							if (mPhotos != null) {
 								mPhotos = asyncPhotos;
-								mAdapter.notifyDataSetChanged();
+								if (mAdapter != null) {
+									mAdapter.notifyDataSetChanged();
+								}
 								if (mPhotos.size() > 0) {
 								} else {
 									OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.data_could_not_be_retrieved));

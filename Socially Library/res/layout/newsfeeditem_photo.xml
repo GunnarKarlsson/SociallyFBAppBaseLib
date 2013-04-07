@@ -57,13 +57,15 @@
 
     </LinearLayout>
     
+  
 
     <include
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dip"
+        android:layout_marginLeft="10dip"
         android:layout_below="@id/newsFeedItemPictureAndName"
         layout="@layout/action_footer_like_and_comment" />
 

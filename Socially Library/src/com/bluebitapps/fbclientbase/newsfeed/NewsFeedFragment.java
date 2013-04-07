@@ -13,7 +13,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteMisuseException;
@@ -36,23 +35,22 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.bluebitapps.utils.FacebookUtils;
-import com.bluebitapps.utils.OutputUtil;
-import com.bluebitapps.utils.StringUtil;
-import com.google.ads.AdView;
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.bluebitapps.fbclientbase.Constants;
 import com.bluebitapps.fbclientbase.FBClientApplication;
 import com.bluebitapps.fbclientbase.R;
 import com.bluebitapps.fbclientbase.base.BaseNavigationFragment;
-import com.bluebitapps.fbclientbase.base.SectionManager;
 import com.bluebitapps.fbclientbase.debug.Logger;
 import com.bluebitapps.fbclientbase.layout.LoadingView;
 import com.bluebitapps.fbclientbase.page.PageActivity;
 import com.bluebitapps.fbclientbase.profile.ProfileActivity;
+import com.bluebitapps.fbclientbase.statusupdate.PostStatusUpdateActivity;
 import com.bluebitapps.fbclientbase.theme.ThemeFactory;
+import com.bluebitapps.utils.FacebookUtils;
+import com.bluebitapps.utils.OutputUtil;
+import com.bluebitapps.utils.StringUtil;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 /**
  * Must to be initialized with an intent with parcelable with key
@@ -251,7 +249,6 @@ public class NewsFeedFragment extends BaseNavigationFragment {
 				}
 			}
 		}
-
 
 		if (mDataUpdateReceiver == null) {
 			mDataUpdateReceiver = new DataUpdateReceiver();
@@ -473,6 +470,7 @@ public class NewsFeedFragment extends BaseNavigationFragment {
 			// public ViewGroup actions;
 			public Button likeButton;
 			public Button commentsButton;
+			public Button shareButton;
 			public ImageView likesIcon;
 			public TextView likesCount;
 			public ImageView commentsIcon;
@@ -554,13 +552,14 @@ public class NewsFeedFragment extends BaseNavigationFragment {
 
 		private void setFromHeaderValues(NewsFeedItem item, ViewHolder holder) {
 			holder.fromName.setText(Html.fromHtml(FacebookUtils.getFromStringForNewsFeedItem(item)));
-			holder.createdTime.setText(Html.fromHtml(FacebookUtils.getCreatedTimeInNewsFeed(item,getActivity())));
+			holder.createdTime.setText(Html.fromHtml(FacebookUtils.getCreatedTimeInNewsFeed(item, getActivity())));
 			getImageLoader().displayImage(item.getProfilePicture(), holder.fromPicture, getImageDisplayOptions());
 		}
 
 		private void setActionFooterReferences(View view, ViewHolder holder) {
 			holder.likeButton = (Button) view.findViewById(R.id.likeButton);
 			holder.commentsButton = (Button) view.findViewById(R.id.commentButton);
+			holder.shareButton = (Button) view.findViewById(R.id.shareButton);
 			holder.likesCount = (TextView) view.findViewById(R.id.likeCount);
 			holder.commentsCount = (TextView) view.findViewById(R.id.commentCount);
 		}
@@ -611,6 +610,38 @@ public class NewsFeedFragment extends BaseNavigationFragment {
 					displayNewsFeedItemDetails(position);
 				}
 			});
+
+			holder.shareButton.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					String link = mNewsFeedItems.get(position).getLink();
+					Log.i("ae3", "link: " + link);
+					if (getActivity() != null) {
+						Intent intent = new Intent(getActivity(),PostStatusUpdateActivity.class);
+						intent.putExtra(Constants.IS_SHARE_KEY, true);
+						intent.putExtra(Constants.URL_KEY, link);
+						intent.putExtra(Constants.OBJECT_TITLE_KEY, mNewsFeedItems.get(position).getFromName());
+						intent.putExtra(Constants.OBJECT_ID_KEY, mNewsFeedItems.get(position).getFromId());
+						intent.putExtra(Constants.OBJECT_SUBTITLE_KEY, mNewsFeedItems.get(position).getType());
+						String token = getApplication().getFBConnection().getFacebook().getAccessToken();
+						String imageUrl;
+
+						if(mNewsFeedItems.get(position).getType().equalsIgnoreCase("status")){
+							imageUrl = "https://graph.facebook.com/" + item.getFromId() + "/picture?width=100&height=100&access_token=" + token;						
+						}else if(mNewsFeedItems.get(position).getType().equalsIgnoreCase("photo")){
+							imageUrl = "https://graph.facebook.com/" + item.getObjectId() + "/picture?width=100&height=100&access_token=" + token;
+						}else{
+							imageUrl = mNewsFeedItems.get(position).getPicture();
+						}
+						
+						intent.putExtra(Constants.OBJECT_IMAGE_URL_KEY, imageUrl);
+						
+						getActivity().startActivity(intent);
+					}
+				}
+			});
 		}
 
 		private void displayNewsFeedItemDetails(int position) {
@@ -650,9 +681,9 @@ public class NewsFeedFragment extends BaseNavigationFragment {
 
 				setActionFooterReferences(view, holder);
 
-				holder.commentsIcon = (ImageView) view.findViewById(R.id.commentIcon);
+				holder.commentsIcon = (ImageView) view.findViewById(R.id.commentIconImage);
 
-				holder.likesIcon = (ImageView) view.findViewById(R.id.likeIcon);
+				holder.likesIcon = (ImageView) view.findViewById(R.id.likeIconImage);
 
 				view.setTag(holder);
 			} else {
@@ -705,9 +736,10 @@ public class NewsFeedFragment extends BaseNavigationFragment {
 				}
 			}
 
-			String areNowFriendsString = getResources().getString(R.string.are_now_friends_forbibben_string);
+			String areNowFriendsString = getResources().getString(R.string.are_now_friends_forbidden_string);
 			if (holder.message != null && holder.message.getText() != null && holder.message.getText().toString().contains(areNowFriendsString)) {
 				holder.storyBox.setVisibility(View.GONE);
+				holder.description.setVisibility(View.GONE);
 			}
 
 			String isGoingToAnEventString = getResources().getString(R.string.is_going_to_an_event_forbidden_string);
@@ -775,8 +807,8 @@ public class NewsFeedFragment extends BaseNavigationFragment {
 
 				holder.message.setClickable(true);
 
-				holder.commentsIcon = (ImageView) view.findViewById(R.id.commentIcon);
-				holder.likesIcon = (ImageView) view.findViewById(R.id.likeIcon);
+				holder.commentsIcon = (ImageView) view.findViewById(R.id.commentIconImage);
+				holder.likesIcon = (ImageView) view.findViewById(R.id.likeIconImage);
 
 				setActionFooterReferences(view, holder);
 
@@ -847,8 +879,8 @@ public class NewsFeedFragment extends BaseNavigationFragment {
 				configText(holder.message);
 				holder.storyBox = (ViewGroup) view.findViewById(R.id.newsFeedItemPictureAndName);
 				holder.picture = (ImageView) view.findViewById(R.id.newsFeedItemPicture);
-				holder.commentsIcon = (ImageView) view.findViewById(R.id.commentIcon);
-				holder.likesIcon = (ImageView) view.findViewById(R.id.likeIcon);
+				holder.commentsIcon = (ImageView) view.findViewById(R.id.commentIconImage);
+				holder.likesIcon = (ImageView) view.findViewById(R.id.likeIconImage);
 				setActionFooterReferences(view, holder);
 				view.setTag(holder);
 			} else
@@ -916,10 +948,10 @@ public class NewsFeedFragment extends BaseNavigationFragment {
 						int end = tag.getOffset() + tag.getLength();
 						Logger.i("offset" + tag.getOffset());
 						Logger.i("end: " + end);
-						try{
-						spans.setSpan(clickSpan, tag.getOffset(), end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-						}catch(IndexOutOfBoundsException e){
-							
+						try {
+							spans.setSpan(clickSpan, tag.getOffset(), end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+						} catch (IndexOutOfBoundsException e) {
+
 						}
 					}
 				}

@@ -1,27 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/actionsFooter"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:paddingBottom="10dip"
-    android:paddingLeft="10dip"
-    android:paddingTop="10dip" >
+    android:orientation="vertical" >
 
     <LinearLayout
-        android:id="@+id/commentDataWrapper"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#eeeeee"
-        android:orientation="horizontal"
-        android:padding="2dip" >
+        android:orientation="horizontal" 
+        android:gravity="right"
+        android:paddingBottom="10dip">
 
         <ImageView
-            android:id="@+id/commentIcon"
+            android:id="@+id/commentIconImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@null"
-            android:paddingTop="6dip"
             android:src="@drawable/comment" />
 
         <TextView
@@ -33,26 +28,11 @@
             android:layout_marginRight="5dip"
             android:paddingTop="4dip" />
 
-        <Button
-            android:id="@+id/commentButton"
-            style="@style/ButtonStyleSmall"
-            android:text="@string/comment" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/likeDataWrapper"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dip"
-        android:background="#eeeeee"
-        android:padding="2dip" >
-
         <ImageView
-            android:id="@+id/likeIcon"
+            android:id="@+id/likeIconImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@null"
-            android:paddingTop="6dip"
             android:src="@drawable/like" />
 
         <TextView
@@ -63,10 +43,51 @@
             android:layout_marginLeft="5dip"
             android:layout_marginRight="5dip"
             android:paddingTop="4dip" />
+    </LinearLayout>
+    
+      <View 
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#222222"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="10dip"
+        android:paddingTop="10dip"
+        android:weightSum="3" 
+        android:layout_gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/commentButton"
+            android:drawableLeft="@drawable/comment"
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:layout_weight="1"
+            style="@style/ButtonStyleSmall"
+            android:text="@string/comment" />
 
         <Button
             android:id="@+id/likeButton"
-            style="@style/ButtonStyleSmall" />
+            android:layout_width="wrap_content"
+            android:drawableLeft="@drawable/like"
+            android:layout_height="28dp"
+            android:layout_marginLeft="6dp"
+            style="@style/ButtonStyleSmall"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/shareButton"
+            android:drawableLeft="@drawable/share"
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="6dp"
+            style="@style/ButtonStyleSmall"
+            android:contentDescription="@null"
+            android:text="@string/share_button" />
     </LinearLayout>
 
 </LinearLayout>

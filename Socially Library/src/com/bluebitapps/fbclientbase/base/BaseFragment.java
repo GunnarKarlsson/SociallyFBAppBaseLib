@@ -86,6 +86,10 @@ public class BaseFragment extends Fragment {
 
 		if (!isPremiumVersion) {
 
+			if(getView()==null){
+				return;
+			}
+			
 			AdView adView = (AdView) getView().findViewById(R.id.adView);
 			if (adView != null) {
 

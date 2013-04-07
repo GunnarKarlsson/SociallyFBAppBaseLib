@@ -29,6 +29,8 @@ import android.util.Log;
 
 import com.bluebitapps.fbclientbase.R;
 import com.bluebitapps.fbclientbase.debug.Logger;
+import com.bluebitapps.fbclientbase.notifications.NotificationAlarm;
+import com.bluebitapps.utils.MarketUtil;
 import com.bluebitapps.utils.OutputUtil;
 
 public class SettingsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
@@ -53,11 +55,45 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 			}
 		});
 
+		Preference prefNotifTiming = (Preference) findPreference(getResources().getString(R.string.PREFS_NOTIFICATION_FREQUENCY_KEY));
+		prefNotifTiming.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				if (getActivity() != null) {
+					NotificationAlarm alarm = new NotificationAlarm(getActivity());
+					alarm.start();
+				}
+				return false;
+			}
+		});
+
+		Preference prefRemoveAds = (Preference) findPreference("ads");
+		if (prefRemoveAds != null) {
+			prefRemoveAds.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+
+				@Override
+				public boolean onPreferenceClick(Preference preference) {
+					// TODO Auto-generated method stub
+
+					if (getResources().getBoolean(R.bool.isPinkVersion)) {
+						MarketUtil.openGooglePlay(getActivity(),"com.bluebitapps.sociallypinkpremium");
+						//MarketUtil.openAmazonStore(getActivity(), "com.bluebitapps.sociallypinkpremium");
+					} else {
+						MarketUtil.openGooglePlay(getActivity(), "com.bluebitapps.sociallypremium");
+						//MarketUtil.openAmazonStore(getActivity(), "com.bluebitapps.sociallypremium");
+					}
+
+					return false;
+				}
+			});
+		}
 	}
 
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 		// TODO Auto-generated method stub
+		Log.i("feb28", Logger.getClassAndMethod() + sharedPreferences + " " + key);
 
 	}
 
@@ -65,13 +101,13 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 	public void onResume() {
 		Log.i("jan9", Logger.getClassAndMethod());
 		super.onResume();
-		
+
 		OutputUtil.cancelAllCroutons(getActivity());
-		
+
 		if (getActivity() != null) {
 			Log.i("jan9", Logger.getClassAndMethod() + "getActivity() != null");
 			if (getActivity().getActionBar() != null) {
-				//getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+				// getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
 				getActivity().getActionBar().setDisplayShowTitleEnabled(true);
 				getActivity().getActionBar().setTitle(R.string.settings_menu_item);
 				getActivity().getActionBar().setSubtitle(null);

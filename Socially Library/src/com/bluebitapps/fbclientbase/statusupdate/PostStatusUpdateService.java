@@ -60,15 +60,15 @@ public class PostStatusUpdateService extends IntentService {
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		
-		if(intent == null){
+
+		if (intent == null) {
 			return;
 		}
-		
-		if(intent.getExtras()==null){
+
+		if (intent.getExtras() == null) {
 			return;
 		}
-		
+
 		Bundle bundle = intent.getExtras();
 		mMessage = bundle.getString(MESSAGE_KEY);
 		mLink = bundle.getString(LINK_KEY);
@@ -84,21 +84,18 @@ public class PostStatusUpdateService extends IntentService {
 	}
 
 	private void postStatusUpdate() {
-		
+
 		Log.i("feb6", Logger.getClassAndMethod() + mPrivacySetting);
 
-		if (!StringUtil.notEmpty(mMessage))
-			return;
+		// Log.i("feb6", Logger.getClassAndMethod() + privacy);
 
-	
-
-		//Log.i("feb6", Logger.getClassAndMethod() + privacy);
-		
 		Bundle params = new Bundle();
-		params.putString("message", mMessage);
+		if (StringUtil.notEmpty(mMessage)) {
+			params.putString("message", mMessage);
+		}
 		params.putString("link", mLink);
 		params.putString("name", mLinkName);
-		
+
 		JSONObject privacy = new JSONObject();
 		try {
 			privacy.put("value", mPrivacySetting);
@@ -106,7 +103,7 @@ public class PostStatusUpdateService extends IntentService {
 		} catch (JSONException e) {
 			Log.i("feb6", Logger.getClassAndMethod() + "privacy value exception: " + e);
 		}
-		
+
 		FBClientApplication.getApplication().getFBConnection().getAsyncFacebookRunner().request("me/feed", params, "POST", new StatusUpdateListener(), null);
 	}
 
@@ -156,7 +153,8 @@ public class PostStatusUpdateService extends IntentService {
 		NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		Notification.Builder builder = new Notification.Builder(this);
 		builder.setContentIntent(contentIntent);
-		builder.setContentTitle(getResources().getString(R.string.your_post_successfully_posted)).setContentText(getResources().getString(R.string.your_post_has_been_successfully_posted_to_facebook_from_socially)).setSmallIcon(R.drawable.status_update_ok);
+		builder.setContentTitle(getResources().getString(R.string.your_post_successfully_posted))
+				.setContentText(getResources().getString(R.string.your_post_has_been_successfully_posted_to_facebook_from_socially)).setSmallIcon(R.drawable.status_update_ok);
 
 		Notification notification = builder.getNotification();
 		notificationManager.notify(STATUS_UPDATE_NOTIFICATION_ID, notification);
@@ -171,7 +169,8 @@ public class PostStatusUpdateService extends IntentService {
 		NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		Notification.Builder builder = new Notification.Builder(this);
 		builder.setContentIntent(contentIntent);
-		builder.setContentTitle(getResources().getString(R.string.post_could_not_be_posted)).setContentText(getResources().getString(R.string.your_post_could_not_be_posted_please_try_again)).setSmallIcon(R.drawable.status_update_fail);
+		builder.setContentTitle(getResources().getString(R.string.post_could_not_be_posted)).setContentText(getResources().getString(R.string.your_post_could_not_be_posted_please_try_again))
+				.setSmallIcon(R.drawable.status_update_fail);
 		Notification notification = builder.getNotification();
 		notificationManager.notify(STATUS_UPDATE_NOTIFICATION_ID, notification);
 	}

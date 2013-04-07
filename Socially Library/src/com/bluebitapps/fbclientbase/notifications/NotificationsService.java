@@ -99,6 +99,8 @@ public class NotificationsService extends IntentService {
 	@Override
 	protected void onHandleIntent(Intent intent) {
 
+		Log.i("feb28", Logger.getClassAndMethod());
+
 		if (intent == null) {
 			return;
 		}
@@ -157,7 +159,7 @@ public class NotificationsService extends IntentService {
 		@Override
 		public void onComplete(String response, Object state) {
 
-			Log.i("notiftype", Logger.getClassAndMethod() + response);
+			Log.i("feb28", Logger.getClassAndMethod() + response);
 
 			final List<FBNotification> notifications = new ArrayList<FBNotification>();
 
@@ -198,26 +200,46 @@ public class NotificationsService extends IntentService {
 							notification.setSenderName(name);
 						}
 
-						
 						String languageCode = getResources().getConfiguration().locale.getLanguage();
-						
+
 						if (languageCode.contains("es")) {
-							//check for forbidden Strings in Spanish
-							if(StringUtil.notEmpty(notification.getTitleText())){
+							// check for forbidden Strings in Spanish
+							if (StringUtil.notEmpty(notification.getTitleText())) {
 								if (StringUtil.stringContainsItemFromList(notification.getTitleText(), Constants.forbiddenStringsForNotifications_ES)) {
 									continue;
 								}
 							}
 
-						}else if(languageCode.contains("pt")){
-							if(StringUtil.notEmpty(notification.getTitleText())){
+						} else if (languageCode.contains("fr")) {
+							if (StringUtil.notEmpty(notification.getTitleText())) {
+								if (StringUtil.stringContainsItemFromList(notification.getTitleText(), Constants.forbiddenStringsForNotifications_FR)) {
+									continue;
+								}
+							}
+
+						} else if (languageCode.contains("pt")) {
+							if (StringUtil.notEmpty(notification.getTitleText())) {
 								if (StringUtil.stringContainsItemFromList(notification.getTitleText(), Constants.forbiddenStringsForNotifications_PT)) {
 									continue;
 								}
 							}
-							
+
+						} else if (languageCode.contains("de")) {
+							if (StringUtil.notEmpty(notification.getTitleText())) {
+								if (StringUtil.stringContainsItemFromList(notification.getTitleText(), Constants.forbiddenStringsForNotifications_DE)) {
+									continue;
+								}
+							}
+
+						} else if (languageCode.contains("it")) {
+							if (StringUtil.notEmpty(notification.getTitleText())) {
+								if (StringUtil.stringContainsItemFromList(notification.getTitleText(), Constants.forbiddenStringsForNotifications_IT)) {
+									continue;
+								}
+							}
+
 						} else {
-							//default: check for forbidden Strings in English
+							// default: check for forbidden Strings in English
 							if (StringUtil.notEmpty(notification.getTitleText())) {
 								if (StringUtil.stringContainsItemFromList(notification.getTitleText(), Constants.forbiddenStringsForNotifications)) {
 									continue;
@@ -247,6 +269,17 @@ public class NotificationsService extends IntentService {
 			}
 
 			int notificationsCount = notifications.size();
+
+			// delete all existing notifications in db.
+			try {
+				FBClientApplication app = (FBClientApplication) getApplication();
+				app.getNotificationsData().deleteAllRows();
+				Log.i("mar27","deletedAllDbRows");
+				//long unreadCount = app.getNotificationsData().getUnreadCount();
+				//Log.i("mar27","unreadCount: " + unreadCount);
+			} catch (Exception exception) {
+
+			}
 
 			// Add notifications to database
 			try {
@@ -337,6 +370,7 @@ public class NotificationsService extends IntentService {
 	}
 
 	private void postToStatusBar(long unreadCount, String title) {
+		Log.i("feb28", Logger.getClassAndMethod());
 		Intent intent = new Intent(Constants.ACTION_NEW_NOTIFICATIONS);
 		intent.putExtra(Constants.NOTIFICATION_COUNT_KEY, unreadCount);
 		sendBroadcast(intent);
@@ -352,7 +386,7 @@ public class NotificationsService extends IntentService {
 		notificationIntent.setAction(Constants.REQUEST_NOTIFICATIONS);
 		PendingIntent pendingIntent = PendingIntent.getActivity(getBaseContext(), 0, notificationIntent, Intent.FLAG_ACTIVITY_NEW_TASK);
 
-		notification.defaults |= Notification.DEFAULT_SOUND;
+		// notification.defaults |= Notification.DEFAULT_SOUND;//no sound
 		notification.flags |= Notification.FLAG_AUTO_CANCEL;
 
 		// if setLastestEventInfo isn't set, notification will not appear.
@@ -362,6 +396,7 @@ public class NotificationsService extends IntentService {
 	}
 
 	private void launchPopup() {
+		Log.i("feb28", Logger.getClassAndMethod());
 		Intent dialogIntent = new Intent(getBaseContext(), NotificationsAlertActivity.class);
 		dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // NEEDS TO BE
 																// LAUNCHED ONLY

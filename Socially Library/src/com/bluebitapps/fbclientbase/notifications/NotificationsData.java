@@ -100,13 +100,13 @@ public class NotificationsData {
 		SQLiteDatabase db = this.dbHelper.getReadableDatabase();
 		return db.query(TABLE, null, null, null, null, null, GET_ALL_ORDER_BY);
 	}
-
+/*
 	public Cursor getReadNotifications() {
 		SQLiteDatabase db = this.dbHelper.getReadableDatabase();
 		String readValue = "0";
 		return db.query(TABLE, null, C_IS_UNREAD + "=" + readValue, null, null, null, GET_ALL_ORDER_BY);
 	}
-
+*/
 	public Cursor getUnreadNotifications() {
 		SQLiteDatabase db = this.dbHelper.getReadableDatabase();
 		String readValue = "1";

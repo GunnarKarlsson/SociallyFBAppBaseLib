@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
+    <PreferenceCategory android:title="@string/remove_ads_menu_item" >
+        <Preference
+            android:key="ads"
+            android:title="@string/remove_ads_menu_item" />
+    </PreferenceCategory>
     <PreferenceCategory android:title="@string/notifications_menu_item" >
         <ListPreference
             android:defaultValue="@string/PREFS_NOTIFICATION_DELIVERY_DEFAULT_VALUE"

@@ -4,6 +4,8 @@
 	<string name="search_hint">Busca páginas, eventos, grupos&amp;#8230;</string>
 	<string name="like">Me gusta</string>
 	<string name="comment">Comentar</string>
+	<string name="share_button">Compartir</string>
+	<string name="status_update">Actualización del estado</string>
 	<string name="loading">Cargando&#8230;</string>
 	<string name="add_your_message">Añade tu mensaje</string>
 	<string name="send">enviar</string>
@@ -259,5 +261,5 @@
 	<string name="new_notifications">nuevas notificaciones</string>
 	<string name="one_new_notification">1 nueva notificación</string>
 	<string name="a_while_ago">hace poco</string>
-	  <string name="remove_ads_menu_item_error_message">Link could not be found</string>
+	<string name="remove_ads_menu_item_error_message">Link could not be found</string>
 </resources>

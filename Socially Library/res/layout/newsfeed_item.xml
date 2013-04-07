@@ -66,9 +66,10 @@
         android:textAppearance="@style/bodyTextStyle" />
 
     <include
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginLeft="10dp"
         android:layout_alignRight="@id/newsFeedItemPictureAndName"
         android:layout_below="@id/newsFeedItemDescription"
         layout="@layout/action_footer_like_and_comment" />

@@ -157,7 +157,7 @@ public class ImagePagerFragment extends BaseFragment {
 				}
 				mIds = mIds.substring(0, mIds.length() - 2);
 				mIds += ")";
-			}else if(mPhotos.size()==1){
+			} else if (mPhotos.size() == 1) {
 				mIds = "(" + mPhotos.get(0).getId() + ")";
 			}
 		}
@@ -349,7 +349,7 @@ public class ImagePagerFragment extends BaseFragment {
 
 		@Override
 		public void onComplete(String response, Object state) {
-			
+
 			Log.i("feb19", Logger.getClassAndMethod() + " response: " + response);
 
 			try {
@@ -410,7 +410,7 @@ public class ImagePagerFragment extends BaseFragment {
 						if (photo != null) {
 							photo.setUserLikes(userLikes);
 							photo.setLikesCount(likesCount);
-							if(mPhotos.size()==1){
+							if (mPhotos.size() == 1) {
 								mPhotos.get(0).setUserLikes(userLikes);
 								mPhotos.get(0).setLikesCount(likesCount);
 							}
@@ -426,7 +426,7 @@ public class ImagePagerFragment extends BaseFragment {
 						PhotoComment comment = PhotoComment.fromJSON(obj);
 						// Set comment's fromName from userNamesMap
 						comment.setFromName(userNamesMap.get(comment.getFromId()));
-						//comment.setFromId(comment.getFromId());
+						// comment.setFromId(comment.getFromId());
 						// Add comment to comments ArrayList for that photo in
 						// commentsMap.
 						Log.i("feb19", "comment.getObjectId(): " + comment.getObjectId());
@@ -436,11 +436,11 @@ public class ImagePagerFragment extends BaseFragment {
 						// add comments to photo
 						photo.addComment(comment);
 						// set likes count on photo
-						
-						if(mPhotos.size()==1){
+
+						if (mPhotos.size() == 1) {
 							mPhotos.get(0).addComment(comment);
 						}
-						
+
 					}
 				}
 
@@ -476,29 +476,41 @@ public class ImagePagerFragment extends BaseFragment {
 		@Override
 		public void onIOException(IOException e, Object state) {
 			Logger.i(Logger.getClassAndMethod() + e.toString());
-			OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.photos_could_not_be_retrieved));
+			try {
+				OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.photos_could_not_be_retrieved));
+			} catch (IllegalStateException ex) {
 
+			}
 		}
 
 		@Override
 		public void onFileNotFoundException(FileNotFoundException e, Object state) {
 			Logger.i(Logger.getClassAndMethod() + e.toString());
-			OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.photos_could_not_be_retrieved));
+			try {
+				OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.photos_could_not_be_retrieved));
+			} catch (IllegalStateException ex) {
 
+			}
 		}
 
 		@Override
 		public void onMalformedURLException(MalformedURLException e, Object state) {
 			Logger.i(Logger.getClassAndMethod() + e.toString());
-			OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.photos_could_not_be_retrieved));
+			try {
+				OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.photos_could_not_be_retrieved));
+			} catch (IllegalStateException ex) {
 
+			}
 		}
 
 		@Override
 		public void onFacebookError(FacebookError e, Object state) {
 			Logger.i(Logger.getClassAndMethod() + e.toString());
-			OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.photos_could_not_be_retrieved));
+			try {
+				OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.photos_could_not_be_retrieved));
+			} catch (IllegalStateException ex) {
 
+			}
 		}
 
 	}
@@ -560,7 +572,7 @@ public class ImagePagerFragment extends BaseFragment {
 			commentCount.setText(mPhotos.get(position).getCommentsCount());
 
 			ArrayList<PhotoComment> comments = mPhotos.get(position).getComments();
-			
+
 			Log.i("feb19", "comments: " + comments.size());
 
 			Logger.i(ImagePagerFragment.class.getSimpleName() + "comments.size(): " + comments.size());
@@ -611,10 +623,23 @@ public class ImagePagerFragment extends BaseFragment {
 
 				@Override
 				public void onLoadingFailed(FailReason failReason) {
+					try {
+						OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.data_could_not_be_retrieved));
+					} catch (IllegalStateException e) {
 
-					OutputUtil.showCrouton(getActivity(), getResources().getString(R.string.data_could_not_be_retrieved));
-					loadingView.setVisibility(View.GONE);
-					imageView.setImageResource(android.R.drawable.ic_delete);
+					}
+
+					if (loadingView != null) {
+
+						loadingView.setVisibility(View.GONE);
+					}
+					try {
+						if (imageView != null) {
+							imageView.setImageResource(android.R.drawable.ic_delete);
+						}
+					} catch (IllegalStateException e) {
+
+					}
 				}
 
 				@Override
@@ -731,8 +756,8 @@ public class ImagePagerFragment extends BaseFragment {
 				if (StringUtil.notEmpty(comment.getTime())) {
 					holder.createdTime.setText(comment.getTime());
 				}
-				
-				Log.i("feb19", "fromPicture: "+ photoComments.get(position).getFromPicture());
+
+				Log.i("feb19", "fromPicture: " + photoComments.get(position).getFromPicture());
 
 				getImageLoader().displayImage(photoComments.get(position).getFromPicture(), holder.fromPicture, getImageDisplayOptions());
 

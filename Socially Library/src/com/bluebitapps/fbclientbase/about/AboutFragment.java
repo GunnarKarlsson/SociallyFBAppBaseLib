@@ -58,7 +58,7 @@ public class AboutFragment extends BaseNavigationFragment {
 			setState(bundle.getString(Constants.STATE_KEY));
 		}
 		
-		setTitle("About");
+		setTitle(getResources().getString(R.string.about_menu_item));
 	}
 
 	@Override

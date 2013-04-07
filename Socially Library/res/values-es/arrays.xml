@@ -4,10 +4,7 @@
 		<item>Mensaje de la barra de estado (por defecto)</item>
 		<item>Diálogo emergente temático</item>
 	</string-array>
-	<string-array name="pref_notification_delivery_values">
-		 <item>statusbar</item>
-        <item>popup</item>
-	</string-array>
+
 	<string-array name="pref_font_size_entries">
 		<item>El más pequeño (10 dip)</item>
 		<item>Más pequeño (12 dip)</item>

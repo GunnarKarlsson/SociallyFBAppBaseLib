@@ -49,6 +49,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.bluebitapps.utils.ExitUtil;
+import com.bluebitapps.utils.MarketUtil;
 import com.bluebitapps.utils.OutputUtil;
 import com.bluebitapps.utils.StringUtil;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
@@ -468,62 +469,14 @@ public class BaseSlidingMenuActivity extends SlidingFragmentActivity implements 
 
 		} else if (Constants.MENU_ITEM_REMOVE_ADS.equalsIgnoreCase(selection)) {
 
-			if (FBClientApplication.getApplication().hasKindleFeatureSet()) {
-				if (getResources().getBoolean(R.bool.isPinkVersion)) {
-					//is Kindle and Pink
-				} else {
-					//is not Kindle and Blue
-					Uri uriToAmazonAppStore = Uri.parse("amzn://apps.android?p=com.bluebitapps.sociallypremium");
-					Intent intentToLaunchAmazonAppStore = new Intent(Intent.ACTION_VIEW, uriToAmazonAppStore);
-					try {
-						startActivity(intentToLaunchAmazonAppStore);
-					} catch (ActivityNotFoundException e) {
-						// Amazon AppStore not found, link to Amazon web store.
-						Uri uriToAmazonWebStore = Uri.parse("http://www.amazon.com/gp/mas/dl/android?p=com.bluebitapps.sociallypremium");
-						Intent intentToLaunchAmazonWebStore = new Intent(Intent.ACTION_VIEW, uriToAmazonWebStore);
-						try {
-							startActivity(intentToLaunchAmazonWebStore);
-						} catch (ActivityNotFoundException ex) {
-							Toast.makeText(BaseSlidingMenuActivity.this, R.string.remove_ads_menu_item_error_message, Toast.LENGTH_SHORT).show();
-						}
-					}
-				}
-			} else {
-				
-				if (getResources().getBoolean(R.bool.isPinkVersion)) {
-					// is non-Kindle and pink version
-					Uri uriToGooglePlayApp = Uri.parse("market://details?id=com.bluebitapps.sociallypinkpremium");
-					Intent intentToLaunchGooglePlayApp = new Intent(Intent.ACTION_VIEW, uriToGooglePlayApp);
-					try {
-						startActivity(intentToLaunchGooglePlayApp);
-					} catch (ActivityNotFoundException e) {
-						// Google Play store not found, link to web store
-						Uri uriToGooglePlayWebStore = Uri.parse("http://google.play.com/store/apps/details?id=com.bluebitapps.sociallypinkpremium");
-						Intent intentTolaunchGooglePlayWebStore = new Intent(Intent.ACTION_VIEW, uriToGooglePlayWebStore);
-						try {
-							startActivity(intentTolaunchGooglePlayWebStore);
-						} catch (ActivityNotFoundException ex) {
-							Toast.makeText(BaseSlidingMenuActivity.this, R.string.remove_ads_menu_item_error_message, Toast.LENGTH_SHORT).show();
-						}
-					}
+			if (getResources().getBoolean(R.bool.isPinkVersion)) {
 
-				} else {
-					// is non-Kindle and blue version
-					Uri uriToGooglePlayApp = Uri.parse("market://details?id=com.bluebitapps.sociallypremium");
-					Intent intentToLaunchGooglePlayApp = new Intent(Intent.ACTION_VIEW, uriToGooglePlayApp);
-					try {
-						startActivity(intentToLaunchGooglePlayApp);
-					} catch (ActivityNotFoundException e) {
-						// Google Play store not found, link to web store
-						Uri uriToGooglePlayWebStore = Uri.parse("http://google.play.com/store/apps/details?id=com.bluebitapps.sociallypremium");
-						Intent intentTolaunchGooglePlayWebStore = new Intent(Intent.ACTION_VIEW, uriToGooglePlayWebStore);
-						try {
-							startActivity(intentTolaunchGooglePlayWebStore);
-						} catch (ActivityNotFoundException ex) {
-							Toast.makeText(BaseSlidingMenuActivity.this, R.string.remove_ads_menu_item_error_message, Toast.LENGTH_SHORT).show();
-						}
-					}
-				}
+				MarketUtil.openGooglePlay(this,"com.bluebitapps.sociallypinkpremium");
+				//MarketUtil.openAmazonStore(this, "com.bluebitapps.sociallypinkpremium");
+			} else {
+
+				MarketUtil.openGooglePlay(this,"com.bluebitapps.sociallypremium");
+				//MarketUtil.openAmazonStore(this, "com.bluebitapps.sociallypremium");
 			}
 
 		} else {
@@ -598,9 +551,11 @@ public class BaseSlidingMenuActivity extends SlidingFragmentActivity implements 
 			if (isShowingTextSettings) {
 				isShowingTextSettings = false;
 				getActionBar().setDisplayHomeAsUpEnabled(false);
-				getFragmentManager().popBackStackImmediate();
-				return true;
+				try {
+					getFragmentManager().popBackStackImmediate();
+				} catch (IllegalStateException e) {
 
+				}
 			} else {
 
 				toggle();
