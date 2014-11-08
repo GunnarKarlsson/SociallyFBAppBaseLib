@@ -263,7 +263,11 @@ public class NewsFeedItemActivity extends BaseThemedActivity {
 		Bundle bundle = getIntent().getExtras();
 		mItem = (NewsFeedItem) bundle.getParcelable("newsfeeditem");
 		Log.i("nftest2", mItem.toString());
-		mCommentCount = Integer.parseInt(mItem.getCommentsCount());
+		if (mItem.getCommentsCount() != null) {
+			mCommentCount = Integer.parseInt(mItem.getCommentsCount());			
+		} else {
+			mCommentCount = 0;
+		}
 
 		String title = mItem.getName();
 
@@ -304,7 +308,7 @@ public class NewsFeedItemActivity extends BaseThemedActivity {
 		View headerView = getView(getItemViewType(), mListView);
 		mListView.addHeaderView(headerView);
 
-		if (Integer.parseInt(mItem.getCommentsCount()) > 0) {
+		if (mItem.getCommentsCount() != null && Integer.parseInt(mItem.getCommentsCount()) > 0) {
 			mPrevCommentsView = (ViewSwitcher) LayoutInflater.from(getBaseContext()).inflate(R.layout.header_view_previous_comments, mListView, false);
 			mPrevCommentsView.setTag("MoreCommentsButton");
 

@@ -110,7 +110,9 @@ public class NewsFeedService extends IntentService {
 			mCreatedTime = bundle.getString(Constants.CREATED_TIME_KEY);
 			mUserId = bundle.getString(Constants.USER_ID_KEY);
 			mState = bundle.getString(Constants.STATE_KEY);
-			Log.i("april5", mCreatedTime);
+			if (mCreatedTime != null) {
+				Log.i("april5", mCreatedTime);				
+			}
 		}
 
 		boolean isValidSession = ((FBClientApplication) getApplication()).getFBConnection().isValidSession();
