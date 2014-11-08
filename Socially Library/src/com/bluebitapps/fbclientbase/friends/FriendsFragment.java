@@ -40,8 +40,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -49,20 +47,20 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.bluebitapps.utils.ClearableEditText;
-import com.bluebitapps.utils.InputUtil;
-import com.bluebitapps.utils.OutputUtil;
-import com.bluebitapps.utils.ClearableEditText.OnClearClickListener;
-import com.facebook.android.AsyncFacebookRunner.RequestListener;
-import com.facebook.android.FacebookError;
 import com.bluebitapps.fbclientbase.Constants;
 import com.bluebitapps.fbclientbase.FBClientApplication;
 import com.bluebitapps.fbclientbase.R;
 import com.bluebitapps.fbclientbase.base.BaseNavigationFragment;
-import com.bluebitapps.fbclientbase.base.SectionManager;
 import com.bluebitapps.fbclientbase.debug.Logger;
 import com.bluebitapps.fbclientbase.layout.LoadingView;
 import com.bluebitapps.fbclientbase.theme.ThemeFactory;
+import com.bluebitapps.utils.ClearableEditText;
+import com.bluebitapps.utils.ClearableEditText.OnClearClickListener;
+import com.bluebitapps.utils.InputUtil;
+import com.bluebitapps.utils.OutputUtil;
+import com.facebook.android.AsyncFacebookRunner.RequestListener;
+import com.facebook.android.FacebookError;
+import com.google.android.gms.ads.AdView;
 
 public class FriendsFragment extends BaseNavigationFragment implements OnClearClickListener {
 
@@ -182,7 +180,6 @@ public class FriendsFragment extends BaseNavigationFragment implements OnClearCl
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		Log.i("jan17", Logger.getClassAndMethod());
 		ViewGroup vg = ThemeFactory.getViewGroup(getThemeSelection(), getActivity(), inflater, container, R.layout.image_list_search);
 
 		mLoadingView = (LoadingView) vg.findViewById(R.id.loadingView);

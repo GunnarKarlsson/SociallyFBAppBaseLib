@@ -17,10 +17,7 @@
 package com.bluebitapps.fbclientbase.notifications;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
-import android.app.ActionBar;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -36,7 +33,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
@@ -44,12 +40,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.bluebitapps.utils.FacebookUtils;
-import com.bluebitapps.utils.OutputUtil;
-import com.bluebitapps.utils.StringUtil;
 import com.bluebitapps.fbclientbase.Constants;
 import com.bluebitapps.fbclientbase.FBClientApplication;
-import com.bluebitapps.fbclientbase.MainActivity;
 import com.bluebitapps.fbclientbase.R;
 import com.bluebitapps.fbclientbase.albums.AlbumsActivity;
 import com.bluebitapps.fbclientbase.base.BaseNavigationFragment;
@@ -63,11 +55,9 @@ import com.bluebitapps.fbclientbase.photos.ImagePagerActivity;
 import com.bluebitapps.fbclientbase.photos.Photo;
 import com.bluebitapps.fbclientbase.profile.ProfileActivity;
 import com.bluebitapps.fbclientbase.theme.ThemeFactory;
-import com.google.ads.AdRequest;
-import com.google.ads.AdView;
-
-import de.neofonie.mobile.app.android.widget.crouton.Crouton;
-import de.neofonie.mobile.app.android.widget.crouton.Style;
+import com.bluebitapps.utils.FacebookUtils;
+import com.bluebitapps.utils.OutputUtil;
+import com.bluebitapps.utils.StringUtil;
 
 public class NotificationsFragment extends BaseNavigationFragment {
 

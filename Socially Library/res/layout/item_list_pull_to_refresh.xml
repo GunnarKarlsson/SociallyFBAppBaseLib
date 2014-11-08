@@ -1,39 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical">
+    android:orientation="vertical" >
 
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         xmlns:ptr="http://schemas.android.com/apk/res-auto"
         android:id="@+id/pull_refresh_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_above="@+id/adView"
+        android:layout_alignParentTop="true"
+        android:clipToPadding="false"
         android:divider="@android:color/transparent"
         android:dividerHeight="@dimen/divider_height"
         android:paddingLeft="@dimen/list_padding_left"
         android:paddingRight="@dimen/list_padding_right"
-        android:layout_above="@+id/adView"
-        android:layout_alignParentTop="true"
-        ptr:ptrMode="both"
-        ptr:ptrHeaderTextColor="#777777"
-        ptr:ptrShowIndicator="false"
-		android:clipToPadding="false"
         android:scrollbarStyle="outsideOverlay"
         android:scrollbarThumbVertical="@drawable/scrollbar_vertical_thumb"
-        />
-    
-    <com.google.ads.AdView
+        ptr:ptrHeaderTextColor="#777777"
+        ptr:ptrMode="both"
+        ptr:ptrShowIndicator="false" />
+
+    <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        ads:adUnitId="a150ab340c1545c"
+        android:layout_centerVertical="true"
         ads:adSize="SMART_BANNER"
-        ads:loadAdOnCreate="true"
-        />
+        ads:adUnitId="@string/ad_unit_banner_item_list_pull_to_refresh" />
 
     <com.bluebitapps.fbclientbase.layout.LoadingView
         android:id="@+id/loadingView"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -36,14 +36,14 @@
         android:scrollbarStyle="outsideOverlay"
         android:scrollbarThumbVertical="@drawable/scrollbar_vertical_thumb" />
 
-    <com.google.ads.AdView
+    <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
         ads:adSize="SMART_BANNER"
-        ads:adUnitId="a150ab340c1545c"
-        ads:loadAdOnCreate="true" />
+        ads:adUnitId="@string/ad_unit_banner_image_list_search" />
 
     <com.bluebitapps.fbclientbase.layout.LoadingView
         android:id="@+id/loadingView"
