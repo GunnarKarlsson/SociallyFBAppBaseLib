@@ -50,6 +50,8 @@ import com.facebook.android.FacebookError;
 
 public class NewsFeedService extends IntentService {
 
+	public static final String TAG = NewsFeedService.class.getSimpleName();
+	
 	private String mCreatedTime;
 
 	private List<NewsFeedItem> mNewsFeedItems;
@@ -94,8 +96,8 @@ public class NewsFeedService extends IntentService {
 	@Override
 	protected void onHandleIntent(Intent intent) {
 
-		Log.i("april5","onHandleIntent");
-		
+		Log.i(TAG, "onHandleIntent");
+
 		if (intent == null) {
 			return;
 		}
@@ -111,11 +113,12 @@ public class NewsFeedService extends IntentService {
 			mUserId = bundle.getString(Constants.USER_ID_KEY);
 			mState = bundle.getString(Constants.STATE_KEY);
 			if (mCreatedTime != null) {
-				Log.i("april5", mCreatedTime);				
+				Log.i("april5", mCreatedTime);
 			}
 		}
 
-		boolean isValidSession = ((FBClientApplication) getApplication()).getFBConnection().isValidSession();
+		boolean isValidSession = ((FBClientApplication) getApplication())
+				.getFBConnection().isValidSession();
 
 		if (isValidSession) {
 			getNewsFeed();
@@ -130,14 +133,15 @@ public class NewsFeedService extends IntentService {
 
 	private void getNewsFeed() {
 
-		Log.i("jan17nf", Logger.getClassAndMethod());
+		Log.i(TAG, Logger.getClassAndMethod());
 
 		Bundle params = new Bundle();
 
 		if (mCreatedTime != null) {
 
 			try {
-				SimpleDateFormat format = new SimpleDateFormat("yyy-MM-dd'T'HH:mm:ss+SSSS");
+				SimpleDateFormat format = new SimpleDateFormat(
+						"yyy-MM-dd'T'HH:mm:ss+SSSS");
 				Date date = format.parse(mCreatedTime);
 				Calendar calendar = Calendar.getInstance();
 				calendar.setTime(date);
@@ -148,19 +152,40 @@ public class NewsFeedService extends IntentService {
 
 				params.putString("limit", "25");
 				params.putString("until", timeParameter);
-
 			} catch (ParseException e) {
 				Logger.i(Logger.getClassAndMethod() + e.toString());
 			}
 
 		}
 
+		/*
+		 * Get comment and likes count via .limit(1).summary(true), but this
+		 * requires us to request all other fields explicitly.
+		 */
+
+		//Test: removed "actions".
+		final String fields = "id, likes.limit(1).summary(true), shares, comments.limit(1).summary(true), actions,"
+				+ "from, message, picture, link, name, caption, story, story_tags, description, icon, "
+				+ "privacy, type, status_type, application, created_time, updated_time";
+		
+		params.putString("fields", fields);
+		
 		if (mState.equalsIgnoreCase(Constants.STATE_PROFILE)) {
 			Logger.i(Logger.getClassAndMethod() + " Feed");
-			((FBClientApplication) getApplication()).getFBConnection().getAsyncFacebookRunner().request(mUserId + "/feed", params, new NewsFeedListener());
+			final String query = mUserId + "/feed";
+			Log.d(TAG, "query: " + query);
+			((FBClientApplication) getApplication()).getFBConnection()
+					.getAsyncFacebookRunner()
+					.request(query, params, new NewsFeedListener());
 		} else {
 			Logger.i(Logger.getClassAndMethod() + "Home");
-			((FBClientApplication) getApplication()).getFBConnection().getAsyncFacebookRunner().request(mUserId + "/home", params, new NewsFeedListener());
+			final String query = mUserId + "/home";
+			Log.d(TAG, "query: " + query);
+			((FBClientApplication) getApplication())
+					.getFBConnection()
+					.getAsyncFacebookRunner()
+					.request(query, params,
+							new NewsFeedListener());
 		}
 
 	}
@@ -170,16 +195,13 @@ public class NewsFeedService extends IntentService {
 		@Override
 		public void onComplete(String response, Object state) {
 
-			Log.i("jan21", Logger.getClassAndMethod() + response);
-			
-			Log.i("april5",response);
+			Log.i(TAG, Logger.getClassAndMethod() + response);
+			Logger.i(response);
 
 			try {
 
 				mNewsFeedCache.clear();
 				mNewsFeedItems.clear();
-
-				Logger.i(Logger.getClassAndMethod());
 
 				final JSONObject dataJsonObject = new JSONObject(response);
 				final JSONArray jsonArray = dataJsonObject.getJSONArray("data");
@@ -188,50 +210,71 @@ public class NewsFeedService extends IntentService {
 					for (int i = 0; i < jsonArray.length(); i++) {
 
 						JSONObject obj = jsonArray.getJSONObject(i);
-						NewsFeedItem newsFeedItem = NewsFeedItem.fromJson(obj, mUserId);
+						NewsFeedItem newsFeedItem = NewsFeedItem.fromJson(obj,
+								mUserId);
 
+						Log.d(TAG, "newsFeedItem.getLikesCount(): "+ newsFeedItem.getLikesCount());
+						
 						// Remove "incomprehensible" posts: posts with reference
 						// to objects that are not showed (the API doesn't
 						// provide an object reference to them in the post).
 
 						if (StringUtil.notEmpty(newsFeedItem.getStory())) {
 
-							String languageCode = getResources().getConfiguration().locale.getLanguage();
+							String languageCode = getResources()
+									.getConfiguration().locale.getLanguage();
 
 							if (languageCode.contains("es")) {
-								if (StringUtil.stringContainsItemFromList(newsFeedItem.getStory(), Constants.forbiddenStrings_ES)) {
+								if (StringUtil.stringContainsItemFromList(
+										newsFeedItem.getStory(),
+										Constants.forbiddenStrings_ES)) {
 									continue;
 								}
 							} else if (languageCode.contains("de")) {
 
-								if (StringUtil.stringContainsItemFromList(newsFeedItem.getStory(), Constants.forbiddenStrings_DE)) {
+								if (StringUtil.stringContainsItemFromList(
+										newsFeedItem.getStory(),
+										Constants.forbiddenStrings_DE)) {
 									continue;
 								}
 							} else if (languageCode.contains("it")) {
 
-								if (StringUtil.stringContainsItemFromList(newsFeedItem.getStory(), Constants.forbiddenStrings_IT)) {
+								if (StringUtil.stringContainsItemFromList(
+										newsFeedItem.getStory(),
+										Constants.forbiddenStrings_IT)) {
 									continue;
 								}
 
 							} else if (languageCode.contains("pt")) {
 
-								if (StringUtil.stringContainsItemFromList(newsFeedItem.getStory(), Constants.forbiddenStrings_PT)) {
+								if (StringUtil.stringContainsItemFromList(
+										newsFeedItem.getStory(),
+										Constants.forbiddenStrings_PT)) {
 									continue;
 								}
 							} else if (languageCode.contains("fr")) {
 
-								if (StringUtil.stringContainsItemFromList(newsFeedItem.getStory(), Constants.forbiddenStrings_FR)) {
+								if (StringUtil.stringContainsItemFromList(
+										newsFeedItem.getStory(),
+										Constants.forbiddenStrings_FR)) {
 									continue;
 								}
 							} else {
-								if (StringUtil.stringContainsItemFromList(newsFeedItem.getStory(), Constants.forbiddenStrings)) {
+								if (StringUtil.stringContainsItemFromList(
+										newsFeedItem.getStory(),
+										Constants.forbiddenStrings)) {
 									continue;
 								}
 							}
 						}
 
-						if (!StringUtil.notEmpty(newsFeedItem.getStory()) && !StringUtil.notEmpty(newsFeedItem.getMessage()) && !StringUtil.notEmpty(newsFeedItem.getDescription())
-								&& !StringUtil.notEmpty(newsFeedItem.getPicture())) {
+						if (!StringUtil.notEmpty(newsFeedItem.getStory())
+								&& !StringUtil.notEmpty(newsFeedItem
+										.getMessage())
+								&& !StringUtil.notEmpty(newsFeedItem
+										.getDescription())
+								&& !StringUtil.notEmpty(newsFeedItem
+										.getPicture())) {
 							continue;
 						}
 
@@ -239,12 +282,21 @@ public class NewsFeedService extends IntentService {
 
 							if (newsFeedItem.getApplicationName() == null) {
 								mNewsFeedItems.add(newsFeedItem);
-								mNewsFeedCache.put(newsFeedItem.getId(), newsFeedItem);
+								mNewsFeedCache.put(newsFeedItem.getId(),
+										newsFeedItem);
 							} else {
-								if (!newsFeedItem.getApplicationName().equalsIgnoreCase(NewsFeedItem.APPLICATION_NAME_LIKES)) {
-									if (!newsFeedItem.getApplicationName().equalsIgnoreCase(NewsFeedItem.APPLICATION_NAME_INSTAGRAM)) {
+								if (!newsFeedItem
+										.getApplicationName()
+										.equalsIgnoreCase(
+												NewsFeedItem.APPLICATION_NAME_LIKES)) {
+									if (!newsFeedItem
+											.getApplicationName()
+											.equalsIgnoreCase(
+													NewsFeedItem.APPLICATION_NAME_INSTAGRAM)) {
 										mNewsFeedItems.add(newsFeedItem);
-										mNewsFeedCache.put(newsFeedItem.getId(), newsFeedItem);
+										mNewsFeedCache.put(
+												newsFeedItem.getId(),
+												newsFeedItem);
 									}
 								}
 							}
@@ -254,60 +306,75 @@ public class NewsFeedService extends IntentService {
 				}
 
 				if (mNewsFeedItems.size() < 1) {
-					Log.i("jan21", NewsFeedListener.class.getSimpleName() + "mNewsFeedItems.size < 1");
-					sendBroadcast(new Intent(NewsFeedService.REFRESH_NEWSFEED_DATA_FAIL));
+					Log.i(TAG, NewsFeedListener.class.getSimpleName()
+							+ "mNewsFeedItems.size < 1");
+					sendBroadcast(new Intent(
+							NewsFeedService.REFRESH_NEWSFEED_DATA_FAIL));
 				} else {
 
-					String query = "SELECT likes, post_id FROM stream WHERE post_id IN (";
+					saveToDb();
+					
+//					String query = "SELECT likes, post_id FROM stream WHERE post_id IN (";
 
-					try {
-						for (int i = 0; i < mNewsFeedItems.size(); i++) {
-							if (mNewsFeedItems.get(i).getId() != null) {
-								query += "'" + mNewsFeedItems.get(i).getId() + "'";
-								if (i < (mNewsFeedItems.size() - 1)) {
-									query += ",";
-								}
-							}
-						}
-					} catch (IndexOutOfBoundsException e) {
-						return;
-					}
+//					try {
+//						for (int i = 0; i < mNewsFeedItems.size(); i++) {
+//							if (mNewsFeedItems.get(i).getId() != null) {
+//								query += "'" + mNewsFeedItems.get(i).getId()
+//										+ "'";
+//								if (i < (mNewsFeedItems.size() - 1)) {
+//									query += ",";
+//								}
+//							}
+//						}
+//					} catch (IndexOutOfBoundsException e) {
+//						return;
+//					}
 
-					query += ")";
-
-					Bundle params = new Bundle();
-					params.putString("method", "fql.query");
-					params.putString("query", query);
-					((FBClientApplication) getApplication()).getFBConnection().getAsyncFacebookRunner().request(null, params, new LikesRequestListener());
+//					query += ")";
+//
+//					Bundle params = new Bundle();
+//					params.putString("method", "fql.query");
+//					params.putString("query", query);
+//					((FBClientApplication) getApplication()).getFBConnection()
+//							.getAsyncFacebookRunner()
+//							.request(null, params, new LikesRequestListener());
 				}
 			} catch (JSONException e) {
-				Log.i("jan21", NewsFeedListener.class.getSimpleName() + e.toString());
-				sendBroadcast(new Intent(NewsFeedService.REFRESH_NEWSFEED_DATA_FAIL));
+				Log.i(TAG,
+						NewsFeedListener.class.getSimpleName() + e.toString());
+				sendBroadcast(new Intent(
+						NewsFeedService.REFRESH_NEWSFEED_DATA_FAIL));
 			}
 		}// end onComplete
 
 		@Override
 		public void onIOException(IOException e, Object state) {
-			Log.i("jan21", NewsFeedService.class.getSimpleName() + "#NewsFeedListener" + e.toString());
+			Log.i(TAG, NewsFeedService.class.getSimpleName()
+					+ "#NewsFeedListener" + e.toString());
 			sendBroadcast(new Intent(NewsFeedService.REFRESH_NEWSFEED_DATA_FAIL));
 
 		}
 
 		@Override
-		public void onFileNotFoundException(FileNotFoundException e, Object state) {
-			Log.i("jan21", NewsFeedService.class.getSimpleName() + "#NewsFeedListener" + e.toString());
+		public void onFileNotFoundException(FileNotFoundException e,
+				Object state) {
+			Log.i(TAG, NewsFeedService.class.getSimpleName()
+					+ "#NewsFeedListener" + e.toString());
 			sendBroadcast(new Intent(NewsFeedService.REFRESH_NEWSFEED_DATA_FAIL));
 		}
 
 		@Override
-		public void onMalformedURLException(MalformedURLException e, Object state) {
-			Log.i("jan21", NewsFeedService.class.getSimpleName() + "#NewsFeedListener" + e.toString());
+		public void onMalformedURLException(MalformedURLException e,
+				Object state) {
+			Log.i(TAG, NewsFeedService.class.getSimpleName()
+					+ "#NewsFeedListener" + e.toString());
 			sendBroadcast(new Intent(NewsFeedService.REFRESH_NEWSFEED_DATA_FAIL));
 		}
 
 		@Override
 		public void onFacebookError(FacebookError e, Object state) {
-			Log.i("jan21", NewsFeedService.class.getSimpleName() + "#NewsFeedListener" + e.toString());
+			Log.i(TAG, NewsFeedService.class.getSimpleName()
+					+ "#NewsFeedListener" + e.toString());
 			sendBroadcast(new Intent(NewsFeedService.REFRESH_NEWSFEED_DATA_FAIL));
 		}
 
@@ -341,7 +408,8 @@ public class NewsFeedService extends IntentService {
 
 			try {
 
-				Logger.i(LikesRequestListener.class.getSimpleName() + "#onComplete()");
+				Logger.i(LikesRequestListener.class.getSimpleName()
+						+ "#onComplete()");
 				final JSONArray jsonArray = new JSONArray(response);
 
 				if (jsonArray.length() > 0) {
@@ -356,12 +424,15 @@ public class NewsFeedService extends IntentService {
 						if (obj.has("likes")) {
 							JSONObject likes = obj.getJSONObject("likes");
 							if (likes.has("user_likes")) {
-								holder.setUserLikes(likes.getString("user_likes"));
+								holder.setUserLikes(likes
+										.getString("user_likes"));
 							}
 						}
 
-						NewsFeedItem item = mNewsFeedCache.get(holder.getPostId());
-						if (item != null && holder != null && StringUtil.notEmpty(holder.getUserLikes())) {
+						NewsFeedItem item = mNewsFeedCache.get(holder
+								.getPostId());
+						if (item != null && holder != null
+								&& StringUtil.notEmpty(holder.getUserLikes())) {
 							item.setUserLikes(holder.getUserLikes());
 						}
 
@@ -372,7 +443,8 @@ public class NewsFeedService extends IntentService {
 				saveToDb();
 
 			} catch (JSONException e) {
-				Log.i("jan21", NewsFeedListener.class.getSimpleName() + e.toString());
+				Log.i(TAG,
+						NewsFeedListener.class.getSimpleName() + e.toString());
 
 			}
 
@@ -385,13 +457,15 @@ public class NewsFeedService extends IntentService {
 		}
 
 		@Override
-		public void onFileNotFoundException(FileNotFoundException e, Object state) {
+		public void onFileNotFoundException(FileNotFoundException e,
+				Object state) {
 			Logger.i(NewsFeedListener.class.getSimpleName() + e.toString());
 
 		}
 
 		@Override
-		public void onMalformedURLException(MalformedURLException e, Object state) {
+		public void onMalformedURLException(MalformedURLException e,
+				Object state) {
 			Logger.i(NewsFeedListener.class.getSimpleName() + e.toString());
 
 		}
@@ -404,6 +478,8 @@ public class NewsFeedService extends IntentService {
 
 	private void saveToDb() {
 
+		Log.d(TAG, "saveToDB");
+		
 		Intent intent = null;
 		// Case: we have fetched the latest data
 		if (mCreatedTime == null) {
@@ -411,11 +487,14 @@ public class NewsFeedService extends IntentService {
 			NewsFeedData data;
 
 			if (mState.equalsIgnoreCase(Constants.STATE_PROFILE)) {
-				Logger.i(Logger.getClassAndMethod() + " saveToDb saving to wall db");
-				data = ((FBClientApplication) getApplication()).getNewsFeedData(NewsFeedData.REQUEST_WALL_FROM_DB);
+				Logger.i(Logger.getClassAndMethod()
+						+ " saveToDb saving to wall db");
+				data = ((FBClientApplication) getApplication())
+						.getNewsFeedData(NewsFeedData.REQUEST_WALL_FROM_DB);
 			} else {
 				Logger.i(Logger.getClassAndMethod() + "saving to newsfeed db");
-				data = ((FBClientApplication) getApplication()).getNewsFeedData(NewsFeedData.REQUEST_NEWSFEED_FROM_DB);
+				data = ((FBClientApplication) getApplication())
+						.getNewsFeedData(NewsFeedData.REQUEST_NEWSFEED_FROM_DB);
 			}
 
 			data.deleteRowsForUser(mUserId);
@@ -425,15 +504,18 @@ public class NewsFeedService extends IntentService {
 					data.insertOrIgnore(newsFeedItem.toContentValues());
 				}
 			} catch (ConcurrentModificationException e) {
-				sendBroadcast(new Intent(NewsFeedService.REFRESH_NEWSFEED_DATA_FAIL));
+				sendBroadcast(new Intent(
+						NewsFeedService.REFRESH_NEWSFEED_DATA_FAIL));
 				return;
 			}
 
 			if (mState.equalsIgnoreCase(Constants.STATE_PROFILE)) {
 				intent = new Intent(NewsFeedService.REFRESH_WALL_DATA);
-				Logger.i(Logger.getClassAndMethod() + "sending broadcast - wall data is available");
+				Logger.i(Logger.getClassAndMethod()
+						+ "sending broadcast - wall data is available");
 			} else {
-				Logger.i(Logger.getClassAndMethod() + "sending broadcast - newsfeed data is available");
+				Logger.i(Logger.getClassAndMethod()
+						+ "sending broadcast - newsfeed data is available");
 				intent = new Intent(NewsFeedService.REFRESH_NEWSFEED_DATA);
 			}
 
@@ -445,9 +527,11 @@ public class NewsFeedService extends IntentService {
 			NewsFeedData data;
 
 			if (mState.equalsIgnoreCase(Constants.STATE_PROFILE)) {
-				data = ((FBClientApplication) getApplication()).getNewsFeedData(NewsFeedData.REQUEST_WALL_OLDER_FROM_DB);
+				data = ((FBClientApplication) getApplication())
+						.getNewsFeedData(NewsFeedData.REQUEST_WALL_OLDER_FROM_DB);
 			} else {
-				data = ((FBClientApplication) getApplication()).getNewsFeedData(NewsFeedData.REQUEST_NEWSFEED_OLDER_FROM_DB);
+				data = ((FBClientApplication) getApplication())
+						.getNewsFeedData(NewsFeedData.REQUEST_NEWSFEED_OLDER_FROM_DB);
 			}
 
 			data.deleteRowsForUser(mUserId);
@@ -457,7 +541,8 @@ public class NewsFeedService extends IntentService {
 					data.insertOrIgnore(newsFeedItem.toContentValues());
 				}
 			} catch (ConcurrentModificationException e) {
-				sendBroadcast(new Intent(NewsFeedService.REFRESH_NEWSFEED_DATA_FAIL));
+				sendBroadcast(new Intent(
+						NewsFeedService.REFRESH_NEWSFEED_DATA_FAIL));
 				return;
 			}
 

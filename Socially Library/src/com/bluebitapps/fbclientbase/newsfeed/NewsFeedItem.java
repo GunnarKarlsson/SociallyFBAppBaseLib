@@ -231,19 +231,29 @@ public class NewsFeedItem implements Parcelable, Likeable {
 
 				if (comments.has("count")) {
 					item.setCommentsCount(comments.getString("count"));
-					// Log.i(TAG,
-					// "comments count: "+comments.getString("count").toString());
+				}
+				
+				if (comments.has("summary")) {
+					JSONObject summary = comments.getJSONObject("summary");
+					if (summary.has("total_count")) {
+						item.setCommentsCount(summary.getString("total_count"));
+					}
 				}
 			}
 
 			if (obj.has("likes")) {
 
 				JSONObject likes = obj.getJSONObject("likes");
-
+				
 				if (likes.has("count")) {
 					item.setLikesCount(likes.getString("count"));
-					// Log.i(TAG,
-					// "likes count: "+likes.getString("count").toString());
+				}
+				
+				if (likes.has("summary")) {
+					JSONObject summary = likes.getJSONObject("summary");
+					if (summary.has("total_count")) {
+						item.setLikesCount(summary.getString("total_count"));
+					}
 				}
 			}
 			/*
