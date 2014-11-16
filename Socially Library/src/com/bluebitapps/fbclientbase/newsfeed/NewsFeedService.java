@@ -164,7 +164,7 @@ public class NewsFeedService extends IntentService {
 		 */
 
 		//Test: removed "actions".
-		final String fields = "id, likes.limit(1).summary(true), shares, comments.limit(1).summary(true), actions,"
+		final String fields = "id, object_id, likes.limit(1).summary(true), shares, comments.limit(1).summary(true), actions,"
 				+ "from, message, picture, link, name, caption, story, story_tags, description, icon, "
 				+ "privacy, type, status_type, application, created_time, updated_time";
 		
