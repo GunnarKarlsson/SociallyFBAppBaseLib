@@ -40,6 +40,7 @@ import com.facebook.android.FacebookError;
 
 public class MessagesService extends IntentService {
 
+	private static final String TAG = MessagesService.class.getSimpleName();
 	public static final String REFRESH_MESSAGES_DATA_SUCCESS = "refresh messages data intent";
 	public static final String REFRESH_MESSAGES_DATA_FAIL = "refresh messages data fail";
 
@@ -64,12 +65,11 @@ public class MessagesService extends IntentService {
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		Logger.i(Logger.getClassAndMethod());
-		Log.i("feb7", Logger.getClassAndMethod());
+		Log.i(TAG, Logger.getClassAndMethod());
 		boolean isValidSession = ((FBClientApplication) getApplication()).getFBConnection().isValidSession();
 
 		if (isCalledOnce) {
-			Log.i("feb7", "has been called once - return");
+			Log.i(TAG, "has been called once - return");
 			return;
 		}
 

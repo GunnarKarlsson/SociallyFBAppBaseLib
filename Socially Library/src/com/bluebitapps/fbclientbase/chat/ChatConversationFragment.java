@@ -60,6 +60,8 @@ import com.bluebitapps.fbclientbase.theme.ThemeFactory;
 
 public class ChatConversationFragment extends BaseNavigationFragment {
 
+	private static final String TAG = ChatConversationFragment.class
+			.getSimpleName();
 	private static final String SAVED_INSTANCE_STATE_KEY = "saved instance state key";
 
 	ArrayList<Message> mMessages;
@@ -96,8 +98,11 @@ public class ChatConversationFragment extends BaseNavigationFragment {
 
 		mMessages = new ArrayList<Message>();
 
-		if (savedInstanceState != null && savedInstanceState.getParcelableArrayList(SAVED_INSTANCE_STATE_KEY) != null) {
-			mMessages = savedInstanceState.getParcelableArrayList(SAVED_INSTANCE_STATE_KEY);
+		if (savedInstanceState != null
+				&& savedInstanceState
+						.getParcelableArrayList(SAVED_INSTANCE_STATE_KEY) != null) {
+			mMessages = savedInstanceState
+					.getParcelableArrayList(SAVED_INSTANCE_STATE_KEY);
 			hasSavedInstanceState = true;
 		} else {
 			hasSavedInstanceState = false;
@@ -118,9 +123,11 @@ public class ChatConversationFragment extends BaseNavigationFragment {
 
 		mChatUserName = bundle.getString(Constants.CHAT_USER_NAME_KEY);
 
-		mCurrentUserId = FBClientApplication.getApplication().getFBConnection().getUserId();
+		mCurrentUserId = FBClientApplication.getApplication().getFBConnection()
+				.getUserId();
 
-		Log.i("chat", "mChatUserName: " + mChatUserName + " ,mCurrentUserId: " + mCurrentUserId + " ,mFriendId: " + mFriendId);
+		Log.i(TAG, "mChatUserName: " + mChatUserName + " ,mCurrentUserId: "
+				+ mCurrentUserId + " ,mFriendId: " + mFriendId);
 		setHasOptionsMenu(true);
 
 		mConnectionSingleton = XMPPConnectionSingleton.getInstance();
@@ -140,24 +147,37 @@ public class ChatConversationFragment extends BaseNavigationFragment {
 				ChatManager chatmanager = conn.getChatManager();
 				// Create Chat Manager
 
-				mNewChat = chatmanager.createChat(mChatUserJabberId, new MessageListener() {
+				mNewChat = chatmanager.createChat(mChatUserJabberId,
+						new MessageListener() {
 
-					@Override
-					public void processMessage(Chat chat, org.jivesoftware.smack.packet.Message message) {
+							@Override
+							public void processMessage(
+									Chat chat,
+									org.jivesoftware.smack.packet.Message message) {
 
-						if (!StringUtil.notEmpty(message.getBody())) {
-							return;
-						}
+								if (!StringUtil.notEmpty(message.getBody())) {
+									return;
+								}
 
-						// Logger.i(chat.getParticipant() + " said ->" +
-						// message.getBody());
+								Log.d(TAG,
+										"chatPariticipant "
+												+ chat.getParticipant()
+												+ " said ->"
+												+ message.getBody());
 
-						long currentTimeStamp = System.currentTimeMillis() / 1000;
-						addMessageToList(FacebookUtils.getUserIdFromJabberId(chat.getParticipant()), Long.toString(currentTimeStamp), message.getBody(), null);
+								long currentTimeStamp = System
+										.currentTimeMillis() / 1000;
+								addMessageToList(FacebookUtils
+										.getUserIdFromJabberId(chat
+												.getParticipant()), Long
+										.toString(currentTimeStamp), message
+										.getBody(), null);
 
-					}
-				});
+							}
+						});
 
+			} else {
+				Log.d(TAG, "connection is null");
 			}
 		}
 	}
@@ -169,13 +189,15 @@ public class ChatConversationFragment extends BaseNavigationFragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
 
 		ViewGroup vg = null;
 
 		if (getActivity() != null) {
 
-			vg = ThemeFactory.getViewGroup(getThemeSelection(), getActivity(), inflater, container, R.layout.chat_list_edit_text);
+			vg = ThemeFactory.getViewGroup(getThemeSelection(), getActivity(),
+					inflater, container, R.layout.chat_list_edit_text);
 
 			mSendButton = (Button) vg.findViewById(R.id.postButton);
 			mEditText = (EditText) vg.findViewById(R.id.editText);
@@ -219,7 +241,8 @@ public class ChatConversationFragment extends BaseNavigationFragment {
 
 		startRefreshMenuItemAnimation();
 
-		Cursor c = FBClientApplication.getApplication().getMessagesData().getThreadFromFriendId(mFriendId);
+		Cursor c = FBClientApplication.getApplication().getMessagesData()
+				.getThreadFromFriendId(mFriendId);
 
 		// Cursor c = ((FBClientApplication)
 		// getActivity().getApplication()).getMessagesData().getMessages();
@@ -228,7 +251,8 @@ public class ChatConversationFragment extends BaseNavigationFragment {
 		if (c != null) {
 			if (c.moveToFirst()) {
 				do {
-					threadId = c.getString(c.getColumnIndex(MessageThreadData.C_ID));
+					threadId = c.getString(c
+							.getColumnIndex(MessageThreadData.C_ID));
 				} while (c.moveToNext());
 			}
 		}
@@ -236,14 +260,20 @@ public class ChatConversationFragment extends BaseNavigationFragment {
 			c.close();
 		}
 
-		Log.i("chat", Logger.getClassAndMethod() + "threadid: " + threadId);
+		Log.i(TAG, Logger.getClassAndMethod() + "threadid: " + threadId);
 
 		if (StringUtil.notEmpty(threadId)) {
-			((FBClientApplication) getApplication()).getFBConnection().getAsyncFacebookRunner().request(threadId, new MessageHistoryListener());
+			String query = threadId + "/comments";
+			((FBClientApplication) getApplication()).getFBConnection()
+					.getAsyncFacebookRunner()
+					.request(query, new MessageHistoryListener());
 		} else {
 			if (getActivity() != null) {
-				OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.error_retrieving_message_history));
-				Log.i("chat", Logger.getClassAndMethod() + "threadId is null");
+				OutputUtil.showCrouton(
+						getActivity(),
+						getActivity().getResources().getString(
+								R.string.error_retrieving_message_history));
+				Log.i(TAG, Logger.getClassAndMethod() + "threadId is null");
 				stopRefreshMenuItemAnimation();
 			}
 		}
@@ -254,82 +284,105 @@ public class ChatConversationFragment extends BaseNavigationFragment {
 		@Override
 		public void onComplete(String response, Object state) {
 
+			Log.i(TAG, "response: " + response.toString());
+
 			final ArrayList<Message> messages = new ArrayList<Message>();
-
 			try {
-				JSONObject obj = new JSONObject(response);
 
-				// add top item to list
+				JSONObject dataJsonObject = new JSONObject(response);
+				final JSONArray jsonArray = dataJsonObject.getJSONArray("data");
 
-				if (obj.has("from")) {
+				if (jsonArray.length() > 0) {
+					for (int i = 0; i < jsonArray.length(); i++) {
 
-					Message messageAtTop = new Message();
+						JSONObject obj = jsonArray.getJSONObject(i);
 
-					JSONObject fromTop = obj.getJSONObject("from");
+						// add top item to list
 
-					String fromNameTop = fromTop.getString("name");
-					messageAtTop.setFromName(fromNameTop);
-					String fromNameIdTop = fromTop.getString("id");
-					messageAtTop.setFromId(fromNameIdTop);
+						Log.d(TAG, obj.toString());
 
-					if (obj.has("message")) {
-						String messageTop = obj.getString("message");
-						messageAtTop.setMessageText(messageTop);
-					}
+						if (obj.has("from")) {
 
-					if (obj.has("updated_time")) {
-						String updatedTimeTop = obj.getString("updated_time");
-						messageAtTop.setCreatedTime(updatedTimeTop);
-					}
+							Message messageAtTop = new Message();
 
-					if (obj.has("unread")) {
-						String unreadTop = obj.getString("unread");
-						// TODO set unread
-					}
+							JSONObject fromTop = obj.getJSONObject("from");
 
-					messages.add(messageAtTop);
-				}
+							String fromNameTop = fromTop.getString("name");
+							messageAtTop.setFromName(fromNameTop);
+							String fromNameIdTop = fromTop.getString("id");
+							messageAtTop.setFromId(fromNameIdTop);
 
-				// add 'comments' to list
-				if (obj.has("comments")) {
-
-					JSONObject comments = obj.getJSONObject("comments");
-					JSONArray data = comments.getJSONArray("data");
-					for (int i = 0; i < data.length(); i++) {
-						JSONObject item = data.getJSONObject(i);
-
-						if (item.has("from")) {
-
-							Message message = new Message();
-
-							JSONObject from = item.getJSONObject("from");
-
-							String fromName = from.getString("name");
-
-							message.setFromName(fromName);
-							String fromId = from.getString("id");
-							message.setFromId(fromId);
-
-							if (item.has("message")) {
-								String body = item.getString("message");
-								message.setMessageText(body);
+							if (obj.has("message")) {
+								String messageTop = obj.getString("message");
+								messageAtTop.setMessageText(messageTop);
 							}
 
-							if (item.has("created_time")) {
-								String updatedTime = item.getString("created_time");// 2013-01-14T07:13:27+0000
-								message.setCreatedTime(updatedTime);
+							if (obj.has("created_time")) {
+								String updatedTimeTop = obj
+										.getString("created_time");
+								messageAtTop.setCreatedTime(updatedTimeTop);
 							}
 
-							messages.add(message);
+							if (obj.has("unread")) {
+								String unreadTop = obj.getString("unread");
+								// TODO set unread
+							}
 
+							messages.add(messageAtTop);
 						}
+
+						// add 'comments' to list
+						/*
+						if (obj.has("comments")) {
+
+							JSONObject comments = obj.getJSONObject("comments");
+							JSONArray data = comments.getJSONArray("data");
+							for (int j = 0; j < data.length(); j++) {
+								JSONObject item = data.getJSONObject(j);
+
+								if (item.has("from")) {
+
+									Message message = new Message();
+
+									JSONObject from = item
+											.getJSONObject("from");
+
+									String fromName = from.getString("name");
+
+									message.setFromName(fromName);
+									String fromId = from.getString("id");
+									message.setFromId(fromId);
+
+									if (item.has("message")) {
+										String body = item.getString("message");
+										message.setMessageText(body);
+									}
+
+									if (item.has("created_time")) {
+										Log.d(TAG, "created_time: " + item.getString("created_time"));
+										String updatedTime = item
+												.getString("created_time");// 2013-01-14T07:13:27+0000
+										message.setCreatedTime(updatedTime);
+									}
+
+									messages.add(message);
+
+								}
+							}
+						}
+						*/
 
 					}
 				}
 			} catch (JSONException e) {
-				Log.i("chat", ChatConversationFragment.class.getSimpleName() + "." + MessageHistoryListener.class.getSimpleName() + "." + e.toString());
+				Log.i(TAG, ChatConversationFragment.class.getSimpleName() + "."
+						+ MessageHistoryListener.class.getSimpleName() + "."
+						+ e.toString());
 				if (getActivity() != null) {
-					OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.error_retrieving_message_history));
+					OutputUtil.showCrouton(
+							getActivity(),
+							getActivity().getResources().getString(
+									R.string.error_retrieving_message_history));
 					stopRefreshMenuItemAnimation();
 				}
 			}
@@ -370,37 +423,71 @@ public class ChatConversationFragment extends BaseNavigationFragment {
 
 		@Override
 		public void onIOException(IOException e, Object state) {
-			Logger.i(ChatConversationFragment.class.getSimpleName() + "." + MessageHistoryListener.class.getSimpleName() + "." + e.toString());
+			Logger.i(ChatConversationFragment.class.getSimpleName() + "."
+					+ MessageHistoryListener.class.getSimpleName() + "."
+					+ e.toString());
 			if (getActivity() != null) {
-				OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.message_history_could_not_be_retrieved));
+				OutputUtil
+						.showCrouton(
+								getActivity(),
+								getActivity()
+										.getResources()
+										.getString(
+												R.string.message_history_could_not_be_retrieved));
 				stopRefreshMenuItemAnimation();
 			}
 
 		}
 
 		@Override
-		public void onFileNotFoundException(FileNotFoundException e, Object state) {
-			Logger.i(ChatConversationFragment.class.getSimpleName() + "." + MessageHistoryListener.class.getSimpleName() + "." + e.toString());
+		public void onFileNotFoundException(FileNotFoundException e,
+				Object state) {
+			Logger.i(ChatConversationFragment.class.getSimpleName() + "."
+					+ MessageHistoryListener.class.getSimpleName() + "."
+					+ e.toString());
 			if (getActivity() != null) {
-				OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.message_history_could_not_be_retrieved));
+				OutputUtil
+						.showCrouton(
+								getActivity(),
+								getActivity()
+										.getResources()
+										.getString(
+												R.string.message_history_could_not_be_retrieved));
 				stopRefreshMenuItemAnimation();
 			}
 		}
 
 		@Override
-		public void onMalformedURLException(MalformedURLException e, Object state) {
-			Logger.i(ChatConversationFragment.class.getSimpleName() + "." + MessageHistoryListener.class.getSimpleName() + "." + e.toString());
+		public void onMalformedURLException(MalformedURLException e,
+				Object state) {
+			Logger.i(ChatConversationFragment.class.getSimpleName() + "."
+					+ MessageHistoryListener.class.getSimpleName() + "."
+					+ e.toString());
 			if (getActivity() != null) {
-				OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.message_history_could_not_be_retrieved));
+				OutputUtil
+						.showCrouton(
+								getActivity(),
+								getActivity()
+										.getResources()
+										.getString(
+												R.string.message_history_could_not_be_retrieved));
 				stopRefreshMenuItemAnimation();
 			}
 		}
 
 		@Override
 		public void onFacebookError(FacebookError e, Object state) {
-			Logger.i(ChatConversationFragment.class.getSimpleName() + "." + MessageHistoryListener.class.getSimpleName() + "." + e.toString());
+			Logger.i(ChatConversationFragment.class.getSimpleName() + "."
+					+ MessageHistoryListener.class.getSimpleName() + "."
+					+ e.toString());
 			if (getActivity() != null) {
-				OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.message_history_could_not_be_retrieved));
+				OutputUtil
+						.showCrouton(
+								getActivity(),
+								getActivity()
+										.getResources()
+										.getString(
+												R.string.message_history_could_not_be_retrieved));
 				stopRefreshMenuItemAnimation();
 			}
 		}
@@ -425,7 +512,10 @@ public class ChatConversationFragment extends BaseNavigationFragment {
 
 					if (!StringUtil.notEmpty(mMessage)) {
 						if (getActivity() != null) {
-							OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.enter_a_message));
+							OutputUtil.showCrouton(
+									getActivity(),
+									getActivity().getResources().getString(
+											R.string.enter_a_message));
 							return;
 						}
 					}
@@ -435,25 +525,55 @@ public class ChatConversationFragment extends BaseNavigationFragment {
 					newMessage.setProperty("itemKey", "itemValue");
 					mNewChat.sendMessage(newMessage);
 
-					String fromName = FBClientApplication.getApplication().getFBConnection().getUserName();
-					String fromId = FBClientApplication.getApplication().getFBConnection().getUserId();
+					String fromName = FBClientApplication.getApplication()
+							.getFBConnection().getUserName();
+					String fromId = FBClientApplication.getApplication()
+							.getFBConnection().getUserId();
 					long currentTimeStamp = System.currentTimeMillis() / 1000;
-					addMessageToList(fromName, Long.toString(currentTimeStamp), mMessage, fromId);
+					addMessageToList(fromName, Long.toString(currentTimeStamp),
+							mMessage, fromId);
 
 				} catch (XMPPException e) {
-					Logger.i(ChatConversationFragment.class.getSimpleName() + "." + MessageHistoryListener.class.getSimpleName() + "." + e.toString());
+					Logger.i(ChatConversationFragment.class.getSimpleName()
+							+ "."
+							+ MessageHistoryListener.class.getSimpleName()
+							+ "." + e.toString());
 					if (getActivity() != null) {
-						OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.message_could_not_be_delivered));
+						OutputUtil
+								.showCrouton(
+										getActivity(),
+										getActivity()
+												.getResources()
+												.getString(
+														R.string.message_could_not_be_delivered));
 					}
 				} catch (IllegalStateException e) {
-					Logger.i(ChatConversationFragment.class.getSimpleName() + "." + MessageHistoryListener.class.getSimpleName() + "." + e.toString());
+					Logger.i(ChatConversationFragment.class.getSimpleName()
+							+ "."
+							+ MessageHistoryListener.class.getSimpleName()
+							+ "." + e.toString());
 					if (getActivity() != null) {
-						OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.message_could_not_be_delivered));
+						OutputUtil
+								.showCrouton(
+										getActivity(),
+										getActivity()
+												.getResources()
+												.getString(
+														R.string.message_could_not_be_delivered));
 					}
 				} catch (Exception e) {
-					Logger.i(ChatConversationFragment.class.getSimpleName() + "." + MessageHistoryListener.class.getSimpleName() + "." + e.toString());
+					Logger.i(ChatConversationFragment.class.getSimpleName()
+							+ "."
+							+ MessageHistoryListener.class.getSimpleName()
+							+ "." + e.toString());
 					if (getActivity() != null) {
-						OutputUtil.showCrouton(getActivity(), getActivity().getResources().getString(R.string.message_could_not_be_delivered));
+						OutputUtil
+								.showCrouton(
+										getActivity(),
+										getActivity()
+												.getResources()
+												.getString(
+														R.string.message_could_not_be_delivered));
 					}
 				}
 
@@ -492,18 +612,22 @@ public class ChatConversationFragment extends BaseNavigationFragment {
 		}
 
 		@Override
-		public View getView(final int position, View convertView, ViewGroup parent) {
+		public View getView(final int position, View convertView,
+				ViewGroup parent) {
 
 			View view = convertView;
 			final ViewHolder holder;
 			if (convertView == null && getActivity() != null) {
-				view = getActivity().getLayoutInflater().inflate(R.layout.chat_message_item, null);
+				view = getActivity().getLayoutInflater().inflate(
+						R.layout.chat_message_item, null);
 
 				holder = new ViewHolder();
 				holder.name = (TextView) view.findViewById(R.id.fromName);
 				configFromText(holder.name);
-				holder.picture = (ImageView) view.findViewById(R.id.fromPicture);
-				holder.createdTime = (TextView) view.findViewById(R.id.createdTime);
+				holder.picture = (ImageView) view
+						.findViewById(R.id.fromPicture);
+				holder.createdTime = (TextView) view
+						.findViewById(R.id.createdTime);
 				configTimeText(holder.createdTime);
 				holder.message = (TextView) view.findViewById(R.id.message);
 				configBodyText(holder.message);
@@ -516,16 +640,37 @@ public class ChatConversationFragment extends BaseNavigationFragment {
 
 				holder.name.setText(mMessages.get(position).getFromName());
 
-				String token = getApplication().getFBConnection().getFacebook().getAccessToken();
-				Logger.i("mMessages.get(position).getIdFromJabberId()" + mMessages.get(position).getIdFromJabberId());
-				String query = "https://graph.facebook.com/" + mMessages.get(position).getFromId() + "/picture?access_token=" + token;
-				getImageLoader().displayImage(query, holder.picture, getImageDisplayOptions());
-
-				if (mMessages.get(position).getCreatedTime().contains(":")) {
-					holder.createdTime.setText(FacebookUtils.convertFacebookCreatedTimeToRelativeTime(mMessages.get(position).getCreatedTime(), getActivity()));
+				String token = getApplication().getFBConnection().getFacebook()
+						.getAccessToken();
+				Logger.i("mMessages.get(position).getIdFromJabberId()"
+						+ mMessages.get(position).getIdFromJabberId());
+				String query = "https://graph.facebook.com/"
+						+ mMessages.get(position).getFromId()
+						+ "/picture?access_token=" + token;
+				getImageLoader().displayImage(query, holder.picture,
+						getImageDisplayOptions());
+				
+				String createdTime= mMessages.get(position).getCreatedTime();
+				if (createdTime != null) {
+					Log.d(TAG, "createdTime: " + createdTime);
 				}
+				if (createdTime != null && createdTime.contains(":")) {
+					if (getActivity() != null) {
+						String convertedTime = FacebookUtils.convertFacebookCreatedTimeToRelativeTime(createdTime, getActivity()).toString();
+						holder.createdTime.setText(convertedTime);						
+					}
+				}
+				/*
+				 * if (mMessages.get(position).getCreatedTime().contains(":")) {
+				 * holder.createdTime.setText(FacebookUtils
+				 * .convertFacebookCreatedTimeToRelativeTime(mMessages
+				 * .get(position).getCreatedTime(), getActivity()));
+				 * 
+				 * }
+				 */
 
-				holder.message.setText(mMessages.get(position).getMessageText());
+				holder.message
+						.setText(mMessages.get(position).getMessageText());
 
 				configText(holder.message);
 
@@ -535,7 +680,8 @@ public class ChatConversationFragment extends BaseNavigationFragment {
 		}
 	}
 
-	private void addMessageToList(final String from, final String time, final String body, final String fromId) {
+	private void addMessageToList(final String from, final String time,
+			final String body, final String fromId) {
 
 		getActivity().runOnUiThread(new Runnable() {
 

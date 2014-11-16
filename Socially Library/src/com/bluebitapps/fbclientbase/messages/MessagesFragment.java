@@ -55,6 +55,7 @@ import com.bluebitapps.fbclientbase.theme.ThemeFactory;
  */
 public class MessagesFragment extends BaseNavigationFragment {
 
+	private static final String TAG = MessagesFragment.class.getSimpleName();
 	private List<MessageThread> mMessageThreads;
 	private ListView mListView;
 	private ItemAdapter mAdapter;
@@ -298,7 +299,7 @@ public class MessagesFragment extends BaseNavigationFragment {
 				String updatedTime = (String) FacebookUtils.convertUnixTimeStampToRelativeTime(thread.getUpdatedTime(), getActivity());
 
 				holder.updatedTime.setText(updatedTime);
-				Logger.i("thread.getSnippet: " + thread.getSnippet());
+				Log.i(TAG, "messageThread.getSnippet: " + thread.getSnippet());
 				holder.snippet.setText(thread.getSnippet());
 
 				String token = getApplication().getFBConnection().getFacebook().getAccessToken();
