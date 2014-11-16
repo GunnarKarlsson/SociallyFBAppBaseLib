@@ -313,31 +313,6 @@ public class NewsFeedService extends IntentService {
 				} else {
 
 					saveToDb();
-					
-//					String query = "SELECT likes, post_id FROM stream WHERE post_id IN (";
-
-//					try {
-//						for (int i = 0; i < mNewsFeedItems.size(); i++) {
-//							if (mNewsFeedItems.get(i).getId() != null) {
-//								query += "'" + mNewsFeedItems.get(i).getId()
-//										+ "'";
-//								if (i < (mNewsFeedItems.size() - 1)) {
-//									query += ",";
-//								}
-//							}
-//						}
-//					} catch (IndexOutOfBoundsException e) {
-//						return;
-//					}
-
-//					query += ")";
-//
-//					Bundle params = new Bundle();
-//					params.putString("method", "fql.query");
-//					params.putString("query", query);
-//					((FBClientApplication) getApplication()).getFBConnection()
-//							.getAsyncFacebookRunner()
-//							.request(null, params, new LikesRequestListener());
 				}
 			} catch (JSONException e) {
 				Log.i(TAG,
@@ -378,102 +353,6 @@ public class NewsFeedService extends IntentService {
 			sendBroadcast(new Intent(NewsFeedService.REFRESH_NEWSFEED_DATA_FAIL));
 		}
 
-	}
-
-	private class LikesRequestListener implements RequestListener {
-
-		class Holder {
-			private String userLikes;
-			private String postId;
-
-			public String getUserLikes() {
-				return userLikes;
-			}
-
-			public void setUserLikes(String likes) {
-				this.userLikes = likes;
-			}
-
-			public String getPostId() {
-				return postId;
-			}
-
-			public void setPostId(String postId) {
-				this.postId = postId;
-			}
-		}
-
-		@Override
-		public void onComplete(String response, Object state) {
-
-			try {
-
-				Logger.i(LikesRequestListener.class.getSimpleName()
-						+ "#onComplete()");
-				final JSONArray jsonArray = new JSONArray(response);
-
-				if (jsonArray.length() > 0) {
-					for (int i = 0; i < jsonArray.length(); i++) {
-						Holder holder = new Holder();
-						JSONObject obj = jsonArray.getJSONObject(i);
-
-						if (obj.has("post_id")) {
-							holder.setPostId(obj.getString("post_id"));
-						}
-
-						if (obj.has("likes")) {
-							JSONObject likes = obj.getJSONObject("likes");
-							if (likes.has("user_likes")) {
-								holder.setUserLikes(likes
-										.getString("user_likes"));
-							}
-						}
-
-						NewsFeedItem item = mNewsFeedCache.get(holder
-								.getPostId());
-						if (item != null && holder != null
-								&& StringUtil.notEmpty(holder.getUserLikes())) {
-							item.setUserLikes(holder.getUserLikes());
-						}
-
-					}
-
-				}
-
-				saveToDb();
-
-			} catch (JSONException e) {
-				Log.i(TAG,
-						NewsFeedListener.class.getSimpleName() + e.toString());
-
-			}
-
-		}// end onComplete
-
-		@Override
-		public void onIOException(IOException e, Object state) {
-			Logger.i(NewsFeedListener.class.getSimpleName() + e.toString());
-
-		}
-
-		@Override
-		public void onFileNotFoundException(FileNotFoundException e,
-				Object state) {
-			Logger.i(NewsFeedListener.class.getSimpleName() + e.toString());
-
-		}
-
-		@Override
-		public void onMalformedURLException(MalformedURLException e,
-				Object state) {
-			Logger.i(NewsFeedListener.class.getSimpleName() + e.toString());
-
-		}
-
-		@Override
-		public void onFacebookError(FacebookError e, Object state) {
-			Logger.i(NewsFeedListener.class.getSimpleName() + e.toString());
-		}
 	}
 
 	private void saveToDb() {
