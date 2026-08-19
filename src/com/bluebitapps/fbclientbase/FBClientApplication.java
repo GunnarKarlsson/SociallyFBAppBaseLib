@@ -39,7 +39,7 @@ import com.bluebitapps.fbclientbase.notifications.NotificationsData;
 import com.bluebitapps.fbclientbase.page.PageData;
 import com.bluebitapps.fbclientbase.profile.ProfileData;
 
-@ReportsCrashes(formKey = "dHdFOEE2X09rY1ZsaWZ3UG9VdXVVRmc6MQ")
+@ReportsCrashes(formKey = "")
 public class FBClientApplication extends Application implements OnSharedPreferenceChangeListener {
 
 	private static FBClientApplication mApplication;

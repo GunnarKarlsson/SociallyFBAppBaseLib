@@ -6,12 +6,12 @@
     <bool name="isPinkVersion">false</bool>
     <bool name="isPremiumVersion">false</bool>
 
-    <string name="ad_unit_banner_image_list_search">ca-app-pub-4955972611182158/2971969940</string>
-    <string name="ad_unit_banner_item_list_pull_to_refresh">ca-app-pub-4955972611182158/9797232749</string>
-    <string name="ad_unit_banner_image_list">ca-app-pub-4955972611182158/7901697148</string>
-    <string name="ad_unit_banner_item_list">ca-app-pub-4955972611182158/3331896746</string>
-    <string name="ad_unit_banner_message_threads_list_view">ca-app-pub-4955972611182158/7762096345</string>
-    <string name="ad_unit_banner_notifications_list">ca-app-pub-4955972611182158/1715562745</string>
-    <string name="ad_unit_banner_theme_grid">ca-app-pub-4955972611182158/7622495540</string>
+    <string name="ad_unit_banner_image_list_search"></string>
+    <string name="ad_unit_banner_item_list_pull_to_refresh"></string>
+    <string name="ad_unit_banner_image_list"></string>
+    <string name="ad_unit_banner_item_list"></string>
+    <string name="ad_unit_banner_message_threads_list_view"></string>
+    <string name="ad_unit_banner_notifications_list"></string>
+    <string name="ad_unit_banner_theme_grid"></string>
 
 </resources>
